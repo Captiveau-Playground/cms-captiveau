@@ -1,2 +1,33 @@
-allowBuilds: '{"esbuild":true,"sharp":true}'
+allowBuilds:
+  '0': '{'
+  '1': '"'
+  '2': e
+  '3': s
+  '4': b
+  '5': u
+  '6': i
+  '7': l
+  '8': d
+  '9': '"'
+  '10': ':'
+  '11': t
+  '12': r
+  '13': u
+  '14': e
+  '15': ','
+  '16': '"'
+  '17': s
+  '18': h
+  '19': a
+  '20': r
+  '21': p
+  '22': '"'
+  '23': ':'
+  '24': t
+  '25': r
+  '26': u
+  '27': e
+  '28': '}'
+  sharp: true
+  esbuild: false
 onlyBuiltDependencies: '["esbuild","sharp"]'

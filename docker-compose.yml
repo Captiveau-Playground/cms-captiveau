@@ -29,6 +29,8 @@ services:
       PAYLOAD_PUBLIC_SERVER_URL: http://localhost:4000
       NEXT_PUBLIC_SERVER_URL: http://localhost:4000
       NODE_ENV: development
+      CI: 'true'
+      COREPACK_ENABLE_STRICT: '0'
     volumes:
       - .:/app
       - /app/node_modules
