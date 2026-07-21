@@ -1,0 +1,38 @@
+{
+  "name": "cms-captiveau",
+  "version": "1.0.0",
+  "description": "Payload CMS for Captiveau - Creative Tech Studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 4000",
+    "build": "payload build",
+    "start": "payload start",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "seed": "payload run src/seed/index.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "latest",
+    "@payloadcms/next": "latest",
+    "@payloadcms/payload-cloud": "latest",
+    "@payloadcms/richtext-lexical": "latest",
+    "@payloadcms/storage-s3": "latest",
+    "next": "16.2.9",
+    "payload": "latest",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "0.35.2",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tsx": "^4.23.1",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0"
+  }
+}
