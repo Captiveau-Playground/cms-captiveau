@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { adminFullAccess, publicRead } from '../access'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -8,11 +9,27 @@ export const Users: CollectionConfig = {
     group: 'Settings',
   },
   access: {
-    read: () => true,
-    create: () => true, // Allow first user creation
-    update: ({ req: { user } }) => !!user,
-    delete: ({ req: { user } }) => !!user,
-    admin: ({ req: { user } }) => !!user,
+    // Admin only — editor cannot manage users
+    read: ({ req: { user } }) => {
+      const u = user as { role?: string } | null;
+      return u?.role === 'admin';
+    },
+    create: ({ req: { user } }) => {
+      const u = user as { role?: string } | null;
+      return u?.role === 'admin';
+    },
+    update: ({ req: { user } }) => {
+      const u = user as { role?: string } | null;
+      return u?.role === 'admin';
+    },
+    delete: ({ req: { user } }) => {
+      const u = user as { role?: string } | null;
+      return u?.role === 'admin';
+    },
+    admin: ({ req: { user } }) => {
+      const u = user as { role?: string } | null
+      return u?.role === 'admin'
+    },
   },
   fields: [
     {
@@ -31,6 +48,7 @@ export const Users: CollectionConfig = {
       ],
       defaultValue: 'editor',
       required: true,
+      saveToJWT: true,
     },
   ],
 }

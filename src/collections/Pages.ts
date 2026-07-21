@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { editorCreateAdminDelete } from '../access'
 import { HeroBlock } from '../blocks/HeroBlock'
 import { FeaturesBlock } from '../blocks/FeaturesBlock'
 import { ServicesPreviewBlock } from '../blocks/ServicesPreviewBlock'
@@ -17,9 +18,7 @@ export const Pages: CollectionConfig = {
     group: 'Content',
     defaultColumns: ['title', 'slug', 'updatedAt'],
   },
-  access: {
-    read: () => true,
-  },
+  access: editorCreateAdminDelete,
   fields: [
     {
       name: 'title',

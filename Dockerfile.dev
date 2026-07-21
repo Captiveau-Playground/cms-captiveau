@@ -1,0 +1,16 @@
+FROM node:22-alpine
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+WORKDIR /app
+
+# Copy dependency files
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --ignore-scripts
+
+# Rebuild sharp (needs native bindings)
+RUN pnpm rebuild sharp
+
+EXPOSE 4000
+
+CMD ["pnpm", "run", "dev"]

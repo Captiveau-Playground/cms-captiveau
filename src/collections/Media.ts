@@ -1,13 +1,12 @@
 import type { CollectionConfig } from 'payload'
+import { editorCreateAdminDelete } from '../access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
     group: 'Content',
   },
-  access: {
-    read: () => true,
-  },
+  access: editorCreateAdminDelete,
   upload: {
     staticDir: 'media',
     imageSizes: [

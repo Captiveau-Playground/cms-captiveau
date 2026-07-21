@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { adminOnlyMutate, publicRead } from '../access'
 
 export const Redirects: CollectionConfig = {
   slug: 'redirects',
@@ -7,7 +8,10 @@ export const Redirects: CollectionConfig = {
     defaultColumns: ['from', 'to', 'statusCode'],
   },
   access: {
-    read: () => true,
+    read: publicRead,
+    create: adminOnlyMutate,
+    update: adminOnlyMutate,
+    delete: adminOnlyMutate,
   },
   fields: [
     {

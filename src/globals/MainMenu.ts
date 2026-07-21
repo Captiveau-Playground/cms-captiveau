@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { publicRead, adminOnly } from '../access'
 
 export const MainMenu: GlobalConfig = {
   slug: 'main-menu',
@@ -7,7 +8,8 @@ export const MainMenu: GlobalConfig = {
     group: 'Settings',
   },
   access: {
-    read: () => true,
+    read: publicRead,
+    update: adminOnly,
   },
   fields: [
     {

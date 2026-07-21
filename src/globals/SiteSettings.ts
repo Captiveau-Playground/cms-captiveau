@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { publicRead, adminOnly } from '../access'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
@@ -7,9 +8,11 @@ export const SiteSettings: GlobalConfig = {
     group: 'Settings',
   },
   access: {
-    read: () => true,
+    read: publicRead,
+    update: adminOnly,
   },
   fields: [
+    // ... fields tetap sama
     {
       name: 'companyName',
       label: 'Company Name',

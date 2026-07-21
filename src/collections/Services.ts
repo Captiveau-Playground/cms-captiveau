@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { editorCreateAdminDelete } from '../access'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -7,9 +8,7 @@ export const Services: CollectionConfig = {
     group: 'Content',
     defaultColumns: ['title', 'slug', 'updatedAt'],
   },
-  access: {
-    read: () => true,
-  },
+  access: editorCreateAdminDelete,
   fields: [
     {
       name: 'title',
