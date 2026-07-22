@@ -43,29 +43,29 @@ const ContactInfo = () => {
       <div className="flex flex-col gap-6">
         <div className="flex gap-3 items-center">
           <div className="w-2 h-2 rounded-full bg-primary"></div>
-          <p className="text-base font-normal text-muted-foreground">We can help</p>
+          <p className="text-base font-normal text-muted-foreground">Hubungi Kami</p>
         </div>
         <p className="text-3xl md:text-4xl font-medium text-foreground">
-          Let&rsquo;s discuss about your project and take it the next level.
+          "Kami tidak hanya membangun interface; kami menciptakan pengalaman yang mengkonversi."
         </p>
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-6">
         <div className="flex flex-col gap-1">
           <p className="text-sm font-normal text-muted-foreground">Phone</p>
-          <a href="tel:+323-25-8964" className="text-base font-medium text-primary">+323-25-8964</a>
+          <a href="tel:+6285117705910" className="text-base font-medium text-primary">+62-851-1770-5910</a>
         </div>
         <div className="flex flex-col gap-1">
           <p className="text-sm font-normal text-muted-foreground">Email</p>
-          <a href="mailto:me@shadcnspace.com" className="text-base font-medium text-primary">me@shadcnspace.com</a>
+          <a href="mailto:hello@captiveau.id" className="text-base font-medium text-primary">hello@captiveau.id</a>
         </div>
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-sm font-normal text-muted-foreground">Location</p>
-        <p className="text-base font-medium text-primary">Mark Avenue, Dalls Road, New York</p>
+        <p className="text-base font-medium text-primary">Tebet, South Jakarta, Indonesia</p>
       </div>
       <Separator orientation="horizontal" />
       <div className="flex flex-col gap-6">
-        <p className="text-base font-normal text-muted-foreground">Trusted by</p>
+        <p className="text-base font-normal text-muted-foreground">Teknologi Kami</p>
         <Marquee pauseOnHover className="[--duration:20s] p-0">
           {brandList.map((brand, index) => (
             <div key={index}>

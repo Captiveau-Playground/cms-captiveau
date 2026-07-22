@@ -1,23 +1,23 @@
 "use client";
 import Feature from "@/components/shadcn-space/blocks/feature-01/feature";
-import { ArrowDownUp, BellRing, RotateCw, Tag } from "lucide-react"
+import { Eye, RefreshCw, Users, Lightbulb } from "lucide-react"
 
 const featureData = [
     {
-      icon: ArrowDownUp,
-      content: "Instantly sync and update your documentation across teams without manual rework.",
+      icon: Eye,
+      content: "Pantau progress project Anda secara real-time dengan update mingguan dan akses ke development board.",
     },
     {
-      icon: BellRing,
-      content: "Get real-time alerts when docs are updated, reviewed, or need your attention.",
+      icon: RefreshCw,
+      content: "Kami berikan garansi bug-fix dan maintenance untuk memastikan produk Anda berjalan optimal.",
     },
     {
-      icon: RotateCw,
-      content: "Automatically keep your documentation up to date with seamless content refreshes.",
+      icon: Users,
+      content: "Setiap project mendapatkan tim khusus yang fokus 100% untuk mengerjakan produk Anda.",
     },
     {
-      icon: Tag,
-      content: "Organize your docs with smart tags for faster search and better discoverability.",
+      icon: Lightbulb,
+      content: "Dari ide awal hingga maintenance, kami handle semua: design, development, testing, hingga deployment.",
     },
 ];
 

@@ -10,29 +10,44 @@ import { cn } from "@/lib/utils";
 
 const FAQ_DATA = [
   {
-    question: "What services does Shadcn Space offer?",
+    question: "Apa itu Captiveau?",
     answer:
-      "We offer a wide range of services including web development, app development, and digital marketing.",
+      "Captiveau adalah software house Indonesia yang mengkhususkan diri dalam desain dan pengembangan produk digital end-to-end. Kami membantu startup, korporasi, dan UMKM mewujudkan ide digital mereka menjadi aplikasi nyata.",
   },
   {
-    question: "How long does a typical project take?",
+    question: "Berapa lama waktu yang dibutuhkan untuk membuat aplikasi?",
     answer:
-      "The time it takes to complete a project depends on the complexity of the project and the scope of the work.",
+      "Untuk MVP (Minimum Viable Product) biasanya membutuhkan 8-12 minggu. Untuk aplikasi kompleks bisa 3-6 bulan tergantung fitur dan skala project. Kami akan berikan timeline detail setelah konsultasi gratis.",
   },
   {
-    question: "How is pricing structured at Awake Agency?",
+    question: "Apakah saya perlu punya skill teknis untuk bekerja dengan Captiveau?",
     answer:
-      "Pricing is based on the complexity of the project and the scope of the work.",
+      "Tidak perlu! Tim kami akan memandu Anda dari awal hingga akhir. Kami akan menjelaskan setiap tahap dengan bahasa yang mudah dipahami dan memastikan Anda selalu update dengan perkembangan project.",
   },
   {
-    question: "Do you offer ongoing support after project completion?",
+    question: "Bagaimana proses kerja dengan Captiveau?",
     answer:
-      "Absolutely! We offer comprehensive post-launch support to ensure a seamless implementation and provide ongoing maintenance packages tailored to clients who need regular updates or technical assistance. Our commitment doesn’t end at launch — we’re here to help you every step of the way.",
+      "Mulai dengan konsultasi gratis → analisis kebutuhan → wireframe & design → development → testing → deployment → maintenance. Anda akan dapat update mingguan selama proses berlangsung.",
   },
   {
-    question: "How often will I receive updates on my project?",
+    question: "Apakah saya bisa request revisi selama development?",
     answer:
-      "We provide updates on a regular basis to ensure that your project is running smoothly and that you are aware of any changes or updates to the project.",
+      "Tentu! Kami menyediakan sesi revisi di setiap tahap development. Kami ingin memastikan hasil akhir sesuai dengan ekspektasi Anda. Perubahan kecil bisa langsung dilakukan, sementara perubahan besar akan didiskusikan terlebih dahulu.",
+  },
+  {
+    question: "Apakah aplikasi yang dibuat support Android dan iOS?",
+    answer:
+      "Ya! Kami develop aplikasi yang bisa berjalan di Android dan iOS menggunakan teknologi cross-platform seperti Flutter atau React Native untuk efisiensi biaya dan waktu.",
+  },
+  {
+    question: "Apakah ada garansi untuk aplikasi yang dibuat?",
+    answer:
+      "Ya, kami memberikan garansi bug-fix dalam periode tertentu setelah launching. Untuk maintenance jangka panjang, kami juga menyediakan paket pemeliharaan yang bisa disesuaikan dengan kebutuhan Anda.",
+  },
+  {
+    question: "Bagaimana cara memulai kerja sama dengan Captiveau?",
+    answer:
+      "Cukup klik tombol \"Konsultasi Gratis\" di website, isi form singkat, atau langsung WhatsApp ke +6285-156-265-910. Kami akan jadwalkan meeting dalam 24 jam.",
   },
 ];
 
@@ -48,7 +63,7 @@ export default function Faq() {
             FAQs
           </Badge>
           <h2 className="text-5xl font-medium text-center max-w-lg">
-            Got questions? We&rsquo;ve got answers ready
+            Pertanyaan yang Sering Diajukan
           </h2>
         </div>
         <div>

@@ -31,19 +31,15 @@ const Feature = ({ featureData }: { featureData: Features }) => {
                   variant={"outline"}
                   className="px-3 py-1 h-auto text-sm font-normal"
                 >
-                  Features
+                  Keunggulan
                 </Badge>
                 <h2 className="text-3xl md:text-4xl font-semibold">
-                  Leading with innovation
+                  Mengapa Pilih Captiveau?
                 </h2>
                 <p className="text-lg font-normal text-muted-foreground">
-                  We're west coast change-makers in a complex world, crafting
-                  purposeful and powerful brands with fluidity
+                  Software house Indonesia yang mengutamakan kualitas, kecepatan, dan kepuasan klien
                 </p>
               </div>
-              <Button className="rounded-full px-5 py-2.5 shadow-xs h-auto cursor-pointer">
-                <a href="#">Browse more block</a>
-              </Button>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6">
               <motion.div
@@ -73,7 +69,7 @@ const Feature = ({ featureData }: { featureData: Features }) => {
                       frontend.&rdquo;
                     </h3>
                   </CardContent>
-                  <CardFooter className="bg-card border-none w-full px-6 sm:px-8 py-0 flex flex-col items-start gap-0.5">
+                  <CardFooter className="bg-card mb-10 border-none w-full pb-4 px-6 sm:px-8 py-0 flex flex-col items-start gap-0.5">
                     <p className="text-sm font-medium text-primary">
                       JOHNATHAN DOE
                     </p>

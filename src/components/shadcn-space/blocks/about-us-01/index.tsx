@@ -22,16 +22,16 @@ const aboutusData = [
 
 const statisticsCounter = [
     {
-        title: "Total Projects Completed",
-        count: 40
+        title: "Produk Diluncurkan",
+        count: 10
     },
     {
-        title: "Years of Experience",
+        title: "Pengguna Puas",
+        count: 50
+    },
+    {
+        title: "Klien Terpercaya",
         count: 15
-    },
-    {
-        title: "Design Awards",
-        count: 12
     },
 ]
 

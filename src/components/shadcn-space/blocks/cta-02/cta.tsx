@@ -6,10 +6,10 @@ interface CTAProps {
 }
 
 const defaultMarqueeItems = [
-    "Find your dream home with our expert real estate agents!",
-    "Browse thousands of listings in prime locations at great prices!",
-    "Get a free property valuation—sell your home with confidence!",
-    "Secure the best mortgage rates with our trusted loan partners!",
+    "Membangun produk digital bersama Captiveau — mitra teknologi terpercaya Anda!",
+    "Konsultasi gratis dengan tim ahli kami dan wujudkan ide digital Anda!",
+    "Dari MVP hingga platform berskala besar — kami handle semuanya!",
+    "Tim developer & designer senior siap membantu transformasi digital bisnis Anda!",
 ];
 
 const CTA: React.FC<CTAProps> = ({ marqueeItems = defaultMarqueeItems }) => {
@@ -30,10 +30,13 @@ const CTA: React.FC<CTAProps> = ({ marqueeItems = defaultMarqueeItems }) => {
                     <div className="h-full w-full py-16 px-10">
                         <div className="flex flex-col items-center gap-8">
                             <h2 className='text-white sm:text-4xl text-3xl max-w-2xl text-center font-medium'>
-                                Enter a realm where exquisite design and timeless luxury come together.
+                                Mari Mulai Kolaborasi.
                             </h2>
+                            <p className='text-white/80 text-base max-w-md text-center mb-6'>
+                                Ide digital Anda siap menjadi produk nyata. Konsultasikan gratis dengan tim kami dan wujudkan solusi yang tepat untuk bisnis Anda.
+                            </p>
                             <a href="#" className='bg-white dark:bg-black py-3.5 px-6 rounded-full text-primary hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black duration-300 font-medium text-sm'>
-                                Get In Touch
+                                Konsultasi Gratis
                             </a>
                         </div>
                     </div>

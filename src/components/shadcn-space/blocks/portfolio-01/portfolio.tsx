@@ -13,27 +13,27 @@ type PortfolioData = {
 const portfolioData: PortfolioData[] = [
   {
     portfolio_image:
-      "https://images.shadcnspace.com/assets/portfolio/flowbank.webp",
-    portfolio_title: "Flowbank",
-    portfolio_tags: ["UX Research", "Interface Design"],
+      "/client/amertavana.webp",
+    portfolio_title: "Amertavana",
+    portfolio_tags: ["Web Development", "Brand Identity"],
   },
   {
     portfolio_image:
-      "https://images.shadcnspace.com/assets/portfolio/academy.webp",
-    portfolio_title: "Academy.co",
-    portfolio_tags: ["Product Design", "Interection Design"],
+      "/client/cogan.webp",
+    portfolio_title: "Cogan",
+    portfolio_tags: ["UI/UX Design", "Mobile App"],
   },
   {
     portfolio_image:
-      "https://images.shadcnspace.com/assets/portfolio/genome.webp",
-    portfolio_title: "Genome",
-    portfolio_tags: ["Brand identity design", "UX Research"],
+      "/client/emerintek.webp",
+    portfolio_title: "Emerintek",
+    portfolio_tags: ["Web Platform", "Dashboard"],
   },
   {
     portfolio_image:
-      "https://images.shadcnspace.com/assets/portfolio/hotto.webp",
-    portfolio_title: "Hotto",
-    portfolio_tags: ["Visual Storytelling", "Web & Mobile Design"],
+      "/client/indomaja.webp",
+    portfolio_title: "Indomaja",
+    portfolio_tags: ["E-Commerce", "Digital Strategy"],
   },
 ];
 
@@ -64,7 +64,7 @@ const Portfolio = () => {
             </Badge>
             <div className="max-w-xs sm:max-w-2xl mx-auto text-center">
               <h2 className="text-foreground text-3xl sm:text-5xl font-semibold">
-                How we transformed a small business&rsquo;s online presence
+                Portofolio Project Terbaru Kami
               </h2>
             </div>
           </div>

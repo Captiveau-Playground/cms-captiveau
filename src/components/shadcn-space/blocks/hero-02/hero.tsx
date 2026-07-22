@@ -10,26 +10,26 @@ import { motion, useInView } from "motion/react";
 const stats = [
   {
     icon: Code,
-    label: "Project Selesai",
-    count: "50+",
+    label: "Project Diluncurkan",
+    count: "10+",
     className: "border-r border-b",
   },
   {
     icon: Palette,
-    label: "Klien Puas",
-    count: "30+",
+    label: "Pengguna Puas",
+    count: "50+",
     className: "border-b",
   },
   {
     icon: ShoppingCart,
-    label: "Tech Stack",
+    label: "Klien Terpercaya",
     count: "15+",
     className: "border-r",
   },
   {
     icon: Rocket,
-    label: "Tahun Pengalaman",
-    count: "4+",
+    label: "Teknologi Dikuasai",
+    count: "15+",
     className: "",
   },
 ];
@@ -40,24 +40,27 @@ const HeroSection: React.FC = () => {
 
   return (
     <section ref={sectionRef}>
-      <div className="bg-[url('/houses.webp')] bg-cover bg-center bg-no-repeat overflow-hidden relative flex flex-col xl:h-screen justify-center z-10 xl:gap-0 gap-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full xl:pt-0 pt-32">
-          <div className="relative text-white text-start z-30">
+      <div className="overflow-hidden relative flex flex-col xl:h-screen justify-center xl:gap-0 gap-12">
+        {/* Background image with blur */}
+        <div className="absolute inset-0 bg-[url('/housess.webp')] bg-cover bg-center bg-no-repeat blur-xs scale-105" />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full xl:pt-0 pt-32 relative z-10">
+          <div className="text-white text-start">
             <p className="text-white/70 text-xs font-normal tracking-widest uppercase">Creative Tech Studio</p>
             <h1 className="text-white !text-5xl md:!text-6xl lg:!text-7xl !font-normal max-w-3xl mt-2 mb-6">
               Transform Your Ideas Into{" "}
               <span className="!font-semibold">Digital Reality</span>
             </h1>
             <p className="text-white/80 text-lg max-w-xl mb-8">
-              Kami membantu startup, korporasi, dan UMKM menciptakan produk digital
-              yang powerful — dari MVP hingga platform berskala besar.
+              Captiveau adalah software house Indonesia yang mengkhususkan diri dalam desain dan pengembangan produk digital end-to-end. Kami membantu startup, korporasi, dan UMKM mewujudkan ide digital mereka dengan teknologi terkini dan tim berpengalaman.
             </p>
             <div className="flex gap-4">
               <Button className="px-8 py-3.5 bg-primary border-0 text-white duration-300 hover:bg-primary/90 font-medium rounded-full cursor-pointer h-auto text-base shadow-lg shadow-primary/30">
-                <a href="#">Konsultasi Gratis</a>
+                <a href="#">Mulai Project</a>
               </Button>
               <Button className="px-8 py-3.5 bg-transparent border border-white/30 text-white duration-300 hover:bg-white/10 font-medium rounded-full cursor-pointer h-auto text-base">
-                <a href="/services">Lihat Layanan</a>
+                <a href="#">Konsultasi Gratis</a>
               </Button>
             </div>
           </div>
@@ -102,7 +105,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-        <SeamlessCloud
+        {/*<SeamlessCloud
           cloudCount={2}
           minSize={400}
           maxSize={678}
@@ -110,7 +113,7 @@ const HeroSection: React.FC = () => {
           gapMin={100}
           gapMax={500}
           top="top-56 sm:top-40 left-0"
-        />
+        />*/}
       </div>
     </section>
   );

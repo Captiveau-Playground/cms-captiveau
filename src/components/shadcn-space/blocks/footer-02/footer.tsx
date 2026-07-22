@@ -4,82 +4,66 @@ import { Separator } from "@/components/ui/separator"
 
 export default function Footer() {
     const footerLinks = [
-        { label: "Home", href: "#" },
-        { label: "Categories", href: "#" },
-        { label: "Properties", href: "#" },
-        { label: "Featured property", href: "#" },
-        { label: "Testimonials", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "FAQs", href: "#" },
-        { label: "404 page", href: "#" },
+        { label: "Home", href: "/" },
+        { label: "Services", href: "/services" },
+        { label: "Articles", href: "/articles" },
+        { label: "Career", href: "/career" },
+        { label: "About Us", href: "/about-us" },
+        { label: "FAQs", href: "/faqs" },
+    ]
+    const servicesLinks = [
+        { label: "Landing Page", href: "/services/landing-page" },
+        { label: "E-Commerce", href: "/services/ecommerce" },
+        { label: "Company Profile", href: "/services/company-profile" },
+        { label: "UI/UX Design", href: "/services/uiux-design" },
     ]
     return (
         <footer className="dark bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:py-24 py-8">
                 <div className="flex flex-col gap-16">
-                    <div className="flex flex-col gap-12">
-                        <div className='grid grid-cols-12 gap-6'>
-                            <div className="col-span-12 md:col-span-3">
-                                <p className='w-full text-foreground'>
-                                    Stay updated with the latest news, promotions, and exclusive offers.
-                                </p>
+                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
+                        <div>
+                            <div className="text-primary flex items-center gap-2">
+                                <span className="text-2xl font-semibold">Captiveau</span>
                             </div>
-                            <div className="md:col-span-1" />
-                            <div className="col-span-12 md:col-span-8">
-                                <div className='flex flex-col lg:flex-row gap-5 lg:gap-10'>
-                                    <form className='flex gap-2 flex-1'>
-                                        <Input
-                                            required
-                                            type="email"
-                                            name="email"
-                                            placeholder="enter your email"
-                                            className="rounded-full h-full py-2 text-white"
-                                        />
-                                        <Button type='submit' className='h-auto py-2 px-4 rounded-full cursor-pointer font-medium hover:bg-primary/80'>
-                                            Subscribe
-                                        </Button>
-                                    </form>
-                                    <p className='text-sm flex-1 text-foreground'>
-                                        By subscribing, you agree to receive our promotional emails. You can unsubscribe at any time.
-                                    </p>
-                                </div>
+                            <p className="text-muted-foreground/50 mt-6 max-w-md leading-relaxed">
+                                Membangun pengalaman web yang indah dan fungsional dengan teknologi modern. Kami membantu startup dan bisnis menciptakan kehadiran digital mereka.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-10 lg:col-span-2">
+                            <div>
+                                <p className="text-lg font-medium text-foreground">Layanan Kami</p>
+                                <ul className="mt-8 space-y-4">
+                                    {servicesLinks.map((link) => (
+                                        <li key={link.label}>
+                                            <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition">
+                                                {link.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        </div>
-                        <Separator />
-                    </div>
-                    <div className="grid grid-cols-12 gap-6">
-                        <div className="col-span-12 md:col-span-7">
-                            <h2 className="sm:text-5xl text-3xl font-medium mb-6 text-foreground">
-                                Begin your path to success contact us today.
-                            </h2>
-                            <Button className="py-3.5 px-6 rounded-full bg-primary hover:bg-primary/80 h-auto text-white">
-                                Get in touch
-                            </Button>
-                        </div>
-                        <div className="md:col-span-1" />
-                        <div className="col-span-12 md:col-span-2">
-                            <div className="flex flex-col gap-4">
-                                {footerLinks.slice(0, 4).map((link) => (
-                                    <a key={link.label} href={link.href} className="block text-base text-muted-foreground hover:text-primary">
-                                        {link.label}
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="col-span-12 md:col-span-2">
-                            <div className="flex flex-col gap-4">
-                                {footerLinks.slice(4, 8).map((link) => (
-                                    <a key={link.label} href={link.href} className="block text-base text-muted-foreground hover:text-primary">
-                                        {link.label}
-                                    </a>
-                                ))}
+                            <div>
+                                <p className="text-lg font-medium text-foreground">Tautan Berguna</p>
+                                <ul className="mt-8 space-y-4">
+                                    {footerLinks.map((link) => (
+                                        <li key={link.label}>
+                                            <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition">
+                                                {link.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-12">
-                        <Separator />
+                    <Separator />
+                    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
                         <p className="text-sm text-muted-foreground">
-                            ©2026 Shadcn Space. All Rights Reserved
+                            © 2025 Captiveau. Semua hak dilindungi.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Dibuat dengan ❤️ di Indonesia
                         </p>
                     </div>
                 </div>

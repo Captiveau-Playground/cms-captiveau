@@ -50,10 +50,10 @@ export default function Testimonial01({
                         className="flex flex-col gap-3"
                     >
                         <Badge className="text-sm h-auto py-1 px-3 border-0 w-fit">
-                            Testimonials
+                            Testimonial
                         </Badge>
                         <h2 className="sm:text-5xl text-xl leading-none font-medium tracking">
-                            Success Stories
+                            Apa Kata Klien Kami
                         </h2>
                     </motion.div>
                     <motion.div

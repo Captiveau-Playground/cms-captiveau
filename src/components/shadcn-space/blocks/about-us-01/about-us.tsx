@@ -73,8 +73,7 @@ const AboutUs = ({
             className="flex flex-col items-center justify-center gap-4"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-foreground text-center tracking-tight">
-              Crafting exceptional, well experienced & technology driven
-              strategies to drive impactful results with
+              Mitra transformasi digital terpercaya untuk mewujudkan ide Anda menjadi solusi digital yang berdampak dengan
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-4">
               {aboutusData.map((item, index) => (
