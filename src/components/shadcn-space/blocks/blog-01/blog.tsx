@@ -86,7 +86,7 @@ const Blog = () => {
                           className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-2 px-4 sm:px-6">
                         <p className="text-base font-normal text-muted-foreground">{formattedDate}</p>
                         <p className="text-2xl font-semibold text-foreground group-hover:text-primary transition-colors">{value.title}</p>
                       </div>

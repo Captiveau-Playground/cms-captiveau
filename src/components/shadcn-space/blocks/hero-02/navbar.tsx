@@ -10,8 +10,8 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { Menu, X, Phone, Mail } from 'lucide-react'
-import { Separator } from '@/components/ui/separator';
+import { Menu, X } from 'lucide-react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { motion, useInView } from "motion/react";
 
 type NavData = {
@@ -76,7 +76,13 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
         <div className={`flex items-center justify-between duration-300 transition-all ${sticky ? 'shadow-lg bg-background rounded-full p-3' : 'px-0'}`}>
           <div className="flex justify-between items-center gap-2 w-full">
             <div>
-              <a href="/">
+              <a href="/" className="flex items-center gap-2">
+                <DotLottieReact
+                  src="https://lottie.host/54139a36-99f2-4b42-a31a-4397d774b987/N62xm4fvPi.lottie"
+                  loop
+                  autoplay
+                  className="w-10 h-10"
+                />
                 {sticky ? (
                   <span className="text-2xl font-bold text-foreground">Captiveau</span>
                 ) : (
@@ -85,16 +91,35 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
               </a>
             </div>
             <div className="flex items-center gap-2 sm:gap-6">
-              <div className="hidden md:block">
+              <div className="hidden md:flex items-center gap-6">
                 <a
-                  href={phone ? `tel:${phone}` : '#'}
-                  className={`text-sm flex items-center gap-2 ${sticky ? 'text-foreground hover:text-primary' : 'text-white hover:text-white/80'}`}
+                  href="/services"
+                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
                 >
-                  <Phone size={20} />
-                  {phone || '+62-851-5626-5910'}
+                  Services
+                </a>
+                <a
+                  href="/portfolio"
+                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                >
+                  Portfolio
+                </a>
+                <a
+                  href="/blog"
+                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                >
+                  Blog
                 </a>
               </div>
-              <Separator orientation="vertical" className={`h-5 my-auto hidden sm:block ${sticky ? 'bg-foreground/20' : 'bg-white/50'}`} />
+              <a
+                href="/contact"
+                className={`hidden sm:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium h-auto transition-all ${sticky
+                  ? 'bg-primary text-white hover:bg-primary/90'
+                  : 'bg-white text-black hover:bg-white/90'
+                }`}
+              >
+                Request for Demo
+              </a>
               <div>
                 <Button
                   size={"lg"}

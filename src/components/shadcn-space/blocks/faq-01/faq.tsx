@@ -58,7 +58,7 @@ export default function Faq() {
                 key={`item-${index}`}
                 value={`item-${index}`}
                 className={cn(
-                  "p-6 border border-border rounded-2xl flex flex-col gap-3 group/item data-[open]:bg-accent data-[open]:border-primary transition-colors",
+                  "p-6 border border-border rounded-2xl flex flex-col gap-3 group/item data-[open]:bg-accent/5 data-[open]:border-accent transition-colors",
                   index === 0 && "delay-100",
                   index === 1 && "delay-200",
                   index === 2 && "delay-300",

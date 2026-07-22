@@ -40,7 +40,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section ref={sectionRef}>
-      <div className="bg-[url(https://images.shadcnspace.com/assets/backgrounds/real-estate-bg.webp)] bg-cover bg-center bg-no-repeat overflow-hidden relative flex flex-col xl:h-screen justify-center z-10 xl:gap-0 gap-12">
+      <div className="bg-[url('/houses.webp')] bg-cover bg-center bg-no-repeat overflow-hidden relative flex flex-col xl:h-screen justify-center z-10 xl:gap-0 gap-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full xl:pt-0 pt-32">
           <div className="relative text-white text-start z-30">
             <p className="text-white/70 text-xs font-normal tracking-widest uppercase">Creative Tech Studio</p>
@@ -53,7 +53,7 @@ const HeroSection: React.FC = () => {
               yang powerful — dari MVP hingga platform berskala besar.
             </p>
             <div className="flex gap-4">
-              <Button className="px-8 py-3.5 bg-accent border-0 text-white duration-300 hover:bg-accent/90 font-medium rounded-full cursor-pointer h-auto text-base shadow-lg shadow-accent/30">
+              <Button className="px-8 py-3.5 bg-primary border-0 text-white duration-300 hover:bg-primary/90 font-medium rounded-full cursor-pointer h-auto text-base shadow-lg shadow-primary/30">
                 <a href="#">Konsultasi Gratis</a>
               </Button>
               <Button className="px-8 py-3.5 bg-transparent border border-white/30 text-white duration-300 hover:bg-white/10 font-medium rounded-full cursor-pointer h-auto text-base">
@@ -65,13 +65,7 @@ const HeroSection: React.FC = () => {
         <div className="xl:absolute bottom-0 right-0 z-30 xl:w-auto lg:w-4/5 w-full lg:ms-auto">
           <div className="relative">
             <div className="xl:absolute bottom-24 w-full z-0">
-              <img
-                src="https://images.shadcnspace.com/assets/backgrounds/hero-4-banner.webp"
-                alt="hero illustration"
-                width={956}
-                height={897}
-                className="w-full opacity-80"
-              />
+
             </div>
             <div className="bg-background rounded-t-2xl xl:rounded-none xl:rounded-tl-2xl sm:py-10 py-6 sm:ps-12 ps-4 sm:pe-12 pe-4 xl:pe-60 z-1 relative">
               <motion.div

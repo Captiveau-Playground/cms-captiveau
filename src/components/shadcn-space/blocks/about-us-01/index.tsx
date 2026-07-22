@@ -11,7 +11,7 @@ const aboutusData = [
     {
       icon: Zap,
       title: "Innovation",
-      color: "bg-secondary/10 text-secondary"
+      color: "bg-primary/5 text-primary"
     },
     {
       icon: Target,

@@ -92,7 +92,7 @@ const Portfolio = () => {
                         />
                       </a>
                     </div>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 px-4 sm:px-6 pb-6">
                       <a
                         href="#"
                         className="text-foreground text-2xl font-medium tracking-tighter w-fit hover:text-primary transition-colors"

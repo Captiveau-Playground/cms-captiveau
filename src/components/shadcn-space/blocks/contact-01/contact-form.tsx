@@ -43,7 +43,7 @@ const ContactForm = () => {
 
   return (
     <div className="w-full">
-      <Card className="ring-0 p-8 gap-6 md:gap-8 border rounded-2xl">
+      <Card className="ring-0 p-8 gap-6 md:gap-8 rounded-2xl">
         <CardHeader className="p-0">
           <CardTitle className="text-2xl font-semibold text-primary">Start the project</CardTitle>
         </CardHeader>
@@ -101,7 +101,7 @@ const ContactForm = () => {
                 </div>
               </div>
               <Button type="submit" size="lg"
-                className="rounded-xl bg-accent hover:bg-accent/80 text-white cursor-pointer h-10">
+                className="rounded-xl bg-primary hover:bg-primary/80 text-white cursor-pointer h-10">
                 Submit Inquiry
               </Button>
             </div>

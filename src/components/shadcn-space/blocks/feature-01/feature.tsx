@@ -96,7 +96,7 @@ const Feature = ({ featureData }: { featureData: Features }) => {
                         ease: [0.21, 0.47, 0.32, 0.98],
                       }}
                     >
-                      <Card className="py-8 bg-muted ring-0 border-0 h-full">
+                      <Card className="py-8 bg-card ring-0 border-0 h-full">
                         <CardContent className="w-full h-full px-8 flex flex-col items-start gap-12 justify-between">
                           <value.icon
                             className="w-6 h-6 text-gold-500"

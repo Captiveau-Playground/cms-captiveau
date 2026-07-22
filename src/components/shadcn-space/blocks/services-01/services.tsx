@@ -38,20 +38,20 @@ const serviceData: ServiceData[] = [
   {
     service_icon: BarChart3,
     service_title: "Analytics & Reporting",
-    service_bg_color: "bg-secondary/10",
-    service_text_color: "text-secondary",
+    service_bg_color: "bg-primary/5",
+    service_text_color: "text-primary",
   },
   {
     service_icon: Image,
     service_title: "Digital Marketing",
-    service_bg_color: "bg-primary/5",
+    service_bg_color: "bg-primary/10",
     service_text_color: "text-primary",
   },
   {
     service_icon: AppWindowMac,
     service_title: "Web Development",
-    service_bg_color: "bg-accent/5",
-    service_text_color: "text-accent",
+    service_bg_color: "bg-primary/10",
+    service_text_color: "text-primary",
   },
 ];
 
@@ -116,7 +116,7 @@ const Services = () => {
                 </motion.div>
               ))}
             </div>
-            <div className="bg-primary border rounded-2xl p-8 flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
+            <div className="bg-primary rounded-2xl p-8 flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
               <div className="text-center md:text-start">
                 <p className="text-2xl font-medium text-white">
                   See Our Work in Action.
@@ -129,7 +129,7 @@ const Services = () => {
                 <Button className="group text-sm font-medium text-primary bg-white hover:text-primary hover:bg-white/90 rounded-full flex items-center gap-4 p-1 ps-5 w-fit h-12 cursor-pointer">
                   <a href="#" className="flex items-center gap-4">
                     <span>Let&rsquo;s Collaborate</span>
-                    <div className="p-3 bg-black text-white rounded-full group-hover:rotate-45 transition-transform duration-300 ease-in-out">
+                    <div className="p-3 bg-secondary text-white rounded-full group-hover:rotate-45 transition-transform duration-300 ease-in-out">
                       <ArrowUpRight size={16} />
                     </div>
                   </a>
@@ -137,7 +137,7 @@ const Services = () => {
                 <Button className="group text-sm font-medium text-white bg-primary/20 hover:text-white hover:bg-primary/30 rounded-full border border-white/30 flex items-center gap-4 p-1 ps-5 w-fit h-12 cursor-pointer">
                   <a href="#" className="flex items-center gap-4">
                     <span>View Portfolio</span>
-                    <div className="p-3 bg-white text-black rounded-full group-hover:rotate-45 transition-transform duration-300 ease-in-out">
+                    <div className="p-3 bg-secondary text-white rounded-full group-hover:rotate-45 transition-transform duration-300 ease-in-out">
                       <ArrowUpRight size={16} />
                     </div>
                   </a>
