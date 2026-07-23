@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { motion, useInView } from "motion/react";
+import { usePathname } from 'next/navigation';
 
 type NavData = {
   name: string;
@@ -54,6 +55,10 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const isInView = useInView(headerRef, { once: true, amount: 0.1 });
+  const pathname = usePathname();
+  const isHomepage = pathname === '/';
+  // Di sub-pages, navbar langsung solid supaya text terbaca di background terang
+  const showSolid = sticky || !isHomepage;
 
   const handleScroll = useCallback(() => {
     setSticky(window.scrollY >= 50);
@@ -73,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
       className={cn("z-50 w-full bg-transparent h-20 fixed top-0 flex items-center")}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className={`flex items-center justify-between duration-300 transition-all ${sticky ? 'shadow-lg bg-background rounded-full p-3' : 'px-0'}`}>
+        <div className={`flex items-center justify-between duration-300 transition-all ${showSolid ? 'shadow-lg bg-background rounded-full p-3' : 'px-0'}`}>
           <div className="flex justify-between items-center gap-2 w-full">
             <div>
               <a href="/" className="flex items-center gap-2">
@@ -83,7 +88,7 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
                   autoplay
                   className="w-10 h-10"
                 />
-                {sticky ? (
+                {showSolid ? (
                   <span className="text-2xl font-bold text-foreground">Captiveau</span>
                 ) : (
                   <span className="text-2xl font-bold text-white">Captiveau</span>
@@ -93,27 +98,39 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
             <div className="flex items-center gap-2 sm:gap-6">
               <div className="hidden md:flex items-center gap-6">
                 <a
+                  href="/about"
+                  className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                >
+                  About
+                </a>
+                <a
                   href="/services"
-                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                  className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
                 >
                   Services
                 </a>
                 <a
                   href="/portfolio"
-                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                  className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
                 >
                   Portfolio
                 </a>
                 <a
-                  href="/blog"
-                  className={`text-sm font-medium transition-colors ${sticky ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                  href="/articles"
+                  className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
                 >
                   Blog
+                </a>
+                <a
+                  href="/contact"
+                  className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
+                >
+                  Contact
                 </a>
               </div>
               <a
                 href="/contact"
-                className={`hidden sm:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium h-auto transition-all ${sticky
+                className={`hidden sm:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium h-auto transition-all ${showSolid
                   ? 'bg-primary text-white hover:bg-primary/90'
                   : 'bg-white text-black hover:bg-white/90'
                 }`}
@@ -124,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
                 <Button
                   size={"lg"}
                   onClick={() => setNavbarOpen(!navbarOpen)}
-                  className={`flex items-center gap-3 px-5 py-2.5 rounded-full cursor-pointer border text-sm font-medium h-auto ${sticky
+                  className={`flex items-center gap-3 px-5 py-2.5 rounded-full cursor-pointer border text-sm font-medium h-auto ${showSolid
                     ? 'text-foreground bg-background hover:bg-muted border-foreground/20'
                     : 'text-black bg-white hover:bg-transparent hover:text-white border-white'
                   }`}

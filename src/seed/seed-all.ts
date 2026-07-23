@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import {
@@ -19,7 +20,7 @@ async function seed() {
   // 1. SiteSettings (Global)
   console.log('📌 Site Settings...')
   try {
-    await payload.updateGlobal({ slug: 'site-settings', data: siteSettings })
+    await payload.updateGlobal({ slug: 'site-settings', data: siteSettings as any })
     console.log('   ✅ Site Settings updated')
   } catch (e) {
     console.log('   ❌ Site Settings failed:', (e as Error).message)
@@ -28,7 +29,7 @@ async function seed() {
   // 2. MainMenu (Global)
   console.log('📌 Main Menu...')
   try {
-    await payload.updateGlobal({ slug: 'main-menu', data: mainMenu })
+    await payload.updateGlobal({ slug: 'main-menu', data: mainMenu as any })
     console.log('   ✅ Main Menu updated')
   } catch (e) {
     console.log('   ❌ Main Menu failed:', (e as Error).message)
@@ -40,10 +41,10 @@ async function seed() {
     try {
       const existing = await payload.find({ collection: 'services', where: { slug: { equals: service.slug } } })
       if (existing.docs.length > 0) {
-        await payload.update({ collection: 'services', id: existing.docs[0].id, data: service })
+        await payload.update({ collection: 'services', id: existing.docs[0].id, data: service as any })
         console.log(`   ✅ ${service.title} updated`)
       } else {
-        await payload.create({ collection: 'services', data: service })
+        await payload.create({ collection: 'services', data: service as any })
         console.log(`   ✅ ${service.title} created`)
       }
     } catch (e) {

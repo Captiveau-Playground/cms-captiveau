@@ -15,7 +15,7 @@ function renderRichText(content: any): string {
 }
 
 export default function FAQSection({ faqs }: { faqs: Faq[] }) {
-  const [openId, setOpenId] = useState<string | null>(null)
+  const [openId, setOpenId] = useState<number | null>(null)
 
   if (faqs.length === 0) return null
 
@@ -62,7 +62,7 @@ export default function FAQSection({ faqs }: { faqs: Faq[] }) {
               className="rounded-2xl border border-gray-100 bg-white overflow-hidden transition-all"
             >
               <button
-                onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
+                onClick={() => setOpenId(openId === faq.id ? null : faq.id as number)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left"
               >
                 <span className="text-sm font-medium text-gray-900 pr-4">
@@ -71,11 +71,11 @@ export default function FAQSection({ faqs }: { faqs: Faq[] }) {
                 <ChevronDown
                   size={18}
                   className={`shrink-0 text-gray-400 transition-transform ${
-                    openId === faq.id ? 'rotate-180' : ''
+                    openId === faq.id as number ? 'rotate-180' : ''
                   }`}
                 />
               </button>
-              {openId === faq.id && (
+              {openId === faq.id as number && (
                 <div className="px-6 pb-5">
                   <p className="text-sm leading-relaxed text-gray-600">
                     {renderRichText(faq.answer)}

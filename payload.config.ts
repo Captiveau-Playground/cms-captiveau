@@ -26,8 +26,6 @@ export default buildConfig({
     user: 'users',
     meta: {
       titleSuffix: ' | Captiveau CMS',
-      favicon: '/favicon.ico',
-      ogImage: '/og-image.png',
     },
     importMap: {
       baseDir: path.resolve(dirname),

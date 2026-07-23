@@ -36,8 +36,8 @@ export default async function FrontendLayout({
     }))
 
   // Get contact info from settings
-  const email = settings?.contacts?.find((c) => c.type === 'email')?.value
-  const phone = settings?.contacts?.find((c) => c.type === 'whatsapp' || c.type === 'phone')?.value
+  const email = settings?.contacts?.find((c) => c.type === 'email')?.value ?? undefined
+  const phone = settings?.contacts?.find((c) => c.type === 'whatsapp' || c.type === 'phone')?.value ?? undefined
 
   return (
     <div className="min-h-screen flex flex-col">

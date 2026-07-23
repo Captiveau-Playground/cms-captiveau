@@ -46,7 +46,7 @@ const Portfolio = () => {
       transition: {
         delay: index * 0.3,
         duration: 0.6,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
       },
     }),
   };
