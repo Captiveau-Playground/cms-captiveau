@@ -37,12 +37,13 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  --radius: 0.5rem;
+  --radius: 0.75rem;
   --font-sans: 'Satoshi', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 :root {
-  --background: 210 20% 98%;
+  --background: 0 0% 98%;
   --foreground: 222 47% 11%;
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
@@ -53,34 +54,34 @@
   --secondary: 42 92% 50%;
   --secondary-foreground: 222 47% 11%;
   --muted: 210 20% 96%;
-  --muted-foreground: 215 16% 47%;
+  --muted-foreground: 220 9% 46%;
   --accent: 24 100% 50%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
   --ring: 221 83% 53%;
 }
 
 .dark {
-  --background: 0 0% 20%;
+  --background: 222 47% 6%;
   --foreground: 210 40% 98%;
-  --card: 0 0% 20%;
+  --card: 222 47% 8%;
   --card-foreground: 210 40% 98%;
-  --popover: 0 0% 20%;
+  --popover: 222 47% 8%;
   --popover-foreground: 210 40% 98%;
   --primary: 217 91% 60%;
   --primary-foreground: 0 0% 100%;
   --secondary: 42 85% 55%;
   --secondary-foreground: 222 47% 11%;
-  --muted: 0 0% 25%;
-  --muted-foreground: 215 20% 70%;
+  --muted: 217 33% 12%;
+  --muted-foreground: 215 20% 65%;
   --accent: 24 95% 53%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 30%;
-  --input: 0 0% 30%;
+  --border: 217 25% 16%;
+  --input: 217 25% 16%;
   --ring: 217 91% 60%;
 }

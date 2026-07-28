@@ -57,8 +57,9 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
   const isInView = useInView(headerRef, { once: true, amount: 0.1 });
   const pathname = usePathname();
   const isHomepage = pathname === '/';
-  // Di sub-pages, navbar langsung solid supaya text terbaca di background terang
-  const showSolid = sticky || !isHomepage;
+  const transparentPages = ['/', '/about'];
+  // Di halaman tertentu, navbar bisa transparan seperti homepage (hero full-bleed bg)
+  const showSolid = sticky || !transparentPages.includes(pathname);
 
   const handleScroll = useCallback(() => {
     setSticky(window.scrollY >= 50);
@@ -116,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
                   Portfolio
                 </a>
                 <a
-                  href="/articles"
+                  href="/blog-01"
                   className={`text-sm font-medium transition-colors ${showSolid ? 'text-foreground hover:text-primary' : 'text-white/80 hover:text-white'}`}
                 >
                   Blog
@@ -135,19 +136,19 @@ const Navbar: React.FC<NavbarProps> = ({ navData, phone, email }) => {
                   : 'bg-white text-black hover:bg-white/90'
                 }`}
               >
-                Request for Demo
+                Let's Talk
               </a>
               <div>
                 <Button
                   size={"lg"}
                   onClick={() => setNavbarOpen(!navbarOpen)}
-                  className={`flex items-center gap-3 px-5 py-2.5 rounded-full cursor-pointer border text-sm font-medium h-auto ${showSolid
-                    ? 'text-foreground bg-background hover:bg-muted border-foreground/20'
-                    : 'text-black bg-white hover:bg-transparent hover:text-white border-white'
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full cursor-pointer border text-sm font-medium h-auto transition-all ${showSolid
+                    ? 'text-foreground bg-background hover:bg-muted border-border'
+                    : 'text-white bg-white/10 hover:bg-white/20 border-white/20'
                   }`}
                   aria-label="Toggle mobile menu"
                 >
-                  <Menu size={16} />
+                  <Menu size={14} />
                   Menu
                 </Button>
               </div>

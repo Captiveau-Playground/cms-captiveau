@@ -77,13 +77,13 @@ const Blog = () => {
                   transition={{ duration: 1, delay: index === 0 ? 0.2 : index === 1 ? 0.4 : 0.6, ease: "easeInOut" }}
                   className={`group flex flex-col gap-5 ${index === 0 ? "sm:col-span-2" : ""}`}
                 >
-                  <Card className="p-0 ring-0 border-0 rounded-none shadow-none">
+                  <Card className="p-0 ring-0 border-0 rounded-xl shadow-none">
                     <CardContent className="p-0 group flex flex-col gap-5">
-                      <div className="w-full aspect-video sm:aspect-auto sm:h-96 overflow-hidden group">
+                      <div className="w-full aspect-video sm:aspect-auto sm:h-96 overflow-hidden rounded-xl group">
                         <img
                           src={value.coverImage}
                           alt={value.title}
-                          className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
+                          className="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110 rounded-xl"
                         />
                       </div>
                       <div className="flex flex-col gap-2 px-4 sm:px-6">

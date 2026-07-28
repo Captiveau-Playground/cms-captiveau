@@ -1,98 +1,159 @@
+"use client"
+
+import { useState } from "react"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { PlusIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { ArrowRight, Mail, X } from "lucide-react"
 
-const FAQ_DATA = [
+const faqs = [
   {
-    question: "Apa itu Captiveau?",
-    answer:
-      "Captiveau adalah software house Indonesia yang mengkhususkan diri dalam desain dan pengembangan produk digital end-to-end. Kami membantu startup, korporasi, dan UMKM mewujudkan ide digital mereka menjadi aplikasi nyata.",
+    q: "Apa itu Captiveau?",
+    a: "Captiveau adalah software house Indonesia yang mengkhususkan diri dalam desain dan pengembangan produk digital end-to-end. Kami membantu startup, korporasi, dan UMKM mewujudkan ide digital mereka menjadi aplikasi nyata.",
   },
   {
-    question: "Berapa lama waktu yang dibutuhkan untuk membuat aplikasi?",
-    answer:
-      "Untuk MVP (Minimum Viable Product) biasanya membutuhkan 8-12 minggu. Untuk aplikasi kompleks bisa 3-6 bulan tergantung fitur dan skala project. Kami akan berikan timeline detail setelah konsultasi gratis.",
+    q: "Berapa lama waktu untuk membuat aplikasi?",
+    a: "MVP biasanya 8-12 minggu. Aplikasi kompleks bisa 3-6 bulan tergantung fitur. Kami berikan timeline detail setelah konsultasi gratis.",
   },
   {
-    question: "Apakah saya perlu punya skill teknis untuk bekerja dengan Captiveau?",
-    answer:
-      "Tidak perlu! Tim kami akan memandu Anda dari awal hingga akhir. Kami akan menjelaskan setiap tahap dengan bahasa yang mudah dipahami dan memastikan Anda selalu update dengan perkembangan project.",
+    q: "Apakah saya perlu skill teknis?",
+    a: "Tidak perlu! Tim kami akan memandu Anda dari awal hingga akhir dengan bahasa yang mudah dipahami.",
   },
   {
-    question: "Bagaimana proses kerja dengan Captiveau?",
-    answer:
-      "Mulai dengan konsultasi gratis → analisis kebutuhan → wireframe & design → development → testing → deployment → maintenance. Anda akan dapat update mingguan selama proses berlangsung.",
+    q: "Bagaimana proses kerja dengan Captiveau?",
+    a: "Konsultasi gratis → analisis kebutuhan → wireframe & design → development → testing → deployment → maintenance. Ada update mingguan.",
   },
   {
-    question: "Apakah saya bisa request revisi selama development?",
-    answer:
-      "Tentu! Kami menyediakan sesi revisi di setiap tahap development. Kami ingin memastikan hasil akhir sesuai dengan ekspektasi Anda. Perubahan kecil bisa langsung dilakukan, sementara perubahan besar akan didiskusikan terlebih dahulu.",
+    q: "Apakah ada garansi setelah launching?",
+    a: "Ya, kami berikan garansi bug-fix setelah launching. Tersedia juga paket maintenance jangka panjang.",
   },
   {
-    question: "Apakah aplikasi yang dibuat support Android dan iOS?",
-    answer:
-      "Ya! Kami develop aplikasi yang bisa berjalan di Android dan iOS menggunakan teknologi cross-platform seperti Flutter atau React Native untuk efisiensi biaya dan waktu.",
+    q: "Bagaimana cara memulai kerja sama?",
+    a: "Klik tombol Konsultasi Gratis, isi form, atau WhatsApp ke +62-851-1770-5910. Kami jadwalkan meeting dalam 24 jam.",
   },
-  {
-    question: "Apakah ada garansi untuk aplikasi yang dibuat?",
-    answer:
-      "Ya, kami memberikan garansi bug-fix dalam periode tertentu setelah launching. Untuk maintenance jangka panjang, kami juga menyediakan paket pemeliharaan yang bisa disesuaikan dengan kebutuhan Anda.",
-  },
-  {
-    question: "Bagaimana cara memulai kerja sama dengan Captiveau?",
-    answer:
-      "Cukup klik tombol \"Konsultasi Gratis\" di website, isi form singkat, atau langsung WhatsApp ke +6285-156-265-910. Kami akan jadwalkan meeting dalam 24 jam.",
-  },
-];
+]
 
 export default function Faq() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
-    <section className="bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:py-24 py-8 flex flex-col gap-16">
-        <div className="flex flex-col gap-4 items-center">
-          <Badge
-            variant="outline"
-            className="text-sm h-auto py-1 px-3 border-0 outline outline-border"
-          >
-            FAQs
-          </Badge>
-          <h2 className="text-5xl font-medium text-center max-w-lg">
-            Pertanyaan yang Sering Diajukan
-          </h2>
-        </div>
-        <div>
-          <Accordion className="w-full flex flex-col gap-6">
-            {FAQ_DATA.map((faq, index) => (
-              <AccordionItem
-                key={`item-${index}`}
-                value={`item-${index}`}
-                className={cn(
-                  "p-6 border border-border rounded-2xl flex flex-col gap-3 group/item data-[open]:bg-accent/5 data-[open]:border-accent transition-colors",
-                  index === 0 && "delay-100",
-                  index === 1 && "delay-200",
-                  index === 2 && "delay-300",
-                  index === 3 && "delay-400",
-                  index === 4 && "delay-500",
-                )}
+    <section className="flex w-full items-center justify-center bg-muted py-16 text-foreground">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.6fr] md:gap-16">
+          {/* Left panel */}
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                FAQ
+              </span>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Pertanyaan yang Sering Diajukan
+              </h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Temukan jawaban tentang Captiveau dan layanan kami. Jika tidak
+                ada, tim support kami siap membantu.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 border border-border bg-card p-5 rounded-xl">
+              <div className="flex items-center gap-3">
+                <div className="flex size-9 items-center justify-center border border-border bg-background">
+                  <Mail className="size-4 text-muted-foreground" />
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium">
+                    Masih ada pertanyaan?
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Kami respon dalam beberapa jam.
+                  </span>
+                </div>
+              </div>
+
+              <Button
+                className="w-full justify-between rounded-xl"
+                onClick={() => setModalOpen(true)}
               >
-                <AccordionTrigger className="p-0 text-xl font-medium hover:no-underline **:data-[slot=accordion-trigger-icon]:hidden cursor-pointer">
-                  {faq.question}
-                  <PlusIcon className="w-6 h-6 shrink-0 transition-transform duration-200 group-aria-expanded/accordion-trigger:rotate-45" />
+                Hubungi Support
+                <ArrowRight className="size-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Right panel — Accordion */}
+          <Accordion defaultValue={[faqs[0].q]}>
+            {faqs.map(({ q, a }) => (
+              <AccordionItem key={q} value={q}>
+                <AccordionTrigger className="py-3.5 text-sm font-medium">
+                  {q}
                 </AccordionTrigger>
-                <AccordionContent className="p-0 text-muted-foreground text-base">
-                  {faq.answer}
+                <AccordionContent className="pb-3.5 text-sm text-muted-foreground">
+                  {a}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="mx-4 w-full max-w-md rounded-2xl bg-card p-6 shadow-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Hubungi Support</h3>
+              <button
+                onClick={() => setModalOpen(false)}
+                className="size-8 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+            <p className="text-sm text-muted-foreground mb-5">
+              Ceritakan pertanyaan Anda, kami akan merespon dalam beberapa jam.
+            </p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                setModalOpen(false)
+              }}
+              className="flex flex-col gap-4"
+            >
+              <Input
+                type="email"
+                placeholder="Email Anda"
+                required
+                className="rounded-xl"
+              />
+              <Textarea
+                required
+                rows={4}
+                className="min-h-24 resize-none rounded-xl"
+                placeholder="Tulis pertanyaan Anda..."
+              />
+              <div className="flex justify-end gap-3 mt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="rounded-xl"
+                  onClick={() => setModalOpen(false)}
+                >
+                  Batal
+                </Button>
+                <Button type="submit" className="rounded-xl">
+                  Kirim Pesan
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
-  );
+  )
 }

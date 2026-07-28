@@ -1,73 +1,115 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+"use client"
+
+import { ArrowUpRight } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
+
+const columns = [
+  {
+    title: "Layanan",
+    links: [
+      { label: "Landing Page", href: "/services/landing-page" },
+      { label: "E-Commerce", href: "/services/e-commerce" },
+      { label: "Company Profile", href: "/services/company-profile" },
+      { label: "UI/UX Design", href: "/services/uiux-design" },
+      { label: "Web Development", href: "/services/web-development" },
+    ],
+  },
+  {
+    title: "Perusahaan",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Portfolio", href: "/portfolio" },
+      { label: "Blog", href: "/blog-01" },
+      { label: "Career", href: "/career" },
+      { label: "FAQ", href: "/faq" },
+    ],
+  },
+  {
+    title: "Kontak",
+    links: [
+      { label: "hello@captiveau.id", href: "mailto:hello@captiveau.id" },
+      { label: "+62-851-1770-5910", href: "tel:+6285117705910" },
+      { label: "Tebet, Jakarta Selatan", href: "#" },
+    ],
+  },
+]
+
+const socials = [
+  { label: "LinkedIn", href: "https://linkedin.com/company/captiveau" },
+  { label: "Instagram", href: "https://instagram.com/captiv.eau" },
+  { label: "GitHub", href: "#" },
+]
 
 export default function Footer() {
-    const footerLinks = [
-        { label: "Home", href: "/" },
-        { label: "Services", href: "/services" },
-        { label: "Articles", href: "/articles" },
-        { label: "Career", href: "/career" },
-        { label: "About Us", href: "/about-us" },
-        { label: "FAQs", href: "/faqs" },
-    ]
-    const servicesLinks = [
-        { label: "Landing Page", href: "/services/landing-page" },
-        { label: "E-Commerce", href: "/services/ecommerce" },
-        { label: "Company Profile", href: "/services/company-profile" },
-        { label: "UI/UX Design", href: "/services/uiux-design" },
-    ]
-    return (
-        <footer className="dark bg-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:py-24 py-8">
-                <div className="flex flex-col gap-16">
-                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
-                        <div>
-                            <div className="text-primary flex items-center gap-2">
-                                <span className="text-2xl font-semibold">Captiveau</span>
-                            </div>
-                            <p className="text-muted-foreground/50 mt-6 max-w-md leading-relaxed">
-                                Membangun pengalaman web yang indah dan fungsional dengan teknologi modern. Kami membantu startup dan bisnis menciptakan kehadiran digital mereka.
-                            </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-10 lg:col-span-2">
-                            <div>
-                                <p className="text-lg font-medium text-foreground">Layanan Kami</p>
-                                <ul className="mt-8 space-y-4">
-                                    {servicesLinks.map((link) => (
-                                        <li key={link.label}>
-                                            <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition">
-                                                {link.label}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div>
-                                <p className="text-lg font-medium text-foreground">Tautan Berguna</p>
-                                <ul className="mt-8 space-y-4">
-                                    {footerLinks.map((link) => (
-                                        <li key={link.label}>
-                                            <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition">
-                                                {link.label}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <Separator />
-                    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-                        <p className="text-sm text-muted-foreground">
-                            © 2025 Captiveau. Semua hak dilindungi.
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                            Dibuat dengan ❤️ di Indonesia
-                        </p>
-                    </div>
-                </div>
+  return (
+    <footer className="flex w-full items-center justify-center bg-foreground px-6 py-16 text-white">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:grid-cols-6">
+          {/* Brand */}
+          <div className="col-span-2 sm:col-span-3 md:col-span-2">
+            <span className="text-xl font-bold tracking-tight text-white">
+              Captiveau
+            </span>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
+              Creative tech studio yang membantu startup dan bisnis menciptakan
+              produk digital yang indah, fungsional, dan berdampak.
+            </p>
+            <div className="mt-6 flex items-center gap-2">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                >
+                  <span className="text-sm text-white/40 transition-colors hover:text-white">
+                    {social.label}
+                  </span>
+                </a>
+              ))}
             </div>
-        </footer>
-    )
+          </div>
+
+          {/* Nav columns */}
+          {columns.map((column) => (
+            <nav key={column.title} className="flex flex-col gap-3">
+              <h3 className="text-xs font-semibold text-white/30 uppercase tracking-[0.15em]">
+                {column.title}
+              </h3>
+              <ul className="flex flex-col gap-2.5">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-white/60 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
+
+        <Separator className="my-8 bg-white/10" />
+
+        <div className="flex flex-col-reverse items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} Captiveau. All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-2">
+            <a href="/contact">
+              <Button className="rounded-full bg-white/10 text-white hover:bg-white/20 h-9 px-4 text-xs font-medium gap-1.5">
+                Hubungi Kami <ArrowUpRight className="size-3" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
 }
