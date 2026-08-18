@@ -443,7 +443,9 @@ export async function getCmsHomepage() {
       stats: (data.stats || []).map((s: any) => ({ value: s.value, suffix: s.suffix || '', label: s.label })),
       techStack: (data.techStack || []).map((t: any) => t.name).filter(Boolean),
       trustPoints: (data.trustPoints || []).map((t: any) => ({ icon: t.icon || 'users', title: t.title, desc: t.description || '' })),
-      advantages: (data.advantages || []).map((a: any) => ({ icon: a.icon || 'eye', title: a.title, desc: a.description || '' })),
+      advantages: (data.advantages || []).length
+        ? (data.advantages || []).map((a: any) => ({ icon: a.icon || 'eye', title: a.title, desc: a.description || '' }))
+        : advantagesFallback.map((a: any) => ({ icon: a.icon, title: a.title, desc: a.desc })),
       process: (data.process || []).map((p: any, i: number) => ({
         step: p.step || String(i + 1).padStart(2, '0'),
         title: p.title,

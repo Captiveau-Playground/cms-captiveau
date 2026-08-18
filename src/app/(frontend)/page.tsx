@@ -1,7 +1,7 @@
 import type { CmsHomepage } from '@/lib/cms-data'
 import { HeroBentoSection } from '@/components/hero-bento-section'
 import { FeaturesBentoSection } from '@/components/features-bento-section'
-import { HeroGalleryWallSection } from '@/components/hero-section'
+import { FeaturesSeraSection } from '@/components/features-section'
 import { GalleryColumnsSection } from '@/components/gallery-section'
 import SocialProof from '@/components/frontend/home/social-proof'
 import BlogPreview from '@/components/frontend/home/blog'
@@ -39,7 +39,7 @@ export default async function HomePage() {
       {/* Client logos — right under the hero */}
       <SocialProof homepage={data.homepage} />
       <FeaturesBentoSection services={data.services} />
-      <HeroGalleryWallSection advantages={data.homepage.advantages} />
+      <FeaturesSeraSection features={data.homepage.advantages} />
       <GalleryColumnsSection
         projects={data.projects}
         metrics={data.homepage.stats.slice(0, 3).map((s) => ({
