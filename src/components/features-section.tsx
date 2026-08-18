@@ -5,6 +5,7 @@ import { ContentRail, SectionShell } from "@/components/layout-contract";
 import { SeraHoverLift, SeraStagger, SeraStaggerItem } from "@/lib/sera-motion";
 import { resolveIcon } from "@/lib/icons";
 import { Sparkles } from "lucide-react";
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export type WhyUsFeature = {
   title: string;
@@ -45,9 +46,11 @@ export function FeaturesSeraSection({
 
           <SeraStaggerItem>
             <div className="mt-10 max-w-2xl">
-              <h2 className="text-balance font-medium text-3xl tracking-tight md:text-4xl">
-                Why Choose <span className="text-primary">Captiveau?</span>
-              </h2>
+              <AnimatedHeading
+                className="text-balance font-medium text-3xl tracking-tight md:text-4xl"
+                highlightWords={['Captiveau?']}
+                text="Why Choose Captiveau?"
+              />
               <p className="mt-4 text-pretty text-muted-foreground text-sm leading-relaxed md:text-base">
                 Tim senior yang bekerja langsung, proses yang transparan, dan
                 hasil yang terukur — dari ide hingga peluncuran.

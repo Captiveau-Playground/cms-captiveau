@@ -9,6 +9,7 @@ import { SectionShell, ContentRail } from "@/components/layout-contract";
 import { GalleryTile } from "@/lib/gallery-primitives";
 import type { GalleryItem } from "@/lib/gallery-data";
 import type { Project as ProjectItem } from "@/lib/content";
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 function toGalleryItem(p: ProjectItem): GalleryItem {
   return {
@@ -133,9 +134,11 @@ export function GalleryColumnsSection({
           <p className="font-medium text-primary text-xs uppercase tracking-[0.25em]">
             Portfolio
           </p>
-          <h2 className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl">
-            Work that speaks for us
-          </h2>
+          <AnimatedHeading
+            className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl"
+            highlightWords={['speaks']}
+            text="Work that speaks for us"
+          />
           <p className="mt-4 text-muted-foreground text-sm md:text-base">
             Setiap proyek adalah bukti komitmen kami pada kualitas — klik untuk
             melihat studi kasus lengkap.

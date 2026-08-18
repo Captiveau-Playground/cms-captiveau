@@ -6,6 +6,7 @@ import { GridPattern } from "@/components/ui/grid-pattern";
 import { SectionShell, ContentRail } from "@/components/layout-contract";
 import { resolveIcon } from "@/lib/icons";
 import type { ServiceItem } from "@/lib/content";
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 function ServiceCard({
   title,
@@ -61,9 +62,11 @@ export function FeaturesBentoSection({
           <p className="font-medium text-primary text-xs uppercase tracking-[0.25em]">
             Digital Services
           </p>
-          <h2 className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl">
-            Layanan digital yang siap membawa bisnismu naik kelas
-          </h2>
+          <AnimatedHeading
+            className="mt-3 max-w-2xl text-balance font-medium text-2xl tracking-tight md:text-4xl"
+            highlightWords={['digital']}
+            text="Layanan digital yang siap membawa bisnismu naik kelas"
+          />
           <p className="mt-4 text-muted-foreground text-sm md:text-base">
             Dari landing page hingga platform kompleks — kami kerjakan end-to-end
             dengan satu standar kualitas.

@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "lucide-react";
 import { ContentRail, SectionShell } from "@/components/layout-contract";
 import { buttonVariants } from "@/components/ui/button";
 import { SeraBlurReveal, SeraStagger, SeraStaggerItem } from "@/lib/sera-motion";
+import { AnimatedHeading } from "@/components/frontend/animated-heading";
 
 /**
  * CTA (adapted from @nusaiba/cta-11) — driven by the homepage CTA settings.
@@ -29,9 +30,10 @@ export function CtaSeraSection({
                   <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
                     Get started
                   </p>
-                  <h2 className="mt-4 text-balance font-medium text-3xl tracking-tight md:text-4xl">
-                    {title}
-                  </h2>
+                  <AnimatedHeading
+                    className="mt-4 max-w-xl text-balance font-medium text-3xl tracking-tight md:text-4xl"
+                    text={title}
+                  />
                   <p className="mt-4 text-pretty text-muted-foreground text-sm leading-relaxed md:text-base">
                     {subtitle}
                   </p>

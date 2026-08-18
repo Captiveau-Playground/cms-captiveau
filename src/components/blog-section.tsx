@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { SectionShell, ContentRail } from "@/components/layout-contract";
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export type BlogPost = {
   title: string;
@@ -24,9 +25,10 @@ export function BlogSection({ posts }: { posts: BlogPost[] }) {
       <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-medium text-2xl tracking-tight md:text-4xl">
-              Latest from the blog
-            </h2>
+            <AnimatedHeading
+              className="font-medium text-2xl tracking-tight md:text-4xl"
+              text="Latest from the blog"
+            />
             <p className="mt-3 max-w-lg text-muted-foreground text-sm md:text-base">
               Artikel, panduan, dan insights dari tim yang mengerjakan langsung.
             </p>

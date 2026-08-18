@@ -2,13 +2,11 @@
 
 import { useState } from 'react'
 import { Check, Mail, MapPin, Phone, Send } from 'lucide-react'
-import { Section } from '../section'
-import { Eyebrow } from '../eyebrow'
-import { RevealHeading } from '../section'
+import { SectionShell, ContentRail } from '@/components/layout-contract'
+import { SeraStagger, SeraStaggerItem } from '@/lib/sera-motion'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 import { BrandIcon } from '../social-icons'
 import type { CmsSiteSettings } from '@/lib/cms-data'
-
-
 
 const inputClass =
   'w-full rounded-none border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:ring-2 focus:ring-primary/20'
@@ -36,161 +34,164 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
   }
 
   return (
-    <Section className="py-16 sm:py-24">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-        {/* Left — info */}
-        <div className="flex flex-col gap-6 lg:col-span-5">
-          <div className="flex flex-col gap-3">
-            <Eyebrow label="Contact" />
-            <RevealHeading className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Let's talk about{' '}
-              <span className="text-primary">your project</span>
-            </RevealHeading>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              Tell us about your idea — we'll get back to you within one
-              business day with the next steps. No pressure, no commitment.
-            </p>
-          </div>
-
-          {/* channels */}
-          <div className="flex flex-col gap-3">
-            {channels.map((c) => {
-              const Icon = c.icon
-              return (
-                <a
-                  key={c.label}
-                  href={c.href}
-                  target={c.href.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer"
-                  className="group flex items-start gap-4 rounded-none border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 hover:border-primary/40"
-                >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-none bg-primary/10">
-                    <Icon className="size-5 text-primary" strokeWidth={1.7} />
-                  </span>
-                  <span className="flex flex-col gap-0.5">
-                    <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      {c.label}
-                    </span>
-                    <span className="text-sm font-semibold text-foreground">
-                      {c.value}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{c.desc}</span>
-                  </span>
-                </a>
-              )
-            })}
-          </div>
-
-          {/* office image + socials */}
-          <div className="overflow-hidden rounded-none border border-border">
-            <img
-              src="/images/office.jpg"
-              alt="Captiveau studio"
-              className="aspect-[16/8] w-full object-cover"
-            />
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Follow us
-            </span>
-            <div className="flex gap-2">
-              {site.socials.map((s) => (
-                <a
-                  key={s.platform}
-                  href={s.url || '#'}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.platform ?? undefined}
-                  className="flex size-9 items-center justify-center rounded-none border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
-                >
-                  <BrandIcon name={s.platform || ''} />
-                </a>
-              ))}
+    <SectionShell spacingMode="section">
+      <ContentRail maxWidth="max-w-7xl" className="space-y-10">
+        <SeraStagger className="space-y-10">
+          <SeraStaggerItem>
+            <div className="flex items-baseline justify-between gap-4 border-b border-border pb-4">
+              <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
+                Contact
+              </p>
+              <span className="font-mono text-[11px] text-muted-foreground">06</span>
             </div>
-          </div>
-        </div>
+          </SeraStaggerItem>
 
-        {/* Right — form */}
-        <div className="lg:col-span-7">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-5 rounded-none border border-border bg-card p-6 shadow-lg shadow-black/5 sm:p-8"
-          >
-            <div className="flex items-center justify-between border-b border-border pb-5">
-              <div>
-                <h3 className="text-lg font-bold tracking-tight text-foreground">
-                  Tell us about your project
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  We usually reply within 24 hours.
+          <SeraStaggerItem>
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+              {/* Left — info */}
+              <div className="flex flex-col gap-6 lg:col-span-5">
+                <AnimatedHeading
+                  className="max-w-lg text-balance font-medium text-3xl tracking-tight md:text-4xl"
+                  highlightWords={['project']}
+                  text="Let's talk about your project"
+                />
+                <p className="max-w-lg text-muted-foreground text-sm leading-relaxed md:text-base">
+                  Tell us about your idea — we'll get back to you within one
+                  business day with the next steps. No pressure, no commitment.
                 </p>
+
+                <div className="flex flex-col gap-3">
+                  {channels.map((c) => {
+                    const Icon = c.icon
+                    return (
+                      <a
+                        key={c.label}
+                        href={c.href}
+                        target={c.href.startsWith('http') ? '_blank' : undefined}
+                        rel="noreferrer"
+                        className="group flex items-start gap-4 border border-border bg-background p-4 transition-colors hover:bg-muted/30"
+                      >
+                        <span className="flex size-10 shrink-0 items-center justify-center border border-border bg-muted/50 text-foreground/80">
+                          <Icon className="size-5" />
+                        </span>
+                        <span className="flex flex-col gap-0.5">
+                          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            {c.label}
+                          </span>
+                          <span className="text-sm font-semibold text-foreground">
+                            {c.value}
+                          </span>
+                          <span className="text-xs text-muted-foreground">{c.desc}</span>
+                        </span>
+                      </a>
+                    )
+                  })}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Follow us
+                  </span>
+                  <div className="flex gap-2">
+                    {site.socials.map((s) => (
+                      <a
+                        key={s.platform}
+                        href={s.url || '#'}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={s.platform ?? undefined}
+                        className="flex size-9 items-center justify-center border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
+                      >
+                        <BrandIcon name={s.platform || ''} />
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-secondary">
-                <span className="size-1.5 rounded-full bg-secondary animate-pulse" />
-                Online
-              </span>
+
+              {/* Right — form */}
+              <div className="lg:col-span-7">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col gap-5 border border-border bg-background p-6 sm:p-8"
+                >
+                  <div className="flex items-center justify-between border-b border-border pb-5">
+                    <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
+                      Start a project
+                    </p>
+                    <span className="font-mono text-[11px] text-muted-foreground">06</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="name">
+                        Name
+                      </label>
+                      <input id="name" name="name" required placeholder="Your name" className={inputClass} />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="email">
+                        Email
+                      </label>
+                      <input id="email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="service">
+                        Service
+                      </label>
+                      <select id="service" name="service" className={inputClass} defaultValue="Landing Page">
+                        <option>Landing Page</option>
+                        <option>E-Commerce</option>
+                        <option>Company Profile</option>
+                        <option>UI/UX Design</option>
+                        <option>Web Development</option>
+                        <option>Mobile App</option>
+                        <option>Lainnya</option>
+                      </select>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="budget">
+                        Budget
+                      </label>
+                      <select id="budget" name="budget" className={inputClass} defaultValue="Rp 5 – 15 juta">
+                        <option>Rp 5 – 15 juta</option>
+                        <option>Rp 15 – 40 juta</option>
+                        <option>Rp 40 – 100 juta</option>
+                        <option>Rp 100 juta+</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="message">
+                      Message
+                    </label>
+                    <textarea id="message" name="message" required rows={4} placeholder="Tell us about your project…" className={inputClass} />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2 bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/85 active:scale-[0.98]"
+                  >
+                    {sent ? (
+                      <>
+                        <Check className="size-4" /> Email opened — we'll reply soon
+                      </>
+                    ) : (
+                      <>
+                        Send message <Send className="size-4" />
+                      </>
+                    )}
+                  </button>
+                  <p className="text-xs text-muted-foreground">
+                    Dengan mengirim form, kamu setuju dihubungi tim kami via email/WhatsApp.
+                  </p>
+                </form>
+              </div>
             </div>
-
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Name</span>
-                <input required name="name" placeholder="Your name" className={inputClass} />
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Email</span>
-                <input required type="email" name="email" placeholder="you@company.com" className={inputClass} />
-              </label>
-            </div>
-
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Service needed</span>
-                <select name="service" className={inputClass} defaultValue="Landing Page">
-                  {['Landing Page', 'E-Commerce', 'Company Profile', 'UI/UX Design', 'Web Development', 'Mobile App', 'Other'].map((o) => (
-                    <option key={o}>{o}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Budget range</span>
-                <select name="budget" className={inputClass} defaultValue="Rp 5–20 juta">
-                  {['Under Rp 5 juta', 'Rp 5–20 juta', 'Rp 20–50 juta', 'Rp 50+ juta'].map((o) => (
-                    <option key={o}>{o}</option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium text-foreground">Project details</span>
-              <textarea
-                required
-                name="message"
-                rows={5}
-                placeholder="Describe your project, timeline, and goals..."
-                className={`${inputClass} resize-none`}
-              />
-            </label>
-
-            <button
-              type="submit"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-none bg-primary px-8 text-sm font-medium text-white transition-all hover:bg-primary-600 active:scale-[0.98]"
-            >
-              {sent ? (
-                <>
-                  Sent — check your email <Check className="size-4" />
-                </>
-              ) : (
-                <>
-                  Send Message
-                  <Send className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-      </div>
-    </Section>
+          </SeraStaggerItem>
+        </SeraStagger>
+      </ContentRail>
+    </SectionShell>
   )
 }
