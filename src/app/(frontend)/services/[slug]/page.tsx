@@ -16,8 +16,6 @@ import { PricingSection } from '@/components/pricing-section'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
-export const dynamic = 'force-dynamic'
-
 export async function generateMetadata({
   params,
 }: {

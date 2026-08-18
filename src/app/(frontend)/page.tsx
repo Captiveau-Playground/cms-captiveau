@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic'
 import type { CmsHomepage } from '@/lib/cms-data'
-import { HeroBentoSection } from '@/components/blocks/hero-bento'
-import { FeaturesBentoSection } from '@/components/blocks/features-bento'
-import { FeaturesSeraSection } from '@/components/blocks/why-us'
-import { GalleryColumnsSection } from '@/components/blocks/gallery'
-import SocialProof from '@/components/frontend/home/social-proof'
-import { BlogSection } from '@/components/blocks/blog'
-import { TestimonialsSeraSection } from '@/components/blocks/testimonials'
-import { CtaSeraSection } from '@/components/blocks/cta'
-import Faq from '@/components/frontend/home/faq'
-import ContactSection from '@/components/frontend/home/contact'
+
+const HeroBentoSection = dynamic(() => import('@/components/blocks/hero-bento').then((m) => m.HeroBentoSection), { ssr: true })
+const FeaturesBentoSection = dynamic(() => import('@/components/blocks/features-bento').then((m) => m.FeaturesBentoSection), { ssr: true })
+const FeaturesSeraSection = dynamic(() => import('@/components/blocks/why-us').then((m) => m.FeaturesSeraSection), { ssr: true })
+const GalleryColumnsSection = dynamic(() => import('@/components/blocks/gallery').then((m) => m.GalleryColumnsSection), { ssr: true })
+const SocialProof = dynamic(() => import('@/components/frontend/home/social-proof'), { ssr: true })
+const BlogSection = dynamic(() => import('@/components/blocks/blog').then((m) => m.BlogSection), { ssr: true })
+const TestimonialsSeraSection = dynamic(() => import('@/components/blocks/testimonials').then((m) => m.TestimonialsSeraSection), { ssr: true })
+const CtaSeraSection = dynamic(() => import('@/components/blocks/cta').then((m) => m.CtaSeraSection), { ssr: true })
+const Faq = dynamic(() => import('@/components/frontend/home/faq'), { ssr: true })
+const ContactSection = dynamic(() => import('@/components/frontend/home/contact'), { ssr: true })
 import { getHomeData } from '@/lib/cms-data'
 import { formatDateLong } from '@/lib/date'
 import type { Metadata } from 'next'

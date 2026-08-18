@@ -9,9 +9,10 @@ import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 
-// CMS-driven site: always render on demand so admin edits & new content show
-// immediately (no build-time prerendering is cached).
-export const dynamic = 'force-dynamic'
+// ISR: pages are rendered on demand and cached at the edge for 60s, so CMS
+// edits appear within a minute while server response stays fast. Preview /
+// draft requests bypass the cache via Next draftMode.
+export const revalidate = 60
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -165,7 +166,7 @@ export default async function FrontendLayout({
   return (
     <html lang="id">
       <head>
-        <link rel="preload" href="/fonts/Satoshi-Variable.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
         <JsonLd data={orgSchema} />
