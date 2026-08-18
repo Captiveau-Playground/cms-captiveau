@@ -12,6 +12,8 @@ import { getCmsServices } from '@/lib/cms-data'
 import { process } from '@/lib/content'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
+import IntegrationScatter from '@/components/frontend/integration-scatter'
+import HowItWorks from '@/components/frontend/how-it-works'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
@@ -103,46 +105,33 @@ export default async function ServicesPage() {
         </div>
       </Section>
 
-      {/* Process */}
-      <Section muted className="py-16 sm:py-24">
-        <SectionHeader
-          eyebrow="Process"
-          title={
-            <>
-              How We <span className="text-primary">Work</span>
-            </>
-          }
-          description="A proven method from 50+ projects. Transparent at every stage."
-        />
+      {/* How it works — @blockus/how-it-works-01 */}
+      <HowItWorks
+        steps={process.map((p) => ({
+          n: p.step,
+          icon: p.icon,
+          title: p.title,
+          body: p.desc,
+        }))}
+        title={
+          <>
+            How We <span className="text-primary">Work</span>
+          </>
+        }
+        description="A proven method from 50+ projects. Transparent at every stage."
+      />
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {process.map((p, i) => {
-            const Icon = resolveIcon(p.icon, ClipboardList)
-            return (
-              <Reveal
-                key={p.step}
-                delay={i * 0.08}
-                className="group relative flex flex-col rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-primary">
-                    {p.step}
-                  </span>
-                  <Icon
-                    className="size-5 text-muted-foreground transition-colors group-hover:text-primary"
-                    strokeWidth={1.6}
-                  />
-                </div>
-                <h3 className="mt-4 text-sm font-semibold tracking-tight text-foreground">
-                  {p.title}
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                  {p.desc}
-                </p>
-              </Reveal>
-            )
-          })}
-        </div>
+      {/* Technology & integrations */}
+      <Section className="py-16 sm:py-24">
+        <IntegrationScatter
+          title="Teknologi & integrasi"
+          description="Dari Next.js hingga Microsoft Clarity — setiap proyek dibangun dengan stack modern dan fondasi analitik yang terukur."
+          items={[
+            'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js',
+            'PostgreSQL', 'Payload CMS', 'Vercel', 'Cloudflare', 'Figma',
+            'ga4', 'gsc', 'clarity',
+          ]}
+        />
       </Section>
 
       {/* CTA */}

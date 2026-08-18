@@ -133,14 +133,14 @@ export default async function ArticlePage({
           </div>
         </header>
 
-        {/* Featured image — in the middle of the article */}
+        {/* Featured image — full-width band */}
         {article.image && (
-          <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="-mt-6 overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10 sm:-mt-8">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10">
               <img
                 src={article.image}
                 alt={article.title}
-                className="aspect-[16/8] w-full object-cover"
+                className="aspect-[21/9] w-full object-cover"
               />
             </div>
           </div>

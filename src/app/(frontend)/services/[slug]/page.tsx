@@ -12,6 +12,7 @@ import { handleRedirectOrNotFound } from '@/lib/redirects'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
+import { PricingSection } from '@/components/pricing-section'
 
 export const dynamic = 'force-dynamic'
 
@@ -194,70 +195,36 @@ export default async function ServiceDetailPage({
         </div>
       </Section>
 
-      {/* Pricing */}
+      {/* Pricing — @efferd/pricing-4 block (no monthly/yearly toggle) */}
       <Section className="py-16 sm:py-24">
-        <div className="mb-12 flex flex-col gap-4 text-center">
-          <RevealHeading className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Pricing <span className="text-primary">Estimate</span>
-          </RevealHeading>
-          <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground">
-            Final pricing is tailored to your project's scope and specific needs. This is a transparent starting point.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          {(
-            [
-              { plan: service.pricing.basic, featured: false },
-              { plan: service.pricing.best, featured: true },
-              { plan: service.pricing.enterprise, featured: false },
-            ] as const
-          ).map(({ plan, featured }, i) => (
-            <Reveal key={plan.name} delay={i * 0.08} className="h-full">
-              <TiltCard
-                rotationFactor={2}
-                className={`relative flex h-full flex-col overflow-hidden rounded-xl border p-6 sm:p-7 ${
-                  featured
-                    ? 'border-primary/40 bg-primary/5 shadow-lg shadow-primary/10'
-                    : 'border-border bg-card'
-                }`}
-              >
-                {featured && (
-                  <span className="absolute right-4 top-4 rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white">
-                    Most Popular
-                  </span>
-                )}
-                <p className="text-sm font-semibold text-foreground">{plan.name}</p>
-                <p className="mt-3 text-3xl font-bold tracking-tight text-foreground">
-                  {plan.price}
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
-                <ul className="mt-6 flex flex-1 flex-col gap-3 border-t border-border/70 pt-6">
-                  {plan.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2.5 text-sm text-foreground/85"
-                    >
-                      <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                        <Check className="size-2.5 text-primary" strokeWidth={3} />
-                      </span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-7">
-                  <CtaButton
-                    href="/contact"
-                    variant={featured ? 'primary' : 'outline'}
-                    className="w-full"
-                  >
-                    Get a Quote
-                  </CtaButton>
-                </div>
-              </TiltCard>
-            </Reveal>
-          ))}
-        </div>
+        <PricingSection
+          plans={[
+            {
+              name: service.pricing.basic.name,
+              info: service.pricing.basic.description,
+              price: service.pricing.basic.price,
+              features: service.pricing.basic.features,
+              btn: { text: 'Pilih Paket', href: '/contact' },
+            },
+            {
+              name: service.pricing.best.name,
+              info: service.pricing.best.description,
+              price: service.pricing.best.price,
+              features: service.pricing.best.features,
+              btn: { text: 'Pilih Paket', href: '/contact' },
+              highlighted: true,
+            },
+            {
+              name: service.pricing.enterprise.name,
+              info: service.pricing.enterprise.description,
+              price: service.pricing.enterprise.price,
+              features: service.pricing.enterprise.features,
+              btn: { text: 'Hubungi Kami', href: '/contact' },
+            },
+          ]}
+          title={"Pricing " + service.title}
+          description="Final pricing is tailored to your project's scope and specific needs. This is a transparent starting point."
+        />
       </Section>
 
       {/* Technologies */}

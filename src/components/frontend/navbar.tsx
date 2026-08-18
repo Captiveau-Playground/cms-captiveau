@@ -96,17 +96,22 @@ export default function Navbar({
                   <button
                     type="button"
                     className={cn(
-                      'flex items-center gap-1 px-3 py-2 text-sm font-medium',
+                      'flex flex-col items-center px-3 py-2 text-sm font-medium',
                       active
                         ? 'text-primary'
                         : 'text-foreground/80 hover:text-foreground'
                     )}
                   >
-                    {item.label}
-                    <ChevronDown
-                      className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
-                      aria-hidden
-                    />
+                    <span className="flex items-center gap-1 leading-[1.1]">
+                      {item.label}
+                      <ChevronDown
+                        className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
+                        aria-hidden
+                      />
+                    </span>
+                    {/* Matches the underline spacer of DrawUnderlineLink so the
+                        label stays vertically centered with the other items */}
+                    <span className="h-[0.625em] w-full" aria-hidden />
                   </button>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     <div className="w-64 rounded-xl border border-border bg-background p-2 shadow-xl shadow-black/10">

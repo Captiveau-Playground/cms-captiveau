@@ -2,10 +2,9 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Section, RevealHeading } from '@/components/frontend/section'
+import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { CtaButton } from '@/components/frontend/cta-button'
 import StoryScroll from '@/components/frontend/story-scroll'
-import IntegrationsShowcase from '@/components/frontend/integrations-showcase'
-import TechStack from '@/components/frontend/tech-stack'
 import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -137,24 +136,43 @@ export default async function ProjectDetailPage({
               </div>
             </dl>
 
-            {project.stack.length > 0 && (
-              <div className="mt-6">
-                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                  Tech Stack
-                </dt>
-                <TechStack stack={project.stack} />
-              </div>
-            )}
           </div>
         </div>
       </Section>
 
-      {/* Project story — scroll-telling chapters */}
-      {project.story && project.story.length > 0 && (
-        <div className="bg-background">
-          <StoryScroll chapters={project.story} />
-        </div>
-      )}
+      {/* Project story — scroll-telling chapters (auto-built when empty) */}
+      <div className="bg-background">
+        <StoryScroll
+          chapters={
+            project.story && project.story.length > 0
+              ? project.story
+              : [
+                  {
+                    heading: 'Research & Discovery',
+                    description:
+                      'Kami memulai dengan memahami kebutuhan dan tujuan bisnis — setiap keputusan desain berangkat dari konteks nyata klien.',
+                    image: project.image,
+                  },
+                  {
+                    heading: 'Strategy & Design',
+                    description:
+                      project.services.length > 0
+                      ? `Lingkup kerja mencakup ${project.services.join(', ')} — dirancang untuk hasil yang terukur.`
+                      : 'Arsitektur, alur pengguna, dan desain disusun untuk mencapai hasil terbaik.',
+                    image: null,
+                  },
+                  {
+                    heading: 'Build & Launch',
+                    description:
+                      project.stack.length > 0
+                      ? `Dibangun dengan ${project.stack.slice(0, 4).join(', ')} — diuji menyeluruh dan siap diluncurkan.`
+                      : 'Pengembangan dengan standar engineering modern, QA menyeluruh, lalu peluncuran.',
+                    image: project.image,
+                  },
+                ]
+          }
+        />
+      </div>
 
       {/* Results */}
       <Section muted className="py-16 sm:py-24">
@@ -176,22 +194,25 @@ export default async function ProjectDetailPage({
         </div>
       </Section>
 
+      {/* Tech Stack — scattered brand logos */}
+      {project.stack.length > 0 && (
+        <Section muted className="py-16 sm:py-24">
+          <IntegrationScatter
+            title="Tech stack"
+            description="Teknologi modern yang kami pakai untuk membangun proyek ini — dipilih berdasarkan kebutuhan, bukan tren."
+            items={project.stack}
+          />
+        </Section>
+      )}
+
       {/* Digital integrations included (GA4, GSC, Clarity, ...) */}
       {project.integrations && project.integrations.length > 0 && (
         <Section className="py-16 sm:py-24">
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3">
-              <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                Digital integrations included
-              </RevealHeading>
-              <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Setiap proyek kami lengkapi dengan fondasi analitik & verifikasi
-                — dari pengukuran konversi, indeks pencarian, hingga wawasan
-                perilaku pengunjung.
-              </p>
-            </div>
-            <IntegrationsShowcase integrations={project.integrations as never[]} />
-          </div>
+          <IntegrationScatter
+            title="Digital integrations included"
+            description="Setiap proyek kami lengkapi dengan fondasi analitik & verifikasi — pengukuran konversi, indeks pencarian, hingga wawasan perilaku pengunjung."
+            items={project.integrations}
+          />
         </Section>
       )}
 
