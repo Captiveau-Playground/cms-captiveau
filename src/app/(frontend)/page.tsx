@@ -1,8 +1,8 @@
 import type { CmsHomepage } from '@/lib/cms-data'
 import { HeroBentoSection } from '@/components/hero-bento-section'
 import { FeaturesBentoSection } from '@/components/features-bento-section'
-import Advantages from '@/components/frontend/home/advantages'
-import PortfolioShowcase from '@/components/frontend/home/portfolio'
+import { HeroGalleryWallSection } from '@/components/hero-section'
+import { GalleryColumnsSection } from '@/components/gallery-section'
 import SocialProof from '@/components/frontend/home/social-proof'
 import BlogPreview from '@/components/frontend/home/blog'
 import Testimonials from '@/components/frontend/home/testimonials'
@@ -39,8 +39,14 @@ export default async function HomePage() {
       {/* Client logos — right under the hero */}
       <SocialProof homepage={data.homepage} />
       <FeaturesBentoSection services={data.services} />
-      <Advantages advantages={data.homepage.advantages} />
-      <PortfolioShowcase projects={data.projects} />
+      <HeroGalleryWallSection advantages={data.homepage.advantages} />
+      <GalleryColumnsSection
+        projects={data.projects}
+        metrics={data.homepage.stats.slice(0, 3).map((s) => ({
+          value: `${s.value}${s.suffix}`,
+          label: s.label,
+        }))}
+      />
       <BlogPreview articles={data.articles} />
       <Testimonials testimonials={data.testimonials} />
       <Cta homepage={data.homepage} />
