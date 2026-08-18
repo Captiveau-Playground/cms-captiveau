@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   description:
     'Captiveau — creative tech studio dari Jakarta. Kami membantu bisnis membangun produk digital end-to-end: riset, desain, pengembangan, hingga maintenance.',
   path: '/about',
-  keywords: ['tentang captiveau', 'software house jakarta', 'creative tech studio indonesia'],
+  keywords: ['tentang captiveau','software house jakarta','tim web developer indonesia','company profile digital agency'],
 })
 }
 

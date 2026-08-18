@@ -25,10 +25,10 @@ export async function generateMetadata(): Promise<Metadata> {
   keywords: [
     'jasa pembuatan website',
     'jasa pembuatan aplikasi',
-    'landing page',
-    'e-commerce',
-    'company profile',
-    'ui ux design',
+    'jasa pembuatan company profile',
+    'jasa pembuatan landing page',
+    'jasa pembuatan toko online',
+    'web development indonesia',
   ],
 })
 }

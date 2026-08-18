@@ -40,13 +40,18 @@ export async function generateMetadata(): Promise<Metadata> {
         ? { google: settings.analytics.gscVerification }
         : undefined,
     keywords: [
-      'software house indonesia',
       'jasa pembuatan website',
+      'software house indonesia',
+      'software house jakarta',
       'jasa pembuatan aplikasi',
+      'jasa pembuatan company profile',
+      'jasa pembuatan landing page',
       'web development indonesia',
-      'ui ux design',
-      'e-commerce development',
-      'digital product agency',
+      'jasa buat website',
+      'digital agency indonesia',
+      'ui ux design indonesia',
+      'pembuatan e-commerce',
+      'pengembangan aplikasi mobile',
     ],
     robots: {
       index: true,
@@ -115,10 +120,33 @@ export default async function FrontendLayout({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: settings?.companyName || 'Captiveau',
+    alternateName: 'Captiveau — Creative Tech Studio',
     description: settings?.description || undefined,
     url: siteUrl,
     logo: `${siteUrl}/logo.webp`,
     email: email || undefined,
+    telephone: phone || undefined,
+    address:
+      settings?.address && settings.address.city
+        ? {
+            '@type': 'PostalAddress',
+            streetAddress: settings.address.street || undefined,
+            addressLocality: settings.address.city || undefined,
+            addressRegion: settings.address.region || undefined,
+            postalCode: settings.address.postalCode || undefined,
+            addressCountry: settings.address.country || 'ID',
+          }
+        : undefined,
+    areaServed: 'ID',
+    contactPoint: email
+      ? {
+          '@type': 'ContactPoint',
+          contactType: 'customer service',
+          email: email || undefined,
+          telephone: phone || undefined,
+          availableLanguage: ['Indonesian', 'English'],
+        }
+      : undefined,
     sameAs: (settings?.socialLinks || []).map((s) => s.url).filter(Boolean),
   }
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { resolveTech } from '@/lib/tech-icons'
 
@@ -105,6 +106,7 @@ type IntegrationScatterProps = {
  */
 export default function IntegrationScatter({ title, description, items }: IntegrationScatterProps) {
   const tiles = items.slice(0, 12)
+  const [openTile, setOpenTile] = useState<number | null>(null)
 
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:items-center">
@@ -116,15 +118,16 @@ export default function IntegrationScatter({ title, description, items }: Integr
           <p className="text-lg leading-8 text-muted-foreground">{description}</p>
         )}
         <p className="text-sm text-muted-foreground/70">
-          Arahkan kursor ke logo untuk melihat nama & fungsinya.
+          Klik atau arahkan kursor ke logo untuk melihat nama & fungsinya.
         </p>
       </div>
 
       <div className="place-items-end">
-        <div className="mask-[radial-gradient(ellipse_at_center,black,black,transparent)] relative size-72 [--scatter-cell:56px] sm:size-90 sm:[--scatter-cell:72px]">
+        <div className="mask-[radial-gradient(ellipse_at_center,black,black,transparent)] relative size-72 max-w-full [--scatter-cell:56px] sm:size-90 sm:[--scatter-cell:72px]">
           {tiles.map((name, i) => {
             const brand = resolveBrand(name)
             const [row, col] = POSITIONS[i % POSITIONS.length]
+            const isOpen = openTile === i
             return (
               <div
                 key={name + i}
@@ -134,11 +137,17 @@ export default function IntegrationScatter({ title, description, items }: Integr
                     top: `calc(var(--scatter-cell, 72px) * ${row})`,
                   }}
               >
-                {/* Tooltip — renders below for top-row items so it's never clipped */}
+                {/* Tooltip — click on any screen, hover on desktop.
+                    Positioned safely so it never leaves the viewport. */}
                 <div
                   className={cn(
-                    'pointer-events-none absolute left-1/2 z-40 hidden max-w-[16rem] -translate-x-1/2 whitespace-normal border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100 lg:block',
-                    row === 0 ? 'top-full mt-2' : '-top-12'
+                    'pointer-events-none absolute z-40 max-w-[min(16rem,calc(100vw-1.5rem))] whitespace-normal border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150',
+                    'group-hover/tile:opacity-100 lg:group-hover/tile:opacity-100',
+                    isOpen && 'opacity-100',
+                    // vertical: below for top row, above otherwise
+                    row === 0 ? 'top-full mt-2' : '-top-12',
+                    // horizontal: never overflow the viewport
+                    col === 0 ? 'left-0' : col >= 3 ? 'right-0' : 'left-1/2 -translate-x-1/2'
                   )}
                 >
                   <span className="block text-[11px] font-semibold text-foreground">
@@ -151,12 +160,16 @@ export default function IntegrationScatter({ title, description, items }: Integr
                   )}
                 </div>
 
-                <div
+                <button
+                  type="button"
+                  aria-label={brand?.label || name}
+                  onClick={() => setOpenTile(isOpen ? null : i)}
                   className={cn(
-                    'flex size-14 items-center justify-center rounded-none border sm:size-18',
+                    'flex size-14 items-center justify-center border active:scale-[0.96] sm:size-18',
                     brand
                       ? 'bg-card shadow-xs dark:bg-card/60'
-                      : 'bg-secondary/30 dark:bg-background'
+                      : 'bg-secondary/30 dark:bg-background',
+                    isOpen && 'border-foreground/40'
                   )}
                 >
                   {brand ? (
@@ -168,7 +181,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
                       {name}
                     </span>
                   )}
-                </div>
+                </button>
               </div>
             )
           })}

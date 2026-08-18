@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   description:
     'Lihat karya dan studi kasus proyek digital yang telah kami kerjakan — dari company profile, e-commerce, hingga aplikasi mobile.',
   path: '/portfolio',
-  keywords: ['portofolio software house', 'studi kasus digital', 'hasil karya web development'],
+  keywords: ['portofolio software house','jasa pembuatan website portofolio','studi kasus website company profile','hasil karya web development indonesia'],
 })
 }
 

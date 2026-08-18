@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   description:
     'Diskusikan ide digital kamu dengan tim Captiveau. Konsultasi gratis — dari landing page hingga platform kompleks.',
   path: '/contact',
-  keywords: ['hubungi software house', 'konsultasi gratis', 'kontak captiveau'],
+  keywords: ['hubungi software house jakarta','konsultasi gratis website','jasa pembuatan website konsultasi','kontak web developer indonesia'],
 })
 }
 
