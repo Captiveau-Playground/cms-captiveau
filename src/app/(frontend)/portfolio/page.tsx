@@ -3,7 +3,7 @@ import { Section } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
 import { TextRevealBlock } from '@/components/sora-ui/texts/text-reveal-block'
 import CountUp from '@/components/frontend/count-up'
-import { ScrollGallery } from '@/components/sora-ui/effects/scroll-gallery'
+import PortfolioIndex from '@/components/frontend/portfolio-index'
 import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
@@ -31,28 +31,17 @@ export default async function PortfolioPage() {
     <>
       <PageHero
         eyebrow="Portfolio"
-        title="Recent Work & Projects"
-        description="Every project is proof of our commitment to quality and client satisfaction. Scroll to explore our work."
+        title="Work that ships, stories that stay"
+        description="Setiap proyek adalah bukti komitmen kami pada kualitas. Jelajahi studi kasus — dari riset, desain, hingga peluncuran."
       />
 
-      {/* Scroll-driven image gallery */}
-      <div className="bg-background">
-        <ScrollGallery
-          slides={projects.map((p) => ({
-            image: p.image,
-            title: p.title,
-            url: `/portfolio/${p.slug}`,
-          }))}
-          prefixLabel="Project"
-          linkLabel="View case study"
-          showInfoBand
-          showPrefix
-          showLink
-        />
-      </div>
+      {/* Featured + editorial rows */}
+      <Section className="py-12 sm:py-16">
+        <PortfolioIndex projects={projects} />
+      </Section>
 
       {/* Stats */}
-      <Section muted className="py-12 sm:py-16">
+      <Section muted className="py-16 sm:py-24">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s) => (
             <div
@@ -74,14 +63,14 @@ export default async function PortfolioPage() {
           <div className="relative z-10 flex flex-col items-center gap-5">
             <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
               <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Have a project for us?
+                Punya proyek serupa?
               </h2>
             </TextRevealBlock>
             <p className="max-w-md text-base leading-relaxed text-white/85">
-              Be our next client. Free consultation, no commitment.
+              Jadilah klien berikutnya. Konsultasi gratis, tanpa komitmen.
             </p>
             <CtaButton href="/contact" size="lg" variant="white">
-              Contact Us
+              Hubungi Kami
             </CtaButton>
           </div>
         </div>

@@ -4,6 +4,8 @@ import { getSiteSettings, getServices } from '@/lib/cms'
 import { getCmsMainMenu, type CmsNavItem } from '@/lib/cms-data'
 import Navbar from '@/components/frontend/navbar'
 import Footer, { type FooterProps } from '@/components/frontend/footer'
+import Banner from '@/components/frontend/banner'
+import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 
@@ -33,6 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     alternates: { canonical: '/' },
+    verification:
+      settings?.analytics?.gscVerification
+        ? { google: settings.analytics.gscVerification }
+        : undefined,
     keywords: [
       'software house indonesia',
       'jasa pembuatan website',
@@ -99,6 +105,8 @@ export default async function FrontendLayout({
     socialLinks: settings?.socialLinks || [],
     navData,
     services: services.map((s) => ({ title: s.title, slug: s.slug })),
+    quote: settings?.footer?.quote || undefined,
+    statusLabel: settings?.footer?.statusLabel || undefined,
   }
 
   const siteUrl = await getSiteUrl()
@@ -131,7 +139,9 @@ export default async function FrontendLayout({
       <body>
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />
+        <Integrations analytics={settings?.analytics} />
         <div className="min-h-screen flex flex-col">
+          <Banner banner={settings?.banner} />
           <Navbar navData={navData} />
           <main className="flex-1">{children}</main>
           <Footer {...footerProps} />

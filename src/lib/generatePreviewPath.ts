@@ -25,6 +25,8 @@ export const generatePreviewPath = ({ collection, slug }: Props) => {
     previewSecret: process.env.PREVIEW_SECRET || '',
   })
 
-  const base = process.env.NEXT_PUBLIC_SERVER_URL || ''
-  return `${base}/next/preview?${encodedParams.toString()}`
+  // Relative URL — resolves against the admin origin (admin + frontend are
+  // same-origin), so preview works on any environment without baking a
+  // build-time host (which previously leaked localhost:4000 into production).
+  return `/next/preview?${encodedParams.toString()}`
 }

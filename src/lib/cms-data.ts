@@ -127,6 +127,9 @@ export async function getCmsSiteSettings() {
         data?.address && data.address.city
           ? `${data.address.street || ''}, ${data.address.city || ''}${data.address.region ? ', ' + data.address.region : ''}`.replace(/^,\s/, '')
           : siteFallback.address,
+      banner: data?.banner || null,
+      analytics: data?.analytics || null,
+      footer: data?.footer || null,
     }
   } catch {
     return siteFallback
@@ -221,6 +224,13 @@ export async function getCmsProjects(): Promise<ProjectItem[]> {
       services: (p.services || []).map((s: any) => s.service).filter(Boolean),
       results: (p.results || []).map((r: any) => ({ value: r.value || '', label: r.label || '' })),
       stack: (p.stack || []).map((t: any) => t.tech).filter(Boolean),
+      story: (p.story || [])
+        .filter((s: any) => s.heading)
+        .map((s: any) => ({
+          heading: s.heading,
+          description: s.description || '',
+          image: mediaUrl(s.image, 'hero') || mediaUrl(s.image) || null,
+        })),
     }))
   } catch {
     return projectsFallback

@@ -117,13 +117,43 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'banner',
+      label: 'Announcement Banner',
+      type: 'group',
+      admin: {
+        description: 'Banner promo yang muncul di atas halaman.',
+      },
+      fields: [
+        { name: 'enabled', label: 'Show Banner', type: 'checkbox', defaultValue: false },
+        { name: 'text', label: 'Banner Text', type: 'text', admin: { description: 'e.g., Promo akhir tahun 2025 — diskon 20%' } },
+        { name: 'linkLabel', label: 'Link Label', type: 'text' },
+        { name: 'linkHref', label: 'Link URL', type: 'text', admin: { description: 'e.g., /contact atau URL eksternal' } },
+      ],
+    },
+    {
       name: 'analytics',
-      label: 'Analytics Configuration',
+      label: 'Analytics & Integrations',
       type: 'group',
       fields: [
         { name: 'ga4Id', label: 'GA4 Measurement ID', type: 'text', admin: { description: 'e.g., G-XXXXXXXXXX' } },
         { name: 'gtmId', label: 'GTM Container ID', type: 'text', admin: { description: 'e.g., GTM-XXXXXXXX' } },
         { name: 'clarityId', label: 'Microsoft Clarity Project ID', type: 'text', admin: { description: 'e.g., xxxxxxxx' } },
+        { name: 'gscVerification', label: 'Google Search Console Verification', type: 'text', admin: { description: 'Isi kode di dalam content="..." dari meta tag verifikasi GSC' } },
+      ],
+    },
+    {
+      name: 'footer',
+      label: 'Footer Settings',
+      type: 'group',
+      fields: [
+        {
+          name: 'quote',
+          label: 'Footer Quote',
+          type: 'textarea',
+          defaultValue:
+            'We build the kind of digital products we wish more software shipped — calm, opinionated, ready for the real world.',
+        },
+        { name: 'statusLabel', label: 'Status Text', type: 'text', defaultValue: 'Now accepting new projects' },
       ],
     },
   ],

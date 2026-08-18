@@ -702,6 +702,17 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Bab cerita proyek — tampil sebagai scroll-reveal di halaman detail. Gunakan 3–5 bab untuk ritme terbaik.
+   */
+  story?:
+    | {
+        heading: string;
+        description: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   size?: ('large' | 'small') | null;
   featured?: boolean | null;
   order?: number | null;
@@ -1270,6 +1281,14 @@ export interface ProjectsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  story?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
   size?: T;
   featured?: T;
   order?: T;
@@ -1357,6 +1376,21 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Banner promo yang muncul di atas halaman.
+   */
+  banner?: {
+    enabled?: boolean | null;
+    /**
+     * e.g., Promo akhir tahun 2025 — diskon 20%
+     */
+    text?: string | null;
+    linkLabel?: string | null;
+    /**
+     * e.g., /contact atau URL eksternal
+     */
+    linkHref?: string | null;
+  };
   analytics?: {
     /**
      * e.g., G-XXXXXXXXXX
@@ -1370,6 +1404,14 @@ export interface SiteSetting {
      * e.g., xxxxxxxx
      */
     clarityId?: string | null;
+    /**
+     * Isi kode di dalam content="..." dari meta tag verifikasi GSC
+     */
+    gscVerification?: string | null;
+  };
+  footer?: {
+    quote?: string | null;
+    statusLabel?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1527,12 +1569,27 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         title?: T;
         id?: T;
       };
+  banner?:
+    | T
+    | {
+        enabled?: T;
+        text?: T;
+        linkLabel?: T;
+        linkHref?: T;
+      };
   analytics?:
     | T
     | {
         ga4Id?: T;
         gtmId?: T;
         clarityId?: T;
+        gscVerification?: T;
+      };
+  footer?:
+    | T
+    | {
+        quote?: T;
+        statusLabel?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Section, RevealHeading } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
+import StoryScroll from '@/components/frontend/story-scroll'
 import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -142,6 +143,13 @@ export default async function ProjectDetailPage({
           </div>
         </div>
       </Section>
+
+      {/* Project story — scroll-reveal chapters */}
+      {project.story && project.story.length > 0 && (
+        <Section className="py-16 sm:py-24">
+          <StoryScroll chapters={project.story} />
+        </Section>
+      )}
 
       {/* Results */}
       <Section muted className="py-16 sm:py-24">

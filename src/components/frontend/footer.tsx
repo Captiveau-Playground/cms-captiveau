@@ -13,6 +13,8 @@ export type FooterProps = {
   socialLinks?: { platform?: string | null; url?: string | null }[]
   navData?: { label: string; href: string }[]
   services?: { title: string; slug: string }[]
+  quote?: string | null
+  statusLabel?: string | null
 }
 
 const defaultServices = [
@@ -37,6 +39,8 @@ export default function Footer({
   address,
   socialLinks = [],
   services = defaultServices,
+  quote = 'We build the kind of digital products we wish more software shipped — calm, opinionated, ready for the real world.',
+  statusLabel = 'Now accepting new projects',
 }: FooterProps) {
   const year = new Date().getFullYear()
 
@@ -60,8 +64,7 @@ export default function Footer({
                 letterSpacing: '-0.01em',
               }}
             >
-              We build the kind of digital products we wish more software
-              shipped — calm, opinionated, ready for the real world.
+              {quote}
             </p>
 
             <Link
@@ -180,7 +183,7 @@ export default function Footer({
                   className="absolute inset-0 animate-ping rounded-full bg-emerald-500/50"
                 />
               </span>
-              Now accepting new projects
+              {statusLabel}
             </span>
             <span className="hidden h-3 w-px bg-border sm:block" />
             <span className="font-mono uppercase tracking-widest">
