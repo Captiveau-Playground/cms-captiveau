@@ -1,6 +1,5 @@
 import type { CmsHomepage } from '@/lib/cms-data'
 import { HeroBentoSection } from '@/components/hero-bento-section'
-import Trust from '@/components/frontend/home/trust'
 import { FeaturesBentoSection } from '@/components/features-bento-section'
 import Advantages from '@/components/frontend/home/advantages'
 import PortfolioShowcase from '@/components/frontend/home/portfolio'
@@ -37,7 +36,6 @@ export default async function HomePage() {
   return (
     <>
       <HeroBentoSection homepage={data.homepage} />
-      <Trust points={data.homepage.trustPoints} />
       <FeaturesBentoSection services={data.services} />
       <Advantages advantages={data.homepage.advantages} />
       <PortfolioShowcase projects={data.projects} />
