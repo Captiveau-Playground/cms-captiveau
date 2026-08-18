@@ -24,6 +24,8 @@
   "registries": {
     "@soralabs": "https://ui.soralabs.io.vn/r/{name}.json",
     "@efferd": "https://efferd.com/r/{style}/{name}.json",
-    "@blockus": "https://blockus.lndevui.com/r/{name}.json"
+    "@blockus": "https://blockus.lndevui.com/r/{name}.json",
+    "@nusaiba": "https://nusaiba.dev/r/base-nova/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}"
   }
 }

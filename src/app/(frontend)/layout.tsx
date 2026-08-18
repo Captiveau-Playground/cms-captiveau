@@ -8,6 +8,7 @@ import Banner from '@/components/frontend/banner'
 import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
+import { nusaibaFontClassName } from '@/components/nusaiba-font'
 
 // CMS-driven site: always render on demand so admin edits & new content show
 // immediately (no build-time prerendering is cached).
@@ -135,7 +136,7 @@ export default async function FrontendLayout({
   }
 
   return (
-    <html lang="id">
+    <html lang="id" className={`${nusaibaFontClassName()} h-full antialiased`}>
       <body>
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />
