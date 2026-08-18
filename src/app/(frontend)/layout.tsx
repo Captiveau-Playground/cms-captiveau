@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { getSiteSettings, getServices } from '@/lib/cms'
 import { getCmsMainMenu, type CmsNavItem } from '@/lib/cms-data'
 import Navbar from '@/components/frontend/navbar'
-import Footer, { type FooterProps } from '@/components/frontend/footer'
+import { FooterPromptHandoffSection, type FooterSectionProps } from '@/components/footer-section'
 import Banner from '@/components/frontend/banner'
 import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
@@ -97,7 +97,7 @@ export default async function FrontendLayout({
       .filter(Boolean)
       .join(', ')
 
-  const footerProps: FooterProps = {
+  const footerProps: FooterSectionProps = {
     companyName: settings?.companyName || undefined,
     email,
     phone,
@@ -148,7 +148,7 @@ export default async function FrontendLayout({
             <Navbar navData={navData} />
           </div>
           <main className="flex-1">{children}</main>
-          <Footer {...footerProps} />
+          <FooterPromptHandoffSection {...footerProps} />
         </div>
       </body>
     </html>
