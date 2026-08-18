@@ -36,7 +36,7 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
   }
 
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         {/* Left — info */}
         <div className="flex flex-col gap-6 lg:col-span-5">

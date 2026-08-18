@@ -6,7 +6,7 @@ import type { TestimonialItem } from '@/lib/content'
 
 export default function Testimonials({ testimonials }: { testimonials: TestimonialItem[] }) {
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">

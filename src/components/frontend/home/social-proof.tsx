@@ -20,7 +20,7 @@ export default function SocialProof({ homepage }: { homepage: CmsHomepage }) {
     logos.slice(half).map((src) => ({ src, alt: 'partner' })),
   ]
   return (
-    <Section muted className="py-16 md:py-24">
+    <Section muted className="py-16 sm:py-24">
       <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center gap-3 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           <span className="size-1.5 rounded-full bg-secondary" />

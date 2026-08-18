@@ -121,7 +121,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Cover image */}
-      <section className="py-8 sm:py-12">
+      <section className="py-12 sm:py-16">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10">
             <img
@@ -261,7 +261,7 @@ export default async function ServiceDetailPage({
       </Section>
 
       {/* Technologies */}
-      <Section muted className="pb-16 sm:pb-20">
+      <Section muted className="py-16 sm:py-24">
         <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
@@ -285,7 +285,7 @@ export default async function ServiceDetailPage({
       </Section>
 
       {/* Other services */}
-      <Section className="pb-24 sm:pb-32">
+      <Section className="py-16 sm:py-24">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
             Other services

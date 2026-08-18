@@ -12,7 +12,7 @@ import type { ServiceItem } from '@/lib/content'
 export default function Services({ services }: { services: ServiceItem[] }) {
   const [featured, ...rest] = services
   return (
-    <Section muted className="py-16 md:py-24">
+    <Section muted className="py-16 sm:py-24">
       <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeader
           eyebrow="Services"

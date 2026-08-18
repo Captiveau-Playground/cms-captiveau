@@ -41,7 +41,7 @@ export default async function ServicesPage() {
       />
 
       {/* Services grid */}
-      <Section className="pb-20 sm:pb-24">
+      <Section className="py-16 sm:py-24">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => {
             const Icon = resolveIcon(service.icon, AppWindowMac)
@@ -104,7 +104,7 @@ export default async function ServicesPage() {
       </Section>
 
       {/* Process */}
-      <Section muted className="py-20 sm:py-24">
+      <Section muted className="py-16 sm:py-24">
         <SectionHeader
           eyebrow="Process"
           title={

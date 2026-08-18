@@ -18,7 +18,7 @@ function formatDate(iso: string) {
 export default function BlogPreview({ articles }: { articles: any[] }) {
   const featured = articles.slice(0, 3)
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeader
           eyebrow="Blog & Artikel"

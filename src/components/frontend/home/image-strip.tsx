@@ -14,7 +14,7 @@ export default function ImageStrip({ projects, services }: { projects: ProjectIt
 ]
 
   return (
-    <section className="relative bg-gray-50 py-14 sm:py-20">
+    <section className="relative bg-gray-50 py-12 sm:py-16">
       <div className="mx-auto mb-10 flex w-full max-w-7xl items-end justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-2">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-secondary">

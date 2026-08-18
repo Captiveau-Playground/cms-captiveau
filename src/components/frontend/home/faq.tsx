@@ -26,7 +26,7 @@ export default function Faq({
   )
 
   return (
-    <Section muted className="py-16 md:py-24">
+    <Section muted className="py-16 sm:py-24">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         {/* Left — sticky intro + help card */}
         <div className="lg:col-span-4">

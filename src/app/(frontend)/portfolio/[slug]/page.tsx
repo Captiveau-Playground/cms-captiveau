@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({
       </section>
 
       {/* Cover */}
-      <Section className="pb-14 sm:pb-20">
+      <Section className="py-12 sm:py-16">
         <div className="group relative overflow-hidden rounded-2xl border border-border">
           <img
             src={project.image}
@@ -109,7 +109,7 @@ export default async function ProjectDetailPage({
       </Section>
 
       {/* Overview */}
-      <Section className="pb-16 sm:pb-24">
+      <Section className="py-16 sm:py-24">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -144,7 +144,7 @@ export default async function ProjectDetailPage({
       </Section>
 
       {/* Results */}
-      <Section muted className="pb-16 sm:pb-24">
+      <Section muted className="py-16 sm:py-24">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {project.results.map((r, i) => (
             <div
@@ -164,7 +164,7 @@ export default async function ProjectDetailPage({
       </Section>
 
       {/* CTA */}
-      <Section className="pb-16 sm:pb-24">
+      <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -183,7 +183,7 @@ export default async function ProjectDetailPage({
       </Section>
 
       {/* Other projects */}
-      <Section className="pb-24 sm:pb-32">
+      <Section className="py-16 sm:py-24">
         <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
           Other projects
         </RevealHeading>

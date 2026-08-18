@@ -27,7 +27,7 @@ export default async function FaqPage() {
         description="Find answers about Captiveau and our services. If you can’t find one, reach out directly."
       />
 
-      <Section className="pb-24 sm:pb-32">
+      <Section className="py-16 sm:py-24">
         <div className="mx-auto max-w-3xl">
           <Accordion
             className="flex flex-col divide-y divide-border/70 rounded-2xl border border-border bg-card"

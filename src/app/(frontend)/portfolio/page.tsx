@@ -52,7 +52,7 @@ export default async function PortfolioPage() {
       </div>
 
       {/* Stats */}
-      <Section muted className="py-16 md:py-20">
+      <Section muted className="py-12 sm:py-16">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s) => (
             <div
@@ -69,7 +69,7 @@ export default async function PortfolioPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-16 md:py-24">
+      <Section className="py-16 sm:py-24">
         <div className="relative overflow-hidden rounded-2xl bg-primary px-6 py-16 text-center sm:px-12">
           <div className="relative z-10 flex flex-col items-center gap-5">
             <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">

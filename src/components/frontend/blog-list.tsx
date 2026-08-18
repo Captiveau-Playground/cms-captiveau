@@ -47,7 +47,7 @@ export default function BlogList({ articles }: { articles: any[] }) {
         description="Artikel, panduan, dan wawasan tentang teknologi, desain, dan strategi digital untuk membantu bisnis kamu berkembang."
       />
 
-      <Section className="pb-20 sm:pb-24">
+      <Section className="py-16 sm:py-24">
         {/* Category filter */}
         <div className="mb-10 flex flex-wrap gap-2 border-b border-border pb-6">
           {categories.map((cat) => (
@@ -56,7 +56,7 @@ export default function BlogList({ articles }: { articles: any[] }) {
               type="button"
               onClick={() => setActive(cat)}
               className={cn(
-                'rounded-full px-4 py-2 text-sm font-medium transition-all',
+                'rounded-full px-4 py-2.5 text-sm font-medium transition-all',
                 active === cat
                   ? 'bg-primary text-primary-foreground'
                   : 'border border-border/70 text-muted-foreground hover:border-primary/40 hover:text-foreground'

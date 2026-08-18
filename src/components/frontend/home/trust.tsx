@@ -13,7 +13,7 @@ const icons = {
 
 export default function TrustPoints({ points }: { points: CmsHomepage['trustPoints'] }) {
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {points.map((point, i) => {
           const Icon = icons[point.icon as keyof typeof icons] || Users

@@ -38,7 +38,7 @@ export default async function AboutPage() {
       />
 
       {/* Story */}
-      <Section className="py-10 sm:py-16">
+      <Section className="py-12 sm:py-16">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="overflow-hidden rounded-2xl border border-border lg:col-span-5">
             <img
@@ -151,7 +151,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="pb-24 sm:pb-32">
+      <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">

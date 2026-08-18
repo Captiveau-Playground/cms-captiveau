@@ -10,7 +10,7 @@ import type { Project as ProjectItem } from '@/lib/content'
 
 export default function PortfolioShowcase({ projects }: { projects: ProjectItem[] }) {
   return (
-    <Section muted className="overflow-hidden py-16 md:py-24">
+    <Section muted className="overflow-hidden py-16 sm:py-24">
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         {/* Copy */}
         <div className="flex flex-col gap-6">

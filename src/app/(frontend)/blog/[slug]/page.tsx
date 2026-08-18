@@ -147,7 +147,7 @@ export default async function ArticlePage({
         )}
 
         {/* Body */}
-        <Section className="pb-20 pt-14 sm:pb-28 sm:pt-16">
+        <Section className="py-12 sm:py-16">
           <div className="mx-auto w-full max-w-3xl">
             {article.content ? (
               <RichText data={article.content} />
@@ -169,7 +169,7 @@ export default async function ArticlePage({
         </Section>
 
         {/* CTA */}
-        <Section muted className="py-16 sm:py-20">
+        <Section muted className="py-16 sm:py-24">
           <div className="flex flex-col items-center gap-4 text-center">
             <h2 className="text-2xl font-bold tracking-tight text-foreground">
               Punya proyek serupa?

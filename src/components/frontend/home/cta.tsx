@@ -7,7 +7,7 @@ import { TextRevealBlock } from '@/components/sora-ui/texts/text-reveal-block'
 
 export default function Cta({ homepage }: { homepage: CmsHomepage }) {
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-primary lg:grid-cols-2">
         {/* Copy */}
         <div className="flex flex-col items-start justify-center gap-5 px-6 py-14 sm:px-12 lg:py-20">

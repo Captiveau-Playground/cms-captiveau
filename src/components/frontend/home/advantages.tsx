@@ -15,7 +15,7 @@ const icons = {
 
 export default function Advantages({ advantages }: { advantages: CmsHomepage['advantages'] }) {
   return (
-    <Section className="py-16 md:py-24">
+    <Section className="py-16 sm:py-24">
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
         {/* Image */}
         <motion.div

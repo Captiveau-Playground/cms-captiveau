@@ -32,7 +32,7 @@ export default async function CareerPage() {
       />
 
       {/* Image band */}
-      <Section className="py-8">
+      <Section className="py-12 sm:py-16">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {[
             { src: '/images/team.jpg', alt: 'Captiveau team' },
@@ -48,7 +48,7 @@ export default async function CareerPage() {
 
       {/* Benefits */}
       {careerBenefits.length > 0 && (
-        <Section className="pb-12 sm:pb-16">
+        <Section className="py-12 sm:py-16">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {careerBenefits.map((b, i) => {
               const Icon = resolveIcon(b.icon)
@@ -75,7 +75,7 @@ export default async function CareerPage() {
       )}
 
       {/* Open positions */}
-      <Section muted className="py-14 sm:py-20">
+      <Section muted className="py-16 sm:py-24">
         <SectionHeader
           eyebrow="Open Positions"
           title={
@@ -142,7 +142,7 @@ export default async function CareerPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="pb-24 sm:pb-32">
+      <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
