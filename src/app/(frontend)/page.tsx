@@ -1,6 +1,5 @@
 import type { CmsHomepage } from '@/lib/cms-data'
 import Hero from '@/components/frontend/home/hero'
-import ImageStrip from '@/components/frontend/home/image-strip'
 import Trust from '@/components/frontend/home/trust'
 import Services from '@/components/frontend/home/services'
 import Advantages from '@/components/frontend/home/advantages'
@@ -38,7 +37,6 @@ export default async function HomePage() {
   return (
     <>
       <Hero homepage={data.homepage} />
-      <ImageStrip projects={data.projects} services={data.services} />
       <Trust points={data.homepage.trustPoints} />
       <Services services={data.services} />
       <Advantages advantages={data.homepage.advantages} />

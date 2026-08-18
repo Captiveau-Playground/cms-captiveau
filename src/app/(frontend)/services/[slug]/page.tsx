@@ -13,6 +13,7 @@ import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 import { PricingSection } from '@/components/pricing-section'
+import IntegrationScatter from '@/components/frontend/integration-scatter'
 
 export const dynamic = 'force-dynamic'
 
@@ -227,28 +228,16 @@ export default async function ServiceDetailPage({
         />
       </Section>
 
-      {/* Technologies */}
+      {/* Technology & integrations — same treatment as portfolio */}
       <Section muted className="py-16 sm:py-24">
-        <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
-              Technology
-            </p>
-            <h3 className="mt-2 text-xl font-bold tracking-tight text-foreground">
-              Our tech stack
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {service.technologies.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground/80"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
+        <IntegrationScatter
+          title={`Teknologi & integrasi ${service.title}`}
+          description="Stack modern dan fondasi analitik yang kami sertakan dalam paket layanan ini."
+          items={[
+            ...(service.technologies.length > 0 ? service.technologies : ['Next.js', 'React', 'TypeScript', 'Tailwind CSS']),
+            'ga4', 'gsc', 'clarity', 'performance',
+          ]}
+        />
       </Section>
 
       {/* Other services */}

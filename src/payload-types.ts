@@ -727,7 +727,28 @@ export interface Project {
           | 'Python'
           | 'GraphQL'
           | 'Recharts'
-          | 'shadcn/ui';
+          | 'shadcn/ui'
+          | 'Vue.js'
+          | 'Svelte'
+          | 'NestJS'
+          | 'Express'
+          | 'tRPC'
+          | 'Zod'
+          | 'Redux'
+          | 'TanStack Query'
+          | 'Three.js'
+          | 'Chart.js'
+          | 'Redis'
+          | 'Hetzner'
+          | 'DigitalOcean'
+          | 'Vultr'
+          | 'Nginx'
+          | 'Apache'
+          | 'Git'
+          | 'GitHub'
+          | 'ESLint'
+          | 'Prettier'
+          | 'n8n';
         id?: string | null;
       }[]
     | null;
@@ -743,7 +764,21 @@ export interface Project {
    */
   integrations?:
     | {
-        name: 'ga4' | 'gsc' | 'clarity' | 'gtm' | 'meta-pixel' | 'hotjar' | 'seo' | 'schema' | 'performance';
+        name:
+          | 'ga4'
+          | 'gsc'
+          | 'clarity'
+          | 'gtm'
+          | 'meta-pixel'
+          | 'hotjar'
+          | 'seo'
+          | 'schema'
+          | 'performance'
+          | 'zapier'
+          | 'semrush'
+          | 'intercom'
+          | 'mailchimp'
+          | 'n8n';
         id?: string | null;
       }[]
     | null;
