@@ -1,0 +1,47 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "cms-captiveau",
+	"compatibility_date": "2026-08-16",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"vars": {
+		"CLOUDFLARE_DEPLOY": "true"
+	},
+	"services": [
+		{
+			// Self-reference service binding, the service name must match the worker name
+			// see https://opennext.js.org/cloudflare/caching
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "cms-captiveau"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "D1",
+			"database_name": "cms-captiveau-db",
+			"database_id": "5a43e099-4b8e-4d52-b9b3-df7a4ae1a38b",
+			"migrations_dir": "src/migrations"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "NEXT_INC_CACHE_R2_BUCKET",
+			"bucket_name": "cms-captiveau-opennext-cache"
+		},
+		{
+			// Payload media storage
+			"binding": "R2",
+			"bucket_name": "cms-captiveau-media"
+		}
+	],
+	"images": {
+		"binding": "IMAGES"
+	}
+}

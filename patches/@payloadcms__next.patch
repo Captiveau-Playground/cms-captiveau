@@ -1,0 +1,23 @@
+diff --git a/dist/withPayload/withPayload.js b/dist/withPayload/withPayload.js
+index 99270f74cb583f35b2769d1f187a1191e590fac9..0a560879c9c664541e798e18663063e6b215649d 100644
+--- a/dist/withPayload/withPayload.js
++++ b/dist/withPayload/withPayload.js
+@@ -199,9 +199,15 @@ export const withPayload = (nextConfig = {}, options = {}) => {
+   } else {
+     return {
+       ...baseConfig,
+-      serverExternalPackages: [...(baseConfig.serverExternalPackages || []), 'drizzle-kit', 'drizzle-kit/api', 'sharp', 'libsql', 'require-in-the-middle', 'json-schema-to-typescript',
+-      // Prevents turbopack build errors by the thread-stream package which is installed by pino
+-      'pino']
++      serverExternalPackages: [
++        ...(baseConfig.serverExternalPackages || []),
++        // Patched for OpenNext/Cloudflare: removed 'drizzle-kit' & 'drizzle-kit/api' from
++        // externals — Turbopack creates hashed external shims that OpenNext esbuild
++        // cannot resolve during the worker bundle.
++        'sharp', 'libsql', 'require-in-the-middle', 'json-schema-to-typescript',
++        // Prevents turbopack build errors by the thread-stream package which is installed by pino
++        'pino',
++      ],
+     };
+   }
+ };

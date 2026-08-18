@@ -3,7 +3,11 @@ import { adminFullAccess, publicRead } from '../access'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
+  auth: {
+    tokenExpiration: 60 * 60 * 12, // 12 hours
+    maxLoginAttempts: 5,
+    lockTime: 10 * 60 * 1000, // 10 minutes
+  },
   admin: {
     useAsTitle: 'email',
     group: 'Settings',

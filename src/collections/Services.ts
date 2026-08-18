@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { editorCreateAdminDelete } from '../access'
+import { generatePreviewPath } from '../lib/generatePreviewPath'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -7,6 +8,12 @@ export const Services: CollectionConfig = {
     useAsTitle: 'title',
     group: 'Content',
     defaultColumns: ['title', 'slug', 'updatedAt'],
+    preview: (data) =>
+      generatePreviewPath({ collection: 'services', slug: (data as { slug?: string })?.slug }),
+    livePreview: {
+      url: ({ data }) =>
+        generatePreviewPath({ collection: 'services', slug: (data as { slug?: string })?.slug }),
+    },
   },
   access: editorCreateAdminDelete,
   fields: [

@@ -28,10 +28,9 @@ export const FAQs: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'General', value: 'general' },
-        { label: 'Layanan', value: 'layanan' },
-        { label: 'Pembayaran', value: 'pembayaran' },
-        { label: 'Proyek', value: 'proyek' },
-        { label: 'Dukungan', value: 'dukungan' },
+        { label: 'Technical', value: 'technical' },
+        { label: 'Pricing', value: 'pricing' },
+        { label: 'Support', value: 'support' },
       ],
     },
     {

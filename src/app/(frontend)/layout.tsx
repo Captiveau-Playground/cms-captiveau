@@ -1,18 +1,67 @@
 import './globals.css'
-import type { Metadata } from 'next'
-import { getSiteSettings, getMainMenu } from '@/lib/cms'
-import Navbar from '@/components/shadcn-space/blocks/hero-02/navbar'
-import Footer from '@/components/shadcn-space/blocks/footer-02/footer'
-import type { NavLinkItem } from '@/components/shadcn-space/blocks/hero-02/navbar'
+import type { Metadata, Viewport } from 'next'
+import { getSiteSettings, getServices } from '@/lib/cms'
+import { getCmsMainMenu, type CmsNavItem } from '@/lib/cms-data'
+import Navbar from '@/components/frontend/navbar'
+import Footer, { type FooterProps } from '@/components/frontend/footer'
+import { getSiteUrl } from '@/lib/seo'
+import { JsonLd } from '@/components/frontend/jsonld'
+
+// CMS-driven site: always render on demand so admin edits & new content show
+// immediately (no build-time prerendering is cached).
+export const dynamic = 'force-dynamic'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ff6600',
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
+  const siteUrl = await getSiteUrl()
+  const title = `${settings?.companyName || 'Captiveau'} — Creative Tech Studio`
+  const description =
+    settings?.description ||
+    'Software house Indonesia spesialis digital product design & development.'
+
   return {
+    metadataBase: new URL(siteUrl),
     title: {
-      default: `${settings?.companyName || 'Captiveau'} — Creative Tech Studio`,
+      default: title,
       template: `%s | ${settings?.companyName || 'Captiveau'}`,
     },
-    description: settings?.description || undefined,
+    description,
+    alternates: { canonical: '/' },
+    keywords: [
+      'software house indonesia',
+      'jasa pembuatan website',
+      'jasa pembuatan aplikasi',
+      'web development indonesia',
+      'ui ux design',
+      'e-commerce development',
+      'digital product agency',
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    },
+    openGraph: {
+      type: 'website',
+      locale: 'id_ID',
+      url: siteUrl,
+      siteName: settings?.companyName || 'Captiveau',
+      title,
+      description,
+      images: [{ url: `${siteUrl}/logo.webp`, width: 512, height: 512, alt: 'Captiveau' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${siteUrl}/logo.webp`],
+    },
   }
 }
 
@@ -21,29 +70,73 @@ export default async function FrontendLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [settings, menu] = await Promise.all([
+  const [settings, , services, navData] = await Promise.all([
     getSiteSettings(),
-    getMainMenu(),
+    Promise.resolve(null),
+    getServices().catch(() => []),
+    getCmsMainMenu(),
   ])
 
-  // Map CMS menu items to NavLinkItem format
-  const navData: NavLinkItem[] = (menu?.items || [])
-    .sort((a, b) => (a.order || 0) - (b.order || 0))
-    .map((item) => ({
-      name: item.label || '',
-      href: item.href || '/',
-      isActive: false,
-    }))
+  // Contact info from settings
+  const email =
+    settings?.contacts?.find((c) => c.type === 'email')?.value ??
+    'hello@captiveau.id'
+  const phone =
+    settings?.contacts?.find(
+      (c) => c.type === 'whatsapp' || c.type === 'phone'
+    )?.value ?? undefined
+  const address =
+    settings?.address &&
+    [settings.address.street, settings.address.city, settings.address.region]
+      .filter(Boolean)
+      .join(', ')
 
-  // Get contact info from settings
-  const email = settings?.contacts?.find((c) => c.type === 'email')?.value ?? undefined
-  const phone = settings?.contacts?.find((c) => c.type === 'whatsapp' || c.type === 'phone')?.value ?? undefined
+  const footerProps: FooterProps = {
+    companyName: settings?.companyName || undefined,
+    email,
+    phone,
+    address,
+    socialLinks: settings?.socialLinks || [],
+    navData,
+    services: services.map((s) => ({ title: s.title, slug: s.slug })),
+  }
+
+  const siteUrl = await getSiteUrl()
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: settings?.companyName || 'Captiveau',
+    description: settings?.description || undefined,
+    url: siteUrl,
+    logo: `${siteUrl}/logo.webp`,
+    email: email || undefined,
+    sameAs: (settings?.socialLinks || []).map((s) => s.url).filter(Boolean),
+  }
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: settings?.companyName || 'Captiveau',
+    url: siteUrl,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${siteUrl}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar navData={navData} phone={phone} email={email} />
-      <main className="flex-1">{children}</main>
-      <Footer />
-    </div>
+    <html lang="id">
+      <body>
+        <JsonLd data={orgSchema} />
+        <JsonLd data={websiteSchema} />
+        <div className="min-h-screen flex flex-col">
+          <Navbar navData={navData} />
+          <main className="flex-1">{children}</main>
+          <Footer {...footerProps} />
+        </div>
+      </body>
+    </html>
   )
 }

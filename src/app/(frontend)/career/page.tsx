@@ -1,185 +1,165 @@
-"use client";
+import Link from 'next/link'
+import { ArrowUpRight, Briefcase, MapPin, Sparkles } from 'lucide-react'
+import { PageHero } from '@/components/frontend/page-hero'
+import { Section, SectionHeader, RevealHeading } from '@/components/frontend/section'
+import { CtaButton } from '@/components/frontend/cta-button'
+import { Reveal } from '@/components/frontend/reveal'
+import { resolveIcon } from '@/lib/icons'
+import { getCmsJobs, getCmsHomepage } from '@/lib/cms-data'
+import type { Metadata } from 'next'
+import { buildMetadata } from '@/lib/seo'
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "motion/react";
-import { Heart, Lightbulb, Zap, Users, Briefcase, MapPin, ArrowRight } from "lucide-react";
-import Link from "next/link";
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+  title: 'Karir — Bergabung dengan Tim',
+  description:
+    'Bangun karier yang bermakna bersama Captiveau. Remote-friendly, learning-first, dan dikelilingi tim yang membangun produk digital berkualitas.',
+  path: '/career',
+  keywords: ['lowongan kerja it', 'karir software house', 'kerja di jakarta', 'karir teknologi indonesia'],
+})
+}
 
-const benefits = [
-  { icon: Heart, title: "Lingkungan Suportif", desc: "Budaya kolaboratif yang saling mendukung" },
-  { icon: Lightbulb, title: "Belajar & Berkembang", desc: "Akses kursus, conference, dan resources" },
-  { icon: Zap, title: "Teknologi Modern", desc: "Stack teknologi terkini untuk setiap project" },
-  { icon: Users, title: "Tim Solid", desc: "Bergabung dengan tim yang passionate dan expert" },
-];
+export default async function CareerPage() {
+  const [jobs, homepage] = await Promise.all([getCmsJobs(), getCmsHomepage()])
+  const careerBenefits = homepage?.careerBenefits || []
 
-const openPositions = [
-  {
-    title: "Frontend Developer",
-    type: "Full-time",
-    location: "Remote / Jakarta",
-    desc: "React, Next.js, TypeScript — membangun UI yang cepat dan indah.",
-  },
-  {
-    title: "UI/UX Designer",
-    type: "Full-time",
-    location: "Remote / Jakarta",
-    desc: "Merancang pengalaman pengguna yang intuitif dan visual memukau.",
-  },
-  {
-    title: "Backend Developer",
-    type: "Full-time",
-    location: "Remote / Jakarta",
-    desc: "API dan sistem backend yang scalable dengan Node.js & PostgreSQL.",
-  },
-  {
-    title: "Project Manager",
-    type: "Full-time",
-    location: "Jakarta",
-    desc: "Mengelola timeline, komunikasi klien, dan koordinasi tim.",
-  },
-];
-
-export default function CareerPage() {
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative pt-36 pb-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl"
-          >
-            <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-6">
-              <span className="w-8 h-px bg-primary" />
-              Karir
+      <PageHero
+        eyebrow="Career"
+        title="Build a Career That Matters"
+        description="Join a passionate team building quality digital products. Remote-friendly, learning-first."
+      />
+
+      {/* Image band */}
+      <Section className="py-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {[
+            { src: '/images/team.jpg', alt: 'Captiveau team' },
+            { src: '/images/office.jpg', alt: 'Studio space' },
+            { src: '/images/meeting.jpg', alt: 'Collaboration' },
+          ].map((img) => (
+            <div key={img.src} className="overflow-hidden rounded-xl border border-border">
+              <img src={img.src} alt={img.alt} className="aspect-[4/3] w-full object-cover" />
             </div>
-            <h1 className="text-[clamp(2.2rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-foreground">
-              Bergabung dengan{" "}
-              <span className="text-primary">Tim Captiveau</span>
-            </h1>
-            <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg">
-              Kami mencari talenta terbaik yang passionate dalam menciptakan produk digital
-              berkualitas. Jadilah bagian dari perjalanan kami.
-            </p>
-          </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* ===== BENEFITS ===== */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-muted/20" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-6">
-              <span className="w-8 h-px bg-primary" />
-              Mengapa Kami
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-[1.05] tracking-[-0.03em] mb-10">
-              Mengapa Bekerja di Captiveau?
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {benefits.map((b, i) => {
-              const BIcon = b.icon;
+      {/* Benefits */}
+      {careerBenefits.length > 0 && (
+        <Section className="pb-12 sm:pb-16">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {careerBenefits.map((b, i) => {
+              const Icon = resolveIcon(b.icon)
               return (
-                <motion.div
+                <Reveal
                   key={b.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  delay={i * 0.07}
+                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
-                  <Card className="border-0 ring-0 bg-card p-6 h-full hover:shadow-md transition-all">
-                    <CardContent className="p-0">
-                      <BIcon className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
-                      <h3 className="text-base font-semibold text-foreground mb-1.5">{b.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
+                  <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                    <Icon className="size-5 text-primary" strokeWidth={1.7} />
+                  </span>
+                  <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+                    {b.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {b.desc}
+                  </p>
+                </Reveal>
+              )
             })}
           </div>
-        </div>
-      </section>
+        </Section>
+      )}
 
-      {/* ===== OPEN POSITIONS ===== */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10"
-          >
-            <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-[0.2em] mb-6">
-              <span className="w-8 h-px bg-primary" />
-              Lowongan
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-[1.05] tracking-[-0.03em]">
-              Posisi Tersedia
-            </h2>
-          </motion.div>
+      {/* Open positions */}
+      <Section muted className="py-14 sm:py-20">
+        <SectionHeader
+          eyebrow="Open Positions"
+          title={
+            <>
+              Positions we&rsquo;re{' '}
+              <span className="text-primary">hiring for</span>
+            </>
+          }
+        />
 
-          <div className="space-y-3 max-w-3xl">
-            {openPositions.map((pos, i) => (
-              <motion.div
-                key={pos.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.06 }}
+        <div className="mt-10 flex flex-col divide-y divide-border/70 rounded-2xl border border-border bg-card px-5 sm:px-8">
+          {jobs.map((job, i) => (
+            <Reveal key={job.title} delay={i * 0.05} className="">
+              <Link
+                href={`mailto:hello@captiveau.id?subject=${encodeURIComponent(`Application — ${job.title}`)}`}
+                className="group grid grid-cols-1 items-center gap-4 py-6 transition-all sm:grid-cols-12 sm:gap-6"
               >
-                <Card className="border border-border/30 ring-0 p-5 hover:border-primary/20 transition-all group">
-                  <CardContent className="p-0">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">{pos.title}</h3>
-                        <p className="text-sm text-muted-foreground mt-0.5">{pos.desc}</p>
-                        <div className="flex flex-wrap gap-3 mt-2">
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Briefcase className="w-3 h-3" strokeWidth={1.5} /> {pos.type}
-                          </span>
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <MapPin className="w-3 h-3" strokeWidth={1.5} /> {pos.location}
-                          </span>
-                        </div>
-                      </div>
-                      <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary shrink-0 group-hover:gap-3 transition-all"
-                      >
-                        Lamar <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-8 text-center"
-          >
-            <p className="text-sm text-muted-foreground">
-              Tidak cocok? Tetap kirim CV ke{" "}
-              <a href="mailto:hello@captiveau.id" className="text-primary hover:underline underline-offset-2">hello@captiveau.id</a>
-            </p>
-          </motion.div>
+                <div className="sm:col-span-7">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      {job.title}
+                    </h3>
+                    {job.type === 'Internship' && (
+                      <span className="rounded-full bg-secondary/15 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-secondary">
+                        intern
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-2 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Briefcase className="size-3.5" />
+                      {job.type}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <MapPin className="size-3.5" />
+                      {job.location}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Sparkles className="size-3.5 text-secondary" />
+                      {job.salary}
+                    </span>
+                  </div>
+                </div>
+                <div className="hidden gap-1.5 sm:col-span-3 sm:flex sm:flex-wrap">
+                  {job.tags.slice(0, 3).map((t: string) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between gap-2 sm:col-span-2 sm:justify-end">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary sm:hidden">
+                    apply
+                  </span>
+                  <ArrowUpRight className="size-5 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
-      </section>
+      </Section>
+
+      {/* CTA */}
+      <Section className="pb-24 sm:pb-32">
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+          <div className="relative z-10">
+            <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Can&rsquo;t find the right fit?
+            </RevealHeading>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              We&rsquo;re always open to great talent. Send your portfolio —
+              we&rsquo;ll keep it for the next hiring round.
+            </p>
+          </div>
+          <div className="relative z-10">
+            <CtaButton href="mailto:hello@captiveau.id?subject=Open%20Application" size="lg">
+              Send Application
+            </CtaButton>
+          </div>
+        </div>
+      </Section>
     </>
-  );
+  )
 }

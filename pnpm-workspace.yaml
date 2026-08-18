@@ -30,4 +30,8 @@ allowBuilds:
   '28': '}'
   sharp: true
   esbuild: false
+  workerd: set this to true or false
 onlyBuiltDependencies: '["esbuild","sharp"]'
+patchedDependencies:
+  '@payloadcms/drizzle': patches/@payloadcms__drizzle.patch
+  '@payloadcms/next': patches/@payloadcms__next.patch

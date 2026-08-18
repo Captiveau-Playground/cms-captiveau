@@ -1,227 +1,216 @@
-import { notFound } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowUpRight, CheckCircle, Globe, Smartphone, Palette, Zap, TrendingUp, Users } from "lucide-react";
-import Link from "next/link";
+import { notFound } from 'next/navigation'
+import Link from 'next/link'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { Section, RevealHeading } from '@/components/frontend/section'
+import { CtaButton } from '@/components/frontend/cta-button'
+import { getCmsProjects } from '@/lib/cms-data'
+import type { Metadata } from 'next'
+import { buildMetadata, getSiteUrl } from '@/lib/seo'
+import { JsonLd } from '@/components/frontend/jsonld'
 
-const projectDetails: Record<string, {
-  title: string;
-  image: string;
-  tags: string[];
-  desc: string;
-  challenge: string;
-  solution: string;
-  results: { icon: typeof CheckCircle; text: string }[];
-  features: string[];
-  tech: string[];
-  url?: string;
-}> = {
-  "amertavana": {
-    title: "Amertavana",
-    image: "/client/amertavana.webp",
-    tags: ["Web Development", "Brand Identity"],
-    desc: "Website company profile modern untuk brand lifestyle premium dengan desain elegan dan performa optimal.",
-    challenge: "Amertavana membutuhkan website yang bisa merepresentasikan identitas brand premium mereka dengan desain yang elegan, namun tetap fungsional dan cepat diakses.",
-    solution: "Kami membangun website company profile dengan pendekatan visual storytelling, mengutamakan tipografi yang bersih, palet warna yang hangat, dan animasi halus yang menciptakan pengalaman browsing yang premium.",
-    results: [
-      { icon: Zap, text: "Loading time di bawah 1.5 detik" },
-      { icon: Globe, text: "SEO score 95+ di Lighthouse" },
-      { icon: Smartphone, text: "100% responsive di semua perangkat" },
-      { icon: TrendingUp, text: "Bounce rate turun 40%" },
-    ],
-    features: ["Visual storytelling dengan hero video", "Animasi scroll yang halus", "Galeri produk interaktif", "Blog terintegrasi", "Contact form dengan CRM integration", "Multi-language support"],
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Sanity CMS"],
-  },
-  "cogan": {
-    title: "Cogan",
-    image: "/client/cogan.webp",
-    tags: ["UI/UX Design", "Mobile App"],
-    desc: "Aplikasi mobile dengan pengalaman pengguna yang intuitif dan desain visual yang memukau.",
-    challenge: "Cogan ingin menghadirkan aplikasi mobile yang tidak hanya fungsional tetapi juga memberikan pengalaman pengguna yang menyenangkan dan mudah digunakan oleh target audiens yang beragam.",
-    solution: "Kami melakukan riset pengguna mendalam, membuat wireframe hingga high-fidelity prototype, dan mengembangkan aplikasi dengan pendekatan user-centered design yang memprioritaskan kemudahan navigasi.",
-    results: [
-      { icon: Users, text: "User satisfaction score 4.8/5" },
-      { icon: TrendingUp, text: "Retention rate meningkat 60%" },
-      { icon: Zap, text: "App launch time di bawah 2 detik" },
-      { icon: Smartphone, text: "Rating 4.8 di Play Store" },
-    ],
-    features: ["Onboarding flow yang interaktif", "Dashboard personalisasi", "Push notification", "Offline mode", "Dark mode", "Analytics terintegrasi"],
-    tech: ["Flutter", "Dart", "Firebase", "Figma", "Mixpanel"],
-  },
-  "emerintek": {
-    title: "Emerintek",
-    image: "/client/emerintek.webp",
-    tags: ["Web Platform", "Dashboard"],
-    desc: "Platform dashboard analitik dengan visualisasi data real-time dan sistem manajemen yang komprehensif.",
-    challenge: "Emerintek membutuhkan platform dashboard yang bisa menampilkan data kompleks secara real-time dengan visualisasi yang mudah dipahami oleh tim manajemen non-teknis.",
-    solution: "Kami merancang arsitektur data yang scalable, membangun dashboard interaktif dengan grafik real-time, dan menyederhanakan navigasi agar informasi kritis bisa diakses dalam 3 klik.",
-    results: [
-      { icon: TrendingUp, text: "Efisiensi pelaporan meningkat 70%" },
-      { icon: Users, text: "Diadopsi oleh 50+ pengguna internal" },
-      { icon: Zap, text: "Real-time update di bawah 1 detik" },
-      { icon: Globe, text: "99.9% uptime sejak launch" },
-    ],
-    features: ["Real-time data visualization", "Custom report generator", "Multi-role access control", "Export ke PDF/Excel", "Alert & notification system", "Audit log"],
-    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Chart.js", "Docker"],
-  },
-  "indomaja": {
-    title: "Indomaja",
-    image: "/client/indomaja.webp",
-    tags: ["E-Commerce", "Digital Strategy"],
-    desc: "Platform e-commerce dengan fitur lengkap, payment gateway terintegrasi, dan inventory management.",
-    challenge: "Indomaja ingin membangun platform e-commerce dari nol yang bisa menyaingi marketplace besar dengan pengalaman belanja yang unggul dan operasional yang efisien.",
-    solution: "Kami membangun platform e-commerce end-to-end dengan arsitektur microservices, integrasi multi-payment gateway, sistem manajemen inventaris real-time, dan dashboard admin yang komprehensif.",
-    results: [
-      { icon: TrendingUp, text: "Konversi meningkat 35% dalam 3 bulan" },
-      { icon: Users, text: "Pelanggan aktif 10.000+" },
-      { icon: Zap, text: "Checkout completion rate 85%" },
-      { icon: Globe, text: "Page load time di bawah 2 detik" },
-    ],
-    features: ["Multi-payment gateway", "Inventory management real-time", "Order tracking system", "Vendor management", "Promo & coupon engine", "Analytics dashboard"],
-    tech: ["Next.js", "Node.js", "MongoDB", "Redis", "Midtrans", "AWS"],
-  },
-};
-
-export default async function PortfolioDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const project = projectDetails[slug];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const projects = await getCmsProjects()
+  const project = projects.find((p) => p.slug === slug)
+  if (!project) return {}
+  return buildMetadata({
+    title: `${project.title} — Portofolio`,
+    description: project.description || `Studi kasus proyek ${project.title} oleh Captiveau.`,
+    image: project.image,
+    path: `/portfolio/${slug}`,
+    keywords: [project.title, project.category || '', 'portofolio'],
+  })
+}
+export default async function ProjectDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const projects = await getCmsProjects()
+  const project = projects.find((p) => p.slug === slug)
 
   if (!project) {
-    notFound();
+    notFound()
   }
+
+  const others = projects.filter((p) => p.slug !== slug)
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          name: project.title,
+          description: project.description || undefined,
+          image: project.image || undefined,
+          creator: { '@type': 'Organization', name: 'Captiveau', url: await getSiteUrl() },
+          url: `${await getSiteUrl()}/portfolio/${slug}`,
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Beranda', item: await getSiteUrl() },
+            { '@type': 'ListItem', position: 2, name: 'Portofolio', item: `${await getSiteUrl()}/portfolio` },
+            { '@type': 'ListItem', position: 3, name: project.title, item: `${await getSiteUrl()}/portfolio/${slug}` },
+          ],
+        }}
+      />
       {/* Hero */}
-      <section className="pt-32 pb-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors mb-4 inline-block">
-            ← Kembali ke Portfolio
+      <section className="relative overflow-hidden bg-gray-50 pt-32 pb-10 sm:pt-40 sm:pb-14">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/portfolio"
+            className="group inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+            Back to portfolio
           </Link>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-sm font-normal">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-                {project.title}
-              </h1>
-              <p className="text-lg text-muted-foreground">{project.desc}</p>
-              {project.url && (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary font-medium mt-4 hover:underline"
-                >
-                  Kunjungi Website <ArrowUpRight className="w-4 h-4" />
-                </a>
-              )}
-            </div>
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-muted">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-            </div>
+
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+            <span className="size-1.5 rounded-full bg-primary" />
+            {project.category}
+          </span>
+
+          <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            {project.title}
+          </h1>
+
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Challenge & Solution */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="border border-border/50 ring-0 p-8">
-              <CardContent className="p-0">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Tantangan</h3>
-                <p className="text-muted-foreground">{project.challenge}</p>
-              </CardContent>
-            </Card>
-            <Card className="border border-border/50 ring-0 p-8 bg-primary/5">
-              <CardContent className="p-0">
-                <h3 className="text-lg font-semibold text-foreground mb-3">Solusi Kami</h3>
-                <p className="text-muted-foreground">{project.solution}</p>
-              </CardContent>
-            </Card>
+      {/* Cover */}
+      <Section className="pb-14 sm:pb-20">
+        <div className="group relative overflow-hidden rounded-2xl border border-border">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="aspect-[16/9] w-full object-cover"
+          />
+        </div>
+      </Section>
+
+      {/* Overview */}
+      <Section className="pb-16 sm:pb-24">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="text-lg leading-relaxed text-muted-foreground sm:text-xl">
+              {project.description}
+            </p>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <dl className="flex flex-col divide-y divide-border border-y border-border">
+              <div className="flex items-center justify-between py-3.5">
+                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Year</dt>
+                <dd className="text-sm font-semibold text-foreground">{project.year}</dd>
+              </div>
+              <div className="flex items-center justify-between py-3.5">
+                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Category</dt>
+                <dd className="text-sm font-semibold text-foreground">{project.category}</dd>
+              </div>
+              <div className="flex items-center justify-between gap-4 py-3.5">
+                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Services</dt>
+                <dd className="text-right text-sm font-semibold text-foreground">
+                  {project.services.join(' · ')}
+                </dd>
+              </div>
+              <div className="flex items-center justify-between gap-4 py-3.5">
+                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Stack</dt>
+                <dd className="text-right text-sm font-semibold text-foreground">
+                  {project.stack.join(' · ')}
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Results */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Badge variant="outline" className="px-3 py-1 text-sm font-normal mb-4">
-              Hasil
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Dampak yang Kami Berikan
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {project.results.map((r) => {
-              const RIcon = r.icon;
-              return (
-                <Card key={r.text} className="border-0 ring-0 bg-card p-6 text-center">
-                  <CardContent className="p-0">
-                    <RIcon className="w-8 h-8 text-primary mx-auto mb-3" strokeWidth={1.5} />
-                    <p className="text-sm text-muted-foreground">{r.text}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Features & Tech */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Fitur Unggulan</h3>
-              <ul className="space-y-3">
-                {project.features.map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-muted-foreground">
-                    <CheckCircle className="w-5 h-5 text-primary shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
+      <Section muted className="pb-16 sm:pb-24">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {project.results.map((r, i) => (
+            <div
+              key={r.label}
+              className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 sm:p-8"
+            >
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                result {String(i + 1).padStart(2, '0')}
+              </p>
+              <p className="mt-3 text-4xl font-bold tracking-tight text-secondary sm:text-5xl">
+                {r.value}
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">{r.label}</p>
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Teknologi</h3>
-              <div className="flex flex-wrap gap-3">
-                {project.tech.map((t) => (
-                  <span key={t} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Ingin Hasil Serupa untuk Project Anda?
-          </h2>
-          <p className="text-white/80 max-w-md mx-auto mb-8">
-            Konsultasikan kebutuhan Anda dengan tim kami. Gratis tanpa komitmen.
-          </p>
-          <Link href="/contact">
-            <Button className="bg-white text-primary hover:bg-white/90 rounded-full px-8 py-6 h-auto text-base font-medium">
-              Hubungi Kami
-            </Button>
-          </Link>
+      <Section className="pb-16 sm:pb-24">
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+          <div className="relative z-10">
+            <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Want similar results for your business?
+            </RevealHeading>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Tell us what you need — we're ready to help from idea to launch.
+            </p>
+          </div>
+          <div className="relative z-10">
+            <CtaButton href="/contact" size="lg">
+              Start Your Project
+            </CtaButton>
+          </div>
         </div>
-      </section>
+      </Section>
+
+      {/* Other projects */}
+      <Section className="pb-24 sm:pb-32">
+        <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
+          Other projects
+        </RevealHeading>
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {others.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/portfolio/${p.slug}`}
+              className="group overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+            >
+              <div className="aspect-[16/10] overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                />
+              </div>
+              <div className="flex items-center justify-between p-4">
+                <span className="text-sm font-semibold tracking-tight text-foreground">
+                  {p.title}
+                </span>
+                <span className="text-xs text-muted-foreground">{p.category}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </Section>
     </>
-  );
+  )
 }

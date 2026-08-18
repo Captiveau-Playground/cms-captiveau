@@ -77,6 +77,7 @@ export interface Config {
     pages: Page;
     media: Media;
     redirects: Redirect;
+    projects: Project;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -106,10 +108,12 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     'main-menu': MainMenu;
+    homepage: Homepage;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -481,7 +485,7 @@ export interface Faq {
     };
     [k: string]: unknown;
   };
-  category?: ('general' | 'layanan' | 'pembayaran' | 'proyek' | 'dukungan') | null;
+  category?: ('general' | 'technical' | 'pricing' | 'support') | null;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -660,6 +664,52 @@ export interface Redirect {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  slug: string;
+  image?: (number | null) | Media;
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  description?: string | null;
+  /**
+   * e.g., Company Profile, E-Commerce, Mobile App
+   */
+  category?: string | null;
+  year?: string | null;
+  services?:
+    | {
+        service?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  stack?:
+    | {
+        tech?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  results?:
+    | {
+        value?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  size?: ('large' | 'small') | null;
+  featured?: boolean | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -721,6 +771,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'redirects';
         value: number | Redirect;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1182,6 +1236,48 @@ export interface RedirectsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  image?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  description?: T;
+  category?: T;
+  year?: T;
+  services?:
+    | T
+    | {
+        service?: T;
+        id?: T;
+      };
+  stack?:
+    | T
+    | {
+        tech?: T;
+        id?: T;
+      };
+  results?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  size?: T;
+  featured?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1305,6 +1401,92 @@ export interface MainMenu {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  heroBadge?: string | null;
+  heroTitlePrefix?: string | null;
+  heroSpecialties?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  heroTitleSuffix?: string | null;
+  heroSubtitle?: string | null;
+  heroImages?: (number | null) | Media;
+  stats?:
+    | {
+        value: number;
+        suffix?: string | null;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  techStack?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  trustPoints?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  advantages?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  process?:
+    | {
+        step?: string | null;
+        title: string;
+        description?: string | null;
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialProofLabel?: string | null;
+  socialProofDescription?: string | null;
+  socialProofLogos?:
+    | {
+        logo?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  values?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  careerBenefits?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  ctaTitle?: string | null;
+  ctaSubtitle?: string | null;
+  ctaButtonText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1376,6 +1558,92 @@ export interface MainMenuSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroBadge?: T;
+  heroTitlePrefix?: T;
+  heroSpecialties?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  heroTitleSuffix?: T;
+  heroSubtitle?: T;
+  heroImages?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        suffix?: T;
+        label?: T;
+        id?: T;
+      };
+  techStack?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  trustPoints?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  advantages?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  process?:
+    | T
+    | {
+        step?: T;
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  socialProofLabel?: T;
+  socialProofDescription?: T;
+  socialProofLogos?:
+    | T
+    | {
+        logo?: T;
+        id?: T;
+      };
+  values?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  careerBenefits?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  ctaTitle?: T;
+  ctaSubtitle?: T;
+  ctaButtonText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
