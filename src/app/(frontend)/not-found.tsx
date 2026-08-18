@@ -1,4 +1,4 @@
-import { NotFoundPage } from '../../../components/not-found'
+import { NotFoundPage } from '@/components/frontend/not-found'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-import { Eyebrow } from './eyebrow'
 import { TextRevealBlock } from '@/components/sora-ui/texts/text-reveal-block'
 
 export function Section({
@@ -74,7 +73,11 @@ export function SectionHeader({
         className
       )}
     >
-      {eyebrow && <Eyebrow label={eyebrow} />}
+      {eyebrow && (
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          {eyebrow}
+        </p>
+      )}
       <TextRevealBlock blockColor={blockColor ?? 'hsl(var(--primary))'} animateOnScroll direction="left">
         <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-foreground sm:text-4xl lg:text-5xl lg:leading-[1.1]">
           {title}
