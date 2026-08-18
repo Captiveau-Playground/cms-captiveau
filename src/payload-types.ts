@@ -1329,7 +1329,8 @@ export interface SiteSetting {
   favicon?: (number | null) | Media;
   socialLinks?:
     | {
-        platform?: ('instagram' | 'linkedin' | 'twitter' | 'facebook' | 'youtube' | 'tiktok' | 'github') | null;
+        platform?:
+          ('instagram' | 'linkedin' | 'twitter' | 'facebook' | 'youtube' | 'tiktok' | 'github' | 'behance') | null;
         url?: string | null;
         id?: string | null;
       }[]

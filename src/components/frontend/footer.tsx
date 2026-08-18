@@ -2,8 +2,6 @@
 
 import Link from 'next/link'
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { RollingText } from '@/components/sora-ui/texts/rolling-text'
 import { Wordmark } from './navbar'
 import { BrandIcon } from './social-icons'
 
@@ -24,46 +22,59 @@ const defaultServices = [
   { title: 'UI/UX Design', slug: 'uiux-design' },
 ]
 
+const companyLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Career', href: '/career' },
+  { label: 'FAQ', href: '/faq' },
+]
+
 export default function Footer({
   companyName = 'Captiveau',
   email = 'hello@captiveau.id',
   phone,
   address,
   socialLinks = [],
-  navData = [
-    { label: 'Services', href: '/services' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Career', href: '/career' },
-    { label: 'About Us', href: '/about' },
-  ],
   services = defaultServices,
 }: FooterProps) {
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="relative overflow-hidden bg-foreground text-foreground">
-      {/* top accent bar — solid blue */}
-      <div className="h-1 w-full bg-primary" />
+    <footer className="border-t border-border bg-background text-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+          {/* Brand / editorial */}
+          <div className="flex flex-col gap-6">
+            <Wordmark />
 
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Brand */}
-          <div className="flex flex-col gap-5 lg:col-span-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <img src="/logo.webp" alt="Logo Captiveau" className="size-9 object-contain" width={36} height={36} />
-              <span className="flex flex-col leading-none text-white">
-                <span className="text-lg font-bold tracking-tight">Captiveau</span>
-                <span className="-mt-0.5 text-[11px] text-white/60">
-                  Creative Tech Studio
-                </span>
-              </span>
-            </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-white/60">
-              We build beautiful, functional web experiences with modern
-              technology — helping startups and businesses create their
-              digital presence.
+            <span className="inline-flex w-fit items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span className="size-1.5 rounded-full bg-secondary" />
+              {companyName} — Creative Tech Studio
+            </span>
+
+            <p
+              className="max-w-xl text-balance text-2xl leading-tight text-foreground sm:text-3xl"
+              style={{
+                fontFamily: "ui-serif, Georgia, 'Times New Roman', serif",
+                letterSpacing: '-0.01em',
+              }}
+            >
+              We build the kind of digital products we wish more software
+              shipped — calm, opinionated, ready for the real world.
             </p>
-            <div className="flex flex-wrap items-center gap-2">
+
+            <Link
+              href="/about"
+              className="group inline-flex w-fit items-center gap-1 text-sm font-medium text-foreground"
+            >
+              <span className="underline-offset-4 group-hover:underline">
+                Read our story
+              </span>
+              <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+
+            <div className="mt-2 flex items-center gap-1.5">
               {socialLinks.map((s) => (
                 <Link
                   key={s.platform}
@@ -71,7 +82,7 @@ export default function Footer({
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.platform ?? undefined}
-                  className="flex size-9 items-center justify-center rounded-lg border border-white/15 text-white/60 transition-all hover:border-primary hover:text-white"
+                  className="grid size-9 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   <BrandIcon name={s.platform || ''} />
                 </Link>
@@ -79,87 +90,103 @@ export default function Footer({
             </div>
           </div>
 
-          {/* Services */}
-          <div className="lg:col-span-2">
-            <h3 className="mb-5 text-sm font-semibold text-white">Our Services</h3>
-            <ul className="flex flex-col gap-3">
-              {services.map((s) => (
-                <li key={s.slug}>
-                  <Link
-                    href={`/services/${s.slug}`}
-                    className="text-sm text-white/60 transition-colors hover:text-primary"
-                  >
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Links */}
-          <div className="lg:col-span-2">
-            <h3 className="mb-5 text-sm font-semibold text-white">Useful Links</h3>
-            <ul className="flex flex-col gap-3">
-              {navData.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/60 transition-colors hover:text-primary"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="flex flex-col gap-5 lg:col-span-4">
-            <h3 className="text-sm font-semibold text-white">Get in Touch</h3>
-            <div className="flex flex-col gap-4 text-sm text-white/60">
-              <Link
-                href={`mailto:${email}`}
-                className="group inline-flex items-start gap-2.5 transition-colors hover:text-primary"
-              >
-                <Mail className="mt-0.5 size-4 shrink-0" />
-                <span className="break-all">{email}</span>
-              </Link>
-              {phone && (
-                <Link
-                  href={`https://wa.me/${phone.replace(/\D/g, '')}`}
-                  className="group inline-flex items-start gap-2.5 transition-colors hover:text-primary"
-                >
-                  <Phone className="mt-0.5 size-4 shrink-0" />
-                  <span>{phone}</span>
-                </Link>
-              )}
-              {address && (
-                <span className="inline-flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 size-4 shrink-0" />
-                  <span>{address}</span>
-                </span>
-              )}
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+            <div className="flex flex-col gap-3">
+              <h4 className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                Services
+              </h4>
+              <ul className="flex flex-col gap-2">
+                {services.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={`/services/${s.slug}`}
+                      className="text-sm text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      {s.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="group mt-2 flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs text-white/60 transition-all hover:border-primary hover:text-white"
-            >
-              Back to top
-              <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5" />
-            </button>
+            <div className="flex flex-col gap-3">
+              <h4 className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                Company
+              </h4>
+              <ul className="flex flex-col gap-2">
+                {companyLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-2 flex flex-col gap-3 sm:col-span-1">
+              <h4 className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                Contact
+              </h4>
+              <ul className="flex flex-col gap-2">
+                {email && (
+                  <li>
+                    <Link
+                      href={`mailto:${email}`}
+                      className="inline-flex items-start gap-2 text-sm text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      <Mail className="mt-0.5 size-3.5 shrink-0" />
+                      <span className="break-all">{email}</span>
+                    </Link>
+                  </li>
+                )}
+                {phone && (
+                  <li>
+                    <Link
+                      href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+                      className="inline-flex items-start gap-2 text-sm text-foreground/80 transition-colors hover:text-foreground"
+                    >
+                      <Phone className="mt-0.5 size-3.5 shrink-0" />
+                      <span>{phone}</span>
+                    </Link>
+                  </li>
+                )}
+                {address && (
+                  <li className="inline-flex items-start gap-2 text-sm text-foreground/80">
+                    <MapPin className="mt-0.5 size-3.5 shrink-0" />
+                    <span>{address}</span>
+                  </li>
+                )}
+              </ul>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} {companyName}. All rights reserved.
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
+          <p>
+            © {year} {companyName}. All rights reserved.
           </p>
-          <p className="text-xs text-white/40">
-            Made with <span className="text-secondary">♥</span> in Indonesia
-          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="relative grid size-2 place-items-center">
+                <span className="size-2 rounded-full bg-emerald-500" />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 animate-ping rounded-full bg-emerald-500/50"
+                />
+              </span>
+              Now accepting new projects
+            </span>
+            <span className="hidden h-3 w-px bg-border sm:block" />
+            <span className="font-mono uppercase tracking-widest">
+              Jakarta · Indonesia
+            </span>
+          </div>
         </div>
       </div>
     </footer>

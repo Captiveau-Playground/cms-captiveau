@@ -61,6 +61,7 @@ export const SiteSettings: GlobalConfig = {
             { label: 'YouTube', value: 'youtube' },
             { label: 'TikTok', value: 'tiktok' },
             { label: 'GitHub', value: 'github' },
+            { label: 'Behance', value: 'behance' },
           ],
         },
         { name: 'url', label: 'URL', type: 'text' },
