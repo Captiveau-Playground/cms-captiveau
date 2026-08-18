@@ -35,10 +35,8 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
 
   return (
     <section ref={ref} className="relative bg-background">
-      {/* Scroll distance */}
-      <div className="h-[250vh]" aria-hidden />
-
-      {/* Sticky viewport */}
+      {/* Sticky viewport — sticks the moment the section enters the viewport
+          (no empty scroll above it). The spacer after it holds the scroll. */}
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-background">
         <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
           {/* Header row */}
@@ -179,6 +177,9 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
           </div>
         </div>
       </div>
+
+      {/* Scroll distance — holds the sticky viewport for the story journey */}
+      <div className="h-[220vh]" aria-hidden />
     </section>
   )
 }

@@ -154,7 +154,7 @@ async function main() {
       category: p.category,
       year: p.year,
       services: p.services.map((s) => ({ service: s })),
-      stack: p.stack.map((t) => ({ tech: t })),
+      stack: p.stack.map((t) => ({ tech: t as never })),
       results: p.results.map((r) => ({ value: r.value, label: r.label })),
       size: p.size,
       order: i + 1,

@@ -689,9 +689,45 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Teknologi yang dipakai — pilih dari daftar, ikon logo otomatis tampil.
+   */
   stack?:
     | {
-        tech?: string | null;
+        tech:
+          | 'Next.js'
+          | 'React'
+          | 'React Native'
+          | 'TypeScript'
+          | 'JavaScript'
+          | 'Tailwind CSS'
+          | 'Node.js'
+          | 'PostgreSQL'
+          | 'MySQL'
+          | 'MongoDB'
+          | 'Prisma'
+          | 'Drizzle'
+          | 'Payload CMS'
+          | 'Medusa.js'
+          | 'Stripe'
+          | 'Midtrans'
+          | 'Xendit'
+          | 'Firebase'
+          | 'Supabase'
+          | 'Vercel'
+          | 'Cloudflare'
+          | 'AWS'
+          | 'Docker'
+          | 'Figma'
+          | 'GSAP'
+          | 'Framer Motion'
+          | 'WordPress'
+          | 'Laravel'
+          | 'Go'
+          | 'Python'
+          | 'GraphQL'
+          | 'Recharts'
+          | 'shadcn/ui';
         id?: string | null;
       }[]
     | null;

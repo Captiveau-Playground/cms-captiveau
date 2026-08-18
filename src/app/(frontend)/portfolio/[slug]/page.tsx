@@ -5,6 +5,7 @@ import { Section, RevealHeading } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
 import StoryScroll from '@/components/frontend/story-scroll'
 import IntegrationsShowcase from '@/components/frontend/integrations-showcase'
+import TechStack from '@/components/frontend/tech-stack'
 import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -134,13 +135,16 @@ export default async function ProjectDetailPage({
                   {project.services.join(' · ')}
                 </dd>
               </div>
-              <div className="flex items-center justify-between gap-4 py-3.5">
-                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Stack</dt>
-                <dd className="text-right text-sm font-semibold text-foreground">
-                  {project.stack.join(' · ')}
-                </dd>
-              </div>
             </dl>
+
+            {project.stack.length > 0 && (
+              <div className="mt-6">
+                <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Tech Stack
+                </dt>
+                <TechStack stack={project.stack} />
+              </div>
+            )}
           </div>
         </div>
       </Section>
