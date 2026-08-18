@@ -11,10 +11,12 @@ export type StoryChapter = {
 }
 
 /**
- * Scroll-reveal project story (adapted from abui.io scroll-reveal-content-a):
- * a 300vh scroll journey with a sticky 100vh viewport — numbered chapters with
- * progress rails on the left, crossfading images on the right (lg+).
- * On mobile the story stacks: chapters with their inline image.
+ * Scroll-telling project story (adapted from abui.io scroll-reveal-content-a).
+ * A tall scroll journey (240vh) with a sticky 100vh viewport:
+ * scrolling switches the featured image and highlights the active chapter.
+ * - Desktop: numbered chapters with progress rails on the left, crossfading
+ *   image on the right.
+ * - Mobile: crossfading image on top + the active chapter only (no stacking).
  */
 export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -27,7 +29,10 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
 
   useScrollProgress(scrollYProgress, setProgress)
 
-  const total = chapters.length || 1
+  if (!chapters.length) return null
+
+  const total = chapters.length
+  const activeIndex = Math.min(total - 1, Math.floor(progress * total))
 
   const pct = (index: number) => {
     const start = index / total
@@ -35,89 +40,117 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
     return Math.min(100, Math.max(0, ((progress - start) / (end - start)) * 100))
   }
 
-  if (!chapters.length) return null
+  const chapter = chapters[activeIndex]
 
   return (
     <section className="bg-background">
-      <div ref={ref} className="relative mx-auto w-full max-w-[90vw]">
+      <div ref={ref} className="relative mx-auto w-full">
         {/* Scroll distance */}
-        <div className="h-[300vh]" aria-hidden />
+        <div className="h-[240vh]" aria-hidden />
 
         {/* Sticky viewport */}
-        <div className="sticky top-0 flex h-[100vh] w-full flex-col items-start justify-center">
-          <div className="mx-auto grid w-full max-w-[1340px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-            {/* Chapters */}
-            <div className="flex w-full flex-col gap-8 lg:gap-10">
-              {chapters.map((chapter, i) => {
+        <div className="sticky top-0 flex h-[100dvh] w-full items-center">
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
+            {/* Chapters (desktop) */}
+            <div className="hidden flex-col justify-center gap-8 lg:flex">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                The story
+              </span>
+              {chapters.map((c, i) => {
                 const p = pct(i)
-                const active = p > 0
+                const active = i === activeIndex
                 return (
-                  <div key={chapter.heading + i} className="flex w-full flex-col">
-                    {/* Mobile inline image */}
-                    {chapter.image && (
-                      <div className="mb-4 overflow-hidden rounded-xl border border-border lg:hidden">
-                        <img
-                          src={chapter.image}
-                          alt={chapter.heading}
-                          className="aspect-[16/9] w-full object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="flex items-baseline gap-2">
+                  <div key={c.heading + i} className="flex w-full">
+                    <div className="relative flex w-[64px] shrink-0 items-start justify-center">
+                      <div className="absolute left-1/2 top-1 h-full w-[2px] -translate-x-1/2 bg-foreground/10" />
+                      <div
+                        className="absolute left-1/2 top-1 w-[2px] -translate-x-1/2 bg-foreground transition-[height] duration-150"
+                        style={{ height: `${Math.max(p, active ? 100 : 0)}%` }}
+                      />
                       <span
                         className={cn(
-                          'text-2xl font-semibold tracking-tight transition-opacity duration-300 md:text-3xl',
-                          active ? 'opacity-100' : 'opacity-50'
+                          'relative z-10 mt-2 text-xs font-semibold tabular-nums transition-opacity duration-300',
+                          active ? 'opacity-100' : 'opacity-40'
                         )}
                       >
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <div className="flex w-full">
-                      <div className="relative flex w-[70px] items-start justify-center">
-                        <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-foreground/10" />
-                        <div
-                          className="absolute left-1/2 top-0 w-[2px] -translate-x-1/2 bg-foreground transition-[height] duration-150"
-                          style={{ height: `${p}%` }}
-                        />
-                      </div>
-                      <div className="w-[calc(100%-40px)] pl-4">
-                        <div className="flex flex-col gap-1">
-                          <h3
-                            className={cn(
-                              'mb-2 text-2xl font-semibold tracking-tight text-foreground transition-opacity duration-300 md:text-3xl',
-                              active ? 'opacity-100' : 'opacity-50'
-                            )}
-                          >
-                            {chapter.heading}
-                          </h3>
-                          <p
-                            className={cn(
-                              'max-w-[400px] text-base font-medium leading-[130%] text-muted-foreground transition-opacity duration-300 md:text-lg',
-                              active ? 'opacity-100' : 'opacity-50'
-                            )}
-                          >
-                            {chapter.description}
-                          </p>
-                        </div>
-                      </div>
+                    <div className="min-w-0 pl-4">
+                      <h3
+                        className={cn(
+                          'mb-1 text-2xl font-semibold tracking-tight text-foreground transition-opacity duration-300 md:text-[1.7rem]',
+                          active ? 'opacity-100' : 'opacity-40'
+                        )}
+                      >
+                        {c.heading}
+                      </h3>
+                      <p
+                        className={cn(
+                          'max-w-[480px] text-base font-medium leading-[130%] text-muted-foreground transition-opacity duration-300 md:text-lg',
+                          active ? 'opacity-100' : 'opacity-30'
+                        )}
+                      >
+                        {c.description}
+                      </p>
                     </div>
                   </div>
                 )
               })}
             </div>
 
-            {/* Crossfading images (lg+) */}
-            <div className="relative hidden h-full flex-col items-center justify-center lg:flex">
-              <div className="relative h-[65vh] w-full overflow-hidden rounded-2xl border border-border bg-muted">
-                {chapters.map((chapter, i) => (
+            {/* Image (desktop) */}
+            <div className="relative hidden h-[78vh] w-full overflow-hidden rounded-2xl border border-border bg-muted lg:block">
+              {chapters.map((c, i) => (
+                <img
+                  key={c.heading + i}
+                  src={c.image || '/images/office.jpg'}
+                  alt={c.heading}
+                  className={cn(
+                    'absolute inset-0 h-full w-full object-cover transition-opacity duration-500',
+                    i === activeIndex ? 'opacity-100' : 'opacity-0'
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Mobile: image + active chapter only */}
+            <div className="flex h-full flex-col justify-center gap-5 lg:hidden">
+              <div className="relative h-[42dvh] w-full overflow-hidden rounded-xl border border-border bg-muted">
+                {chapters.map((c, i) => (
                   <img
-                    key={chapter.heading + i}
-                    src={chapter.image || '/images/office.jpg'}
-                    alt={chapter.heading}
+                    key={c.heading + i}
+                    src={c.image || '/images/office.jpg'}
+                    alt={c.heading}
                     className={cn(
                       'absolute inset-0 h-full w-full object-cover transition-opacity duration-500',
-                      progress > i / total ? 'opacity-100' : 'opacity-0'
+                      i === activeIndex ? 'opacity-100' : 'opacity-0'
+                    )}
+                  />
+                ))}
+              </div>
+
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                The story · {String(activeIndex + 1).padStart(2, '0')}/
+                {String(total).padStart(2, '0')}
+              </span>
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+                  {chapter.heading}
+                </h3>
+                <p className="text-base font-medium leading-[130%] text-muted-foreground">
+                  {chapter.description}
+                </p>
+              </div>
+
+              {/* Progress dots */}
+              <div className="flex items-center gap-2 pt-1">
+                {chapters.map((c, i) => (
+                  <span
+                    key={c.heading + i}
+                    className={cn(
+                      'h-1.5 rounded-full transition-all duration-300',
+                      i === activeIndex ? 'w-8 bg-foreground' : 'w-2.5 bg-foreground/20'
                     )}
                   />
                 ))}

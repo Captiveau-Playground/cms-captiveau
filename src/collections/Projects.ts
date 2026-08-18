@@ -85,6 +85,34 @@ export const Projects: CollectionConfig = {
       ],
     },
     {
+      name: 'integrations',
+      label: 'Digital Integrations Included',
+      type: 'array',
+      admin: {
+        description:
+          'Paket integrasi analitik & verifikasi yang disertakan dalam proyek (GA4, GSC, Clarity, dll).',
+      },
+      fields: [
+        {
+          name: 'name',
+          label: 'Integration',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'GA4 (Google Analytics 4)', value: 'ga4' },
+            { label: 'Google Search Console', value: 'gsc' },
+            { label: 'Microsoft Clarity', value: 'clarity' },
+            { label: 'Google Tag Manager', value: 'gtm' },
+            { label: 'Meta Pixel', value: 'meta-pixel' },
+            { label: 'Hotjar', value: 'hotjar' },
+            { label: 'SEO & Open Graph', value: 'seo' },
+            { label: 'Schema.org Structured Data', value: 'schema' },
+            { label: 'Performance Optimization', value: 'performance' },
+          ],
+        },
+      ],
+    },
+    {
       name: 'story',
       label: 'Project Story',
       type: 'array',

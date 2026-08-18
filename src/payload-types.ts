@@ -703,6 +703,15 @@ export interface Project {
       }[]
     | null;
   /**
+   * Paket integrasi analitik & verifikasi yang disertakan dalam proyek (GA4, GSC, Clarity, dll).
+   */
+  integrations?:
+    | {
+        name: 'ga4' | 'gsc' | 'clarity' | 'gtm' | 'meta-pixel' | 'hotjar' | 'seo' | 'schema' | 'performance';
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Bab cerita proyek — tampil sebagai scroll-reveal di halaman detail. Gunakan 3–5 bab untuk ritme terbaik.
    */
   story?:
@@ -1279,6 +1288,12 @@ export interface ProjectsSelect<T extends boolean = true> {
     | {
         value?: T;
         label?: T;
+        id?: T;
+      };
+  integrations?:
+    | T
+    | {
+        name?: T;
         id?: T;
       };
   story?:

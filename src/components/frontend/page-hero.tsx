@@ -20,7 +20,7 @@ export function PageHero({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-gray-50 pt-32 pb-14 sm:pt-40 sm:pb-20',
+        'relative overflow-hidden bg-gray-50 pt-12 pb-14 sm:pt-16 sm:pb-20',
         className
       )}
     >

@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Section, RevealHeading } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
 import StoryScroll from '@/components/frontend/story-scroll'
+import IntegrationsShowcase from '@/components/frontend/integrations-showcase'
 import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -66,7 +67,7 @@ export default async function ProjectDetailPage({
         }}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gray-50 pt-32 pb-10 sm:pt-40 sm:pb-14">
+      <section className="relative overflow-hidden bg-gray-50 pt-12 pb-10 sm:pt-16 sm:pb-14">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
           <Link
             href="/portfolio"
@@ -144,11 +145,11 @@ export default async function ProjectDetailPage({
         </div>
       </Section>
 
-      {/* Project story — scroll-reveal chapters */}
+      {/* Project story — scroll-telling chapters */}
       {project.story && project.story.length > 0 && (
-        <Section className="py-16 sm:py-24">
+        <div className="bg-background">
           <StoryScroll chapters={project.story} />
-        </Section>
+        </div>
       )}
 
       {/* Results */}
@@ -170,6 +171,25 @@ export default async function ProjectDetailPage({
           ))}
         </div>
       </Section>
+
+      {/* Digital integrations included (GA4, GSC, Clarity, ...) */}
+      {project.integrations && project.integrations.length > 0 && (
+        <Section className="py-16 sm:py-24">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-3">
+              <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                Digital integrations included
+              </RevealHeading>
+              <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+                Setiap proyek kami lengkapi dengan fondasi analitik & verifikasi
+                — dari pengukuran konversi, indeks pencarian, hingga wawasan
+                perilaku pengunjung.
+              </p>
+            </div>
+            <IntegrationsShowcase integrations={project.integrations as never[]} />
+          </div>
+        </Section>
+      )}
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">

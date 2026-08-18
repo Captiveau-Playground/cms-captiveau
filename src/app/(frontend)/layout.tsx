@@ -141,8 +141,12 @@ export default async function FrontendLayout({
         <JsonLd data={websiteSchema} />
         <Integrations analytics={settings?.analytics} />
         <div className="min-h-screen flex flex-col">
-          <Banner banner={settings?.banner} />
-          <Navbar navData={navData} />
+          {/* Banner + navbar as one sticky unit — banner sits ABOVE the nav,
+              never overlapping it (navbar is in-flow, not fixed). */}
+          <div className="sticky top-0 z-50">
+            <Banner banner={settings?.banner} />
+            <Navbar navData={navData} />
+          </div>
           <main className="flex-1">{children}</main>
           <Footer {...footerProps} />
         </div>

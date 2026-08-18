@@ -373,6 +373,7 @@ export type Project = {
   results: { value: string; label: string }[]
   stack: string[]
   story?: { heading: string; description: string; image: string | null }[]
+  integrations?: string[]
 }
 
 export const projects: Project[] = [

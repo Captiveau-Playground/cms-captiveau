@@ -74,7 +74,7 @@ export default async function ServiceDetailPage({
         }}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gray-50 pt-32 pb-14 sm:pt-40 sm:pb-20">
+      <section className="relative overflow-hidden bg-gray-50 pt-12 pb-14 sm:pt-16 sm:pb-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
           <Link
             href="/services"

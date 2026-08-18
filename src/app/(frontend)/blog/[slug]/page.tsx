@@ -73,7 +73,7 @@ export default async function ArticlePage({
 
       {/* Article header */}
       <article>
-        <header className="relative overflow-hidden bg-gray-50 pt-32 pb-12 sm:pt-40 sm:pb-16">
+        <header className="relative overflow-hidden bg-gray-50 pt-12 pb-12 sm:pt-16 sm:pb-16">
           <div className="mx-auto flex w-full max-w-3xl flex-col items-start gap-5 px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"

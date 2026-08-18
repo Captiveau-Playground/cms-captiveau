@@ -224,6 +224,7 @@ export async function getCmsProjects(): Promise<ProjectItem[]> {
       services: (p.services || []).map((s: any) => s.service).filter(Boolean),
       results: (p.results || []).map((r: any) => ({ value: r.value || '', label: r.label || '' })),
       stack: (p.stack || []).map((t: any) => t.tech).filter(Boolean),
+      integrations: (p.integrations || []).map((i: any) => i.name).filter(Boolean),
       story: (p.story || [])
         .filter((s: any) => s.heading)
         .map((s: any) => ({

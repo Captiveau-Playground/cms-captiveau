@@ -74,10 +74,10 @@ export default function Navbar({
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        'relative w-full transition-all duration-300',
         scrolled
           ? 'border-b border-border/80 bg-background/85 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent'
+          : 'border-b border-transparent bg-background'
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
