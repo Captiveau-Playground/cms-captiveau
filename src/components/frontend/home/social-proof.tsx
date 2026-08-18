@@ -12,6 +12,9 @@ const fallbackLogos = [
   '/logos/turso.svg', '/logos/clerk.svg', '/logos/claude.svg', '/logos/vercel.svg',
 ]
 
+/**
+ * Simple client-logo strip — placed right under the hero.
+ */
 export default function SocialProof({ homepage }: { homepage: CmsHomepage }) {
   const logos = (homepage.socialProofLogos.length ? homepage.socialProofLogos : fallbackLogos).filter((l): l is string => !!l)
   const half = Math.ceil(logos.length / 2)
@@ -20,22 +23,12 @@ export default function SocialProof({ homepage }: { homepage: CmsHomepage }) {
     logos.slice(half).map((src) => ({ src, alt: 'partner' })),
   ]
   return (
-    <Section muted className="py-16 sm:py-24">
-      <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center gap-3 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          <span className="size-1.5 rounded-full bg-secondary" />
-          Social Proof
-        </span>
-        <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          {homepage.socialProofLabel}
-        </h2>
-        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-          {homepage.socialProofDescription}
-        </p>
-      </div>
-
+    <Section className="border-y border-border py-12 sm:py-16">
+      <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        {homepage.socialProofLabel || 'Dipercaya klien di berbagai industri'}
+      </p>
       <LogoCarouselSwapper
-        aria-label="Partner & technology logos"
+        aria-label="Client & partner logos"
         rows={rows}
         interval={3000}
         stagger={0.12}

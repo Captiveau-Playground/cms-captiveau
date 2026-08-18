@@ -36,10 +36,11 @@ export default async function HomePage() {
   return (
     <>
       <HeroBentoSection homepage={data.homepage} />
+      {/* Client logos — right under the hero */}
+      <SocialProof homepage={data.homepage} />
       <FeaturesBentoSection services={data.services} />
       <Advantages advantages={data.homepage.advantages} />
       <PortfolioShowcase projects={data.projects} />
-      <SocialProof homepage={data.homepage} />
       <BlogPreview articles={data.articles} />
       <Testimonials testimonials={data.testimonials} />
       <Cta homepage={data.homepage} />

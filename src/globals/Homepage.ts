@@ -127,7 +127,7 @@ export const Homepage: GlobalConfig = {
               name: 'socialProofLabel',
               label: 'Label',
               type: 'text',
-              defaultValue: 'We build with trusted technology',
+              defaultValue: 'Dipercaya klien di berbagai industri',
             },
             {
               name: 'socialProofDescription',
