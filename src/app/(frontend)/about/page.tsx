@@ -8,6 +8,7 @@ import { resolveIcon } from '@/lib/icons'
 import { getCmsTeam, getCmsHomepage } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 const storyStats = [
   { value: 12, suffix: 'K+', label: 'Project hours' },
@@ -40,7 +41,7 @@ export default async function AboutPage() {
       {/* Story */}
       <Section className="py-12 sm:py-16">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="overflow-hidden rounded-2xl border border-border lg:col-span-5">
+          <Reveal className="overflow-hidden rounded-none border border-border lg:col-span-5">
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80"
               alt="Captiveau team"
@@ -49,10 +50,11 @@ export default async function AboutPage() {
           </Reveal>
 
           <div className="flex flex-col gap-6 lg:col-span-7">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              From two restless engineers,{' '}
-              <span className="text-primary">to a trusted</span> studio
-            </h2>
+            <AnimatedHeading
+              className="max-w-2xl text-balance font-medium text-3xl tracking-[-0.04em] sm:text-4xl"
+              highlightWords={['studio']}
+              text="From two restless engineers, to a trusted studio"
+            />
             <div className="flex flex-col gap-4 text-base leading-relaxed text-muted-foreground">
               <p>
                 It started with two engineers tired of rebuilding the same
@@ -100,7 +102,7 @@ export default async function AboutPage() {
                 <Reveal
                   key={v.title}
                   delay={i * 0.06}
-                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                  className="group relative overflow-hidden rounded-none border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
                   <Icon className="size-6 text-primary" strokeWidth={1.6} />
                   <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
@@ -134,10 +136,10 @@ export default async function AboutPage() {
             <Reveal
               key={member.name}
               delay={i * 0.06}
-              className="group rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+              className="group rounded-none border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
             >
               <div
-                className={`flex aspect-square items-center justify-center rounded-lg text-2xl font-bold text-white ${member.color}`}
+                className={`flex aspect-square items-center justify-center rounded-none text-2xl font-bold text-white ${member.color}`}
               >
                 {member.initials}
               </div>
@@ -152,7 +154,7 @@ export default async function AboutPage() {
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">
-        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Interested in working together?

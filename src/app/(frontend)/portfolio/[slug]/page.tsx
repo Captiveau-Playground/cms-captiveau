@@ -9,6 +9,7 @@ import { getCmsProjects } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export async function generateMetadata({
   params,
@@ -67,24 +68,25 @@ export default async function ProjectDetailPage({
         }}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gray-50 pt-12 pb-10 sm:pt-16 sm:pb-14">
+      <section className="border-b border-border bg-background pb-14 pt-12 sm:pb-16 sm:pt-14">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
           <Link
             href="/portfolio"
-            className="group inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="group inline-flex w-fit items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
           >
-            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-1" />
             Back to portfolio
           </Link>
 
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-            <span className="size-1.5 rounded-full bg-primary" />
-            {project.category}
-          </span>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-secondary">
+            {project.category} · {project.year}
+          </p>
 
-          <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            {project.title}
-          </h1>
+          <AnimatedHeading
+            as="h1"
+            className="max-w-3xl text-balance font-medium text-4xl tracking-[-0.04em] md:text-5xl lg:text-[3.4rem] lg:leading-[1.05]"
+            text={project.title}
+          />
 
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -101,7 +103,7 @@ export default async function ProjectDetailPage({
 
       {/* Cover */}
       <Section className="py-12 sm:py-16">
-        <div className="group relative overflow-hidden rounded-2xl border border-border">
+        <div className="group relative overflow-hidden rounded-none border border-border">
           <img
             src={project.image}
             alt={project.title}
@@ -180,7 +182,7 @@ export default async function ProjectDetailPage({
           {project.results.map((r, i) => (
             <div
               key={r.label}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 sm:p-8"
+              className="group relative overflow-hidden rounded-none border border-border bg-card p-6 sm:p-8"
             >
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 result {String(i + 1).padStart(2, '0')}
@@ -218,7 +220,7 @@ export default async function ProjectDetailPage({
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">
-        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Want similar results for your business?
@@ -245,7 +247,7 @@ export default async function ProjectDetailPage({
             <Link
               key={p.slug}
               href={`/portfolio/${p.slug}`}
-              className="group overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+              className="group overflow-hidden rounded-none border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
             >
               <div className="aspect-[16/10] overflow-hidden">
                 <img

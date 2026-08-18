@@ -1,3 +1,4 @@
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 import { cn } from '@/lib/utils'
 import { FullWidthDivider } from '@/components/full-width-divider'
 import { LazyImage } from '@/components/lazy-image'
@@ -20,11 +21,16 @@ export type BlogGridItem = {
 export function BlogGrid({ blogs, title, description }: { blogs: BlogGridItem[]; title?: string; description?: string }) {
   return (
     <div className="mx-auto w-full max-w-7xl grow px-4 sm:px-6 lg:px-8">
-      <div className="space-y-1 py-12 md:py-16">
-        <h1 className="text-2xl font-semibold tracking-wide md:text-4xl">
-          {title || 'Blog & Insights'}
-        </h1>
-        <p className="text-sm text-muted-foreground md:text-base">
+      <div className="border-b border-border py-12 md:py-16">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          Blog · Insights
+        </p>
+        <AnimatedHeading
+          as="h1"
+          className="mt-3 max-w-2xl text-balance font-medium text-3xl tracking-[-0.04em] md:text-5xl"
+          text={title || 'Blog & Insights'}
+        />
+        <p className="mt-4 max-w-2xl text-sm text-muted-foreground md:text-base">
           {description ||
             'Artikel, panduan, dan wawasan tentang teknologi, desain, dan strategi digital.'}
         </p>
@@ -53,14 +59,14 @@ function BlogCard({
     <Link
       href={slug ? `/blog/${slug}` : '#'}
       className={cn(
-        'group flex flex-col gap-2 rounded-lg p-3 hover:bg-muted/50 active:bg-muted',
+        'group flex flex-col gap-2 rounded-none p-3 hover:bg-muted/50 active:bg-muted',
         className
       )}
     >
       <LazyImage
         alt={title}
         className="transition-all duration-500 group-hover:scale-105"
-        containerClassName="rounded-md shadow-md outline outline-offset-3 outline-border/50"
+        containerClassName="rounded-none shadow-md outline outline-offset-3 outline-border/50"
         fallback="/images/office.jpg"
         inView
         ratio={16 / 9}

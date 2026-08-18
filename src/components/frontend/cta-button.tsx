@@ -47,7 +47,7 @@ export function CtaButton({
     <Link
       href={href}
       className={cn(
-        'group/cta relative inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 will-change-transform active:scale-[0.98]',
+        'group/cta relative inline-flex items-center justify-center rounded-none font-medium transition-all duration-200 will-change-transform active:scale-[0.98]',
         sizes[size],
         variantClasses[variant],
         className

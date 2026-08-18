@@ -46,7 +46,7 @@ export default async function PortfolioPage() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="flex flex-col gap-1 rounded-xl border border-border bg-card p-6 text-center"
+              className="flex flex-col gap-1 rounded-none border border-border bg-card p-6 text-center"
             >
               <p className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
                 <CountUp value={s.value} suffix={s.suffix} decimals={s.decimals} />
@@ -59,7 +59,7 @@ export default async function PortfolioPage() {
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">
-        <div className="relative overflow-hidden rounded-2xl bg-primary px-6 py-16 text-center sm:px-12">
+        <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
           <div className="relative z-10 flex flex-col items-center gap-5">
             <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
               <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">

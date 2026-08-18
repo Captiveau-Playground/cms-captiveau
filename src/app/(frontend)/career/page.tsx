@@ -8,6 +8,7 @@ import { resolveIcon } from '@/lib/icons'
 import { getCmsJobs, getCmsHomepage } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
@@ -39,7 +40,7 @@ export default async function CareerPage() {
             { src: '/images/office.jpg', alt: 'Studio space' },
             { src: '/images/meeting.jpg', alt: 'Collaboration' },
           ].map((img) => (
-            <div key={img.src} className="overflow-hidden rounded-xl border border-border">
+            <div key={img.src} className="overflow-hidden rounded-none border border-border">
               <img src={img.src} alt={img.alt} className="aspect-[4/3] w-full object-cover" />
             </div>
           ))}
@@ -56,9 +57,9 @@ export default async function CareerPage() {
                 <Reveal
                   key={b.title}
                   delay={i * 0.07}
-                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                  className="group relative overflow-hidden rounded-none border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                  <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                     <Icon className="size-5 text-primary" strokeWidth={1.7} />
                   </span>
                   <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
@@ -76,17 +77,20 @@ export default async function CareerPage() {
 
       {/* Open positions */}
       <Section muted className="py-16 sm:py-24">
-        <SectionHeader
-          eyebrow="Open Positions"
-          title={
-            <>
-              Positions we&rsquo;re{' '}
-              <span className="text-primary">hiring for</span>
-            </>
-          }
-        />
+        <div className="mb-12 flex items-end justify-between gap-4 border-b border-border pb-6">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Open Positions · 01
+            </p>
+            <AnimatedHeading
+              className="mt-3 max-w-xl text-balance font-medium text-2xl tracking-tight md:text-4xl"
+              highlightWords={['hiring']}
+              text="Positions we're hiring for"
+            />
+          </div>
+        </div>
 
-        <div className="mt-10 flex flex-col divide-y divide-border/70 rounded-2xl border border-border bg-card px-5 sm:px-8">
+        <div className="mt-10 flex flex-col divide-y divide-border/70 rounded-none border border-border bg-card px-5 sm:px-8">
           {jobs.map((job, i) => (
             <Reveal key={job.title} delay={i * 0.05} className="">
               <Link
@@ -143,7 +147,7 @@ export default async function CareerPage() {
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">
-        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
             <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Can&rsquo;t find the right fit?

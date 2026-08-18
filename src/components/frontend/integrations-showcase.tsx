@@ -84,8 +84,8 @@ export default function IntegrationsShowcase({
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((item, i) => (
         <Reveal key={item.label} delay={i * 0.04}>
-          <div className="flex h-full flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-black/5">
-            <span className="flex size-10 items-center justify-center rounded-lg bg-muted">
+          <div className="flex h-full flex-col gap-3 rounded-none border border-border bg-card p-4 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-black/5">
+            <span className="flex size-10 items-center justify-center rounded-none bg-muted">
               {item.brand ? (
                 <BrandMark brand={item.brand} className="size-5" />
               ) : (

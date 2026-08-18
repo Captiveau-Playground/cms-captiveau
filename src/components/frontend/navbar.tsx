@@ -114,7 +114,7 @@ export default function Navbar({
                     <span className="h-[0.625em] w-full" aria-hidden />
                   </button>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="w-64 rounded-xl border border-border bg-background p-2 shadow-xl shadow-black/10">
+                    <div className="w-64 rounded-none border border-border bg-background p-2 shadow-xl shadow-black/10">
                       {item.children.map((child) => {
                         const childActive =
                           child.href === '/'
@@ -125,7 +125,7 @@ export default function Navbar({
                             key={child.href + child.label}
                             href={child.href}
                             className={cn(
-                              'flex flex-col gap-0.5 rounded-lg px-3 py-2.5 transition-colors hover:bg-muted',
+                              'flex flex-col gap-0.5 rounded-none px-3 py-2.5 transition-colors hover:bg-muted',
                               childActive && 'text-primary'
                             )}
                           >
@@ -173,7 +173,7 @@ export default function Navbar({
           aria-label={open ? 'Tutup menu' : 'Buka menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="relative z-[60] flex size-10 items-center justify-center rounded-lg border border-border bg-background text-foreground lg:hidden"
+          className="relative z-[60] flex size-10 items-center justify-center rounded-none border border-border bg-background text-foreground lg:hidden"
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -233,7 +233,7 @@ export default function Navbar({
                             key={child.href + child.label}
                             href={child.href}
                             className={cn(
-                              'flex flex-col gap-0.5 rounded-lg px-4 py-3 transition-colors',
+                              'flex flex-col gap-0.5 rounded-none px-4 py-3 transition-colors',
                               pathname.startsWith(child.href)
                                 ? 'text-primary'
                                 : 'text-foreground/70'

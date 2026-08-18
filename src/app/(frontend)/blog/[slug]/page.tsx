@@ -10,6 +10,7 @@ import { handleRedirectOrNotFound } from '@/lib/redirects'
 import { buildMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 import { formatDateLong, formatRelativeTime } from '@/lib/date'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export const dynamic = 'force-dynamic'
 
@@ -73,24 +74,25 @@ export default async function ArticlePage({
 
       {/* Article header */}
       <article>
-        <header className="relative overflow-hidden bg-gray-50 pt-12 pb-12 sm:pt-16 sm:pb-16">
+        <header className="border-b border-border bg-background pb-12 pt-12 sm:pb-14 sm:pt-14">
           <div className="mx-auto flex w-full max-w-3xl flex-col items-start gap-5 px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"
-              className="group inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="group inline-flex w-fit items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
             >
-              <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-1" />
               Semua artikel
             </Link>
 
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-              <span className="size-1.5 rounded-full bg-primary" />
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-secondary">
               {article.category}
-            </span>
+            </p>
 
-            <h1 className="text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
-              {article.title}
-            </h1>
+            <AnimatedHeading
+              as="h1"
+              className="text-balance font-medium text-3xl tracking-[-0.04em] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.08]"
+              text={article.title}
+            />
 
             {article.description && (
               <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -101,7 +103,7 @@ export default async function ArticlePage({
             {/* Byline */}
             <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border/70 pt-5">
               <div className="flex items-center gap-3">
-                <span className="flex size-11 items-center justify-center rounded-full bg-primary/10 text-sm font-bold uppercase text-primary">
+                <span className="flex size-11 items-center justify-center border border-border bg-muted/50 text-sm font-bold uppercase text-primary">
                   {authorInitial}
                 </span>
                 <div className="flex flex-col">
@@ -136,7 +138,7 @@ export default async function ArticlePage({
         {/* Featured image — full-width band */}
         {article.image && (
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10">
+            <div className="overflow-hidden rounded-none border border-border shadow-xl shadow-black/10">
               <img
                 src={article.image}
                 alt={article.title}

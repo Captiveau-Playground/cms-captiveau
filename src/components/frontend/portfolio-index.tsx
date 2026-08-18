@@ -32,7 +32,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
       <Reveal>
         <Link
           href={`/portfolio/${featured.slug}`}
-          className="group relative block overflow-hidden rounded-2xl border border-border bg-card"
+          className="group relative block overflow-hidden rounded-none border border-border bg-card"
         >
           <img
             src={featured.image}
@@ -81,7 +81,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                 <div className="lg:col-span-7 lg:[direction:ltr]">
                   <Link
                     href={`/portfolio/${project.slug}`}
-                    className="relative block overflow-hidden rounded-2xl border border-border bg-card"
+                    className="relative block overflow-hidden rounded-none border border-border bg-card"
                   >
                     <img
                       src={project.image}

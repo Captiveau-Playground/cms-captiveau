@@ -112,7 +112,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
 
             {/* Image (desktop) — fills the column */}
             <div className="relative hidden min-h-0 lg:block">
-              <div className="absolute inset-0 overflow-hidden rounded-3xl border border-border bg-muted">
+              <div className="absolute inset-0 overflow-hidden rounded-none border border-border bg-muted">
                 {chapters.map((c, i) => (
                   <img
                     key={c.heading + i}
@@ -129,7 +129,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
 
             {/* Mobile: image + active chapter */}
             <div className="flex min-h-0 flex-col justify-center gap-4 lg:hidden">
-              <div className="relative h-[44dvh] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+              <div className="relative h-[44dvh] w-full overflow-hidden rounded-none border border-border bg-muted">
                 {chapters.map((c, i) => (
                   <img
                     key={c.heading + i}

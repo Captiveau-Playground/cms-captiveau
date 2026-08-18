@@ -2,8 +2,12 @@
 
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-import { TextEffect } from '@/components/sora-ui/texts/text-effect'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
+/**
+ * Page hero — Nusaiba-style: mono eyebrow + word-reveal heading + description,
+ * boxy with a bottom border (matches the homepage design system).
+ */
 export function PageHero({
   eyebrow,
   title,
@@ -20,24 +24,23 @@ export function PageHero({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-gray-50 pt-12 pb-14 sm:pt-16 sm:pb-20',
+        'border-b border-border bg-background pb-14 pt-12 sm:pb-16 sm:pt-14',
         className
       )}
     >
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-5 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-4 px-4 sm:px-6 lg:px-8">
         {eyebrow && (
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-            <span className="size-1.5 rounded-full bg-primary" />
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
             {eyebrow}
-          </span>
+          </p>
         )}
-        <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-          <TextEffect as="span" preset="fade-in-blur" per="line" speedReveal={1.2}>
-            {title}
-          </TextEffect>
-        </h1>
+        <AnimatedHeading
+          as="h1"
+          className="max-w-4xl text-balance font-medium text-4xl tracking-[-0.04em] md:text-5xl lg:text-[3.4rem] lg:leading-[1.05]"
+          text={title}
+        />
         {description && (
-          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
             {description}
           </p>
         )}

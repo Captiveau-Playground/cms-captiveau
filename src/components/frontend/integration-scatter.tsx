@@ -132,7 +132,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
                 style={{ left: col * 72, top: row * 72 }}
               >
                 {/* Tooltip */}
-                <div className="pointer-events-none absolute -top-11 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100">
+                <div className="pointer-events-none absolute -top-11 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-none border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100">
                   <span className="block text-[11px] font-semibold text-foreground">
                     {brand?.label || name}
                   </span>
@@ -145,7 +145,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
 
                 <div
                   className={cn(
-                    'flex size-18 items-center justify-center rounded-md border',
+                    'flex size-18 items-center justify-center rounded-none border',
                     brand
                       ? 'bg-card shadow-xs dark:bg-card/60'
                       : 'bg-secondary/30 dark:bg-background'

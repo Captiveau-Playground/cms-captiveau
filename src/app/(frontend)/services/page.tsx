@@ -14,6 +14,7 @@ import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
 import HowItWorks from '@/components/frontend/how-it-works'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
@@ -44,6 +45,21 @@ export default async function ServicesPage() {
 
       {/* Services grid */}
       <Section className="py-16 sm:py-24">
+        <div className="mb-12 flex items-end justify-between gap-4 border-b border-border pb-6">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Services · 01
+            </p>
+            <AnimatedHeading
+              className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl"
+              text="End-to-End Digital Solutions"
+            />
+          </div>
+          <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
+            Dari landing page hingga platform kompleks — teknologi yang tepat
+            untuk setiap tahap bisnis.
+          </p>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => {
             const Icon = resolveIcon(service.icon, AppWindowMac)
@@ -51,7 +67,7 @@ export default async function ServicesPage() {
               <Reveal key={service.slug} delay={(i % 3) * 0.08} className="h-full">
                 <TiltCard
                   rotationFactor={2.5}
-                  className="group h-full overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                  className="group h-full overflow-hidden rounded-none border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
                   <Link
                     href={`/services/${service.slug}`}
@@ -63,7 +79,7 @@ export default async function ServicesPage() {
                         alt={service.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                       />
-                      <span className="absolute left-4 top-4 flex size-10 items-center justify-center rounded-lg bg-background/90 backdrop-blur-sm">
+                      <span className="absolute left-4 top-4 flex size-10 items-center justify-center rounded-none bg-background/90 backdrop-blur-sm">
                         <Icon className="size-5 text-primary" strokeWidth={1.8} />
                       </span>
                     </div>
@@ -136,7 +152,7 @@ export default async function ServicesPage() {
 
       {/* CTA */}
       <Section className="py-16 sm:py-24">
-        <div className="relative overflow-hidden rounded-2xl bg-primary px-6 py-16 text-center sm:px-12">
+        <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute -left-20 -top-20 size-72 rounded-full bg-white/10 blur-3xl" />
           </div>

@@ -57,10 +57,10 @@ export default function HowItWorks({
             return (
               <li
                 key={s.n}
-                className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm shadow-black/5 sm:p-6"
+                className="flex flex-col gap-3 rounded-none border border-border bg-card p-5 shadow-sm shadow-black/5 sm:p-6"
               >
                 <div className="flex items-center justify-between">
-                  <span className="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <span className="grid size-10 place-items-center rounded-none bg-primary/10 text-primary">
                     <Icon className="size-5" />
                   </span>
                   <span className="font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground">

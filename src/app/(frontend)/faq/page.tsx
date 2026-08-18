@@ -6,6 +6,7 @@ import { Accordion } from '@/components/sora-ui/disclosure/accordion'
 import { getCmsFaqs } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
@@ -28,9 +29,21 @@ export default async function FaqPage() {
       />
 
       <Section className="py-16 sm:py-24">
+        <div className="mx-auto mb-10 flex items-end justify-between gap-4 border-b border-border pb-6">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              FAQ · 01
+            </p>
+            <AnimatedHeading
+              className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-3xl"
+              highlightWords={['questions']}
+              text="Frequently asked questions"
+            />
+          </div>
+        </div>
         <div className="mx-auto max-w-3xl">
           <Accordion
-            className="flex flex-col divide-y divide-border/70 rounded-2xl border border-border bg-card"
+            className="flex flex-col divide-y divide-border/70 rounded-none border border-border bg-card"
             items={faqs.map((f) => ({
               title: f.title,
               content: f.content,
@@ -40,7 +53,7 @@ export default async function FaqPage() {
           />
         </div>
 
-        <div className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-5 rounded-2xl border border-border bg-card px-6 py-12 text-center">
+        <div className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
           <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
             Still have questions?
           </RevealHeading>

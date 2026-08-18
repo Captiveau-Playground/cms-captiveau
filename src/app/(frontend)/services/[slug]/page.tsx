@@ -14,6 +14,7 @@ import { buildMetadata, getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 import { PricingSection } from '@/components/pricing-section'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
+import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 export const dynamic = 'force-dynamic'
 
@@ -76,25 +77,29 @@ export default async function ServiceDetailPage({
         }}
       />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gray-50 pt-12 pb-14 sm:pt-16 sm:pb-20">
+      <section className="border-b border-border bg-background pb-14 pt-12 sm:pb-16 sm:pt-14">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
           <Link
             href="/services"
-            className="group inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="group inline-flex w-fit items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
           >
-            <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-1" />
             Back to services
           </Link>
 
-          <div className="flex items-start gap-4">
-            <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-              <Icon className="size-7 text-primary" strokeWidth={1.6} />
-            </span>
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-semibold text-secondary">{service.tagline}</p>
-              <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                {service.title}
-              </h1>
+          <div className="flex flex-col gap-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-secondary">
+              {service.tagline}
+            </p>
+            <div className="flex items-center gap-4">
+              <span className="flex size-12 shrink-0 items-center justify-center border border-border bg-muted/50 text-foreground/80">
+                <Icon className="size-5" strokeWidth={1.6} />
+              </span>
+              <AnimatedHeading
+                as="h1"
+                className="max-w-3xl text-balance font-medium text-4xl tracking-[-0.04em] md:text-5xl"
+                text={service.title}
+              />
             </div>
           </div>
 
@@ -125,7 +130,7 @@ export default async function ServiceDetailPage({
       {/* Cover image */}
       <section className="py-12 sm:py-16">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10">
+          <div className="overflow-hidden rounded-none border border-border shadow-xl shadow-black/10">
             <img
               src={service.image}
               alt={service.title}
@@ -144,9 +149,9 @@ export default async function ServiceDetailPage({
               <Reveal
                 key={b.title}
                 delay={i * 0.07}
-                className="flex flex-col rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                className="flex flex-col rounded-none border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
               >
-                <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                   <BIcon className="size-5 text-primary" strokeWidth={1.7} />
                 </span>
                 <h3 className="mt-4 text-sm font-semibold tracking-tight text-foreground">
@@ -175,7 +180,7 @@ export default async function ServiceDetailPage({
               <Reveal
                 key={p.step}
                 delay={i * 0.08}
-                className="group flex flex-col rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                className="group flex flex-col rounded-none border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-primary">[{p.step}]</span>
@@ -263,9 +268,9 @@ export default async function ServiceDetailPage({
                 <Link
                   key={s.slug}
                   href={`/services/${s.slug}`}
-                  className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-5 transition-all hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                  className="group flex flex-col gap-3 rounded-none border border-border bg-card p-5 transition-all hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                  <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                     <SIcon className="size-5 text-primary" strokeWidth={1.7} />
                   </span>
                   <span className="text-sm font-semibold tracking-tight text-foreground">
