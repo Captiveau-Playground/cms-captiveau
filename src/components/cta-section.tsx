@@ -1,0 +1,66 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowRightIcon } from "lucide-react";
+import { ContentRail, SectionShell } from "@/components/layout-contract";
+import { buttonVariants } from "@/components/ui/button";
+import { SeraBlurReveal, SeraStagger, SeraStaggerItem } from "@/lib/sera-motion";
+
+/**
+ * CTA (adapted from @nusaiba/cta-11) — driven by the homepage CTA settings.
+ */
+export function CtaSeraSection({
+  title,
+  subtitle,
+  buttonText,
+}: {
+  title: string
+  subtitle: string
+  buttonText: string
+}) {
+  return (
+    <SectionShell spacingMode="section">
+      <ContentRail>
+        <SeraStagger>
+          <SeraStaggerItem>
+            <div className="border border-border">
+              <div className="flex flex-col gap-8 p-6 md:p-10 lg:flex-row lg:items-end lg:justify-between">
+                <div className="min-w-0 max-w-xl">
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
+                    Get started
+                  </p>
+                  <h2 className="mt-4 text-balance font-medium text-3xl tracking-tight md:text-4xl">
+                    {title}
+                  </h2>
+                  <p className="mt-4 text-pretty text-muted-foreground text-sm leading-relaxed md:text-base">
+                    {subtitle}
+                  </p>
+                </div>
+                <div className="flex min-w-0 flex-col gap-3 sm:flex-row lg:shrink-0">
+                  <Link className={buttonVariants()} href="/contact">
+                    {buttonText}
+                    <ArrowRightIcon data-icon="inline-end" />
+                  </Link>
+                  <Link className={buttonVariants({ variant: "ghost" })} href="/portfolio">
+                    Lihat Portofolio
+                  </Link>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 border-t border-border px-6 py-4 font-mono text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-10">
+                <span>Konsultasi gratis — tanpa komitmen</span>
+                <span>04</span>
+              </div>
+
+              <SeraBlurReveal className="bg-primary px-6 py-3 text-primary-foreground md:px-10">
+                <p className="text-[11px] uppercase tracking-[0.2em]">
+                  Captiveau — clean studio, sharp corners, honest numbers
+                </p>
+              </SeraBlurReveal>
+            </div>
+          </SeraStaggerItem>
+        </SeraStagger>
+      </ContentRail>
+    </SectionShell>
+  );
+}

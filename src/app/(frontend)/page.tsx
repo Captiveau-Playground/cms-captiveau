@@ -4,12 +4,13 @@ import { FeaturesBentoSection } from '@/components/features-bento-section'
 import { FeaturesSeraSection } from '@/components/features-section'
 import { GalleryColumnsSection } from '@/components/gallery-section'
 import SocialProof from '@/components/frontend/home/social-proof'
-import BlogPreview from '@/components/frontend/home/blog'
-import Testimonials from '@/components/frontend/home/testimonials'
-import Cta from '@/components/frontend/home/cta'
+import { BlogSection } from '@/components/blog-section'
+import { TestimonialsSeraSection } from '@/components/testimonials-section'
+import { CtaSeraSection } from '@/components/cta-section'
 import Faq from '@/components/frontend/home/faq'
 import ContactSection from '@/components/frontend/home/contact'
 import { getHomeData } from '@/lib/cms-data'
+import { formatDateLong } from '@/lib/date'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 
@@ -47,9 +48,22 @@ export default async function HomePage() {
           label: s.label,
         }))}
       />
-      <BlogPreview articles={data.articles} />
-      <Testimonials testimonials={data.testimonials} />
-      <Cta homepage={data.homepage} />
+      <BlogSection
+        posts={data.articles.map((a: any) => ({
+          title: a.title,
+          slug: a.slug || '',
+          category: a.category,
+          date: a.date ? formatDateLong(a.date) : '',
+          excerpt: a.excerpt,
+          image: a.image,
+        }))}
+      />
+      <TestimonialsSeraSection testimonials={data.testimonials} />
+      <CtaSeraSection
+        title={data.homepage.ctaTitle}
+        subtitle={data.homepage.ctaSubtitle}
+        buttonText={data.homepage.ctaButtonText}
+      />
       <Faq faqs={data.faqs} categories={data.faqCategories} />
       <ContactSection settings={data.settings} />
     </>
