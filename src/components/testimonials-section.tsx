@@ -68,7 +68,7 @@ export function TestimonialsSeraSection({
 
   return (
     <SectionShell spacingMode="section">
-      <ContentRail maxWidth="max-w-6xl" className="space-y-10">
+      <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <SeraStagger className="space-y-10">
           <SeraStaggerItem>
             <div className="flex items-baseline justify-between gap-4">

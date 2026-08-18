@@ -21,7 +21,7 @@ export type BlogPost = {
 export function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
     <SectionShell spacingMode="section">
-      <ContentRail maxWidth="max-w-6xl" className="space-y-10">
+      <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="font-medium text-2xl tracking-tight md:text-4xl">
