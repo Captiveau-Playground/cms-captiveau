@@ -31,7 +31,7 @@ export default function HowItWorks({
 }) {
   return (
     <section className="bg-background py-16 sm:py-24">
-      <div className="mx-auto max-w-5xl px-4 sm:px-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-10">
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
             How it works

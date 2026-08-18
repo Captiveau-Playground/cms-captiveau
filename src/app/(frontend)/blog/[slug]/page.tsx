@@ -75,7 +75,7 @@ export default async function ArticlePage({
       {/* Article header */}
       <article>
         <header className="border-b border-border bg-background pb-12 pt-12 sm:pb-14 sm:pt-14">
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-start gap-5 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-5 px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"
               className="group inline-flex w-fit items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"

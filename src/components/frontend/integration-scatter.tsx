@@ -107,7 +107,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
   const tiles = items.slice(0, 12)
 
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:items-center">
+    <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:items-center">
       <div className="max-w-xl space-y-5">
         <h2 className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl md:text-5xl">
           {title}

@@ -41,7 +41,7 @@ export default async function FaqPage() {
             />
           </div>
         </div>
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-7xl">
           <Accordion
             className="flex flex-col divide-y divide-border/70 rounded-none border border-border bg-card"
             items={faqs.map((f) => ({
@@ -53,7 +53,7 @@ export default async function FaqPage() {
           />
         </div>
 
-        <div className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
+        <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
           <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
             Still have questions?
           </RevealHeading>
