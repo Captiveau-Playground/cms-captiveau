@@ -121,7 +121,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
       </div>
 
       <div className="place-items-end">
-        <div className="mask-[radial-gradient(ellipse_at_center,black,black,transparent)] relative size-80 sm:size-90">
+        <div className="mask-[radial-gradient(ellipse_at_center,black,black,transparent)] relative size-72 [--scatter-cell:56px] sm:size-90 sm:[--scatter-cell:72px]">
           {tiles.map((name, i) => {
             const brand = resolveBrand(name)
             const [row, col] = POSITIONS[i % POSITIONS.length]
@@ -129,10 +129,13 @@ export default function IntegrationScatter({ title, description, items }: Integr
               <div
                 key={name + i}
                 className="group/tile absolute"
-                style={{ left: col * 72, top: row * 72 }}
+                style={{
+                    left: `calc(var(--scatter-cell, 72px) * ${col})`,
+                    top: `calc(var(--scatter-cell, 72px) * ${row})`,
+                  }}
               >
                 {/* Tooltip */}
-                <div className="pointer-events-none absolute -top-11 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap rounded-none border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100">
+                <div className="pointer-events-none absolute -top-12 left-1/2 z-40 hidden max-w-[16rem] -translate-x-1/2 whitespace-normal border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100 lg:block">
                   <span className="block text-[11px] font-semibold text-foreground">
                     {brand?.label || name}
                   </span>
@@ -145,7 +148,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
 
                 <div
                   className={cn(
-                    'flex size-18 items-center justify-center rounded-none border',
+                    'flex size-14 items-center justify-center rounded-none border sm:size-18',
                     brand
                       ? 'bg-card shadow-xs dark:bg-card/60'
                       : 'bg-secondary/30 dark:bg-background'

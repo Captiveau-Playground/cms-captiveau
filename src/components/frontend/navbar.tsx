@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { DrawUnderlineLink } from '@/components/sora-ui/texts/draw-underline-link'
-import { CtaButton } from './cta-button'
+import { buttonVariants } from '@/components/ui/button'
 
 export type NavItem = {
   label: string
@@ -29,7 +28,7 @@ export function Wordmark({ className }: { className?: string }) {
         height={32}
       />
       <span className="flex flex-col leading-none">
-        <span className="text-lg font-bold tracking-tight text-foreground">
+        <span className="text-lg font-semibold tracking-[-0.02em] text-foreground">
           Captiveau
         </span>
         <span className="-mt-0.5 text-[11px] text-muted-foreground">
@@ -48,16 +47,8 @@ export default function Navbar({
   ctaLabel?: string
 }) {
   const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [openSub, setOpenSub] = useState<string | null>(null)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     setOpen(false)
@@ -72,19 +63,12 @@ export default function Navbar({
   }, [open])
 
   return (
-    <header
-      className={cn(
-        'relative w-full transition-all duration-300',
-        scrolled
-          ? 'border-b border-border/80 bg-background/85 backdrop-blur-md'
-          : 'border-b border-transparent bg-background'
-      )}
-    >
+    <header className="relative w-full border-b border-border bg-background">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Wordmark />
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Utama">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Utama">
           {navData.map((item) => {
             const active =
               item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
@@ -96,40 +80,28 @@ export default function Navbar({
                   <button
                     type="button"
                     className={cn(
-                      'flex flex-col items-center px-3 py-2 text-sm font-medium',
+                      'flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors',
                       active
                         ? 'text-primary'
-                        : 'text-foreground/80 hover:text-foreground'
+                        : 'text-foreground/75 hover:text-foreground'
                     )}
                   >
-                    <span className="flex items-center gap-1 leading-[1.1]">
-                      {item.label}
-                      <ChevronDown
-                        className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
-                        aria-hidden
-                      />
-                    </span>
-                    {/* Matches the underline spacer of DrawUnderlineLink so the
-                        label stays vertically centered with the other items */}
-                    <span className="h-[0.625em] w-full" aria-hidden />
+                    {item.label}
+                    <ChevronDown
+                      className="size-3.5 transition-transform duration-200 group-hover:rotate-180"
+                      aria-hidden
+                    />
                   </button>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="w-64 rounded-none border border-border bg-background p-2 shadow-xl shadow-black/10">
-                      {item.children.map((child) => {
-                        const childActive =
-                          child.href === '/'
-                            ? pathname === '/'
-                            : pathname.startsWith(child.href)
-                        return (
-                          <Link
-                            key={child.href + child.label}
-                            href={child.href}
-                            className={cn(
-                              'flex flex-col gap-0.5 rounded-none px-3 py-2.5 transition-colors hover:bg-muted',
-                              childActive && 'text-primary'
-                            )}
-                          >
-                            <span className="text-sm font-medium">
+                    <div className="w-64 border border-border bg-background p-1.5 shadow-lg shadow-black/5">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href + child.label}
+                          href={child.href}
+                          className="group/child flex items-center justify-between gap-2 px-3 py-2.5 transition-colors hover:bg-muted/40"
+                        >
+                          <span className="flex min-w-0 flex-col">
+                            <span className="text-sm font-medium text-foreground">
                               {child.label}
                             </span>
                             {child.description && (
@@ -137,9 +109,10 @@ export default function Navbar({
                                 {child.description}
                               </span>
                             )}
-                          </Link>
-                        )
-                      })}
+                          </span>
+                          <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/50 transition-all group-hover/child:translate-x-0.5 group-hover/child:-translate-y-0.5 group-hover/child:text-primary" />
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -147,24 +120,27 @@ export default function Navbar({
             }
 
             return (
-              <DrawUnderlineLink
+              <Link
                 key={item.href + item.label}
                 href={item.href}
                 className={cn(
-                  'px-3 py-2 text-sm font-medium',
-                  active ? 'text-primary' : 'text-foreground/80 hover:text-foreground'
+                  'relative px-3 py-2 text-sm font-medium transition-colors',
+                  'after:absolute after:inset-x-3 after:bottom-0 after:h-px after:bg-primary',
+                  active ? 'text-primary' : 'text-foreground/75 hover:text-foreground',
+                  !active && 'after:scale-x-0 after:opacity-0 after:transition-all hover:after:scale-x-100 hover:after:opacity-100'
                 )}
               >
                 {item.label}
-              </DrawUnderlineLink>
+              </Link>
             )
           })}
         </nav>
 
         <div className="hidden lg:block">
-          <CtaButton href="/contact" size="sm" variant="accent">
+          <Link href="/contact" className={buttonVariants({ size: 'lg' })}>
             {ctaLabel}
-          </CtaButton>
+            <ArrowUpRight data-icon="inline-end" />
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -173,7 +149,7 @@ export default function Navbar({
           aria-label={open ? 'Tutup menu' : 'Buka menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="relative z-[60] flex size-10 items-center justify-center rounded-none border border-border bg-background text-foreground lg:hidden"
+          className="relative z-[60] flex size-10 items-center justify-center border border-border bg-background text-foreground lg:hidden"
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -182,13 +158,11 @@ export default function Navbar({
       {/* Mobile menu */}
       <div
         className={cn(
-          'fixed inset-0 z-[55] flex flex-col bg-background px-4 pb-8 pt-24 transition-all duration-300 lg:hidden',
-          open
-            ? 'pointer-events-auto opacity-100'
-            : 'pointer-events-none opacity-0'
+          'fixed inset-0 z-[55] flex flex-col bg-background px-4 pb-8 pt-20 transition-all duration-300 lg:hidden',
+          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         )}
       >
-        <nav className="flex flex-col gap-1" aria-label="Utama (mobile)">
+        <nav className="flex flex-col gap-0" aria-label="Utama (mobile)">
           {navData.map((item, i) => {
             const active =
               item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
@@ -203,7 +177,7 @@ export default function Navbar({
                     onClick={() => setOpenSub(isOpen ? null : item.href)}
                     style={{ transitionDelay: `${i * 40}ms` }}
                     className={cn(
-                      'flex w-full items-center justify-between border-b border-border/60 py-4 text-xl font-semibold tracking-tight transition-all duration-300',
+                      'flex w-full items-center justify-between border-b border-border py-4 text-lg font-medium tracking-tight transition-all duration-300',
                       open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
                       active ? 'text-primary' : 'text-foreground'
                     )}
@@ -227,19 +201,14 @@ export default function Navbar({
                     )}
                   >
                     <div className="overflow-hidden">
-                      <div className="flex flex-col gap-1 pb-2 pt-2">
+                      <div className="flex flex-col gap-0.5 py-2">
                         {item.children.map((child) => (
                           <Link
                             key={child.href + child.label}
                             href={child.href}
-                            className={cn(
-                              'flex flex-col gap-0.5 rounded-none px-4 py-3 transition-colors',
-                              pathname.startsWith(child.href)
-                                ? 'text-primary'
-                                : 'text-foreground/70'
-                            )}
+                            className="flex flex-col gap-0.5 border-b border-border/60 px-3 py-3 transition-colors hover:bg-muted/40"
                           >
-                            <span className="text-base font-medium">
+                            <span className="text-base font-medium text-foreground">
                               {child.label}
                             </span>
                             {child.description && (
@@ -262,7 +231,7 @@ export default function Navbar({
                 href={item.href}
                 style={{ transitionDelay: `${i * 40}ms` }}
                 className={cn(
-                  'flex items-center justify-between border-b border-border/60 py-4 text-xl font-semibold tracking-tight transition-all duration-300',
+                  'flex items-center justify-between border-b border-border py-4 text-lg font-medium tracking-tight transition-all duration-300',
                   open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
                   active ? 'text-primary' : 'text-foreground'
                 )}
@@ -273,9 +242,10 @@ export default function Navbar({
           })}
         </nav>
         <div className="mt-8">
-          <CtaButton href="/contact" size="lg" variant="accent" className="w-full">
+          <Link href="/contact" className={cn(buttonVariants({ size: 'lg' }), 'w-full')}>
             Mulai Sekarang
-          </CtaButton>
+            <ArrowUpRight data-icon="inline-end" />
+          </Link>
         </div>
       </div>
     </header>
