@@ -34,7 +34,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
           href={`/portfolio/${featured.slug}`}
           className="group relative block overflow-hidden rounded-none border border-border bg-card"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={featured.image}
             alt={featured.title}
             className="aspect-[16/9] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] sm:aspect-[21/9]"
@@ -83,7 +83,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                     href={`/portfolio/${project.slug}`}
                     className="relative block overflow-hidden rounded-none border border-border bg-card"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={project.image}
                       alt={project.title}
                       className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"

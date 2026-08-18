@@ -139,7 +139,7 @@ export default async function ArticlePage({
         {article.image && (
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="overflow-hidden rounded-none border border-border shadow-xl shadow-black/10">
-              <img
+              <img loading="lazy" decoding="async"
                 src={article.image}
                 alt={article.title}
                 className="aspect-[21/9] w-full object-cover"

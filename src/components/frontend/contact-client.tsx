@@ -65,7 +65,7 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
           </div>
 
           <div className="overflow-hidden rounded-none border border-border">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/office.jpg"
               alt="Captiveau studio"
               className="aspect-[16/8] w-full object-cover"

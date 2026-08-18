@@ -26,10 +26,13 @@ function FeaturedVisual({ src, alt }: { src?: string | null; alt: string }) {
     <div className="relative h-36 overflow-hidden rounded-t-none border border-border/70 border-b-0 sm:h-40">
       <div className="absolute inset-x-0 top-0 h-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt={alt}
           className="h-full w-full object-cover object-top"
           src={src || "/images/team.jpg"}
+          fetchPriority="high"
+          decoding="sync"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
       </div>

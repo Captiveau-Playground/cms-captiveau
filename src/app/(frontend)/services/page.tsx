@@ -74,7 +74,7 @@ export default async function ServicesPage() {
                     className="flex h-full flex-col"
                   >
                     <div className="relative aspect-[16/9] overflow-hidden">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={service.image}
                         alt={service.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"

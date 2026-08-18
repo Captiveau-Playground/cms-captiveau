@@ -131,7 +131,7 @@ export default async function ServiceDetailPage({
       <section className="py-12 sm:py-16">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-none border border-border shadow-xl shadow-black/10">
-            <img
+            <img loading="lazy" decoding="async"
               src={service.image}
               alt={service.title}
               className="aspect-[16/8] w-full object-cover"

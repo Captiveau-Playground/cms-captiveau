@@ -104,7 +104,7 @@ export default async function ProjectDetailPage({
       {/* Cover */}
       <Section className="py-12 sm:py-16">
         <div className="group relative overflow-hidden rounded-none border border-border">
-          <img
+          <img loading="lazy" decoding="async"
             src={project.image}
             alt={project.title}
             className="aspect-[16/9] w-full object-cover"
@@ -250,7 +250,7 @@ export default async function ProjectDetailPage({
               className="group overflow-hidden rounded-none border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
             >
               <div className="aspect-[16/10] overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src={p.image}
                   alt={p.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"

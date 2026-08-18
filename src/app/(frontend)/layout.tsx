@@ -164,6 +164,9 @@ export default async function FrontendLayout({
 
   return (
     <html lang="id">
+      <head>
+        <link rel="preload" href="/fonts/Satoshi-Variable.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+      </head>
       <body>
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />

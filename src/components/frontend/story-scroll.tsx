@@ -114,7 +114,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
             <div className="relative hidden lg:flex lg:items-center">
               <div className="relative h-[50vh] w-full overflow-hidden border border-border bg-muted">
                 {chapters.map((c, i) => (
-                  <img
+                  <img loading="lazy" decoding="async"
                     key={c.heading + i}
                     src={c.image || '/images/office.jpg'}
                     alt={c.heading}
@@ -131,7 +131,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
             <div className="flex min-h-0 flex-col justify-center gap-4 lg:hidden">
               <div className="relative h-[44dvh] w-full overflow-hidden rounded-none border border-border bg-muted">
                 {chapters.map((c, i) => (
-                  <img
+                  <img loading="lazy" decoding="async"
                     key={c.heading + i}
                     src={c.image || '/images/office.jpg'}
                     alt={c.heading}

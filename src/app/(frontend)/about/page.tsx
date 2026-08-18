@@ -42,7 +42,7 @@ export default async function AboutPage() {
       <Section className="py-12 sm:py-16">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="overflow-hidden rounded-none border border-border lg:col-span-5">
-            <img
+            <img loading="lazy" decoding="async"
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80"
               alt="Captiveau team"
               className="aspect-[4/3] w-full object-cover"

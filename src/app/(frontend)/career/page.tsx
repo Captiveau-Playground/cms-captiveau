@@ -41,7 +41,7 @@ export default async function CareerPage() {
             { src: '/images/meeting.jpg', alt: 'Collaboration' },
           ].map((img) => (
             <div key={img.src} className="overflow-hidden rounded-none border border-border">
-              <img src={img.src} alt={img.alt} className="aspect-[4/3] w-full object-cover" />
+              <img loading="lazy" decoding="async" src={img.src} alt={img.alt} className="aspect-[4/3] w-full object-cover" />
             </div>
           ))}
         </div>
