@@ -11,12 +11,10 @@ export type StoryChapter = {
 }
 
 /**
- * Scroll-telling project story (adapted from abui.io scroll-reveal-content-a).
- * A tall scroll journey (240vh) with a sticky 100vh viewport:
- * scrolling switches the featured image and highlights the active chapter.
- * - Desktop: numbered chapters with progress rails on the left, crossfading
- *   image on the right.
- * - Mobile: crossfading image on top + the active chapter only (no stacking).
+ * Scroll-telling project story (inspired by abui.io scroll-reveal-content-a).
+ * A 250vh journey with a sticky 100dvh viewport. Each scroll segment advances
+ * one chapter: the timeline dot lights up, the description fades in and the
+ * featured image crossfades. Layout fills the viewport — no dead space.
  */
 export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -33,90 +31,90 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
 
   const total = chapters.length
   const activeIndex = Math.min(total - 1, Math.floor(progress * total))
-
-  const pct = (index: number) => {
-    const start = index / total
-    const end = (index + 1) / total
-    return Math.min(100, Math.max(0, ((progress - start) / (end - start)) * 100))
-  }
-
   const chapter = chapters[activeIndex]
 
   return (
-    <section className="bg-background">
-      <div ref={ref} className="relative mx-auto w-full">
-        {/* Scroll distance */}
-        <div className="h-[240vh]" aria-hidden />
+    <section ref={ref} className="relative bg-background">
+      {/* Scroll distance */}
+      <div className="h-[250vh]" aria-hidden />
 
-        {/* Sticky viewport */}
-        <div className="sticky top-0 flex h-[100dvh] w-full items-center">
-          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
-            {/* Chapters (desktop) */}
-            <div className="hidden flex-col justify-center gap-8 lg:flex">
-              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                The story
-              </span>
-              {chapters.map((c, i) => {
-                const p = pct(i)
-                const active = i === activeIndex
-                return (
-                  <div key={c.heading + i} className="flex w-full">
-                    <div className="relative flex w-[64px] shrink-0 items-start justify-center">
-                      <div className="absolute left-1/2 top-1 h-full w-[2px] -translate-x-1/2 bg-foreground/10" />
-                      <div
-                        className="absolute left-1/2 top-1 w-[2px] -translate-x-1/2 bg-foreground transition-[height] duration-150"
-                        style={{ height: `${Math.max(p, active ? 100 : 0)}%` }}
-                      />
-                      <span
-                        className={cn(
-                          'relative z-10 mt-2 text-xs font-semibold tabular-nums transition-opacity duration-300',
-                          active ? 'opacity-100' : 'opacity-40'
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-background">
+        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+          {/* Header row */}
+          <div className="flex items-center justify-between pt-6 lg:pt-8">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              The story
+            </span>
+            <span className="font-mono text-xs tabular-nums text-muted-foreground">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </span>
+          </div>
+
+          {/* Body — fills remaining height */}
+          <div className="grid min-h-0 flex-1 grid-cols-1 gap-6 pb-10 pt-4 lg:grid-cols-2 lg:gap-12 lg:pb-12 lg:pt-6">
+            {/* Chapters timeline (desktop) */}
+            <div className="hidden min-h-0 flex-col justify-center lg:flex">
+              <div
+                className="flex flex-col justify-between gap-8"
+                style={{ minHeight: 'min(520px, 72vh)' }}
+              >
+                {chapters.map((c, i) => {
+                  const active = i === activeIndex
+                  return (
+                    <div key={c.heading + i} className="relative flex w-full items-stretch gap-4">
+                      {/* Rail */}
+                      <div className="relative flex w-7 flex-col items-center">
+                        <span
+                          className={cn(
+                            'mt-1.5 size-3 shrink-0 rounded-full border-2 transition-all duration-300',
+                            active
+                              ? 'border-primary bg-primary'
+                              : 'border-border bg-background'
+                          )}
+                        />
+                        {i < total - 1 && (
+                          <span className="absolute left-1/2 top-6 bottom-[-2.2rem] w-px -translate-x-1/2 bg-foreground/10" />
                         )}
-                      >
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
+                      </div>
+                      {/* Content */}
+                      <div className="min-w-0 flex-1">
+                        <span
+                          className={cn(
+                            'text-[11px] font-semibold tabular-nums transition-colors duration-300',
+                            active ? 'text-primary' : 'text-muted-foreground/60'
+                          )}
+                        >
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <h3
+                          className={cn(
+                            'mb-1 font-semibold tracking-tight transition-all duration-300',
+                            active
+                              ? 'text-2xl text-foreground md:text-3xl'
+                              : 'text-xl text-foreground/40 md:text-2xl'
+                          )}
+                        >
+                          {c.heading}
+                        </h3>
+                        <p
+                          className={cn(
+                            'max-w-[440px] text-[15px] font-medium leading-[135%] transition-opacity duration-300 md:text-base',
+                            active ? 'opacity-100' : 'opacity-25'
+                          )}
+                        >
+                          {c.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className="min-w-0 pl-4">
-                      <h3
-                        className={cn(
-                          'mb-1 text-2xl font-semibold tracking-tight text-foreground transition-opacity duration-300 md:text-[1.7rem]',
-                          active ? 'opacity-100' : 'opacity-40'
-                        )}
-                      >
-                        {c.heading}
-                      </h3>
-                      <p
-                        className={cn(
-                          'max-w-[480px] text-base font-medium leading-[130%] text-muted-foreground transition-opacity duration-300 md:text-lg',
-                          active ? 'opacity-100' : 'opacity-30'
-                        )}
-                      >
-                        {c.description}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+              </div>
             </div>
 
-            {/* Image (desktop) */}
-            <div className="relative hidden h-[78vh] w-full overflow-hidden rounded-2xl border border-border bg-muted lg:block">
-              {chapters.map((c, i) => (
-                <img
-                  key={c.heading + i}
-                  src={c.image || '/images/office.jpg'}
-                  alt={c.heading}
-                  className={cn(
-                    'absolute inset-0 h-full w-full object-cover transition-opacity duration-500',
-                    i === activeIndex ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              ))}
-            </div>
-
-            {/* Mobile: image + active chapter only */}
-            <div className="flex h-full flex-col justify-center gap-5 lg:hidden">
-              <div className="relative h-[42dvh] w-full overflow-hidden rounded-xl border border-border bg-muted">
+            {/* Image (desktop) — fills the column */}
+            <div className="relative hidden min-h-0 lg:block">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl border border-border bg-muted">
                 {chapters.map((c, i) => (
                   <img
                     key={c.heading + i}
@@ -129,33 +127,55 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
                   />
                 ))}
               </div>
+            </div>
 
-              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                The story · {String(activeIndex + 1).padStart(2, '0')}/
-                {String(total).padStart(2, '0')}
-              </span>
+            {/* Mobile: image + active chapter */}
+            <div className="flex min-h-0 flex-col justify-center gap-4 lg:hidden">
+              <div className="relative h-[44dvh] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+                {chapters.map((c, i) => (
+                  <img
+                    key={c.heading + i}
+                    src={c.image || '/images/office.jpg'}
+                    alt={c.heading}
+                    className={cn(
+                      'absolute inset-0 h-full w-full object-cover transition-opacity duration-500',
+                      i === activeIndex ? 'opacity-100' : 'opacity-0'
+                    )}
+                  />
+                ))}
+              </div>
               <div className="flex flex-col gap-1.5">
-                <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                  {String(activeIndex + 1).padStart(2, '0')} — {chapter.heading}
+                </span>
+                <h3 className="text-xl font-semibold tracking-tight text-foreground">
                   {chapter.heading}
                 </h3>
-                <p className="text-base font-medium leading-[130%] text-muted-foreground">
+                <p className="text-[15px] font-medium leading-[135%] text-muted-foreground">
                   {chapter.description}
                 </p>
               </div>
-
-              {/* Progress dots */}
+              {/* Dots */}
               <div className="flex items-center gap-2 pt-1">
                 {chapters.map((c, i) => (
                   <span
                     key={c.heading + i}
                     className={cn(
                       'h-1.5 rounded-full transition-all duration-300',
-                      i === activeIndex ? 'w-8 bg-foreground' : 'w-2.5 bg-foreground/20'
+                      i === activeIndex ? 'w-8 bg-primary' : 'w-2.5 bg-foreground/20'
                     )}
                   />
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="absolute inset-x-0 bottom-0 h-[3px] bg-foreground/10">
+            <div
+              className="h-full bg-primary transition-[width] duration-150"
+              style={{ width: `${progress * 100}%` }}
+            />
           </div>
         </div>
       </div>
