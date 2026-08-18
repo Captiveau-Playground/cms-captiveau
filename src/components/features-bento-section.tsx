@@ -31,7 +31,7 @@ function ServiceCard({
     >
       <DecorIcon position="top-left" />
       <DecorIcon position="top-right" />
-      <div className="mb-4 flex size-10 items-center justify-center rounded-[var(--radius-md)] border bg-muted/50 text-foreground/80">
+      <div className="mb-4 flex size-10 items-center justify-center rounded-none border bg-muted/50 text-foreground/80">
         {Icon && <Icon className="size-5" />}
       </div>
       <div className="flex items-start justify-between gap-2">
@@ -70,7 +70,7 @@ export function FeaturesBentoSection({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4 md:grid-rows-2">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-none border border-border bg-border md:grid-cols-4 md:grid-rows-2">
           {featured && (
             <a
               href={`/services/${featured.slug}`}
@@ -86,7 +86,7 @@ export function FeaturesBentoSection({
               <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent" />
               <div className="relative flex h-full min-h-56 flex-col justify-between">
                 <div>
-                  <div className="mb-4 flex size-10 items-center justify-center rounded-[var(--radius-md)] border bg-background/80 text-foreground/80">
+                  <div className="mb-4 flex size-10 items-center justify-center rounded-none border bg-background/80 text-foreground/80">
                     {FeaturedIcon && <FeaturedIcon className="size-5" />}
                   </div>
                   <p className="font-medium text-primary text-xs uppercase tracking-[0.2em]">

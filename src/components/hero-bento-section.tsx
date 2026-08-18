@@ -23,7 +23,7 @@ const fallbackSpecialties = [
 
 function FeaturedVisual({ src, alt }: { src?: string | null; alt: string }) {
   return (
-    <div className="relative h-36 overflow-hidden rounded-t-xl border border-border/70 border-b-0 sm:h-40">
+    <div className="relative h-36 overflow-hidden rounded-t-none border border-border/70 border-b-0 sm:h-40">
       <div className="absolute inset-x-0 top-0 h-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -57,7 +57,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
 
       <ContentRail className="relative">
         <motion.div
-          className="relative rounded-xl border border-border bg-background p-4 md:p-5"
+          className="relative rounded-none border border-border bg-background p-4 md:p-5"
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           transition={{ ...spring, delay: 0.06 }}
           viewport={{ once: true }}
@@ -68,7 +68,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
           <DecorIcon position="bottom-left" />
           <DecorIcon position="bottom-right" />
 
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg bg-border min-[30rem]:grid-cols-6">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-none bg-border min-[30rem]:grid-cols-6">
             {/* Headline + CTAs */}
             <motion.div
               className="space-y-5 bg-background p-5 min-[30rem]:col-span-4 min-[30rem]:p-6"
@@ -90,6 +90,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
                     </span>
                   ))}
                 </TextLoop>{" "}
+                <br/>
                 {homepage.heroTitleSuffix}
               </h1>
               <p className="max-w-lg text-pretty text-muted-foreground text-sm leading-relaxed md:text-base">
@@ -123,7 +124,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
               viewport={{ once: true }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             >
-              <div className="flex size-8 items-center justify-center rounded-[var(--radius-sm)] border border-border/80 bg-muted/30 text-foreground/70">
+              <div className="flex size-8 items-center justify-center rounded-none border border-border/80 bg-muted/30 text-foreground/70">
                 <SparklesIcon className="size-4" />
               </div>
               <div>
@@ -162,7 +163,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
               viewport={{ once: true }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             >
-              <div className="flex size-8 items-center justify-center rounded-[var(--radius-sm)] border border-border/80 bg-muted/30 text-foreground/70">
+              <div className="flex size-8 items-center justify-center rounded-none border border-border/80 bg-muted/30 text-foreground/70">
                 <Code2 className="size-4" />
               </div>
               <div className="space-y-2">
@@ -191,7 +192,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
               <div className="flex flex-wrap gap-2">
                 {specialties.slice(0, 5).map((specialty) => (
                   <span
-                    className="inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] border border-border/80 bg-muted/15 px-2 py-1 text-[0.6875rem] text-muted-foreground"
+                    className="inline-flex items-center gap-1.5 rounded-none border border-border/80 bg-muted/15 px-2 py-1 text-[0.6875rem] text-muted-foreground"
                     key={specialty}
                   >
                     {specialty}

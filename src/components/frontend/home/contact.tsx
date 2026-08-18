@@ -11,7 +11,7 @@ import type { CmsSiteSettings } from '@/lib/cms-data'
 
 
 const inputClass =
-  'w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:ring-2 focus:ring-primary/20'
+  'w-full rounded-none border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:ring-2 focus:ring-primary/20'
 
 export default function ContactSection({ settings }: { settings: CmsSiteSettings }) {
   const site = settings
@@ -62,9 +62,9 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
                   href={c.href}
                   target={c.href.startsWith('http') ? '_blank' : undefined}
                   rel="noreferrer"
-                  className="group flex items-start gap-4 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 hover:border-primary/40"
+                  className="group flex items-start gap-4 rounded-none border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 hover:border-primary/40"
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-none bg-primary/10">
                     <Icon className="size-5 text-primary" strokeWidth={1.7} />
                   </span>
                   <span className="flex flex-col gap-0.5">
@@ -82,7 +82,7 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
           </div>
 
           {/* office image + socials */}
-          <div className="overflow-hidden rounded-xl border border-border">
+          <div className="overflow-hidden rounded-none border border-border">
             <img
               src="/images/office.jpg"
               alt="Captiveau studio"
@@ -102,7 +102,7 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.platform ?? undefined}
-                  className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
+                  className="flex size-9 items-center justify-center rounded-none border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
                 >
                   <BrandIcon name={s.platform || ''} />
                 </a>
@@ -115,7 +115,7 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
         <div className="lg:col-span-7">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 shadow-lg shadow-black/5 sm:p-8"
+            className="flex flex-col gap-5 rounded-none border border-border bg-card p-6 shadow-lg shadow-black/5 sm:p-8"
           >
             <div className="flex items-center justify-between border-b border-border pb-5">
               <div>
@@ -175,7 +175,7 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
 
             <button
               type="submit"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-8 text-sm font-medium text-white transition-all hover:bg-primary-600 active:scale-[0.98]"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-none bg-primary px-8 text-sm font-medium text-white transition-all hover:bg-primary-600 active:scale-[0.98]"
             >
               {sent ? (
                 <>

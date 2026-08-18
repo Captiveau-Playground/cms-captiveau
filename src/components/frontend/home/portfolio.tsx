@@ -28,7 +28,7 @@ export default function PortfolioShowcase({ projects }: { projects: ProjectItem[
           </div>
           <Link
             href="/portfolio"
-            className="group inline-flex w-fit items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:bg-primary-600"
+            className="group inline-flex w-fit items-center gap-2 rounded-none bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:bg-primary-600"
           >
             View All Projects
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -41,7 +41,7 @@ export default function PortfolioShowcase({ projects }: { projects: ProjectItem[
             <Reveal key={project.slug} delay={i * 0.06}>
               <Link
                 href={`/portfolio/${project.slug}`}
-                className="group relative block aspect-[4/5] overflow-hidden rounded-xl border border-border bg-card"
+                className="group relative block aspect-[4/5] overflow-hidden rounded-none border border-border bg-card"
               >
                 <img
                   src={project.image}

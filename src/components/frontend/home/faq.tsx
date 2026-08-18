@@ -44,8 +44,8 @@ export default function Faq({
             </div>
 
             {/* help card */}
-            <div className="relative overflow-hidden rounded-xl border border-border bg-card p-6">
-              <span className="flex size-11 items-center justify-center rounded-lg bg-primary/10">
+            <div className="relative overflow-hidden rounded-none border border-border bg-card p-6">
+              <span className="flex size-11 items-center justify-center rounded-none bg-primary/10">
                 <MessageCircleQuestion className="size-5 text-primary" strokeWidth={1.8} />
               </span>
               <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
@@ -93,7 +93,7 @@ export default function Faq({
           </div>
 
           {/* accordion with numbering */}
-          <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card">
+          <div className="mt-6 overflow-hidden rounded-none border border-border bg-card">
             {filtered.map((f, i) => (
               <Accordion
                 key={`${active}-${f.title}`}
@@ -110,7 +110,7 @@ export default function Faq({
             ))}
           </div>
 
-          <div className="mt-6 flex items-center justify-between rounded-xl border border-border bg-card px-5 py-4">
+          <div className="mt-6 flex items-center justify-between rounded-none border border-border bg-card px-5 py-4">
             <p className="text-sm text-muted-foreground">
               Want to talk through your project?
             </p>

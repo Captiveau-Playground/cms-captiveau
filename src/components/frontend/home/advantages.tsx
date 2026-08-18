@@ -25,14 +25,14 @@ export default function Advantages({ advantages }: { advantages: CmsHomepage['ad
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative lg:col-span-6"
         >
-          <div className="overflow-hidden rounded-2xl border border-border shadow-xl shadow-black/10">
+          <div className="overflow-hidden rounded-none border border-border shadow-xl shadow-black/10">
             <img
               src="/images/meeting.jpg"
               alt="Captiveau team discussing with clients"
               className="aspect-[4/3] w-full object-cover"
             />
           </div>
-          <div className="absolute -bottom-5 right-6 rounded-xl border border-border bg-card px-5 py-3 shadow-lg shadow-black/10">
+          <div className="absolute -bottom-5 right-6 rounded-none border border-border bg-card px-5 py-3 shadow-lg shadow-black/10">
             <p className="text-xl font-bold text-primary">8+ thn</p>
             <p className="text-xs text-muted-foreground">industry experience</p>
           </div>
@@ -60,9 +60,9 @@ export default function Advantages({ advantages }: { advantages: CmsHomepage['ad
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.45, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+                  className="flex items-start gap-4 rounded-none border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-none bg-primary/10">
                     <Icon className="size-5 text-primary" strokeWidth={1.8} />
                   </span>
                   <div className="flex flex-col gap-1">

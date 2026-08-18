@@ -51,7 +51,7 @@ export default function BlogPreview({ articles }: { articles: any[] }) {
           >
             <TiltCard
               rotationFactor={3}
-              className="group h-full overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
+              className="group h-full overflow-hidden rounded-none border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
             >
               <Link href="/blog" className="flex h-full flex-col">
                 <div className="relative aspect-video overflow-hidden">
