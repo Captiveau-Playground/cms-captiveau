@@ -37,7 +37,7 @@ export default function HowItWorks({
             How it works
           </span>
           <h2
-            className="text-balance font-semibold tracking-tight"
+            className="text-balance font-medium tracking-[-0.04em]"
             style={{
               fontSize: 'clamp(1.85rem, 4vw, 2.75rem)',
               letterSpacing: '-0.03em',
@@ -67,7 +67,7 @@ export default function HowItWorks({
                     {s.n}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold tracking-tight">{s.title}</h3>
+                <h3 className="text-lg font-medium tracking-[-0.04em]">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.body}</p>
               </li>
             )

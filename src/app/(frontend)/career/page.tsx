@@ -62,7 +62,7 @@ export default async function CareerPage() {
                   <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                     <Icon className="size-5 text-primary" strokeWidth={1.7} />
                   </span>
-                  <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+                  <h3 className="mt-4 text-base font-medium tracking-[-0.04em] text-foreground">
                     {b.title}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -99,7 +99,7 @@ export default async function CareerPage() {
               >
                 <div className="sm:col-span-7">
                   <div className="flex items-center gap-3">
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    <h3 className="text-lg font-medium tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary">
                       {job.title}
                     </h3>
                     {job.type === 'Internship' && (
@@ -149,7 +149,7 @@ export default async function CareerPage() {
       <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
-            <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
               Can&rsquo;t find the right fit?
             </RevealHeading>
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">

@@ -72,7 +72,7 @@ export default async function AboutPage() {
               {storyStats.map((s) => (
                 <div key={s.label} className="flex flex-col gap-1">
                   <dt className="order-2 text-xs text-muted-foreground">{s.label}</dt>
-                  <dd className="order-1 text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+                  <dd className="order-1 text-2xl font-medium tracking-[-0.04em] text-primary sm:text-3xl">
                     <CountUp value={s.value} suffix={s.suffix} decimals={s.decimals} />
                   </dd>
                 </div>
@@ -105,7 +105,7 @@ export default async function AboutPage() {
                   className="group relative overflow-hidden rounded-none border border-border bg-card p-6 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
                 >
                   <Icon className="size-6 text-primary" strokeWidth={1.6} />
-                  <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">
+                  <h3 className="mt-4 text-base font-medium tracking-[-0.04em] text-foreground">
                     {v.title}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -143,7 +143,7 @@ export default async function AboutPage() {
               >
                 {member.initials}
               </div>
-              <h3 className="mt-4 text-sm font-semibold tracking-tight text-foreground">
+              <h3 className="mt-4 text-sm font-medium tracking-[-0.04em] text-foreground">
                 {member.name}
               </h3>
               <p className="mt-0.5 text-xs text-muted-foreground">{member.role}</p>
@@ -156,7 +156,7 @@ export default async function AboutPage() {
       <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
-            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
               Interested in working together?
             </h2>
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">

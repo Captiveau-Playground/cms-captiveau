@@ -154,7 +154,7 @@ export default async function ServiceDetailPage({
                 <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                   <BIcon className="size-5 text-primary" strokeWidth={1.7} />
                 </span>
-                <h3 className="mt-4 text-sm font-semibold tracking-tight text-foreground">
+                <h3 className="mt-4 text-sm font-medium tracking-[-0.04em] text-foreground">
                   {b.title}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -169,7 +169,7 @@ export default async function ServiceDetailPage({
       {/* Process */}
       <Section muted className="py-16 sm:py-24">
         <div className="mb-10">
-          <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
             How <span className="text-primary">{service.title}</span> works
           </RevealHeading>
         </div>
@@ -189,7 +189,7 @@ export default async function ServiceDetailPage({
                     strokeWidth={1.6}
                   />
                 </div>
-                <h3 className="mt-4 text-sm font-semibold tracking-tight text-foreground">
+                <h3 className="mt-4 text-sm font-medium tracking-[-0.04em] text-foreground">
                   {p.title}
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
@@ -248,7 +248,7 @@ export default async function ServiceDetailPage({
       {/* Other services */}
       <Section className="py-16 sm:py-24">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
+          <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
             Other services
           </RevealHeading>
           <Link
@@ -273,7 +273,7 @@ export default async function ServiceDetailPage({
                   <span className="flex size-10 items-center justify-center rounded-none bg-primary/10">
                     <SIcon className="size-5 text-primary" strokeWidth={1.7} />
                   </span>
-                  <span className="text-sm font-semibold tracking-tight text-foreground">
+                  <span className="text-sm font-medium tracking-[-0.04em] text-foreground">
                     {s.title}
                   </span>
                 </Link>

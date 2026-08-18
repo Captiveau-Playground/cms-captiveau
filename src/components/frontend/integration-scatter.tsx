@@ -109,7 +109,7 @@ export default function IntegrationScatter({ title, description, items }: Integr
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:items-center">
       <div className="max-w-xl space-y-5">
-        <h2 className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl md:text-5xl">
+        <h2 className="text-3xl font-medium tracking-[-0.04em] text-foreground sm:text-4xl md:text-5xl">
           {title}
         </h2>
         {description && (
@@ -134,8 +134,13 @@ export default function IntegrationScatter({ title, description, items }: Integr
                     top: `calc(var(--scatter-cell, 72px) * ${row})`,
                   }}
               >
-                {/* Tooltip */}
-                <div className="pointer-events-none absolute -top-12 left-1/2 z-40 hidden max-w-[16rem] -translate-x-1/2 whitespace-normal border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100 lg:block">
+                {/* Tooltip — renders below for top-row items so it's never clipped */}
+                <div
+                  className={cn(
+                    'pointer-events-none absolute left-1/2 z-40 hidden max-w-[16rem] -translate-x-1/2 whitespace-normal border border-border bg-background px-2.5 py-1.5 text-center opacity-0 shadow-lg transition-opacity duration-150 group-hover/tile:opacity-100 lg:block',
+                    row === 0 ? 'top-full mt-2' : '-top-12'
+                  )}
+                >
                   <span className="block text-[11px] font-semibold text-foreground">
                     {brand?.label || name}
                   </span>

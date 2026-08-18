@@ -32,7 +32,7 @@ export function PricingSection({
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-7 p-4">
       <div className="mx-auto max-w-xl space-y-2">
-        <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
+        <h2 className="text-center text-2xl font-medium tracking-[-0.04em] md:text-3xl lg:text-4xl">
           {title}
         </h2>
         <p className="text-center text-sm text-muted-foreground md:text-base">

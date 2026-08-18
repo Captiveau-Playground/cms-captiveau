@@ -85,7 +85,7 @@ export function HeroGalleryWallSection({
                       <span className="mb-4 flex size-10 items-center justify-center rounded-none border bg-muted/50 text-foreground/80">
                         <Icon className="size-5" />
                       </span>
-                      <p className="text-lg font-medium tracking-tight">{item.title}</p>
+                      <p className="text-lg font-medium tracking-[-0.04em]">{item.title}</p>
                       <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
                     </div>
                     <ArrowUpRightIcon className="mt-4 size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

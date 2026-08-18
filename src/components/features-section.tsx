@@ -72,7 +72,7 @@ export function FeaturesSeraSection({
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
-                    <h3 className="mt-6 text-sm font-medium tracking-tight">
+                    <h3 className="mt-6 text-sm font-medium tracking-[-0.04em]">
                       {feature.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

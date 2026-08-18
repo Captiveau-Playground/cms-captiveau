@@ -32,7 +32,7 @@ export default function HowItWorks01() {
             How it works
           </span>
           <h2
-            className="text-balance font-semibold tracking-tight"
+            className="text-balance font-medium tracking-[-0.04em]"
             style={{
               fontSize: "clamp(1.85rem, 4vw, 2.75rem)",
               letterSpacing: "-0.03em",

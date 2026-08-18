@@ -173,7 +173,7 @@ export default async function ArticlePage({
         {/* CTA */}
         <Section muted className="py-16 sm:py-24">
           <div className="flex flex-col items-center gap-4 text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground">
               Punya proyek serupa?
             </h2>
             <p className="max-w-md text-muted-foreground">

@@ -41,7 +41,7 @@ function MarqueeCard({ testimonial }: { testimonial: TestimonialItem }) {
           </span>
         )}
         <div className="min-w-0">
-          <p className="text-sm font-medium tracking-tight">{testimonial.name}</p>
+          <p className="text-sm font-medium tracking-[-0.04em]">{testimonial.name}</p>
           <p className="text-muted-foreground text-xs">
             {testimonial.role}
             {testimonial.company && ` · ${testimonial.company}`}
@@ -103,7 +103,7 @@ export function TestimonialsSeraSection({
                   </span>
                 )}
                 <div className="min-w-0">
-                  <p className="text-sm font-medium tracking-tight">{featured.name}</p>
+                  <p className="text-sm font-medium tracking-[-0.04em]">{featured.name}</p>
                   <p className="text-muted-foreground text-xs">
                     {featured.role}
                     {featured.company && ` · ${featured.company}`}

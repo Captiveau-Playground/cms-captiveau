@@ -54,7 +54,7 @@ export default async function FaqPage() {
         </div>
 
         <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
-          <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
+          <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
             Still have questions?
           </RevealHeading>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">

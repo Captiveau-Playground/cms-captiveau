@@ -54,7 +54,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                 Featured
               </span>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-2xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
               {featured.title}
             </h2>
             <span className="inline-flex items-center gap-1.5 text-sm font-medium text-white/90 underline-offset-4 group-hover:underline">
@@ -108,7 +108,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                     <span>{String(i + 2).padStart(2, '0')}</span>
                   </div>
 
-                  <h3 className="text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-3xl">
+                  <h3 className="text-2xl font-medium tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary sm:text-3xl">
                     <Link href={`/portfolio/${project.slug}`}>{project.title}</Link>
                   </h3>
 
@@ -120,7 +120,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                     <div className="mt-2 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-5">
                       {project.results.slice(0, 3).map((r) => (
                         <div key={r.label} className="flex flex-col">
-                          <span className="text-2xl font-bold tracking-tight text-foreground">
+                          <span className="text-2xl font-medium tracking-[-0.04em] text-foreground">
                             {r.value}
                           </span>
                           <span className="text-xs text-muted-foreground">{r.label}</span>

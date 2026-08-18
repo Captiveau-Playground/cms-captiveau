@@ -187,7 +187,7 @@ export default async function ProjectDetailPage({
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 result {String(i + 1).padStart(2, '0')}
               </p>
-              <p className="mt-3 text-4xl font-bold tracking-tight text-secondary sm:text-5xl">
+              <p className="mt-3 text-4xl font-medium tracking-[-0.04em] text-secondary sm:text-5xl">
                 {r.value}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">{r.label}</p>
@@ -222,7 +222,7 @@ export default async function ProjectDetailPage({
       <Section className="py-16 sm:py-24">
         <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
           <div className="relative z-10">
-            <RevealHeading className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
               Want similar results for your business?
             </RevealHeading>
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -239,7 +239,7 @@ export default async function ProjectDetailPage({
 
       {/* Other projects */}
       <Section className="py-16 sm:py-24">
-        <RevealHeading className="text-2xl font-bold tracking-tight text-foreground">
+        <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
           Other projects
         </RevealHeading>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -257,7 +257,7 @@ export default async function ProjectDetailPage({
                 />
               </div>
               <div className="flex items-center justify-between p-4">
-                <span className="text-sm font-semibold tracking-tight text-foreground">
+                <span className="text-sm font-medium tracking-[-0.04em] text-foreground">
                   {p.title}
                 </span>
                 <span className="text-xs text-muted-foreground">{p.category}</span>

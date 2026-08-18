@@ -85,7 +85,7 @@ export default async function ServicesPage() {
                     </div>
                     <div className="flex flex-1 flex-col p-6 sm:p-7">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                      <h2 className="text-lg font-medium tracking-[-0.04em] text-foreground">
                         {service.title}
                       </h2>
                       <span className="font-mono text-xs text-muted-foreground/60">
@@ -158,7 +158,7 @@ export default async function ServicesPage() {
           </div>
           <div className="relative z-10 flex flex-col items-center gap-5">
             <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
-              <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
                 Not sure where to start?
               </h2>
             </TextRevealBlock>

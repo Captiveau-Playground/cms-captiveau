@@ -87,7 +87,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
                         </span>
                         <h3
                           className={cn(
-                            'mb-1 font-semibold tracking-tight transition-all duration-300',
+                            'mb-1 font-medium tracking-[-0.04em] transition-all duration-300',
                             active
                               ? 'text-2xl text-foreground md:text-3xl'
                               : 'text-xl text-foreground/40 md:text-2xl'
@@ -110,9 +110,9 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
               </div>
             </div>
 
-            {/* Image (desktop) — fills the column */}
-            <div className="relative hidden min-h-0 lg:block">
-              <div className="absolute inset-0 overflow-hidden rounded-none border border-border bg-muted">
+            {/* Image (desktop) — shorter, balanced with the chapters column */}
+            <div className="relative hidden lg:flex lg:items-center">
+              <div className="relative h-[50vh] w-full overflow-hidden border border-border bg-muted">
                 {chapters.map((c, i) => (
                   <img
                     key={c.heading + i}
@@ -146,7 +146,7 @@ export default function StoryScroll({ chapters }: { chapters: StoryChapter[] }) 
                 <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
                   {String(activeIndex + 1).padStart(2, '0')} — {chapter.heading}
                 </span>
-                <h3 className="text-xl font-semibold tracking-tight text-foreground">
+                <h3 className="text-xl font-medium tracking-[-0.04em] text-foreground">
                   {chapter.heading}
                 </h3>
                 <p className="text-[15px] font-medium leading-[135%] text-muted-foreground">

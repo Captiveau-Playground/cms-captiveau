@@ -177,7 +177,7 @@ export default function Navbar({
                     onClick={() => setOpenSub(isOpen ? null : item.href)}
                     style={{ transitionDelay: `${i * 40}ms` }}
                     className={cn(
-                      'flex w-full items-center justify-between border-b border-border py-4 text-lg font-medium tracking-tight transition-all duration-300',
+                      'flex w-full items-center justify-between border-b border-border py-4 text-lg font-medium tracking-[-0.04em] transition-all duration-300',
                       open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
                       active ? 'text-primary' : 'text-foreground'
                     )}
@@ -231,7 +231,7 @@ export default function Navbar({
                 href={item.href}
                 style={{ transitionDelay: `${i * 40}ms` }}
                 className={cn(
-                  'flex items-center justify-between border-b border-border py-4 text-lg font-medium tracking-tight transition-all duration-300',
+                  'flex items-center justify-between border-b border-border py-4 text-lg font-medium tracking-[-0.04em] transition-all duration-300',
                   open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
                   active ? 'text-primary' : 'text-foreground'
                 )}

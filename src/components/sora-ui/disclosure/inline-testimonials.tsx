@@ -372,7 +372,7 @@ export function InlineTestimonials({
 
   return (
     <div
-      className={cn("font-medium tracking-tight", classNames?.root, className)}
+      className={cn("font-medium tracking-[-0.04em]", classNames?.root, className)}
       style={{ fontSize: `${fontSize}px`, lineHeight: 1.35 }}
     >
       {testimonials.map((t, index) => (

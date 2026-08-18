@@ -101,7 +101,7 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
           >
             <div className="flex items-center justify-between border-b border-border pb-5">
               <div>
-                <h3 className="text-lg font-bold tracking-tight text-foreground">
+                <h3 className="text-lg font-medium tracking-[-0.04em] text-foreground">
                   Tell us about your project
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
