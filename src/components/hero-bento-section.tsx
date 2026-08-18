@@ -23,7 +23,7 @@ const fallbackSpecialties = [
 
 function FeaturedVisual({ src, alt }: { src?: string | null; alt: string }) {
   return (
-    <div className="relative h-36 overflow-hidden rounded-t-[calc(var(--radius-md)+4px)] border border-border/70 border-b-0 sm:h-40">
+    <div className="relative h-36 overflow-hidden rounded-t-xl border border-border/70 border-b-0 sm:h-40">
       <div className="absolute inset-x-0 top-0 h-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -57,7 +57,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
 
       <ContentRail className="relative">
         <motion.div
-          className="relative border border-border bg-background p-4 md:p-5"
+          className="relative rounded-xl border border-border bg-background p-4 md:p-5"
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           transition={{ ...spring, delay: 0.06 }}
           viewport={{ once: true }}
@@ -68,7 +68,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
           <DecorIcon position="bottom-left" />
           <DecorIcon position="bottom-right" />
 
-          <div className="grid grid-cols-1 gap-px bg-border min-[30rem]:grid-cols-6">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg bg-border min-[30rem]:grid-cols-6">
             {/* Headline + CTAs */}
             <motion.div
               className="space-y-5 bg-background p-5 min-[30rem]:col-span-4 min-[30rem]:p-6"

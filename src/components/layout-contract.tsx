@@ -51,7 +51,7 @@ export function SectionShell({
 export function ContentRail({
 	children,
 	className,
-	maxWidth = "max-w-6xl",
+	maxWidth = "max-w-7xl",
 	...props
 }: {
 	children: ReactNode;

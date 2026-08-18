@@ -38,6 +38,14 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   --radius: 0.75rem;
+  /* Radius scale — used by shadcn/Nusaiba primitives (--radius-sm/md/lg/xl) */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
   --font-sans: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
   --button-size-lg: var(----button-size-lg);

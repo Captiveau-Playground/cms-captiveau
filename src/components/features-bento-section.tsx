@@ -56,7 +56,7 @@ export function FeaturesBentoSection({
 
   return (
     <SectionShell spacingMode="section">
-      <ContentRail maxWidth="max-w-5xl" className="space-y-10">
+      <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <div className="max-w-2xl">
           <p className="font-medium text-primary text-xs uppercase tracking-[0.25em]">
             Digital Services
@@ -70,7 +70,7 @@ export function FeaturesBentoSection({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4 md:grid-rows-2">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4 md:grid-rows-2">
           {featured && (
             <a
               href={`/services/${featured.slug}`}
