@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRightIcon } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { defaultSpring, motionStagger, motionViewport } from "@/lib/motion-tokens";
 import { cn } from "@/lib/utils";
 import type { GalleryFilter, GalleryItem } from "./gallery-data";
@@ -119,18 +119,21 @@ export function GalleryImageFrame({
 	priority?: boolean;
 	hoverZoom?: boolean;
 }) {
+	const [loaded, setLoaded] = useState(false);
 	return (
 		<div className={cn("absolute inset-0 overflow-hidden bg-muted", className)}>
 			<div
 				className={cn(
-					"absolute inset-0",
-					hoverZoom && "transition-transform duration-700 ease-out group-hover:scale-[1.04]",
+					"absolute inset-0 transition-opacity duration-500",
+					loaded ? "opacity-100" : "opacity-0",
+					hoverZoom && "transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.04]",
 				)}
 			>
 				<Image
 					alt={item.alt}
 					className="object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
 					fill
+					onLoad={() => setLoaded(true)}
 					priority={priority}
 					sizes={sizes}
 					src={item.image}
