@@ -24,6 +24,22 @@ export const Services: CollectionConfig = {
       required: true,
     },
     {
+      name: 'category',
+      label: 'Kategori Layanan',
+      type: 'select',
+      options: [
+        { label: 'Project (per project)', value: 'project' },
+        { label: 'Managed (per bulan)', value: 'managed' },
+      ],
+      defaultValue: 'project',
+      required: true,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Project = dikerjakan sekali (landing page, aplikasi). Managed = langganan bulanan (maintenance, server, mail, workspace).',
+      },
+    },
+    {
       name: 'slug',
       label: 'Slug',
       type: 'text',

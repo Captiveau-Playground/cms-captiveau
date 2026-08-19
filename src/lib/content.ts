@@ -66,6 +66,7 @@ export const site = {
 export type ServiceItem = {
   slug: string
   title: string
+  category?: 'project' | 'managed' | string
   index: string
   image: string
   tagline: string

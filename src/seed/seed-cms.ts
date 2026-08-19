@@ -108,6 +108,7 @@ async function main() {
     const data = {
       title: s.title,
       slug: s.slug,
+      category: 'project' as const,
       subtitle: s.tagline,
       description: s.description,
       icon: iconNames[s.slug] || 'layout',
@@ -136,6 +137,78 @@ async function main() {
     }
   }
   console.log(`✓ ${services.length} services`)
+
+  // ── Managed services (per month) ──
+  console.log('Seeding managed services...')
+  const managedServices = [
+    {
+      title: 'Web & Infra Management',
+      slug: 'web-infra-management',
+      subtitle: 'Maintenance & monitoring website + server',
+      description: 'Aman, cepat, dan selalu update — kami urus website & infrastruktur kamu secara berkelanjutan dengan SLA jelas.',
+      icon: 'shield',
+      benefits: [
+        { title: 'Uptime 99.9%', description: 'Monitoring 24/7, notifikasi dini.' },
+        { title: 'Update & Patch', description: 'Framework & keamanan selalu terbaru.' },
+        { title: 'SEO & Performa', description: 'Core Web Vitals dipantau.' },
+        { title: 'Support Prioritas', description: 'Tim teknis siap bantu.' },
+      ],
+    },
+    {
+      title: 'Mail Server',
+      slug: 'mail-server',
+      subtitle: 'Email profesional @domain-anda',
+      description: 'Email bisnis @namadomain — deliverability tinggi, aman, anti-spam. Bukan sekadar forward.',
+      icon: 'mail',
+      benefits: [
+        { title: 'Antispam & Secure', description: 'SPF/DKIM/DMARC benar.' },
+        { title: 'Cepat & Stabil', description: 'Server lokal, deliverability tinggi.' },
+        { title: 'Quota Fleksibel', description: 'Skala mailbox sesuai tim.' },
+        { title: 'Migrasi Gratis', description: 'Email lama dipindah tanpa hilang.' },
+      ],
+    },
+    {
+      title: 'Google Workspace',
+      slug: 'google-workspace',
+      subtitle: 'Email & kolaborasi Gmail untuk UMKM',
+      description: 'Gmail @domain, Drive, Meet, Docs — onboarding gratis untuk tim UMKM.',
+      icon: 'mail',
+      benefits: [
+        { title: 'Email @Domain', description: 'Gmail alamat bisnis profesional.' },
+        { title: 'Kolaborasi Tim', description: 'Drive, Docs, Meet satu ekosistem.' },
+        { title: 'Admin Console', description: 'Kelola user dari satu panel.' },
+        { title: 'Onboarding Cepat', description: 'Setup + migrasi untuk UMKM.' },
+      ],
+    },
+  ]
+  for (const m of managedServices) {
+    const existing = await payload.find({ collection: 'services', where: { slug: { equals: m.slug } } })
+    const data = {
+      title: m.title,
+      slug: m.slug,
+      category: 'managed' as const,
+      subtitle: m.subtitle,
+      description: m.description,
+      icon: m.icon,
+      introduction: textToLexical(m.description),
+      keyBenefits: m.benefits.map((b) => ({ title: b.title, description: b.description, icon: 'check' })),
+      process: m.benefits.map((b, idx) => ({ step: idx + 1, title: b.title, description: b.description, icon: 'arrow-right' })),
+      usp: m.benefits.map((b) => ({ title: b.title, description: b.description })),
+      pricingPlans: {
+        basic: { name: 'Starter', price: 'Mulai Rp 499rb/bulan', description: 'Cocok untuk UMKM', features: [] },
+        bestDeal: { name: 'Standard', price: 'Mulai Rp 999rb/bulan', description: 'Paling populer', features: [] },
+        enterprise: { name: 'Enterprise', price: 'Hubungi Kami', description: 'Skala besar', features: [] },
+      },
+      technologies: [{ name: 'Cloudflare' }],
+      order: 20 + managedServices.indexOf(m),
+    }
+    if (existing.docs.length > 0) {
+      await payload.update({ collection: 'services', id: existing.docs[0].id, data })
+    } else {
+      await payload.create({ collection: 'services', data })
+    }
+  }
+  console.log('✓ managed services')
 
   // ── Projects ──
   console.log('Seeding projects...')

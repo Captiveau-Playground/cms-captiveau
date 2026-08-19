@@ -154,6 +154,7 @@ export async function getCmsServices(): Promise<ServiceItem[]> {
     if (!docs.length) return servicesFallback
     return docs.map((s: any) => ({
       slug: s.slug,
+      category: s.category || 'project',
       index: String(s.order ?? 0).padStart(2, '0'),
       title: s.title,
       tagline: s.subtitle || '',

@@ -35,6 +35,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ServicesPage() {
   const [services, settings] = await Promise.all([getCmsServices(), getCmsSiteSettings()])
+  const project = services.filter((svc) => svc.category !== 'managed')
+  const managed = services.filter((svc) => svc.category === 'managed')
   return (
     <>
       <PageHero
@@ -61,7 +63,7 @@ export default async function ServicesPage() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => {
+          {project.map((service, i) => {
             const Icon = resolveIcon(service.icon, AppWindowMac)
             return (
               <Reveal key={service.slug} delay={(i % 3) * 0.08} className="h-full">
@@ -120,6 +122,57 @@ export default async function ServicesPage() {
           })}
         </div>
       </Section>
+
+      {/* Managed Services */}
+      {managed.length > 0 && (
+        <Section className="py-16 sm:py-24">
+          <div className="mb-12 flex items-end justify-between gap-4 border-b border-border pb-6">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                Managed · Per Bulan
+              </p>
+              <AnimatedHeading
+                className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl"
+                highlightWords={['kelola']}
+                text="Layanan kelola & ongoing"
+              />
+            </div>
+            <p className="hidden max-w-xs text-sm text-muted-foreground md:block">
+              Website, server, email, dan workspace — kami urus berkelanjutan
+              dengan SLA jelas.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {managed.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="group flex flex-col border border-border bg-background transition-colors hover:bg-muted/40"
+              >
+                <div className="flex flex-col gap-3 p-6">
+                  <span className="flex size-10 items-center justify-center border border-border bg-muted/50 text-foreground/80">
+                    {(() => { const I = resolveIcon(service.icon); return I ? <I className="size-5" /> : null })()}
+                  </span>
+                  <h3 className="text-lg font-medium tracking-[-0.02em] text-foreground group-hover:text-primary">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                    {service.tagline}
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="mt-auto flex items-center justify-between border-t border-border px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                  <span>{service.pricing.best.price || 'Hubungi Kami'}</span>
+                  <ArrowUpRight className="size-4 text-muted-foreground/60 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* How it works — @blockus/how-it-works-01 */}
       <HowItWorks

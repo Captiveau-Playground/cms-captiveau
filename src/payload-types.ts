@@ -177,6 +177,10 @@ export interface User {
 export interface Service {
   id: number;
   title: string;
+  /**
+   * Project = dikerjakan sekali (landing page, aplikasi). Managed = langganan bulanan (maintenance, server, mail, workspace).
+   */
+  category: 'project' | 'managed';
   slug: string;
   subtitle?: string | null;
   description?: string | null;
@@ -939,6 +943,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
+  category?: T;
   slug?: T;
   subtitle?: T;
   description?: T;
