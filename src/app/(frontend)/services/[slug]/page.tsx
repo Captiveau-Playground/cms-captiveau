@@ -17,6 +17,7 @@ import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
 import RelatedWork from '@/components/frontend/related-work'
 import ManagedServiceDetail from '@/components/frontend/managed-service-detail'
+import { ConsultCta } from '@/components/frontend/consult-cta'
 
 export async function generateMetadata({
   params,
@@ -66,10 +67,11 @@ export default async function ServiceDetailPage({
     ...allProjects.filter((project) => !matches.includes(project)),
   ].slice(0, 3)
 
+  const cal = (await getCmsSiteSettings().catch(() => null))?.cal
+
   // Managed services use a distinct subscription-style layout
   if (service.category === 'managed') {
-    const settings = await getCmsSiteSettings().catch(() => null)
-    return <ManagedServiceDetail service={service} cal={settings?.cal} />
+    return <ManagedServiceDetail service={service} cal={cal} />
   }
 
   const Icon = resolveIcon(service.icon, AppWindowMac)
@@ -308,6 +310,28 @@ export default async function ServiceDetailPage({
             })}
         </div>
       </Section>
+
+      {/* CTA */}
+      <section className="border-t border-border bg-primary px-4 py-16 md:px-6 sm:py-20">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-5 text-center">
+          <AnimatedHeading
+            as="h2"
+            className="max-w-2xl text-balance font-medium text-3xl tracking-[-0.04em] text-white md:text-4xl"
+            text={`Mau mulai proyek ${service.title}?`}
+          />
+          <p className="max-w-xl text-pretty text-white/85">
+            Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana
+            kerja yang jelas.
+          </p>
+          <div className="mt-1">
+            <ConsultCta
+              label="Konsultasi Gratis"
+              cal={cal}
+              className="bg-white text-foreground hover:bg-background"
+            />
+          </div>
+        </div>
+      </section>
     </>
   )
 }

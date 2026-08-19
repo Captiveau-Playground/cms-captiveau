@@ -41,7 +41,7 @@ export default async function ProjectDetailPage({
     notFound()
   }
 
-  const others = projects.filter((p) => p.slug !== slug)
+  const others = projects.filter((p) => p.slug !== slug).slice(0, 3)
 
   return (
     <>
@@ -239,9 +239,18 @@ export default async function ProjectDetailPage({
 
       {/* Other projects */}
       <Section className="py-16 sm:py-24">
-        <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
-          Other projects
-        </RevealHeading>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
+            Other projects
+          </RevealHeading>
+          <Link
+            href="/portfolio"
+            className="group inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary"
+          >
+            All works
+            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </div>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {others.map((p) => (
             <Link
