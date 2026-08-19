@@ -8,8 +8,6 @@ import { AnimatedHeading } from '@/components/frontend/animated-heading'
 import { ConsultCta } from '@/components/frontend/consult-cta'
 import { getCmsSiteSettings } from '@/lib/cms-data'
 
-export const generateStaticParams = async () => []
-
 export async function generateMetadata({
   params,
 }: {
