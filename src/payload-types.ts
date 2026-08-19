@@ -78,6 +78,7 @@ export interface Config {
     media: Media;
     redirects: Redirect;
     projects: Project;
+    promotions: Promotion;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    promotions: PromotionsSelect<false> | PromotionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -805,6 +807,70 @@ export interface Project {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promotions".
+ */
+export interface Promotion {
+  id: number;
+  headline: string;
+  /**
+   * URL halaman: /promo/[slug] — mis. teman-konsultan
+   */
+  slug: string;
+  status?: ('published' | 'draft') | null;
+  /**
+   * Label kecil di atas judul.
+   */
+  eyebrow?: string | null;
+  /**
+   * Contoh: Teman Konsultan
+   */
+  badge?: string | null;
+  /**
+   * Kalimat pengantar di bawah judul.
+   */
+  subheadline?: string | null;
+  cta?: {
+    type?: ('cal' | 'whatsapp' | 'contact') | null;
+    label?: string | null;
+  };
+  offerTitle?: string | null;
+  /**
+   * Isi utama penawaran — jelaskan apa yang didapat.
+   */
+  offerDescription?: string | null;
+  /**
+   * Poin keunggulan / apa saja yang termasuk.
+   */
+  benefits?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  steps?:
+    | {
+        step?: number | null;
+        title?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  finalCtaTitle?: string | null;
+  finalCtaSubtitle?: string | null;
+  finalCtaLabel?: string | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  /**
+   * Pisahkan dengan koma.
+   */
+  keywords?: string | null;
+  ogImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -870,6 +936,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'promotions';
+        value: number | Promotion;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1383,6 +1453,50 @@ export interface ProjectsSelect<T extends boolean = true> {
   size?: T;
   featured?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promotions_select".
+ */
+export interface PromotionsSelect<T extends boolean = true> {
+  headline?: T;
+  slug?: T;
+  status?: T;
+  eyebrow?: T;
+  badge?: T;
+  subheadline?: T;
+  cta?:
+    | T
+    | {
+        type?: T;
+        label?: T;
+      };
+  offerTitle?: T;
+  offerDescription?: T;
+  benefits?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  steps?:
+    | T
+    | {
+        step?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  finalCtaTitle?: T;
+  finalCtaSubtitle?: T;
+  finalCtaLabel?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  keywords?: T;
+  ogImage?: T;
   updatedAt?: T;
   createdAt?: T;
 }

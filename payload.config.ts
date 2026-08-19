@@ -31,6 +31,7 @@ import { Media } from './src/collections/Media'
 import { Users } from './src/collections/Users'
 import { Redirects } from './src/collections/Redirects'
 import { Projects } from './src/collections/Projects'
+import { Promotions } from './src/collections/Promotions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -112,6 +113,7 @@ async function getConfig() {
       Media,
       Redirects,
       Projects,
+      Promotions,
     ],
     globals: [SiteSettings, MainMenu, Homepage],
     // Full-featured rich text: headings, internal/external links, embedded

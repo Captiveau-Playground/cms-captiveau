@@ -525,3 +525,64 @@ export async function getHomeData() {
 }
 
 export type HomeData = Awaited<ReturnType<typeof getHomeData>>
+
+// ═══════════════════════════════════════════════════════
+// Promotions (promo landing pages)
+// ═══════════════════════════════════════════════════════
+export type CmsPromotion = {
+  slug: string
+  eyebrow: string
+  badge?: string
+  headline: string
+  subheadline?: string
+  cta: { type?: string | null; label?: string | null }
+  offerTitle?: string
+  offerDescription?: string
+  benefits: { title: string; description?: string }[]
+  steps: { step?: number | null; title?: string; description?: string }[]
+  finalCtaTitle?: string
+  finalCtaSubtitle?: string
+  finalCtaLabel: string
+  metaTitle?: string
+  metaDescription?: string
+  keywords?: string
+  ogImage?: string | null
+}
+
+export async function getPromotions(): Promise<CmsPromotion[]> {
+  try {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'promotions',
+      where: { status: { equals: 'published' } },
+      sort: 'createdAt',
+      depth: 1,
+    })
+    return docs.map((p: any) => ({
+      slug: p.slug,
+      eyebrow: p.eyebrow || 'Promo',
+      badge: p.badge || undefined,
+      headline: p.headline,
+      subheadline: p.subheadline || undefined,
+      cta: p.cta || {},
+      offerTitle: p.offerTitle || undefined,
+      offerDescription: p.offerDescription || undefined,
+      benefits: (p.benefits || []).map((b: any) => ({ title: b.title, description: b.description || undefined })),
+      steps: (p.steps || []).map((s: any) => ({ step: s.step, title: s.title, description: s.description })),
+      finalCtaTitle: p.finalCtaTitle || undefined,
+      finalCtaSubtitle: p.finalCtaSubtitle || undefined,
+      finalCtaLabel: p.finalCtaLabel || 'Konsultasi Gratis',
+      metaTitle: p.metaTitle || undefined,
+      metaDescription: p.metaDescription || undefined,
+      keywords: p.keywords || undefined,
+      ogImage: mediaUrl(p.ogImage, 'hero') || mediaUrl(p.ogImage) || undefined,
+    }))
+  } catch {
+    return []
+  }
+}
+
+export async function getPromotionBySlug(slug: string): Promise<CmsPromotion | null> {
+  const promotions = await getPromotions()
+  return promotions.find((p) => p.slug === slug) || null
+}

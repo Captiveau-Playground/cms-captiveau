@@ -61,10 +61,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: a.updatedAt || a.publishedDate || undefined,
   }))
 
+  // Dynamic: published promotions
+  const promotions = await payload.find({
+    collection: 'promotions',
+    where: { status: { equals: 'published' } },
+    limit: 100,
+    select: { slug: true, updatedAt: true },
+  })
+  const promoRoutes: MetadataRoute.Sitemap = promotions.docs.map((p) => ({
+    url: `${SITE_URL}/promo/${p.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+    lastModified: p.updatedAt || undefined,
+  }))
+
   return [
     ...staticRoutes,
     ...serviceRoutes,
     ...projectRoutes,
     ...articleRoutes,
+    ...promoRoutes,
   ]
 }
