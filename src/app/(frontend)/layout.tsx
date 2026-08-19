@@ -9,10 +9,10 @@ import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 
-// ISR: pages are rendered on demand and cached at the edge for 60s, so CMS
-// edits appear within a minute while server response stays fast. Preview /
-// draft requests bypass the cache via Next draftMode.
-export const revalidate = 60
+// CMS-driven site: render on demand so admin edits & new content show
+// immediately (no build-time prerendering/cache — Payload+D1 needs request
+// context, which static generation can't provide during the CF build).
+export const dynamic = 'force-dynamic'
 
 export const viewport: Viewport = {
   width: 'device-width',
