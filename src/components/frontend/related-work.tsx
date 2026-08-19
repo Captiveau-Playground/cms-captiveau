@@ -19,15 +19,24 @@ export default function RelatedWork({
   return (
     <section className="border-t border-border bg-background py-16 sm:py-24">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 border-b border-border pb-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            Related work
-          </p>
-          <AnimatedHeading
-            className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-3xl"
-            highlightWords={['terkait']}
-            text={`Contoh hasil ${serviceTitle} yang pernah kami kerjakan`}
-          />
+        <div className="mb-10 flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Related work
+            </p>
+            <AnimatedHeading
+              className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-3xl"
+              highlightWords={['terkait']}
+              text={`Contoh hasil ${serviceTitle} yang pernah kami kerjakan`}
+            />
+          </div>
+          <Link
+            href="/portfolio"
+            className="group inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary"
+          >
+            All portfolios
+            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
