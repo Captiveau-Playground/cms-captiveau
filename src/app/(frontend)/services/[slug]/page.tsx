@@ -7,7 +7,7 @@ import { Reveal } from '@/components/frontend/reveal'
 import { TiltCard } from '@/components/sora-ui/effects/tilt-card'
 import { resolveIcon } from '@/lib/icons'
 import RichText from '@/components/frontend/rich-text'
-import { getCmsServices, getCmsProjects } from '@/lib/cms-data'
+import { getCmsServices, getCmsProjects, getCmsSiteSettings } from '@/lib/cms-data'
 import { handleRedirectOrNotFound } from '@/lib/redirects'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -16,6 +16,7 @@ import { PricingSection } from '@/components/pricing-section'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
 import RelatedWork from '@/components/frontend/related-work'
+import ManagedServiceDetail from '@/components/frontend/managed-service-detail'
 
 export async function generateMetadata({
   params,
@@ -64,6 +65,12 @@ export default async function ServiceDetailPage({
     ...matches,
     ...allProjects.filter((project) => !matches.includes(project)),
   ].slice(0, 3)
+
+  // Managed services use a distinct subscription-style layout
+  if (service.category === 'managed') {
+    const settings = await getCmsSiteSettings().catch(() => null)
+    return <ManagedServiceDetail service={service} cal={settings?.cal} />
+  }
 
   const Icon = resolveIcon(service.icon, AppWindowMac)
 
