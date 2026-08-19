@@ -156,13 +156,6 @@ export function FooterPromptHandoffSection({
                   {address}
                 </li>
               )}
-              <li>
-                <ConsultCta
-                  label="Start a project"
-                  cal={cal}
-                  className="relative inline-flex min-h-10 gap-1.5 border-0 bg-transparent p-0 text-sm font-medium text-foreground hover:text-primary"
-                />
-              </li>
             </ul>
           </div>
         </div>

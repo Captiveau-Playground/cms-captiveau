@@ -31,11 +31,10 @@ export default function Faq({
       <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <SeraStagger className="space-y-10">
           <SeraStaggerItem>
-            <div className="flex items-baseline justify-between gap-4 border-b border-border pb-4">
+            <div className="border-b border-border pb-4">
               <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
                 FAQ
               </p>
-              <span className="font-mono text-[11px] text-muted-foreground">05</span>
             </div>
           </SeraStaggerItem>
 

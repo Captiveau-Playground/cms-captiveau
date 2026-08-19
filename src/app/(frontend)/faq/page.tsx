@@ -32,7 +32,7 @@ export default async function FaqPage() {
         <div className="mx-auto mb-10 flex items-end justify-between gap-4 border-b border-border pb-6">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              FAQ · 01
+              FAQ
             </p>
             <AnimatedHeading
               className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-3xl"

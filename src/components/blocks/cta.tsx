@@ -49,9 +49,8 @@ export function CtaSeraSection({
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2 border-t border-border px-6 py-4 font-mono text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-10">
+              <div className="border-t border-border px-6 py-4 font-mono text-[11px] text-muted-foreground md:px-10">
                 <span>Konsultasi gratis — tanpa komitmen</span>
-                <span>04</span>
               </div>
 
               <SeraBlurReveal className="bg-primary px-6 py-3 text-primary-foreground md:px-10">

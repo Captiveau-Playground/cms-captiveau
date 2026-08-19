@@ -48,7 +48,7 @@ export default async function ServicesPage() {
         <div className="mb-12 flex items-end justify-between gap-4 border-b border-border pb-6">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              Services · 01
+              Services
             </p>
             <AnimatedHeading
               className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-4xl"

@@ -71,14 +71,9 @@ export function TestimonialsSeraSection({
       <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <SeraStagger className="space-y-10">
           <SeraStaggerItem>
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                Testimoni
-              </p>
-              <p className="font-mono text-[11px] text-muted-foreground" aria-hidden>
-                03
-              </p>
-            </div>
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Testimoni
+            </p>
           </SeraStaggerItem>
 
           <SeraStaggerItem>

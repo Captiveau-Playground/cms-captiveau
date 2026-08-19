@@ -51,11 +51,10 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
       <ContentRail maxWidth="max-w-7xl" className="space-y-10">
         <SeraStagger className="space-y-10">
           <SeraStaggerItem>
-            <div className="flex items-baseline justify-between gap-4 border-b border-border pb-4">
+            <div className="border-b border-border pb-4">
               <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
                 Contact
               </p>
-              <span className="font-mono text-[11px] text-muted-foreground">06</span>
             </div>
           </SeraStaggerItem>
 
@@ -128,11 +127,10 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
                   onSubmit={handleSubmit}
                   className="flex flex-col gap-5 border border-border bg-background p-6 sm:p-8"
                 >
-                  <div className="flex items-center justify-between border-b border-border pb-5">
+                  <div className="border-b border-border pb-5">
                     <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
                       Start a project
                     </p>
-                    <span className="font-mono text-[11px] text-muted-foreground">06</span>
                   </div>
 
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">

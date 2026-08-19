@@ -34,13 +34,10 @@ export function FeaturesSeraSection({
       <ContentRail>
         <SeraStagger>
           <SeraStaggerItem>
-            <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
+            <div className="border-b border-border pb-4">
               <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
                 Why Us
               </p>
-              <span className="font-mono text-[11px] text-muted-foreground">
-                {String(items.length).padStart(2, "0")} poin
-              </span>
             </div>
           </SeraStaggerItem>
 
