@@ -38,6 +38,27 @@ import {
 
 let _payload: Awaited<ReturnType<typeof getPayload>> | null = null
 
+// ── TTL cache ─────────────────────────────────────────
+// Cheap in-request/process cache so repeated renders of the same data within
+// TTL_MS skip the Payload/D1 query — gives ISR-like latency on a warm worker
+// without any build-time static generation (which Payload config can't do).
+const DATA_TTL_MS = 60_000
+const cacheStore = new Map<string, { value: unknown; expires: number }>()
+
+async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
+  const now = Date.now()
+  const hit = cacheStore.get(key)
+  if (hit && hit.expires > now) return hit.value as T
+  const value = await fn()
+  cacheStore.set(key, { value, expires: now + DATA_TTL_MS })
+  return value
+}
+
+export function clearCmsCache() {
+  cacheStore.clear()
+}
+
+
 async function getPayloadClient() {
   if (!_payload) {
     _payload = await getPayload({ config })
@@ -76,7 +97,7 @@ const defaultMenu: CmsNavItem[] = [
   { label: 'FAQ', href: '/faq' },
 ]
 
-export async function getCmsMainMenu(): Promise<CmsNavItem[]> {
+async function _cached_getCmsMainMenu(): Promise<CmsNavItem[]> {
   try {
     const payload = await getPayloadClient()
     const data = (await payload.findGlobal({
@@ -107,7 +128,7 @@ export async function getCmsMainMenu(): Promise<CmsNavItem[]> {
 // ═══════════════════════════════════════════════════════
 // Site settings
 // ═══════════════════════════════════════════════════════
-export async function getCmsSiteSettings() {
+async function _cached_getCmsSiteSettings() {
   try {
     const payload = await getPayloadClient()
     const data = (await payload.findGlobal({ slug: 'site-settings' })) as unknown as SiteSetting
@@ -143,7 +164,7 @@ export type CmsSiteSettings = Awaited<ReturnType<typeof getCmsSiteSettings>>
 // ═══════════════════════════════════════════════════════
 // Services
 // ═══════════════════════════════════════════════════════
-export async function getCmsServices(): Promise<ServiceItem[]> {
+async function _cached_getCmsServices(): Promise<ServiceItem[]> {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -206,7 +227,7 @@ export async function getCmsServiceBySlug(slug: string): Promise<ServiceItem | n
 // ═══════════════════════════════════════════════════════
 // Projects (portfolio)
 // ═══════════════════════════════════════════════════════
-export async function getCmsProjects(): Promise<ProjectItem[]> {
+async function _cached_getCmsProjects(): Promise<ProjectItem[]> {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -249,7 +270,7 @@ export async function getCmsProjectBySlug(slug: string): Promise<ProjectItem | n
 // ═══════════════════════════════════════════════════════
 // Articles
 // ═══════════════════════════════════════════════════════
-export async function getCmsArticles() {
+async function _cached_getCmsArticles() {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -315,7 +336,7 @@ export async function getCmsArticleBySlug(
 // ═══════════════════════════════════════════════════════
 // Testimonials
 // ═══════════════════════════════════════════════════════
-export async function getCmsTestimonials(): Promise<TestimonialItem[]> {
+async function _cached_getCmsTestimonials(): Promise<TestimonialItem[]> {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -344,7 +365,7 @@ export async function getCmsTestimonials(): Promise<TestimonialItem[]> {
 // ═══════════════════════════════════════════════════════
 const teamColors = ['bg-blue-600', 'bg-amber-500', 'bg-purple-600', 'bg-emerald-600', 'bg-cyan-600', 'bg-rose-600']
 
-export async function getCmsTeam(): Promise<TeamMemberItem[]> {
+async function _cached_getCmsTeam(): Promise<TeamMemberItem[]> {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -367,7 +388,7 @@ export async function getCmsTeam(): Promise<TeamMemberItem[]> {
 // ═══════════════════════════════════════════════════════
 // Jobs
 // ═══════════════════════════════════════════════════════
-export async function getCmsJobs() {
+async function _cached_getCmsJobs() {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -401,7 +422,7 @@ const faqCategoryLabel: Record<string, string> = {
   support: 'Support',
 }
 
-export async function getCmsFaqs() {
+async function _cached_getCmsFaqs() {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -426,7 +447,7 @@ export async function getCmsFaqs() {
 // ═══════════════════════════════════════════════════════
 // Homepage global
 // ═══════════════════════════════════════════════════════
-export async function getCmsHomepage() {
+async function _cached_getCmsHomepage() {
   try {
     const payload = await getPayloadClient()
     const data = (await payload.findGlobal({ slug: 'homepage', depth: 1 })) as unknown as Homepage
@@ -549,7 +570,7 @@ export type CmsPromotion = {
   ogImage?: string | null
 }
 
-export async function getPromotions(): Promise<CmsPromotion[]> {
+async function _cached_getPromotions(): Promise<CmsPromotion[]> {
   try {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
@@ -585,4 +606,40 @@ export async function getPromotions(): Promise<CmsPromotion[]> {
 export async function getPromotionBySlug(slug: string): Promise<CmsPromotion | null> {
   const promotions = await getPromotions()
   return promotions.find((p) => p.slug === slug) || null
+}
+
+
+// ── Cache-wrapped exports (TTL) ──
+export async function getCmsSiteSettings(...args: Parameters<typeof _cached_getCmsSiteSettings>) {
+  return cached('getCmsSiteSettings', () => _cached_getCmsSiteSettings(...args))
+}
+export async function getCmsMainMenu(...args: Parameters<typeof _cached_getCmsMainMenu>) {
+  return cached('getCmsMainMenu', () => _cached_getCmsMainMenu(...args))
+}
+export async function getCmsServices(...args: Parameters<typeof _cached_getCmsServices>) {
+  return cached('getCmsServices', () => _cached_getCmsServices(...args))
+}
+export async function getCmsProjects(...args: Parameters<typeof _cached_getCmsProjects>) {
+  return cached('getCmsProjects', () => _cached_getCmsProjects(...args))
+}
+export async function getCmsArticles(...args: Parameters<typeof _cached_getCmsArticles>) {
+  return cached('getCmsArticles', () => _cached_getCmsArticles(...args))
+}
+export async function getCmsTestimonials(...args: Parameters<typeof _cached_getCmsTestimonials>) {
+  return cached('getCmsTestimonials', () => _cached_getCmsTestimonials(...args))
+}
+export async function getCmsHomepage(...args: Parameters<typeof _cached_getCmsHomepage>) {
+  return cached('getCmsHomepage', () => _cached_getCmsHomepage(...args))
+}
+export async function getCmsTeam(...args: Parameters<typeof _cached_getCmsTeam>) {
+  return cached('getCmsTeam', () => _cached_getCmsTeam(...args))
+}
+export async function getCmsJobs(...args: Parameters<typeof _cached_getCmsJobs>) {
+  return cached('getCmsJobs', () => _cached_getCmsJobs(...args))
+}
+export async function getCmsFaqs(...args: Parameters<typeof _cached_getCmsFaqs>) {
+  return cached('getCmsFaqs', () => _cached_getCmsFaqs(...args))
+}
+export async function getPromotions(...args: Parameters<typeof _cached_getPromotions>) {
+  return cached('getPromotions', () => _cached_getPromotions(...args))
 }

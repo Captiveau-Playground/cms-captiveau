@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
-import { cache } from 'react'
 
 const SITE_NAME = 'Captiveau'
 const DEFAULT_HOST = 'https://cms-captiveau.mulaiplus.workers.dev'
@@ -8,23 +6,12 @@ const DEFAULT_HOST = 'https://cms-captiveau.mulaiplus.workers.dev'
 export const DEFAULT_OG_IMAGE = '/logo.webp'
 
 /**
- * Resolves the site origin from the incoming request host so canonical / OG /
- * Twitter URLs are correct on any domain (workers.dev or a custom domain).
- * Falls back to NEXT_PUBLIC_SERVER_URL (dev) or the default production host.
+ * Stable site origin. Kept constant (not request-header based) so metadata
+ * generation is safe during build-time static generation — which lets us use
+ * ISR edge caching. Set NEXT_PUBLIC_SERVER_URL at build to override the host.
  */
-export const getSiteUrl = cache(async (): Promise<string> => {
-  try {
-    const h = await headers()
-    const host = h.get('host')
-    if (host) {
-      const proto = h.get('x-forwarded-proto') || 'https'
-      return `${proto}://${host}`
-    }
-  } catch {
-    // Outside request context (e.g. build-time) — fall through
-  }
-  return process.env.NEXT_PUBLIC_SERVER_URL || DEFAULT_HOST
-})
+export const getSiteUrl = () =>
+  Promise.resolve(process.env.NEXT_PUBLIC_SERVER_URL || DEFAULT_HOST)
 
 type SeoInput = {
   title: string

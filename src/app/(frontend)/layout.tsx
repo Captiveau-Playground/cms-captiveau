@@ -9,9 +9,9 @@ import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 
-// CMS-driven site: render on demand so admin edits & new content show
-// immediately (no build-time prerendering/cache — Payload+D1 needs request
-// context, which static generation can't provide during the CF build).
+// CMS-driven site: render on demand (Payload+D1 config can't be evaluated at
+// build-time, so no ISR/prerender). Speed comes from in-worker data caching
+// (see cms-data TTL cache) which serves repeats ~instantly.
 export const dynamic = 'force-dynamic'
 
 export const viewport: Viewport = {
