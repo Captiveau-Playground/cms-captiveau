@@ -111,6 +111,7 @@ export function HeroBentoSection({
                 <Button
                   asChild
                   className="active:scale-[0.96] transition-transform"
+                  size="lg"
                   variant="outline"
                 >
                   <a href="/portfolio">See Our Work</a>

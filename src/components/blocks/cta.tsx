@@ -43,7 +43,7 @@ export function CtaSeraSection({
                 </div>
                 <div className="flex min-w-0 flex-col gap-3 sm:flex-row lg:shrink-0">
                   <ConsultCta label={buttonText} cal={cal} />
-                  <Link className={buttonVariants({ variant: "ghost" })} href="/portfolio">
+                  <Link className={buttonVariants({ variant: "ghost", size: "lg" })} href="/portfolio">
                     Lihat Portofolio
                   </Link>
                 </div>
