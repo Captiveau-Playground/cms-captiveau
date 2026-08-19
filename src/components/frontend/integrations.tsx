@@ -1,4 +1,5 @@
 'use client'
+import AnalyticsTracker from '@/components/frontend/analytics-tracker'
 
 import { useEffect } from 'react'
 
@@ -136,5 +137,5 @@ export default function Integrations({
     }
   }, [analytics, cal])
 
-  return null
+  return <>{analytics?.ga4Id ? <AnalyticsTracker /> : null}</>
 }
