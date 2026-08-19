@@ -173,7 +173,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* NOTE: no global smooth-scroll — Next.js scroll restoration needs instant
+     scroll-to-top on route change (smooth here causes landing mid-page). */
 }
 
 body {
