@@ -1,4 +1,5 @@
 "use client";
+import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
@@ -46,7 +47,8 @@ export function FooterPromptHandoffSection({
   services = defaultServices,
   quote = "We build the kind of digital products we wish more software shipped — calm, opinionated, ready for the real world.",
   statusLabel = "Now accepting new projects",
-}: FooterSectionProps) {
+  cal,
+}: FooterSectionProps & { cal?: CalSettings | null }) {
   const year = new Date().getFullYear()
   const companyLinks = navData && navData.length ? navData : defaultCompany
 
@@ -155,13 +157,11 @@ export function FooterPromptHandoffSection({
                 </li>
               )}
               <li>
-                <Link
-                  className="relative inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-foreground transition-[color,transform] hover:text-primary active:scale-[0.96]"
-                  href="/contact"
-                >
-                  Start a project
-                  <ArrowUpRight className="size-3.5" />
-                </Link>
+                <ConsultCta
+                  label="Start a project"
+                  cal={cal}
+                  className="relative inline-flex min-h-10 gap-1.5 border-0 bg-transparent p-0 text-sm font-medium text-foreground hover:text-primary"
+                />
               </li>
             </ul>
           </div>

@@ -1499,6 +1499,28 @@ export interface SiteSetting {
     quote?: string | null;
     statusLabel?: string | null;
   };
+  /**
+   * Tombol konsultasi membuka jadwal Cal.com. Matikan untuk fallback ke halaman contact.
+   */
+  cal?: {
+    enabled?: boolean | null;
+    /**
+     * Contoh: captiveau/konsultasi-pengembangan-web
+     */
+    link?: string | null;
+    namespace?: string | null;
+  };
+  /**
+   * Opsi pengiriman form contact.
+   */
+  contactOptions?: {
+    deliveryEmail?: boolean | null;
+    deliveryWhatsapp?: boolean | null;
+    /**
+     * Format internasional, contoh: 6281234567890
+     */
+    whatsappNumber?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1676,6 +1698,20 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         quote?: T;
         statusLabel?: T;
+      };
+  cal?:
+    | T
+    | {
+        enabled?: T;
+        link?: T;
+        namespace?: T;
+      };
+  contactOptions?:
+    | T
+    | {
+        deliveryEmail?: T;
+        deliveryWhatsapp?: T;
+        whatsappNumber?: T;
       };
   updatedAt?: T;
   createdAt?: T;

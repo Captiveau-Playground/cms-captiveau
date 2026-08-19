@@ -19,7 +19,23 @@ declare global {
  * Injects CMS-managed analytics scripts (GA4, GTM, Microsoft Clarity).
  * Rendered once on the client; values come from Site Settings → Analytics.
  */
-export default function Integrations({ analytics }: { analytics?: AnalyticsData | null }) {
+export type CalData = {
+  enabled?: boolean | null
+  link?: string | null
+  namespace?: string | null
+}
+
+/**
+ * Injects CMS-managed scripts: analytics (GA4/GTM/Clarity) and the Cal.com
+ * booking embed (enables data-cal-link triggers on consultation CTAs).
+ */
+export default function Integrations({
+  analytics,
+  cal,
+}: {
+  analytics?: AnalyticsData | null
+  cal?: CalData | null
+}) {
   useEffect(() => {
     const ids = analytics || {}
 
@@ -63,7 +79,62 @@ export default function Integrations({ analytics }: { analytics?: AnalyticsData 
         ;(w as unknown as { q: unknown[][] }).q.push(args)
       }
     }
-  }, [analytics])
+
+    // Cal.com booking embed — powers data-cal-link consultation CTAs
+    if (cal?.enabled && cal.link && cal.namespace) {
+      type CalApi = {
+        (...args: unknown[]): void
+        ns: Record<string, unknown>
+        q: unknown[][]
+        loaded?: boolean
+        config: Record<string, unknown>
+      }
+
+      const ns = cal.namespace
+      const embedUrl = 'https://app.cal.com/embed/embed.js'
+      const win = window as unknown as Record<string, unknown>
+      const existing = win.Cal as CalApi | undefined
+
+      const calApi: CalApi = ((...args: unknown[]) => {
+        const arr = Array.from(args)
+        if (!calApi.loaded) {
+          const script = document.createElement('script')
+          script.src = embedUrl
+          document.head.appendChild(script)
+          calApi.loaded = true
+        }
+        if (arr[0] === 'init') {
+          const api = (...a: unknown[]) => {
+            ;(api as unknown as { q: unknown[][] }).q.push(a)
+          }
+          ;(api as unknown as { q: unknown[][] }).q = []
+          if (typeof arr[1] === 'string') {
+            calApi.ns[arr[1]] = calApi.ns[arr[1]] || api
+            ;(calApi.ns[arr[1]] as unknown as { q: unknown[][] }).q.push(arr)
+            calApi.q.push(['initNamespace', arr[1]])
+          } else {
+            calApi.q.push(arr)
+          }
+          return
+        }
+        calApi.q.push(arr)
+      }) as CalApi
+
+      calApi.ns = existing?.ns || {}
+      calApi.q = existing?.q || []
+      calApi.loaded = existing?.loaded
+      calApi.config = existing?.config || {}
+
+      win.Cal = calApi as unknown as (typeof win)['Cal']
+
+      calApi('init', ns, { origin: 'https://app.cal.com' })
+      calApi.config.forwardQueryParams = true
+      ;(calApi.ns[ns] as unknown as { q: unknown[][] } | undefined)?.q?.push([
+        'ui',
+        { hideEventTypeDetails: false, layout: 'month_view' },
+      ])
+    }
+  }, [analytics, cal])
 
   return null
 }

@@ -1,4 +1,5 @@
 import { ArrowRight, Search, Palette, Code2, ShieldCheck, Rocket, ClipboardList } from 'lucide-react'
+import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 import { CtaButton } from '@/components/frontend/cta-button'
 
 export type HowItWorksStep = {
@@ -24,10 +25,12 @@ export default function HowItWorks({
   steps,
   title = 'Cara kami bekerja',
   description = 'Metode terbukti dari puluhan proyek. Transparan di setiap tahap.',
+  cal,
 }: {
   steps: HowItWorksStep[]
   title?: React.ReactNode
   description?: string
+  cal?: CalSettings | null
 }) {
   return (
     <section className="bg-background py-16 sm:py-24">
@@ -75,10 +78,7 @@ export default function HowItWorks({
         </ol>
 
         <div className="mt-10 flex justify-center">
-          <CtaButton href="/contact" size="lg">
-            Mulai Konsultasi
-            <ArrowRight className="size-4" />
-          </CtaButton>
+          <ConsultCta label="Mulai Konsultasi" cal={cal} />
         </div>
       </div>
     </section>

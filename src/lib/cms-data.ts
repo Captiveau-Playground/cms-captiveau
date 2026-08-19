@@ -130,6 +130,8 @@ export async function getCmsSiteSettings() {
       banner: data?.banner || null,
       analytics: data?.analytics || null,
       footer: data?.footer || null,
+      cal: data?.cal || null,
+      contactOptions: data?.contactOptions || null,
     }
   } catch {
     return siteFallback

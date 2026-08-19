@@ -114,6 +114,7 @@ export default async function FrontendLayout({
     quote: settings?.footer?.quote || undefined,
     statusLabel: settings?.footer?.statusLabel || undefined,
   }
+  const footerPropsWithCal = { ...footerProps, cal: settings?.cal }
 
   const siteUrl = await getSiteUrl()
 
@@ -171,7 +172,7 @@ export default async function FrontendLayout({
       <body>
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />
-        <Integrations analytics={settings?.analytics} />
+        <Integrations analytics={settings?.analytics} cal={settings?.cal} />
         <div className="min-h-screen flex flex-col">
           {/* Banner + navbar as one sticky unit — banner sits ABOVE the nav,
               never overlapping it (navbar is in-flow, not fixed). */}
@@ -180,7 +181,7 @@ export default async function FrontendLayout({
             <Navbar navData={navData} />
           </div>
           <main className="flex-1">{children}</main>
-          <FooterPromptHandoffSection {...footerProps} />
+          <FooterPromptHandoffSection {...footerPropsWithCal} />
         </div>
       </body>
     </html>

@@ -1,4 +1,5 @@
 "use client";
+import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 
 import { ArrowRightIcon, Code2, SparklesIcon, TerminalIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
@@ -40,7 +41,13 @@ function FeaturedVisual({ src, alt }: { src?: string | null; alt: string }) {
   );
 }
 
-export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
+export function HeroBentoSection({
+  homepage,
+  cal,
+}: {
+  homepage: CmsHomepage
+  cal?: CalSettings | null
+}) {
   const reduceMotion = useReducedMotion();
   const specialties = homepage.heroSpecialties.length
     ? homepage.heroSpecialties
@@ -100,15 +107,7 @@ export function HeroBentoSection({ homepage }: { homepage: CmsHomepage }) {
                 {homepage.heroSubtitle}
               </p>
               <div className="flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  className="active:scale-[0.96] transition-transform"
-                >
-                  <a href="/contact">
-                    Start Your Project
-                    <ArrowRightIcon data-icon="inline-end" />
-                  </a>
-                </Button>
+                <ConsultCta label="Start Your Project" cal={cal} />
                 <Button
                   asChild
                   className="active:scale-[0.96] transition-transform"

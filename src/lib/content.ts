@@ -51,6 +51,16 @@ export const site = {
     { platform: 'instagram', url: 'https://instagram.com/captiveau' },
     { platform: 'linkedin', url: 'https://linkedin.com/company/captiveau' },
   ],
+  cal: {
+    enabled: false,
+    link: 'captiveau/konsultasi-pengembangan-web',
+    namespace: 'konsultasi-pengembangan-web',
+  },
+  contactOptions: {
+    deliveryEmail: true,
+    deliveryWhatsapp: true,
+    whatsappNumber: '6285117705910',
+  },
 }
 
 export type ServiceItem = {

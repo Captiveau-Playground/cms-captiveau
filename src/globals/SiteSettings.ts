@@ -156,5 +156,41 @@ export const SiteSettings: GlobalConfig = {
         { name: 'statusLabel', label: 'Status Text', type: 'text', defaultValue: 'Now accepting new projects' },
       ],
     },
+    {
+      name: 'cal',
+      label: 'Cal.com Booking',
+      type: 'group',
+      admin: {
+        description:
+          'Tombol konsultasi membuka jadwal Cal.com. Matikan untuk fallback ke halaman contact.',
+      },
+      fields: [
+        { name: 'enabled', label: 'Aktifkan Cal.com', type: 'checkbox', defaultValue: true },
+        {
+          name: 'link',
+          label: 'Cal.com Link',
+          type: 'text',
+          defaultValue: 'captiveau/konsultasi-pengembangan-web',
+          admin: { description: 'Contoh: captiveau/konsultasi-pengembangan-web' },
+        },
+        { name: 'namespace', label: 'Namespace', type: 'text', defaultValue: 'konsultasi-pengembangan-web' },
+      ],
+    },
+    {
+      name: 'contactOptions',
+      label: 'Contact Options',
+      type: 'group',
+      admin: { description: 'Opsi pengiriman form contact.' },
+      fields: [
+        { name: 'deliveryEmail', label: 'Kirim via Email (mailto)', type: 'checkbox', defaultValue: true },
+        { name: 'deliveryWhatsapp', label: 'Kirim via WhatsApp', type: 'checkbox', defaultValue: true },
+        {
+          name: 'whatsappNumber',
+          label: 'Nomor WhatsApp (untuk form)',
+          type: 'text',
+          admin: { description: 'Format internasional, contoh: 6281234567890' },
+        },
+      ],
+    },
   ],
 }

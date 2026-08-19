@@ -1,4 +1,5 @@
 'use client'
+import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
@@ -12,9 +13,11 @@ import type { FaqCategory } from '@/lib/content'
 export default function Faq({
   faqs,
   categories,
+  cal,
 }: {
   faqs: { title: string; content: string; category: string }[]
   categories: string[]
+  cal?: CalSettings | null
 }) {
   const [active, setActive] = useState<string>('All')
 
@@ -61,13 +64,11 @@ export default function Faq({
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       Talk to our team and get a reply within one business day.
                     </p>
-                    <Link
-                      className="mt-5 inline-flex items-center gap-1.5 border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/30 active:scale-[0.98]"
-                      href="/contact"
-                    >
-                      Contact us
-                      <ArrowUpRight className="size-3.5" />
-                    </Link>
+                    <ConsultCta
+                      label="Contact us"
+                      cal={cal}
+                      className="mt-5 inline-flex h-auto border border-border bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/30"
+                    />
                   </div>
                 </div>
               </div>
@@ -121,13 +122,11 @@ export default function Faq({
                   <p className="font-mono text-[11px] text-muted-foreground">
                     Want to talk through your project?
                   </p>
-                  <Link
-                    href="/contact"
-                    className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
-                  >
-                    Book a free call
-                    <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
+                  <ConsultCta
+                    label="Book a free call"
+                    cal={cal}
+                    className="group h-auto border-0 bg-transparent p-0 text-sm font-semibold text-primary hover:bg-transparent"
+                  />
                 </div>
               </div>
             </div>

@@ -38,7 +38,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroBentoSection homepage={data.homepage} />
+      <HeroBentoSection homepage={data.homepage} cal={data.settings.cal} />
       {/* Client logos — right under the hero */}
       <SocialProof homepage={data.homepage} />
       <FeaturesBentoSection services={data.services} />
@@ -62,11 +62,12 @@ export default async function HomePage() {
       />
       <TestimonialsSeraSection testimonials={data.testimonials} />
       <CtaSeraSection
+        cal={data.settings.cal}
         title={data.homepage.ctaTitle}
         subtitle={data.homepage.ctaSubtitle}
         buttonText={data.homepage.ctaButtonText}
       />
-      <Faq faqs={data.faqs} categories={data.faqCategories} />
+      <Faq faqs={data.faqs} categories={data.faqCategories} cal={data.settings.cal} />
       <ContactSection settings={data.settings} />
     </>
   )

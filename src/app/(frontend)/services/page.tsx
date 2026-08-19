@@ -8,7 +8,7 @@ import { TiltCard } from '@/components/sora-ui/effects/tilt-card'
 import { Reveal } from '@/components/frontend/reveal'
 import { resolveIcon } from '@/lib/icons'
 import { AppWindowMac, ClipboardList } from 'lucide-react'
-import { getCmsServices } from '@/lib/cms-data'
+import { getCmsServices, getCmsSiteSettings } from '@/lib/cms-data'
 import { process } from '@/lib/content'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesPage() {
-  const services = await getCmsServices()
+  const [services, settings] = await Promise.all([getCmsServices(), getCmsSiteSettings()])
   return (
     <>
       <PageHero
@@ -123,6 +123,7 @@ export default async function ServicesPage() {
 
       {/* How it works — @blockus/how-it-works-01 */}
       <HowItWorks
+        cal={settings.cal}
         steps={process.map((p) => ({
           n: p.step,
           icon: p.icon,

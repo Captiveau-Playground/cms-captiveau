@@ -1,4 +1,5 @@
 "use client";
+import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
@@ -14,10 +15,12 @@ export function CtaSeraSection({
   title,
   subtitle,
   buttonText,
+  cal,
 }: {
   title: string
   subtitle: string
   buttonText: string
+  cal?: CalSettings | null
 }) {
   return (
     <SectionShell spacingMode="section">
@@ -39,10 +42,7 @@ export function CtaSeraSection({
                   </p>
                 </div>
                 <div className="flex min-w-0 flex-col gap-3 sm:flex-row lg:shrink-0">
-                  <Link className={buttonVariants()} href="/contact">
-                    {buttonText}
-                    <ArrowRightIcon data-icon="inline-end" />
-                  </Link>
+                  <ConsultCta label={buttonText} cal={cal} />
                   <Link className={buttonVariants({ variant: "ghost" })} href="/portfolio">
                     Lihat Portofolio
                   </Link>

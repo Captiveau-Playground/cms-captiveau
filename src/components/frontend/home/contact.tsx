@@ -19,17 +19,30 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
     { icon: MapPin, label: 'Visit us', value: site.address || 'Tebet, South Jakarta', href: 'https://www.google.com/maps/search/Tebet,+Jakarta+Selatan', desc: 'Indonesia' },
   ]
   const [sent, setSent] = useState(false)
+  const [delivery, setDelivery] = useState<'email' | 'whatsapp'>('email')
+
+  const options = site.contactOptions || { deliveryEmail: true, deliveryWhatsapp: true, whatsappNumber: null }
+  const waNumber = options.whatsappNumber || (site.whatsapp || '').replace(/\D/g, '')
+  const showEmail = options.deliveryEmail !== false
+  const showWhatsapp = options.deliveryWhatsapp !== false && !!waNumber
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
-    const subject = encodeURIComponent(
-      `Project inquiry — ${data.get('name')} (${data.get('email')})`
-    )
-    const body = encodeURIComponent(
-      `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('service')}\nBudget: ${data.get('budget')}\n\n${data.get('message')}`
-    )
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`
+    const name = String(data.get('name') || '')
+    const email = String(data.get('email') || '')
+    const service = String(data.get('service') || '')
+    const budget = String(data.get('budget') || '')
+    const message = String(data.get('message') || '')
+    const subject = `Project inquiry — ${name} (${email})`
+    const body = `Name: ${name}\nEmail: ${email}\nService: ${service}\nBudget: ${budget}\n\n${message}`
+
+    if (delivery === 'whatsapp' && waNumber) {
+      const text = encodeURIComponent(`${subject}\n\n${body}`)
+      window.open(`https://wa.me/${waNumber}?text=${text}`, '_blank')
+    } else {
+      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    }
     setSent(true)
   }
 
@@ -169,17 +182,53 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
                     <textarea id="message" name="message" required rows={4} placeholder="Tell us about your project…" className={inputClass} />
                   </div>
 
+                  {(showEmail || showWhatsapp) && (
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Kirim via
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {showEmail && (
+                          <button
+                            type="button"
+                            onClick={() => setDelivery('email')}
+                            className={`border px-4 py-2 text-xs font-medium transition-colors active:scale-[0.97] ${
+                              delivery === 'email'
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-muted-foreground hover:text-foreground'
+                            }`}
+                          >
+                            Email
+                          </button>
+                        )}
+                        {showWhatsapp && (
+                          <button
+                            type="button"
+                            onClick={() => setDelivery('whatsapp')}
+                            className={`border px-4 py-2 text-xs font-medium transition-colors active:scale-[0.97] ${
+                              delivery === 'whatsapp'
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-muted-foreground hover:text-foreground'
+                            }`}
+                          >
+                            WhatsApp
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     className="inline-flex items-center justify-center gap-2 bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/85 active:scale-[0.98]"
                   >
                     {sent ? (
                       <>
-                        <Check className="size-4" /> Email opened — we'll reply soon
+                        <Check className="size-4" /> {delivery === 'whatsapp' ? 'WhatsApp dibuka' : 'Email dibuka'} — kami balas segera
                       </>
                     ) : (
                       <>
-                        Send message <Send className="size-4" />
+                        Send via {delivery === 'whatsapp' ? 'WhatsApp' : 'Email'} <Send className="size-4" />
                       </>
                     )}
                   </button>
