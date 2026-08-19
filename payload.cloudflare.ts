@@ -82,13 +82,47 @@ async function getEmailAdapter() {
   })
 }
 
-async function getConfig() {
-  const cloudflare = isCLI
-    ? await getCloudflareContextFromWrangler()
-    : await getCloudflareContext({ async: true })
+/**
+ * Minimal placeholder D1 that throws on any query — used only during
+ * build-time static generation when the Cloudflare runtime isn't available.
+ * Lets buildConfig resolve so pages can prerender with fallback data; at
+ * runtime the real D1 binding is used.
+ */
+function placeholderD1() {
+  const thrower = () => {
+    throw new Error('[build] D1 binding unavailable outside the Cloudflare runtime')
+  }
+  return {
+    prepare: thrower,
+    batch: thrower,
+    dump: thrower,
+    exec: thrower,
+    raw: thrower,
+    async: thrower,
+    info: thrower,
+  } as unknown as any
+}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cfEnv = cloudflare.env as Record<string, any>
+async function getConfig() {
+  let cfEnv: Record<string, any> | undefined
+
+  try {
+    const cloudflare = isCLI
+      ? await getCloudflareContextFromWrangler()
+      : await getCloudflareContext({ async: true })
+    cfEnv = cloudflare.env as Record<string, any>
+  } catch (err) {
+    // Build-time static generation (next build) runs outside the Cloudflare
+    // runtime where bindings aren't available. Use placeholders so buildConfig
+    // resolves; data queries throw and are caught by the CM fetchers (which
+    // return static fallbacks). At runtime real bindings are injected and ISR
+    // revalidates with actual content.
+    console.warn('[payload] Cloudflare context unavailable — using placeholder bindings (build/static).')
+    cfEnv = {
+      D1: placeholderD1(),
+      R2: { get: async () => null, put: async () => {}, delete: async () => {}, head: async () => null },
+    } as Record<string, any>
+  }
 
   return buildConfig({
     admin: {

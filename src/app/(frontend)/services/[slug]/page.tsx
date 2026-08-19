@@ -19,8 +19,6 @@ import RelatedWork from '@/components/frontend/related-work'
 import ManagedServiceDetail from '@/components/frontend/managed-service-detail'
 import { ConsultCta } from '@/components/frontend/consult-cta'
 
-export const dynamic = 'force-dynamic'
-
 export async function generateMetadata({
   params,
 }: {

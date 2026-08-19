@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { trackEvent, elementLabel } from '@/lib/analytics'
 
 /**
@@ -11,17 +11,17 @@ import { trackEvent, elementLabel } from '@/lib/analytics'
  */
 export default function AnalyticsTracker() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   // SPA route change → page_view
   useEffect(() => {
-    const url = `${pathname}${searchParams?.toString() ? `?${searchParams.toString()}` : ''}`
+    const search = window.location.search || ''
+    const url = `${pathname}${search}`
     trackEvent('page_view', {
       page_path: url,
       page_location: window.location.href,
       page_title: document.title,
     })
-  }, [pathname, searchParams])
+  }, [pathname])
 
   // Global click delegation
   useEffect(() => {

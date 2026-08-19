@@ -9,10 +9,10 @@ import Integrations from '@/components/frontend/integrations'
 import { getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
 
-// CMS-driven site: render on demand (Payload+D1 config can't be evaluated at
-// build-time, so no ISR/prerender). Speed comes from in-worker data caching
-// (see cms-data TTL cache) which serves repeats ~instantly.
-export const dynamic = 'force-dynamic'
+// ISR: pages are rendered at build with static fallbacks (no DB at build)
+// and served from the edge cache, revalidated every 60s with real CMS
+// content. Gives fast, shared edge caching. Preview/draft bypass via draftMode.
+export const revalidate = 60
 
 export const viewport: Viewport = {
   width: 'device-width',

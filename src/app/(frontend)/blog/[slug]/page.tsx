@@ -12,8 +12,6 @@ import { JsonLd } from '@/components/frontend/jsonld'
 import { formatDateLong, formatRelativeTime } from '@/lib/date'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
-export const dynamic = 'force-dynamic'
-
 export async function generateMetadata({
   params,
 }: {
