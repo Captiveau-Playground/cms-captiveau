@@ -49,8 +49,8 @@ export default async function HomePage() {
       <FeaturesSeraSection features={data.homepage.advantages} />
       {/* Managed & ongoing services */}
       {data.services.some((svc: any) => svc.category === 'managed') && (
-        <section className="bg-primary">
-          <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 sm:px-6 md:flex-row md:items-center lg:px-8">
+        <section className="bg-primary px-4 py-12 md:px-6">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div className="max-w-2xl">
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary-foreground/80">
                 Managed & Ongoing
