@@ -26,8 +26,8 @@ export default function RelatedWork({
             </p>
             <AnimatedHeading
               className="mt-3 text-balance font-medium text-2xl tracking-tight md:text-3xl"
-              highlightWords={['terkait']}
-              text={`Contoh hasil ${serviceTitle} yang pernah kami kerjakan`}
+              highlightWords={['karya']}
+              text={`Hasil karya ${serviceTitle}`}
             />
           </div>
           <Link
