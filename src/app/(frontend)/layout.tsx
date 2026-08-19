@@ -110,7 +110,7 @@ export default async function FrontendLayout({
     address,
     socialLinks: settings?.socialLinks || [],
     navData,
-    services: services.map((s) => ({ title: s.title, slug: s.slug })),
+    services: services.map((s) => ({ title: s.title, slug: s.slug, category: s.category })),
     quote: settings?.footer?.quote || undefined,
     statusLabel: settings?.footer?.statusLabel || undefined,
   }
@@ -178,7 +178,7 @@ export default async function FrontendLayout({
               never overlapping it (navbar is in-flow, not fixed). */}
           <div className="sticky top-0 z-50">
             <Banner banner={settings?.banner} />
-            <Navbar navData={navData} />
+            <Navbar navData={navData} serviceItems={services} />
           </div>
           <main className="flex-1">{children}</main>
           <FooterPromptHandoffSection {...footerPropsWithCal} />

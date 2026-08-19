@@ -39,12 +39,20 @@ export function Wordmark({ className }: { className?: string }) {
   )
 }
 
+export type NavServiceItem = {
+  title: string
+  slug: string
+  category?: string | null
+}
+
 export default function Navbar({
   navData,
   ctaLabel = 'Start Now',
+  serviceItems = [],
 }: {
   navData: NavItem[]
   ctaLabel?: string
+  serviceItems?: NavServiceItem[]
 }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -93,27 +101,79 @@ export default function Navbar({
                     />
                   </button>
                   <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="w-64 border border-border bg-background p-1.5 shadow-lg shadow-black/5">
-                      {item.children.map((child) => (
+                    {serviceItems.length > 0 && item.href === '/services' ? (
+                      <div className="w-[28rem] border border-border bg-background p-4 shadow-lg shadow-black/5">
+                        <p className="px-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                          Project Services
+                        </p>
+                        <div className="mt-1 grid grid-cols-2 gap-1">
+                          {serviceItems
+                            .filter((svc) => svc.category !== 'managed')
+                            .map((svc) => (
+                              <Link
+                                key={svc.slug}
+                                href={`/services/${svc.slug}`}
+                                className="flex items-center justify-between gap-2 rounded-none px-3 py-2 transition-colors hover:bg-muted/40"
+                              >
+                                <span className="text-sm font-medium text-foreground">
+                                  {svc.title}
+                                </span>
+                                <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/40" />
+                              </Link>
+                            ))}
+                        </div>
+                        <div className="mt-3 border-t border-border pt-3">
+                          <p className="px-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                            Managed Services · Per Bulan
+                          </p>
+                          <div className="mt-1 grid grid-cols-1 gap-1">
+                            {serviceItems
+                              .filter((svc) => svc.category === 'managed')
+                              .map((svc) => (
+                                <Link
+                                  key={svc.slug}
+                                  href={`/services/${svc.slug}`}
+                                  className="flex items-center justify-between gap-2 px-3 py-2 transition-colors hover:bg-muted/40"
+                                >
+                                  <span className="text-sm font-medium text-foreground">
+                                    {svc.title}
+                                  </span>
+                                  <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/40" />
+                                </Link>
+                              ))}
+                          </div>
+                        </div>
                         <Link
-                          key={child.href + child.label}
-                          href={child.href}
-                          className="group/child flex items-center justify-between gap-2 px-3 py-2.5 transition-colors hover:bg-muted/40"
+                          href="/services"
+                          className="mt-3 inline-flex w-full items-center justify-between border-t border-border px-1 pt-3 text-sm font-semibold text-primary"
                         >
-                          <span className="flex min-w-0 flex-col">
-                            <span className="text-sm font-medium text-foreground">
-                              {child.label}
-                            </span>
-                            {child.description && (
-                              <span className="text-xs text-muted-foreground">
-                                {child.description}
-                              </span>
-                            )}
-                          </span>
-                          <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/50 transition-all group-hover/child:translate-x-0.5 group-hover/child:-translate-y-0.5 group-hover/child:text-primary" />
+                          Lihat semua layanan
+                          <ArrowUpRight className="size-4" />
                         </Link>
-                      ))}
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="w-64 border border-border bg-background p-1.5 shadow-lg shadow-black/5">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href + child.label}
+                            href={child.href}
+                            className="group/child flex items-center justify-between gap-2 px-3 py-2.5 transition-colors hover:bg-muted/40"
+                          >
+                            <span className="flex min-w-0 flex-col">
+                              <span className="text-sm font-medium text-foreground">
+                                {child.label}
+                              </span>
+                              {child.description && (
+                                <span className="text-xs text-muted-foreground">
+                                  {child.description}
+                                </span>
+                              )}
+                            </span>
+                            <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/50 transition-all group-hover/child:translate-x-0.5 group-hover/child:-translate-y-0.5 group-hover/child:text-primary" />
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )
@@ -201,24 +261,69 @@ export default function Navbar({
                     )}
                   >
                     <div className="overflow-hidden">
-                      <div className="flex flex-col gap-0.5 py-2">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href + child.label}
-                            href={child.href}
-                            className="flex flex-col gap-0.5 border-b border-border/60 px-3 py-3 transition-colors hover:bg-muted/40"
-                          >
-                            <span className="text-base font-medium text-foreground">
-                              {child.label}
-                            </span>
-                            {child.description && (
-                              <span className="text-xs text-muted-foreground">
-                                {child.description}
+                      {serviceItems.length > 0 && item.href === '/services' ? (
+                        <div className="flex flex-col gap-3 py-2">
+                          <div>
+                            <p className="px-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                              Project Services
+                            </p>
+                            <div className="mt-1 flex flex-col">
+                              {serviceItems
+                                .filter((svc) => svc.category !== 'managed')
+                                .map((svc) => (
+                                  <Link
+                                    key={svc.slug}
+                                    href={`/services/${svc.slug}`}
+                                    className="flex items-center justify-between gap-2 border-b border-border/60 px-3 py-3"
+                                  >
+                                    <span className="text-base font-medium text-foreground">
+                                      {svc.title}
+                                    </span>
+                                  </Link>
+                                ))}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="px-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                              Managed Services · Per Bulan
+                            </p>
+                            <div className="mt-1 flex flex-col">
+                              {serviceItems
+                                .filter((svc) => svc.category === 'managed')
+                                .map((svc) => (
+                                  <Link
+                                    key={svc.slug}
+                                    href={`/services/${svc.slug}`}
+                                    className="flex items-center justify-between gap-2 border-b border-border/60 px-3 py-3"
+                                  >
+                                    <span className="text-base font-medium text-foreground">
+                                      {svc.title}
+                                    </span>
+                                  </Link>
+                                ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-0.5 py-2">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href + child.label}
+                              href={child.href}
+                              className="flex flex-col gap-0.5 border-b border-border/60 px-3 py-3 transition-colors hover:bg-muted/40"
+                            >
+                              <span className="text-base font-medium text-foreground">
+                                {child.label}
                               </span>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
+                              {child.description && (
+                                <span className="text-xs text-muted-foreground">
+                                  {child.description}
+                                </span>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
