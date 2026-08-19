@@ -104,11 +104,13 @@ export default function ManagedServiceDetail({
 
       {/* Pricing (per month) */}
       <section className="border-y border-border bg-muted/30 py-16 sm:py-24">
-        <PricingSection
-          plans={pricingPlans}
-          title={`Paket ${service.title}`}
-          description="Harga berlangganan bulanan — transparan, tanpa biaya tersembunyi."
-        />
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <PricingSection
+            plans={pricingPlans}
+            title={`Paket ${service.title}`}
+            description="Harga berlangganan bulanan — transparan, tanpa biaya tersembunyi."
+          />
+        </div>
       </section>
 
       {/* SLA guarantees */}
