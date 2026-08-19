@@ -7,7 +7,7 @@ import { Reveal } from '@/components/frontend/reveal'
 import { TiltCard } from '@/components/sora-ui/effects/tilt-card'
 import { resolveIcon } from '@/lib/icons'
 import RichText from '@/components/frontend/rich-text'
-import { getCmsServices } from '@/lib/cms-data'
+import { getCmsServices, getCmsProjects } from '@/lib/cms-data'
 import { handleRedirectOrNotFound } from '@/lib/redirects'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -15,6 +15,7 @@ import { JsonLd } from '@/components/frontend/jsonld'
 import { PricingSection } from '@/components/pricing-section'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
+import RelatedWork from '@/components/frontend/related-work'
 
 export async function generateMetadata({
   params,
@@ -47,6 +48,22 @@ export default async function ServiceDetailPage({
     await handleRedirectOrNotFound(`/services/${slug}`)
     return null // unreachable — satisfies the type checker
   }
+
+  // Related portfolio: match projects whose services/category align with this service
+  const allProjects = await getCmsProjects().catch(() => [])
+  const serviceTokens = service.title.toLowerCase().split(/[\s-]+/)
+  const matches = allProjects.filter((project) => {
+    const projectTokens = [...project.services, project.category]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase()
+    return serviceTokens.some((token) => token.length > 2 && projectTokens.includes(token))
+  })
+  // Prefer matches, then pad with other projects so the grid never looks empty
+  const relatedProjects = [
+    ...matches,
+    ...allProjects.filter((project) => !matches.includes(project)),
+  ].slice(0, 3)
 
   const Icon = resolveIcon(service.icon, AppWindowMac)
 
@@ -242,6 +259,11 @@ export default async function ServiceDetailPage({
           ]}
         />
       </Section>
+
+      {/* Related work */}
+      {relatedProjects.length > 0 && (
+        <RelatedWork projects={relatedProjects} serviceTitle={service.title} />
+      )}
 
       {/* Other services */}
       <Section className="py-16 sm:py-24">

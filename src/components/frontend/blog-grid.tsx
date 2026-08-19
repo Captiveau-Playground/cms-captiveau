@@ -36,7 +36,7 @@ export function BlogGrid({ blogs, title, description }: { blogs: BlogGridItem[];
         </p>
       </div>
       <FullWidthDivider contained />
-      <div className="z-10 grid gap-x-4 gap-y-8 p-4 md:grid-cols-2 lg:grid-cols-3 lg:p-6">
+      <div className="z-10 grid gap-x-4 gap-y-8 py-4 md:grid-cols-2 lg:grid-cols-3 lg:py-6">
         {blogs.map((blog) => (
           <BlogCard key={blog.title + blog.slug} {...blog} />
         ))}
