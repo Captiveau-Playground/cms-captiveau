@@ -8,7 +8,7 @@ import { TiltCard } from '@/components/sora-ui/effects/tilt-card'
 import { Reveal } from '@/components/frontend/reveal'
 import { resolveIcon } from '@/lib/icons'
 import { AppWindowMac, ClipboardList } from 'lucide-react'
-import { getCmsServices, getCmsSiteSettings } from '@/lib/cms-data'
+import { getCmsServices, getCmsSiteSettings, getCmsPageCta } from '@/lib/cms-data'
 import { process } from '@/lib/content'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ServicesPage() {
-  const [services, settings] = await Promise.all([getCmsServices(), getCmsSiteSettings()])
+  const [services, settings, cta] = await Promise.all([getCmsServices(), getCmsSiteSettings(), getCmsPageCta('services')])
   const project = services.filter((svc) => svc.category !== 'managed')
   const managed = services.filter((svc) => svc.category === 'managed')
   return (
@@ -204,27 +204,31 @@ export default async function ServicesPage() {
         />
       </Section>
 
-      {/* CTA */}
-      <Section className="py-16 sm:py-24">
-        <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute -left-20 -top-20 size-72 rounded-full bg-white/10 blur-3xl" />
+      {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+      {cta.enabled && (
+        <Section className="py-16 sm:py-24">
+          <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+              <div className="absolute -left-20 -top-20 size-72 rounded-full bg-white/10 blur-3xl" />
+            </div>
+            <div className="relative z-10 flex flex-col items-center gap-5">
+              <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
+                <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
+                  {cta.title}
+                </h2>
+              </TextRevealBlock>
+              {cta.subtitle && (
+                <p className="max-w-md text-base leading-relaxed text-white/80">
+                  {cta.subtitle}
+                </p>
+              )}
+              <CtaButton href={cta.primary.href} size="lg" variant="white">
+                {cta.primary.label}
+              </CtaButton>
+            </div>
           </div>
-          <div className="relative z-10 flex flex-col items-center gap-5">
-            <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
-              <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
-                Not sure where to start?
-              </h2>
-            </TextRevealBlock>
-            <p className="max-w-md text-base leading-relaxed text-white/80">
-              Get a free consultation to map out your needs — no strings attached.
-            </p>
-            <CtaButton href="/contact" size="lg" variant="white">
-              Free Consultation
-            </CtaButton>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </>
   )
 }

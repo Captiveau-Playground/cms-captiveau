@@ -13,7 +13,7 @@ const TestimonialsSeraSection = dynamic(() => import('@/components/blocks/testim
 const CtaSeraSection = dynamic(() => import('@/components/blocks/cta').then((m) => m.CtaSeraSection), { ssr: true })
 const Faq = dynamic(() => import('@/components/frontend/home/faq'), { ssr: true })
 const ContactSection = dynamic(() => import('@/components/frontend/home/contact'), { ssr: true })
-import { getHomeData } from '@/lib/cms-data'
+import { getHomeData, getCmsPageCta } from '@/lib/cms-data'
 import { formatDateLong } from '@/lib/date'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
@@ -37,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 export default async function HomePage() {
   const data = await getHomeData()
+  const homeCta = await getCmsPageCta('home')
 
   return (
     <>
@@ -92,12 +93,9 @@ export default async function HomePage() {
         }))}
       />
       <TestimonialsSeraSection testimonials={data.testimonials} />
-      <CtaSeraSection
-        cal={data.settings.cal}
-        title={data.homepage.ctaTitle}
-        subtitle={data.homepage.ctaSubtitle}
-        buttonText={data.homepage.ctaButtonText}
-      />
+      {homeCta.enabled && (
+        <CtaSeraSection cta={homeCta} cal={data.settings.cal} />
+      )}
       <Faq faqs={data.faqs} categories={data.faqCategories} cal={data.settings.cal} />
       <ContactSection settings={data.settings} />
     </>

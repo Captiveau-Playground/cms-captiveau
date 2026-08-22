@@ -143,7 +143,7 @@ export const Homepage: GlobalConfig = {
           ],
         },
         {
-          label: 'Values & Career',
+          label: 'Values',
           fields: [
             {
               name: 'values',
@@ -154,38 +154,6 @@ export const Homepage: GlobalConfig = {
                 { name: 'title', type: 'text', required: true },
                 { name: 'description', type: 'textarea' },
               ],
-            },
-            {
-              name: 'careerBenefits',
-              label: 'Career Benefits',
-              type: 'array',
-              fields: [
-                { name: 'icon', type: 'text' },
-                { name: 'title', type: 'text', required: true },
-                { name: 'description', type: 'textarea' },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'CTA',
-          fields: [
-            {
-              name: 'ctaTitle',
-              label: 'Title',
-              type: 'text',
-              defaultValue: "Let's Start Collaborating.",
-            },
-            {
-              name: 'ctaSubtitle',
-              label: 'Subtitle',
-              type: 'textarea',
-            },
-            {
-              name: 'ctaButtonText',
-              label: 'Button Text',
-              type: 'text',
-              defaultValue: 'Free Consultation',
             },
           ],
         },

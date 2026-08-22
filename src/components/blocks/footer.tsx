@@ -29,7 +29,6 @@ const defaultCompany = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Blog", href: "/blog" },
-  { label: "Career", href: "/career" },
   { label: "FAQ", href: "/faq" },
 ]
 

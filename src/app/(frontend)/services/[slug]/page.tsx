@@ -7,7 +7,7 @@ import { Reveal } from '@/components/frontend/reveal'
 import { TiltCard } from '@/components/sora-ui/effects/tilt-card'
 import { resolveIcon } from '@/lib/icons'
 import RichText from '@/components/frontend/rich-text'
-import { getCmsServices, getCmsProjects, getCmsSiteSettings } from '@/lib/cms-data'
+import { getCmsServices, getCmsProjects, getCmsSiteSettings, getCmsPageCta } from '@/lib/cms-data'
 import { handleRedirectOrNotFound } from '@/lib/redirects'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
@@ -68,6 +68,7 @@ export default async function ServiceDetailPage({
   ].slice(0, 3)
 
   const cal = (await getCmsSiteSettings().catch(() => null))?.cal
+  const cta = await getCmsPageCta('serviceDetail')
 
   // Managed services use a distinct subscription-style layout
   if (service.category === 'managed') {
@@ -311,27 +312,36 @@ export default async function ServiceDetailPage({
         </div>
       </Section>
 
-      {/* CTA */}
-      <section className="border-t border-border bg-primary px-4 py-16 md:px-6 sm:py-20">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-5 text-center">
-          <AnimatedHeading
-            as="h2"
-            className="max-w-2xl text-balance font-medium text-3xl tracking-[-0.04em] text-white md:text-4xl"
-            text={`Mau mulai proyek ${service.title}?`}
-          />
-          <p className="max-w-xl text-pretty text-white/85">
-            Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana
-            kerja yang jelas.
-          </p>
-          <div className="mt-1">
-            <ConsultCta
-              label="Konsultasi Gratis"
-              cal={cal}
-              className="bg-white text-foreground hover:bg-background"
+      {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+      {cta.enabled && (
+        <section className="border-t border-border bg-primary px-4 py-16 md:px-6 sm:py-20">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-5 text-center">
+            <AnimatedHeading
+              as="h2"
+              className="max-w-2xl text-balance font-medium text-3xl tracking-[-0.04em] text-white md:text-4xl"
+              text={cta.title || `Mau mulai proyek ${service.title}?`}
             />
+            {cta.subtitle && (
+              <p className="max-w-xl text-pretty text-white/85">
+                {cta.subtitle}
+              </p>
+            )}
+            <div className="mt-1">
+              {cta.primary.useCal ? (
+                <ConsultCta
+                  label={cta.primary.label}
+                  cal={cal}
+                  className="bg-white text-foreground hover:bg-background"
+                />
+              ) : (
+                <CtaButton href={cta.primary.href} size="lg" variant="white">
+                  {cta.primary.label}
+                </CtaButton>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   )
 }

@@ -111,11 +111,13 @@ export interface Config {
     'site-settings': SiteSetting;
     'main-menu': MainMenu;
     homepage: Homepage;
+    'page-ctas': PageCta;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    'page-ctas': PageCtasSelect<false> | PageCtasSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1741,17 +1743,56 @@ export interface Homepage {
         id?: string | null;
       }[]
     | null;
-  careerBenefits?:
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Kelola CTA (Call to Action) di tiap halaman secara dinamis. Pilih halaman lalu atur judul, subtitle, dan tombol.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-ctas".
+ */
+export interface PageCta {
+  id: number;
+  items?:
     | {
-        icon?: string | null;
+        /**
+         * Pilih halaman yang CTA-nya ingin diatur. Tiap halaman hanya boleh muncul sekali.
+         */
+        pageKey:
+          | 'home'
+          | 'about'
+          | 'services'
+          | 'serviceDetail'
+          | 'portfolio'
+          | 'projectDetail'
+          | 'blogPost'
+          | 'faq'
+          | 'contact';
+        /**
+         * Matikan untuk menyembunyikan section CTA di halaman ini.
+         */
+        enabled?: boolean | null;
         title: string;
-        description?: string | null;
+        subtitle?: string | null;
+        primaryCta: {
+          label: string;
+          /**
+           * e.g., /contact atau URL eksternal.
+           */
+          href?: string | null;
+          /**
+           * Buka widget booking Cal.com alih-alih mengikuti URL di atas. aktifkan Cal.com di Site Settings.
+           */
+          useCal?: boolean | null;
+        };
+        secondaryCta?: {
+          label?: string | null;
+          href?: string | null;
+        };
         id?: string | null;
       }[]
     | null;
-  ctaTitle?: string | null;
-  ctaSubtitle?: string | null;
-  ctaButtonText?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1932,17 +1973,37 @@ export interface HomepageSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
-  careerBenefits?:
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-ctas_select".
+ */
+export interface PageCtasSelect<T extends boolean = true> {
+  items?:
     | T
     | {
-        icon?: T;
+        pageKey?: T;
+        enabled?: T;
         title?: T;
-        description?: T;
+        subtitle?: T;
+        primaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              useCal?: T;
+            };
+        secondaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
         id?: T;
       };
-  ctaTitle?: T;
-  ctaSubtitle?: T;
-  ctaButtonText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

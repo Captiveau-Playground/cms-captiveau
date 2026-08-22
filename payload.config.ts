@@ -20,6 +20,7 @@ import type { GetPlatformProxyOptions } from 'wrangler'
 import { SiteSettings } from './src/globals/SiteSettings'
 import { MainMenu } from './src/globals/MainMenu'
 import { Homepage } from './src/globals/Homepage'
+import { PageCTAs } from './src/globals/PageCTAs'
 import { Services } from './src/collections/Services'
 import { Articles } from './src/collections/Articles'
 import { Testimonials } from './src/collections/Testimonials'
@@ -135,6 +136,12 @@ async function getConfig() {
         baseDir: path.resolve(dirname),
       },
     },
+    // Security: GraphQL is not used by the frontend, so disable it to reduce
+    // the API attack surface. serverURL anchors CSRF/same-origin checks.
+    graphQL: {
+      disable: true,
+    },
+    serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://cms-captiveau.mulaiplus.workers.dev',
     collections: [
       Users,
       Services,
@@ -149,7 +156,7 @@ async function getConfig() {
       Projects,
       Promotions,
     ],
-    globals: [SiteSettings, MainMenu, Homepage],
+    globals: [SiteSettings, MainMenu, Homepage, PageCTAs],
     // Full-featured rich text: headings, internal/external links, embedded
     // media, tables, horizontal rules + fixed/inline toolbars on top of the
     // default inline formatting, lists and alignment.

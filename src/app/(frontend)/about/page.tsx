@@ -1,11 +1,10 @@
-import Link from 'next/link'
 import { PageHero } from '@/components/frontend/page-hero'
 import { Section, SectionHeader } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
 import { Reveal } from '@/components/frontend/reveal'
 import CountUp from '@/components/frontend/count-up'
 import { resolveIcon } from '@/lib/icons'
-import { getCmsTeam, getCmsHomepage } from '@/lib/cms-data'
+import { getCmsHomepage, getCmsPageCta } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
@@ -27,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [team, homepage] = await Promise.all([getCmsTeam(), getCmsHomepage()])
+  const [homepage, cta] = await Promise.all([getCmsHomepage(), getCmsPageCta('about')])
   const values = homepage?.values || []
 
   return (
@@ -118,61 +117,33 @@ export default async function AboutPage() {
         </Section>
       )}
 
-      {/* Team */}
-      <Section className="py-16 sm:py-24">
-        <SectionHeader
-          eyebrow="Team"
-          title={
-            <>
-              The people behind{' '}
-              <span className="text-primary">the work</span>
-            </>
-          }
-          description="Engineers, designers, and product people passionate about craft."
-        />
-
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {team.map((member, i) => (
-            <Reveal
-              key={member.name}
-              delay={i * 0.06}
-              className="group rounded-none border border-border bg-card p-5 transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:border-primary/30"
-            >
-              <div
-                className={`flex aspect-square items-center justify-center rounded-none text-2xl font-bold text-white ${member.color}`}
-              >
-                {member.initials}
-              </div>
-              <h3 className="mt-4 text-sm font-medium tracking-[-0.04em] text-foreground">
-                {member.name}
-              </h3>
-              <p className="mt-0.5 text-xs text-muted-foreground">{member.role}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* CTA */}
-      <Section className="py-16 sm:py-24">
-        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
-          <div className="relative z-10">
-            <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
-              Interested in working together?
-            </h2>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Let&rsquo;s discuss your project — the first consultation is free.
-            </p>
+      {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+      {cta.enabled && (
+        <Section className="py-16 sm:py-24">
+          <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+            <div className="relative z-10">
+              <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
+                {cta.title}
+              </h2>
+              {cta.subtitle && (
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+                  {cta.subtitle}
+                </p>
+              )}
+            </div>
+            <div className="relative z-10 flex flex-wrap gap-3">
+              <CtaButton href={cta.primary.href} size="lg">
+                {cta.primary.label}
+              </CtaButton>
+              {cta.secondary?.label && (
+                <CtaButton href={cta.secondary.href} size="lg" variant="outline" icon={false}>
+                  {cta.secondary.label}
+                </CtaButton>
+              )}
+            </div>
           </div>
-          <div className="relative z-10 flex flex-wrap gap-3">
-            <CtaButton href="/contact" size="lg">
-              Contact Us
-            </CtaButton>
-            <CtaButton href="/career" size="lg" variant="outline" icon={false}>
-              See Careers
-            </CtaButton>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </>
   )
 }

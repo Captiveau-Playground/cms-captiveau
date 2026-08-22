@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock } from 'lucide-react'
 import RichText from '@/components/frontend/rich-text'
 import { Section } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
-import { getCmsArticleBySlug } from '@/lib/cms-data'
+import { getCmsArticleBySlug, getCmsPageCta } from '@/lib/cms-data'
 import { handleRedirectOrNotFound } from '@/lib/redirects'
 import { buildMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
@@ -52,6 +52,7 @@ export default async function ArticlePage({
   const authorInitial = (article.author || 'C').trim().charAt(0).toUpperCase()
   const siteUrl = await getSiteUrl()
   const canonicalUrl = `${siteUrl}/blog/${slug}`
+  const cta = await getCmsPageCta('blogPost')
 
   return (
     <>
@@ -168,20 +169,24 @@ export default async function ArticlePage({
           </div>
         </Section>
 
-        {/* CTA */}
-        <Section muted className="py-16 sm:py-24">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground">
-              Punya proyek serupa?
-            </h2>
-            <p className="max-w-md text-muted-foreground">
-              Ceritakan ide kamu — tim kami siap membantu dari riset hingga rilis.
-            </p>
-            <CtaButton href="/contact" variant="accent">
-              Konsultasi Gratis
-            </CtaButton>
-          </div>
-        </Section>
+        {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+        {cta.enabled && (
+          <Section muted className="py-16 sm:py-24">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground">
+                {cta.title}
+              </h2>
+              {cta.subtitle && (
+                <p className="max-w-md text-muted-foreground">
+                  {cta.subtitle}
+                </p>
+              )}
+              <CtaButton href={cta.primary.href} variant="accent">
+                {cta.primary.label}
+              </CtaButton>
+            </div>
+          </Section>
+        )}
       </article>
     </>
   )

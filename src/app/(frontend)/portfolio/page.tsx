@@ -4,7 +4,7 @@ import { CtaButton } from '@/components/frontend/cta-button'
 import { TextRevealBlock } from '@/components/sora-ui/texts/text-reveal-block'
 import CountUp from '@/components/frontend/count-up'
 import PortfolioIndex from '@/components/frontend/portfolio-index'
-import { getCmsProjects } from '@/lib/cms-data'
+import { getCmsProjects, getCmsPageCta } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PortfolioPage() {
-  const projects = await getCmsProjects()
+  const [projects, cta] = await Promise.all([getCmsProjects(), getCmsPageCta('portfolio')])
   return (
     <>
       <PageHero
@@ -57,24 +57,28 @@ export default async function PortfolioPage() {
         </div>
       </Section>
 
-      {/* CTA */}
-      <Section className="py-16 sm:py-24">
-        <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
-          <div className="relative z-10 flex flex-col items-center gap-5">
-            <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
-              <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
-                Punya proyek serupa?
-              </h2>
-            </TextRevealBlock>
-            <p className="max-w-md text-base leading-relaxed text-white/85">
-              Jadilah klien berikutnya. Konsultasi gratis, tanpa komitmen.
-            </p>
-            <CtaButton href="/contact" size="lg" variant="white">
-              Hubungi Kami
-            </CtaButton>
+      {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+      {cta.enabled && (
+        <Section className="py-16 sm:py-24">
+          <div className="relative overflow-hidden rounded-none bg-primary px-6 py-16 text-center sm:px-12">
+            <div className="relative z-10 flex flex-col items-center gap-5">
+              <TextRevealBlock blockColor="hsl(var(--primary))" animateOnScroll direction="left">
+                <h2 className="max-w-2xl text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
+                  {cta.title}
+                </h2>
+              </TextRevealBlock>
+              {cta.subtitle && (
+                <p className="max-w-md text-base leading-relaxed text-white/85">
+                  {cta.subtitle}
+                </p>
+              )}
+              <CtaButton href={cta.primary.href} size="lg" variant="white">
+                {cta.primary.label}
+              </CtaButton>
+            </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </>
   )
 }

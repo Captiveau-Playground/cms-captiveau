@@ -25,7 +25,6 @@ import {
   process as processFallback,
   faqs as faqsFallback,
   jobs as jobsFallback,
-  careerBenefits as careerBenefitsFallback,
   trustPoints as trustPointsFallback,
   advantages as advantagesFallback,
   stats as statsFallback,
@@ -70,12 +69,35 @@ function isMedia(obj: any): obj is { url?: string | null; sizes?: any } {
   return obj && typeof obj === 'object' && 'url' in obj
 }
 
+/**
+ * Strips dev/localhost origins that can leak into runtime via a baked
+ * PAYLOAD_PUBLIC_SERVER_URL — always serve media same-origin so images load
+ * regardless of environment/env baking mistakes.
+ */
+function normalizeMediaUrl(url: string | null | undefined): string | null {
+  if (!url) return null
+  try {
+    const parsed = new URL(url, 'https://cms-captiveau.mulaiplus.workers.dev')
+    if (
+      parsed.hostname === 'localhost' ||
+      parsed.hostname === '127.0.0.1' ||
+      parsed.hostname === '0.0.0.0' ||
+      parsed.port === '4000'
+    ) {
+      return parsed.pathname + parsed.search + parsed.hash
+    }
+    return url
+  } catch {
+    return url
+  }
+}
+
 function mediaUrl(media: any, size?: string): string | null {
   if (!media) return null
   if (typeof media === 'number') return null
   const sizes = (media as any)?.sizes
   const target = size ? sizes?.[size] : null
-  return target?.url || media?.url || null
+  return normalizeMediaUrl(target?.url) || normalizeMediaUrl(media?.url) || null
 }
 
 // ═══════════════════════════════════════════════════════
@@ -93,7 +115,6 @@ const defaultMenu: CmsNavItem[] = [
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Blog', href: '/blog' },
   { label: 'About Us', href: '/about' },
-  { label: 'Career', href: '/career' },
   { label: 'FAQ', href: '/faq' },
 ]
 
@@ -480,10 +501,6 @@ async function _cached_getCmsHomepage() {
       socialProofDescription: data.socialProofDescription || '',
       socialProofLogos: logos,
       values: (data.values || []).map((v: any) => ({ icon: v.icon || 'star', title: v.title, desc: v.description || '' })),
-      careerBenefits: (data.careerBenefits || []).map((b: any) => ({ icon: b.icon || 'heart', title: b.title, desc: b.description || '' })),
-      ctaTitle: data.ctaTitle || "Let's Start Collaborating.",
-      ctaSubtitle: data.ctaSubtitle || '',
-      ctaButtonText: data.ctaButtonText || 'Free Consultation',
     }
   } catch {
     return null
@@ -491,6 +508,103 @@ async function _cached_getCmsHomepage() {
 }
 
 export type CmsHomepage = NonNullable<Awaited<ReturnType<typeof getCmsHomepage>>>
+
+// ══════════════════════════════════════════════════════
+// Page CTAs (per-page Call-to-Action, managed in CMS via the `page-ctas` global)
+// ══════════════════════════════════════════════════════
+export type CmsPageCta = {
+  enabled: boolean
+  title: string
+  subtitle: string
+  primary: { label: string; href: string; useCal: boolean }
+  secondary: { label: string; href: string } | null
+}
+
+const defaultPageCtas: Record<string, CmsPageCta> = {
+  home: {
+    enabled: true,
+    title: "Let's Start Collaborating.",
+    subtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
+    primary: { label: 'Free Consultation', href: '/contact', useCal: true },
+    secondary: { label: 'Lihat Portofolio', href: '/portfolio' },
+  },
+  about: {
+    enabled: true,
+    title: 'Interested in working together?',
+    subtitle: "Let's discuss your project — the first consultation is free.",
+    primary: { label: 'Contact Us', href: '/contact', useCal: false },
+    secondary: null,
+  },
+  services: {
+    enabled: true,
+    title: 'Not sure where to start?',
+    subtitle: 'Get a free consultation to map out your needs — no strings attached.',
+    primary: { label: 'Free Consultation', href: '/contact', useCal: false },
+    secondary: null,
+  },
+  serviceDetail: {
+    enabled: true,
+    title: '',
+    subtitle: 'Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana kerja yang jelas.',
+    primary: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
+    secondary: null,
+  },
+  portfolio: {
+    enabled: true,
+    title: 'Punya proyek serupa?',
+    subtitle: 'Jadilah klien berikutnya. Konsultasi gratis, tanpa komitmen.',
+    primary: { label: 'Hubungi Kami', href: '/contact', useCal: false },
+    secondary: null,
+  },
+  projectDetail: {
+    enabled: true,
+    title: 'Want similar results for your business?',
+    subtitle: "Tell us what you need — we're ready to help from idea to launch.",
+    primary: { label: 'Start Your Project', href: '/contact', useCal: false },
+    secondary: null,
+  },
+  blogPost: {
+    enabled: true,
+    title: 'Punya proyek serupa?',
+    subtitle: 'Ceritakan ide kamu — tim kami siap membantu dari riset hingga rilis.',
+    primary: { label: 'Konsultasi Gratis', href: '/contact', useCal: false },
+    secondary: null,
+  },
+  faq: {
+    enabled: true,
+    title: 'Still have questions?',
+    subtitle: "We're here to help. Contact our team and get an answer within 24 hours.",
+    primary: { label: 'Contact Us', href: '/contact', useCal: false },
+    secondary: null,
+  },
+}
+
+async function _cached_getPageCtas(): Promise<Record<string, CmsPageCta>> {
+  try {
+    const payload = await getPayloadClient()
+    const data = (await payload.findGlobal({ slug: 'page-ctas' })) as any
+    const map: Record<string, CmsPageCta> = {}
+    for (const item of data?.items || []) {
+      if (!item?.pageKey) continue
+      map[item.pageKey] = {
+        enabled: item.enabled !== false,
+        title: item.title || '',
+        subtitle: item.subtitle || '',
+        primary: {
+          label: item.primaryCta?.label || 'Hubungi Kami',
+          href: item.primaryCta?.href || '/contact',
+          useCal: !!item.primaryCta?.useCal,
+        },
+        secondary: item.secondaryCta?.label
+          ? { label: item.secondaryCta.label, href: item.secondaryCta.href || '/contact' }
+          : null,
+      }
+    }
+    return map
+  } catch {
+    return {}
+  }
+}
 
 // ═══════════════════════════════════════════════════════
 // Combined fallback resolver: returns CMS data or the static source
@@ -528,10 +642,6 @@ export async function getHomeData() {
         socialProofDescription: 'The modern stack our team uses to ship world-class digital products.',
         socialProofLogos: ['/logos/nvidia.svg', '/logos/supabase.svg', '/logos/github.svg', '/logos/openai.svg', '/logos/turso.svg', '/logos/clerk.svg', '/logos/claude.svg', '/logos/vercel.svg'],
         values: valuesFallback.map((v) => ({ icon: v.icon, title: v.title, desc: v.desc })),
-        careerBenefits: careerBenefitsFallback.map((b) => ({ icon: b.icon, title: b.title, desc: b.desc })),
-        ctaTitle: "Let's Start Collaborating.",
-        ctaSubtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
-        ctaButtonText: 'Free Consultation',
       } as unknown as CmsHomepage),
     services,
     projects,
@@ -642,4 +752,8 @@ export async function getCmsFaqs(...args: Parameters<typeof _cached_getCmsFaqs>)
 }
 export async function getPromotions(...args: Parameters<typeof _cached_getPromotions>) {
   return cached('getPromotions', () => _cached_getPromotions(...args))
+}
+export async function getCmsPageCta(pageKey: string): Promise<CmsPageCta> {
+  const map = await cached('pageCtas', () => _cached_getPageCtas())
+  return map[pageKey] || defaultPageCtas[pageKey] || defaultPageCtas.home
 }

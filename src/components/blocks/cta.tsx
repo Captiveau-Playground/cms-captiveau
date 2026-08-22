@@ -2,26 +2,37 @@
 import { ConsultCta, type CalSettings } from '@/components/frontend/consult-cta'
 
 import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { ContentRail, SectionShell } from "@/components/layout-contract";
 import { buttonVariants } from "@/components/ui/button";
 import { SeraBlurReveal, SeraStagger, SeraStaggerItem } from "@/lib/sera-motion";
 import { AnimatedHeading } from "@/components/frontend/animated-heading";
 
 /**
- * CTA (adapted from @nusaiba/cta-11) — driven by the homepage CTA settings.
+ * Shape mirrors `CmsPageCta` from lib/cms-data (kept local to avoid importing
+ * a server module into this client component).
  */
-export function CtaSeraSection({
-  title,
-  subtitle,
-  buttonText,
-  cal,
-}: {
+export type PageCtaProps = {
+  enabled: boolean
   title: string
   subtitle: string
-  buttonText: string
+  primary: { label: string; href: string; useCal: boolean }
+  secondary: { label: string; href: string } | null
+}
+
+/**
+ * CTA (adapted from @nusaiba/cta-11) — driven by the per-page CTA settings
+ * managed in the `page-ctas` CMS global.
+ */
+export function CtaSeraSection({
+  cta,
+  cal,
+}: {
+  cta: PageCtaProps
   cal?: CalSettings | null
 }) {
+  const primaryActive = cta.primary.useCal && cal?.enabled && cal.link && cal.namespace
+
   return (
     <SectionShell spacingMode="section">
       <ContentRail>
@@ -35,17 +46,32 @@ export function CtaSeraSection({
                   </p>
                   <AnimatedHeading
                     className="mt-4 max-w-xl text-balance font-medium text-3xl tracking-tight md:text-4xl"
-                    text={title}
+                    text={cta.title}
                   />
                   <p className="mt-4 text-pretty text-muted-foreground text-sm leading-relaxed md:text-base">
-                    {subtitle}
+                    {cta.subtitle}
                   </p>
                 </div>
                 <div className="flex min-w-0 flex-col gap-3 sm:flex-row lg:shrink-0">
-                  <ConsultCta label={buttonText} cal={cal} />
-                  <Link className={buttonVariants({ variant: "ghost", size: "lg" })} href="/portfolio">
-                    Lihat Portofolio
-                  </Link>
+                  {primaryActive ? (
+                    <ConsultCta label={cta.primary.label} cal={cal} />
+                  ) : (
+                    <Link
+                      className={buttonVariants({ size: "lg" })}
+                      href={cta.primary.href}
+                    >
+                      {cta.primary.label}
+                      <ArrowUpRight data-icon="inline-end" />
+                    </Link>
+                  )}
+                  {cta.secondary?.label && (
+                    <Link
+                      className={buttonVariants({ variant: "ghost", size: "lg" })}
+                      href={cta.secondary.href}
+                    >
+                      {cta.secondary.label}
+                    </Link>
+                  )}
                 </div>
               </div>
 

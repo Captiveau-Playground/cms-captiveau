@@ -3,7 +3,7 @@ import { Section } from '@/components/frontend/section'
 import { CtaButton } from '@/components/frontend/cta-button'
 import { RevealHeading } from '@/components/frontend/section'
 import { Accordion } from '@/components/sora-ui/disclosure/accordion'
-import { getCmsFaqs } from '@/lib/cms-data'
+import { getCmsFaqs, getCmsPageCta } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function FaqPage() {
-  const { faqs } = await getCmsFaqs()
+  const [{ faqs }, cta] = await Promise.all([getCmsFaqs(), getCmsPageCta('faq')])
   return (
     <>
       <PageHero
@@ -53,17 +53,21 @@ export default async function FaqPage() {
           />
         </div>
 
-        <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
-          <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
-            Still have questions?
-          </RevealHeading>
-          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-            We're here to help. Contact our team and get an answer within 24 hours.
-          </p>
-          <CtaButton href="/contact" size="lg">
-            Contact Us
-          </CtaButton>
-        </div>
+        {cta.enabled && (
+          <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center gap-5 rounded-none border border-border bg-card px-6 py-12 text-center">
+            <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground">
+              {cta.title}
+            </RevealHeading>
+            {cta.subtitle && (
+              <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+                {cta.subtitle}
+              </p>
+            )}
+            <CtaButton href={cta.primary.href} size="lg">
+              {cta.primary.label}
+            </CtaButton>
+          </div>
+        )}
       </Section>
     </>
   )

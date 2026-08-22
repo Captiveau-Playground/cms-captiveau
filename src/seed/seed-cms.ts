@@ -14,7 +14,6 @@ import {
   process,
   faqs,
   jobs,
-  careerBenefits,
   trustPoints,
   advantages,
   stats,
@@ -393,8 +392,7 @@ async function main() {
         { label: 'Portfolio', href: '/portfolio', order: 3 },
         { label: 'Blog', href: '/blog', order: 4 },
         { label: 'About Us', href: '/about', order: 5 },
-        { label: 'Career', href: '/career', order: 6 },
-        { label: 'FAQ', href: '/faq', order: 7 },
+        { label: 'FAQ', href: '/faq', order: 6 },
       ],
     },
   })
@@ -424,13 +422,77 @@ async function main() {
       socialProofLabel: 'We build with trusted technology',
       socialProofDescription: 'The modern stack our team uses to ship world-class digital products.',
       values: values.map((v) => ({ icon: 'star', title: v.title, description: v.desc })),
-      careerBenefits: careerBenefits.map((b) => ({ icon: 'heart', title: b.title, description: b.desc })),
-      ctaTitle: "Let's Start Collaborating.",
-      ctaSubtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
-      ctaButtonText: 'Free Consultation',
     },
   })
   console.log('✓ homepage')
+
+  // ── Page CTAs global ──
+  console.log('Seeding page CTAs...')
+  await payload.updateGlobal({
+    slug: 'page-ctas',
+    data: {
+      items: [
+        {
+          pageKey: 'home',
+          enabled: true,
+          title: "Let's Start Collaborating.",
+          subtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
+          primaryCta: { label: 'Free Consultation', href: '/contact', useCal: true },
+          secondaryCta: { label: 'Lihat Portofolio', href: '/portfolio' },
+        },
+        {
+          pageKey: 'about',
+          enabled: true,
+          title: 'Interested in working together?',
+          subtitle: "Let's discuss your project — the first consultation is free.",
+          primaryCta: { label: 'Contact Us', href: '/contact', useCal: false },
+        },
+        {
+          pageKey: 'services',
+          enabled: true,
+          title: 'Not sure where to start?',
+          subtitle: 'Get a free consultation to map out your needs — no strings attached.',
+          primaryCta: { label: 'Free Consultation', href: '/contact', useCal: false },
+        },
+        {
+          pageKey: 'serviceDetail',
+          enabled: true,
+          title: '',
+          subtitle: 'Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana kerja yang jelas.',
+          primaryCta: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
+        },
+        {
+          pageKey: 'portfolio',
+          enabled: true,
+          title: 'Punya proyek serupa?',
+          subtitle: 'Jadilah klien berikutnya. Konsultasi gratis, tanpa komitmen.',
+          primaryCta: { label: 'Hubungi Kami', href: '/contact', useCal: false },
+        },
+        {
+          pageKey: 'projectDetail',
+          enabled: true,
+          title: 'Want similar results for your business?',
+          subtitle: "Tell us what you need — we're ready to help from idea to launch.",
+          primaryCta: { label: 'Start Your Project', href: '/contact', useCal: false },
+        },
+        {
+          pageKey: 'blogPost',
+          enabled: true,
+          title: 'Punya proyek serupa?',
+          subtitle: 'Ceritakan ide kamu — tim kami siap membantu dari riset hingga rilis.',
+          primaryCta: { label: 'Konsultasi Gratis', href: '/contact', useCal: false },
+        },
+        {
+          pageKey: 'faq',
+          enabled: true,
+          title: 'Still have questions?',
+          subtitle: "We're here to help. Contact our team and get an answer within 24 hours.",
+          primaryCta: { label: 'Contact Us', href: '/contact', useCal: false },
+        },
+      ],
+    },
+  })
+  console.log('✓ page CTAs')
 
   console.log('\n✅ Seed complete!')
 }

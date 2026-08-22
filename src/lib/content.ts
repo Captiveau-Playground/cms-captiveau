@@ -793,10 +793,3 @@ export const jobs = [
     tags: ['Mentorship', 'Real Projects', 'Flexible'],
   },
 ]
-
-export const careerBenefits = [
-  { icon: 'heart', title: 'Supportive Culture', desc: 'A collaborative culture that lifts each other up' },
-  { icon: 'lightbulb', title: 'Learn & Grow', desc: 'Access to courses, conferences, and resources' },
-  { icon: 'zap', title: 'Modern Tech', desc: 'Cutting-edge stack on every project' },
-  { icon: 'users', title: 'Strong Team', desc: 'Join a passionate, expert-driven team' },
-] as const

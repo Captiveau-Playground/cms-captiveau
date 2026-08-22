@@ -5,7 +5,7 @@ import { Section, RevealHeading } from '@/components/frontend/section'
 import IntegrationScatter from '@/components/frontend/integration-scatter'
 import { CtaButton } from '@/components/frontend/cta-button'
 import StoryScroll from '@/components/frontend/story-scroll'
-import { getCmsProjects } from '@/lib/cms-data'
+import { getCmsProjects, getCmsPageCta } from '@/lib/cms-data'
 import type { Metadata } from 'next'
 import { buildMetadata, getSiteUrl } from '@/lib/seo'
 import { JsonLd } from '@/components/frontend/jsonld'
@@ -34,7 +34,7 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const projects = await getCmsProjects()
+  const [projects, cta] = await Promise.all([getCmsProjects(), getCmsPageCta('projectDetail')])
   const project = projects.find((p) => p.slug === slug)
 
   if (!project) {
@@ -218,24 +218,33 @@ export default async function ProjectDetailPage({
         </Section>
       )}
 
-      {/* CTA */}
-      <Section className="py-16 sm:py-24">
-        <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
-          <div className="relative z-10">
-            <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
-              Want similar results for your business?
-            </RevealHeading>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Tell us what you need — we're ready to help from idea to launch.
-            </p>
+      {/* CTA — managed dynamically via the `page-ctas` CMS global */}
+      {cta.enabled && (
+        <Section className="py-16 sm:py-24">
+          <div className="relative flex flex-col items-start gap-6 overflow-hidden rounded-none border border-border bg-card px-6 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+            <div className="relative z-10">
+              <RevealHeading className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-3xl">
+                {cta.title}
+              </RevealHeading>
+              {cta.subtitle && (
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+                  {cta.subtitle}
+                </p>
+              )}
+            </div>
+            <div className="relative z-10 flex flex-wrap gap-3">
+              <CtaButton href={cta.primary.href} size="lg">
+                {cta.primary.label}
+              </CtaButton>
+              {cta.secondary?.label && (
+                <CtaButton href={cta.secondary.href} size="lg" variant="outline" icon={false}>
+                  {cta.secondary.label}
+                </CtaButton>
+              )}
+            </div>
           </div>
-          <div className="relative z-10">
-            <CtaButton href="/contact" size="lg">
-              Start Your Project
-            </CtaButton>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       {/* Other projects */}
       <Section className="py-16 sm:py-24">

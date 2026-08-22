@@ -34,7 +34,6 @@ export const mainMenu = {
     { label: 'Portofolio', href: '/portfolios', order: 3 },
     { label: 'Artikel', href: '/articles', order: 4 },
     { label: 'Tentang Kami', href: '/about-us', order: 5 },
-    { label: 'Karir', href: '/career', order: 6 },
   ],
 }
 
