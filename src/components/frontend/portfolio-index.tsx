@@ -37,7 +37,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
           <img loading="lazy" decoding="async"
             src={featured.image}
             alt={featured.title}
-            className="aspect-[16/9] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] sm:aspect-[21/9]"
+            className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6 sm:p-10">
@@ -86,7 +86,7 @@ export default function PortfolioIndex({ projects }: { projects: PortfolioItem[]
                     <img loading="lazy" decoding="async"
                       src={project.image}
                       alt={project.title}
-                      className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     />
                     <span className="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-background/85 text-foreground opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
                       <ArrowUpRight className="size-4" />

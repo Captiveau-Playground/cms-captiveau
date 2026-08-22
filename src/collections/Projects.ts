@@ -212,6 +212,91 @@ export const Projects: CollectionConfig = {
       ],
     },
     {
+      name: 'caseStudy',
+      label: 'Case Study',
+      type: 'group',
+      admin: {
+        description:
+          'Narasi scrollytelling untuk halaman detail — client overview, bab cerita, dan testimoni. Kosongkan untuk memakai story otomatis.',
+      },
+      fields: [
+        {
+          name: 'client',
+          label: 'Client Overview',
+          type: 'group',
+          fields: [
+            { name: 'name', label: 'Client Name', type: 'text' },
+            { name: 'industry', label: 'Industry', type: 'text' },
+            { name: 'location', label: 'Location', type: 'text' },
+            { name: 'photo', label: 'Client Photo / Logo', type: 'upload', relationTo: 'media' },
+            { name: 'about', label: 'About the Client', type: 'textarea' },
+            { name: 'needs', label: 'Client Needs', type: 'textarea' },
+          ],
+        },
+        {
+          name: 'objective',
+          label: 'Objectives',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image / Mockup', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'approach',
+          label: 'Our Approach',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image / Mockup', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'challenge',
+          label: 'Challenges',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image / Mockup', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'outcome',
+          label: 'Outcome',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image / Mockup', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'reflection',
+          label: 'Reflection',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Title', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea' },
+            { name: 'image', label: 'Image / Mockup', type: 'upload', relationTo: 'media' },
+          ],
+        },
+        {
+          name: 'testimonials',
+          label: 'Testimonials',
+          type: 'array',
+          fields: [
+            { name: 'quote', label: 'Quote', type: 'textarea', required: true },
+            { name: 'name', label: 'Name', type: 'text' },
+            { name: 'role', label: 'Position / Company', type: 'text' },
+            { name: 'photo', label: 'Photo / Avatar', type: 'upload', relationTo: 'media' },
+          ],
+        },
+      ],
+    },
+    {
       name: 'size',
       label: 'Card Size',
       type: 'select',

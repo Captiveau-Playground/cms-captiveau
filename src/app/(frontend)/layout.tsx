@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { getSiteSettings, getServices } from '@/lib/cms'
 import { getCmsMainMenu, type CmsNavItem } from '@/lib/cms-data'
 import Navbar from '@/components/frontend/navbar'
+import SmoothScroll from '@/components/frontend/smooth-scroll'
 import { FooterPromptHandoffSection, type FooterSectionProps } from '@/components/blocks/footer'
 import Banner from '@/components/frontend/banner'
 import Integrations from '@/components/frontend/integrations'
@@ -170,6 +171,7 @@ export default async function FrontendLayout({
         <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
+        <SmoothScroll />
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />
         <Integrations analytics={settings?.analytics} cal={settings?.cal} />

@@ -385,6 +385,39 @@ export type Project = {
   stack: string[]
   story?: { heading: string; description: string; image: string | null }[]
   integrations?: string[]
+  caseStudy?: CaseStudy | null
+}
+
+export type CaseStudyChapter = {
+  title: string
+  description: string
+  image: string | null
+}
+
+export type CaseStudyClient = {
+  name: string
+  industry: string
+  location: string
+  photo: string | null
+  about: string
+  needs: string
+}
+
+export type CaseStudyTestimonial = {
+  quote: string
+  name: string
+  role: string
+  photo: string | null
+}
+
+export type CaseStudy = {
+  client: CaseStudyClient | null
+  objective: CaseStudyChapter | null
+  approach: CaseStudyChapter | null
+  challenge: CaseStudyChapter | null
+  outcome: CaseStudyChapter | null
+  reflection: CaseStudyChapter | null
+  testimonials: CaseStudyTestimonial[]
 }
 
 export const projects: Project[] = [
@@ -405,6 +438,57 @@ export const projects: Project[] = [
       { value: '<1s', label: 'Load time' },
     ],
     stack: ['Next.js', 'Tailwind CSS', 'Payload CMS', 'Vercel'],
+    caseStudy: {
+      client: {
+        name: 'Amertavana',
+        industry: 'Lifestyle & Retail',
+        location: 'Jakarta, Indonesia',
+        photo: '/client/amertavana.webp',
+        about:
+          'Merek lifestyle premium yang menjual produk skincare dan apparel melalui kanal retail serta online. Menjelang peluncuran seri kedua, mereka menyadari situs lama tidak lagi mewakili kelas brand-nya.',
+        needs:
+          'Situs company profile yang elegan dan cepat sebagai pusat cerita brand, katalog produk yang mudah dikelola tim non-teknis, serta fondasi analitik untuk mengukur trafik organik sejak hari pertama.',
+      },
+      objective: {
+        title: 'Mereposisi brand secara digital',
+        description:
+          'Membangun presence digital yang mencerminkan posisi premium Amertavana — dari first impression hingga detail interaksi terkecil — tanpa mengorbankan performa.',
+        image: '/client/amertavana.webp',
+      },
+      approach: {
+        title: 'Design system tipis, konten bernafas',
+        description:
+          'Kami memulai dari audit konten dan arsitektur informasi, lalu merancang design system yang tipis: tipografi editorial, whitespace lebar, satu warna aksen. Setiap keputusan visual kembali ke strategi brand.',
+        image: '/client/amertavana.webp',
+      },
+      challenge: {
+        title: 'Elegansi vs. kecepatan',
+        description:
+          'Foto produk beresolusi tinggi sering bentrok dengan target Lighthouse 90+. Kami membangun pipeline gambar modern (WebP, srcset, lazy-load) dan menulis komponen yang ringan — tanpa menurunkan standar visual.',
+        image: '/client/amertavana.webp',
+      },
+      outcome: {
+        title: 'Trafik organik naik 120%',
+        description:
+          'Situs baru diluncurkan dalam enam minggu. Hasilnya terukur sejak bulan pertama: trafik organik naik 120%, skor Lighthouse 98, dan waktu muat di bawah satu detik.',
+        image: '/client/amertavana.webp',
+      },
+      reflection: {
+        title: 'Batasan adalah arah',
+        description:
+          'Justru karena kami menetapkan batas performa sejak awal, maka setiap keputusan desain jadi lebih tajam dan cepat. Constraints mengarahkan, bukan membatasi.',
+        image: '/client/amertavana.webp',
+      },
+      testimonials: [
+        {
+          quote:
+            'Mereka benar-benar memahami positioning brand kami. Hasilnya elegan, cepat, dan terasa "kami" sejak detik pertama dibuka.',
+          name: 'Andini Putri',
+          role: 'Founder, Amertavana',
+          photo: null,
+        },
+      ],
+    },
   },
   {
     slug: 'cogan',
@@ -423,6 +507,57 @@ export const projects: Project[] = [
       { value: '+35%', label: 'Retention' },
     ],
     stack: ['React Native', 'Figma', 'Firebase'],
+    caseStudy: {
+      client: {
+        name: 'Cogan',
+        industry: 'F&B Loyalty',
+        location: 'Bandung, Indonesia',
+        photo: '/client/cogan.webp',
+        about:
+          'Ekosistem minuman lokal yang membangun program loyalitas antar gerai. Mereka butuh aplikasi mobile yang mudah dipakai semua kalangan dan tampil beda dari kompetitor.',
+        needs:
+          'Aplikasi yang intuitif dengan onboarding mulus, sistem poin yang jelas, dan visual yang membuat pelanggan bangga memakainya setiap hari.',
+      },
+      objective: {
+        title: 'Loyalitas lewat desain yang menyenangkan',
+        description:
+          'Merancang pengalaman mobile yang membuat pengguna kembali setiap hari — bukan lewat notifikasi, tapi lewat alur yang jelas dan momen visual yang memuaskan.',
+        image: '/client/cogan.webp',
+      },
+      approach: {
+        title: 'Prototipe di minggu pertama',
+        description:
+          'Kami membuat prototipe interaktif sejak minggu pertama dan mengujinya dengan pelanggan nyata di gerai. Feedback langsung membentuk ulang alur poin dan klaim hadiah.',
+        image: '/client/cogan.webp',
+      },
+      challenge: {
+        title: 'Poin yang adil untuk semua umur',
+        description:
+          'Desain harus tetap sederhana untuk pengguna baru, tapi tetap menantang bagi pengguna harian. Kami menyelesaikannya dengan hierarki visual dan microcopy yang tegas di tiap langkah.',
+        image: '/client/cogan.webp',
+      },
+      outcome: {
+        title: 'Rating 4.8 dan retensi naik',
+        description:
+          'Lebih dari 50 ribu unduhan pada bulan pertama dengan rating 4.8 dan retensi bulanan naik 35% dibanding program sebelumnya.',
+        image: '/client/cogan.webp',
+      },
+      reflection: {
+        title: 'Uji dengan pengguna sejak awal',
+        description:
+          'Prototipe yang diuji lebih awal menyelamatkan kami dari dua iterasi besar. Waktu riset adalah investasi yang kembali berkali-kali lipat.',
+        image: '/client/cogan.webp',
+      },
+      testimonials: [
+        {
+          quote:
+            'Aplikasinya terasa seperti produk dari tim internal sendiri. Pengguna kami nyaman, dan itu terlihat dari ulasan harian.',
+          name: 'Raka Wirawan',
+          role: 'COO, Cogan Group',
+          photo: null,
+        },
+      ],
+    },
   },
   {
     slug: 'emerintek',

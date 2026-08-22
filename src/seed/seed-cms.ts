@@ -230,6 +230,43 @@ async function main() {
       results: p.results.map((r) => ({ value: r.value, label: r.label })),
       size: p.size,
       order: i + 1,
+      ...(p.caseStudy
+        ? {
+            caseStudy: {
+              client: p.caseStudy.client
+                ? {
+                    name: p.caseStudy.client.name || '',
+                    industry: p.caseStudy.client.industry || '',
+                    location: p.caseStudy.client.location || '',
+                    photo: projMedia[i],
+                    about: p.caseStudy.client.about || '',
+                    needs: p.caseStudy.client.needs || '',
+                  }
+                : undefined,
+              objective: p.caseStudy.objective
+                ? { ...p.caseStudy.objective, image: projMedia[i] }
+                : undefined,
+              approach: p.caseStudy.approach
+                ? { ...p.caseStudy.approach, image: projMedia[i] }
+                : undefined,
+              challenge: p.caseStudy.challenge
+                ? { ...p.caseStudy.challenge, image: projMedia[i] }
+                : undefined,
+              outcome: p.caseStudy.outcome
+                ? { ...p.caseStudy.outcome, image: projMedia[i] }
+                : undefined,
+              reflection: p.caseStudy.reflection
+                ? { ...p.caseStudy.reflection, image: projMedia[i] }
+                : undefined,
+              testimonials: (p.caseStudy.testimonials || []).map((t) => ({
+                quote: t.quote,
+                name: t.name || '',
+                role: t.role || '',
+                photo: projMedia[i],
+              })),
+            },
+          }
+        : {}),
     }
     if (existing.docs.length > 0) {
       await payload.update({ collection: 'projects', id: existing.docs[0].id, data })

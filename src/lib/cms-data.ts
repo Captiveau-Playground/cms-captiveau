@@ -32,6 +32,8 @@ import {
   type Project as ProjectItem,
   type TestimonialItem,
   type TeamMember as TeamMemberItem,
+  type CaseStudy,
+  type CaseStudyChapter,
 } from './content'
 
 
@@ -277,9 +279,55 @@ async function _cached_getCmsProjects(): Promise<ProjectItem[]> {
           description: s.description || '',
           image: mediaUrl(s.image, 'hero') || mediaUrl(s.image) || null,
         })),
+      caseStudy: mapCaseStudy(p.caseStudy),
     }))
   } catch {
     return projectsFallback
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// Case Study — scrollytelling data for portfolio detail
+// ═══════════════════════════════════════════════════════
+function mapCaseChapter(c: any): CaseStudyChapter | null {
+  if (!c || (!c.title && !c.description)) return null
+  return {
+    title: c.title || '',
+    description: c.description || '',
+    image: mediaUrl(c.image, 'hero') || mediaUrl(c.image) || null,
+  }
+}
+
+function mapCaseStudy(cs: any): CaseStudy | null {
+  if (!cs) return null
+  const client = cs.client
+  const hasClient =
+    client && (client.name || client.industry || client.location || client.about || client.needs || client.photo)
+  return {
+    client: hasClient
+      ? {
+          name: client.name || '',
+          industry: client.industry || '',
+          location: client.location || '',
+          photo: mediaUrl(client.photo, 'hero') || mediaUrl(client.photo) || null,
+          about: client.about || '',
+          needs: client.needs || '',
+        }
+      : null,
+    objective: mapCaseChapter(cs.objective),
+    approach: mapCaseChapter(cs.approach),
+    challenge: mapCaseChapter(cs.challenge),
+    outcome: mapCaseChapter(cs.outcome),
+    reflection: mapCaseChapter(cs.reflection),
+    testimonials: (cs.testimonials || [])
+      .filter((t: any) => t.quote)
+      .slice(0, 2)
+      .map((t: any) => ({
+        quote: t.quote,
+        name: t.name || '',
+        role: t.role || '',
+        photo: mediaUrl(t.photo, 'thumbnail') || mediaUrl(t.photo) || null,
+      })),
   }
 }
 

@@ -801,6 +801,53 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Narasi scrollytelling untuk halaman detail — client overview, bab cerita, dan testimoni. Kosongkan untuk memakai story otomatis.
+   */
+  caseStudy?: {
+    client?: {
+      name?: string | null;
+      industry?: string | null;
+      location?: string | null;
+      photo?: (number | null) | Media;
+      about?: string | null;
+      needs?: string | null;
+    };
+    objective?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+    };
+    approach?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+    };
+    challenge?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+    };
+    outcome?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+    };
+    reflection?: {
+      title?: string | null;
+      description?: string | null;
+      image?: (number | null) | Media;
+    };
+    testimonials?:
+      | {
+          quote: string;
+          name?: string | null;
+          role?: string | null;
+          photo?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
   size?: ('large' | 'small') | null;
   featured?: boolean | null;
   order?: number | null;
@@ -1451,6 +1498,64 @@ export interface ProjectsSelect<T extends boolean = true> {
         description?: T;
         image?: T;
         id?: T;
+      };
+  caseStudy?:
+    | T
+    | {
+        client?:
+          | T
+          | {
+              name?: T;
+              industry?: T;
+              location?: T;
+              photo?: T;
+              about?: T;
+              needs?: T;
+            };
+        objective?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        approach?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        challenge?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        outcome?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        reflection?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              quote?: T;
+              name?: T;
+              role?: T;
+              photo?: T;
+              id?: T;
+            };
       };
   size?: T;
   featured?: T;
