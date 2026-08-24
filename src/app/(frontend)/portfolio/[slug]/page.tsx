@@ -335,61 +335,7 @@ export default async function ProjectDetailPage({
         </Section>
       )}
 
-      {/* 05 · The story — pinned film glide */}
-      {chapters.length >= 2 && <CaseStudyScroll chapters={chapters} />}
-
-      {/* 06 · The finale — outcome scoreboard */}
-      {project.results.length > 0 && (
-        <OutcomeFinale
-          results={project.results}
-          year={project.year}
-          headline={cs?.outcome?.title || undefined}
-        />
-      )}
-
-      {/* 07 · Afterword — quiet editorial close */}
-      {reflection && (
-        <Section className="py-24 sm:py-32">
-          <SeraMaskRule className="mb-12" />
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <Kicker>Reflection</Kicker>
-              <SeraBlurReveal>
-                <h2 className="max-w-xl text-balance text-3xl font-medium leading-[1.08] tracking-[-0.04em] text-foreground sm:text-4xl">
-                  {reflection.title || 'Reflection'}
-                </h2>
-              </SeraBlurReveal>
-              {reflection.description && (
-                <SeraBlurReveal>
-                  <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-muted-foreground sm:text-lg">
-                    {reflection.description}
-                  </p>
-                </SeraBlurReveal>
-              )}
-            </div>
-            <div className="lg:col-span-5 lg:col-start-8">
-              <SeraBlurReveal>
-                <div className="relative overflow-hidden border border-border bg-muted">
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src={reflection.image || project.image}
-                    alt={reflection.title}
-                    data-scroll
-                    data-scroll-speed="-0.08"
-                    className="h-auto w-full"
-                  />
-                  <span className="pointer-events-none absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.24em] text-white mix-blend-difference">
-                    reflection
-                  </span>
-                </div>
-              </SeraBlurReveal>
-            </div>
-          </div>
-        </Section>
-      )}
-
-      {/* 08 · Proof — what they said */}
+      {/* 05 · Proof — what they said */}
       {cs && cs.testimonials.length > 0 && (
         <Section muted className="py-16 sm:py-24">
           <div className="mb-10 border-b border-border pb-8">
@@ -437,6 +383,60 @@ export default async function ProjectDetailPage({
                 </figure>
               </Reveal>
             ))}
+          </div>
+        </Section>
+      )}
+
+      {/* 06 · The story — pinned film glide */}
+      {chapters.length >= 2 && <CaseStudyScroll chapters={chapters} />}
+
+      {/* 07 · The finale — outcome scoreboard */}
+      {project.results.length > 0 && (
+        <OutcomeFinale
+          results={project.results}
+          year={project.year}
+          headline={cs?.outcome?.title || undefined}
+        />
+      )}
+
+      {/* 08 · Afterword — quiet editorial close */}
+      {reflection && (
+        <Section className="py-24 sm:py-32">
+          <SeraMaskRule className="mb-12" />
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <Kicker>Reflection</Kicker>
+              <SeraBlurReveal>
+                <h2 className="max-w-xl text-balance text-3xl font-medium leading-[1.08] tracking-[-0.04em] text-foreground sm:text-4xl">
+                  {reflection.title || 'Reflection'}
+                </h2>
+              </SeraBlurReveal>
+              {reflection.description && (
+                <SeraBlurReveal>
+                  <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-muted-foreground sm:text-lg">
+                    {reflection.description}
+                  </p>
+                </SeraBlurReveal>
+              )}
+            </div>
+            <div className="lg:col-span-5 lg:col-start-8">
+              <SeraBlurReveal>
+                <div className="relative overflow-hidden border border-border bg-muted">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={reflection.image || project.image}
+                    alt={reflection.title}
+                    data-scroll
+                    data-scroll-speed="-0.08"
+                    className="h-auto w-full"
+                  />
+                  <span className="pointer-events-none absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.24em] text-white mix-blend-difference">
+                    reflection
+                  </span>
+                </div>
+              </SeraBlurReveal>
+            </div>
           </div>
         </Section>
       )}

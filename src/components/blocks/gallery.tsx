@@ -116,12 +116,14 @@ export function GalleryColumnsSection({
   const reduceMotion = useReducedMotion();
 
   const items = projects.map(toGalleryItem)
-  const left = items.slice(0, 4).map((item, i) => ({
+  // Interleave kiri/kanan (parity) supaya jumlah item di kedua kolom seimbang
+  // — dengan 4 item: kiri 2, kanan 2. Item ganjil di kanan, genap di kiri.
+  const left = items.filter((_, i) => i % 2 === 0).map((item, i) => ({
     item,
     slug: item.id,
     height: leftColumnHeights[i % leftColumnHeights.length],
   }))
-  const right = items.slice(4, 8).map((item, i) => ({
+  const right = items.filter((_, i) => i % 2 === 1).map((item, i) => ({
     item,
     slug: item.id,
     height: rightColumnHeights[i % rightColumnHeights.length],

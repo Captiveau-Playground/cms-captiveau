@@ -94,7 +94,7 @@ export default function OutcomeFinale({
               return (
                 <div
                   key={r.label}
-                  className="border-t border-border py-6 first:pt-0 sm:py-7"
+                  className="border-t border-border py-6 sm:py-7"
                 >
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     result {String(i + 2).padStart(2, '0')} — {r.label}

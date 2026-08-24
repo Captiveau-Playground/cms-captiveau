@@ -76,7 +76,7 @@ export default async function HomePage() {
       )}
 
       <GalleryColumnsSection
-        projects={data.projects}
+        projects={data.projects.slice(0, 4)}
         metrics={data.homepage.stats.slice(0, 3).map((s) => ({
           value: `${s.value}${s.suffix}`,
           label: s.label,
