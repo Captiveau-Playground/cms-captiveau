@@ -14,12 +14,17 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "pnpm run deploy:database && pnpm run deploy:app",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "cf-typegen": "wrangler types --include-runtime=false --env-interface CloudflareEnv cloudflare-env.d.ts",
     "build:cf": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts opennextjs-cloudflare build",
-    "deploy:database": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate",
-    "migrate:create:cf": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts NODE_ENV=development PAYLOAD_SECRET=ignore payload migrate:create",
+    "deploy:database": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts CLOUDFLARE_ENV=production NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate",
+    "migrate:create:cf": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts CLOUDFLARE_ENV=production NODE_ENV=development PAYLOAD_SECRET=ignore payload migrate:create",
     "deploy:app": "pnpm run build:cf && opennextjs-cloudflare deploy",
-    "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy:staging": "pnpm run deploy:database:staging && pnpm run build:cf && opennextjs-cloudflare deploy --env staging",
+    "deploy:app:staging": "pnpm run build:cf && opennextjs-cloudflare deploy --env staging",
+    "deploy:database:staging": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts CLOUDFLARE_ENV=staging NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate",
+    "migrate:create:staging": "PAYLOAD_CONFIG_PATH=payload.cloudflare.ts CLOUDFLARE_ENV=staging NODE_ENV=development PAYLOAD_SECRET=ignore payload migrate:create",
+    "preview:staging": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env staging"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

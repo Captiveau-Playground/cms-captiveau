@@ -15,13 +15,13 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-d1-sqlite'
  */
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   // ── New: page-ctas global ──
-  await db.run(sql`CREATE TABLE \`page_ctas\` (
+  await db.run(sql`CREATE TABLE IF NOT EXISTS \`page_ctas\` (
   	\`id\` integer PRIMARY KEY NOT NULL,
   	\`updated_at\` text,
   	\`created_at\` text
   );
   `)
-  await db.run(sql`CREATE TABLE \`page_ctas_items\` (
+  await db.run(sql`CREATE TABLE IF NOT EXISTS \`page_ctas_items\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
   	\`id\` text PRIMARY KEY NOT NULL,
@@ -37,16 +37,23 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	FOREIGN KEY (\`_parent_id\`) REFERENCES \`page_ctas\`(\`id\`) ON UPDATE no action ON DELETE cascade
   );
   `)
-  await db.run(sql`CREATE INDEX \`page_ctas_items_order_idx\` ON \`page_ctas_items\` (\`_order\`);`)
-  await db.run(sql`CREATE INDEX \`page_ctas_items_parent_id_idx\` ON \`page_ctas_items\` (\`_parent_id\`);`)
+  await db.run(sql`CREATE INDEX IF NOT EXISTS \`page_ctas_items_order_idx\` ON \`page_ctas_items\` (\`_order\`);`)
+  await db.run(sql`CREATE INDEX IF NOT EXISTS \`page_ctas_items_parent_id_idx\` ON \`page_ctas_items\` (\`_parent_id\`);`)
 
   // ── Removed: homepage careerBenefits array ──
   await db.run(sql`DROP TABLE IF EXISTS \`homepage_career_benefits\`;`)
 
   // ── Removed: homepage CTA columns (now managed via page-ctas global) ──
-  await db.run(sql`ALTER TABLE \`homepage\` DROP COLUMN \`cta_title\`;`)
-  await db.run(sql`ALTER TABLE \`homepage\` DROP COLUMN \`cta_subtitle\`;`)
-  await db.run(sql`ALTER TABLE \`homepage\` DROP COLUMN \`cta_button_text\`;`)
+  // SQLite has no `ALTER TABLE ... DROP COLUMN IF EXISTS`, so guard each
+  // drop — the columns may already be gone on databases synced via push
+  // or cloned from production.
+  for (const col of ['cta_title', 'cta_subtitle', 'cta_button_text']) {
+    try {
+      await db.run(sql.raw(`ALTER TABLE \`homepage\` DROP COLUMN \`${col}\`;`))
+    } catch {
+      // column already dropped — nothing to do
+    }
+  }
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {

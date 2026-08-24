@@ -12,7 +12,8 @@
 		"binding": "ASSETS"
 	},
 	"vars": {
-		"CLOUDFLARE_DEPLOY": "true"
+		"CLOUDFLARE_DEPLOY": "true",
+		"ENVIRONMENT": "production"
 	},
 	"services": [
 		{
@@ -43,5 +44,83 @@
 	],
 	"images": {
 		"binding": "IMAGES"
+	},
+	// Production mirror — explicitly named so `remoteBindings` is honored by
+	// getPlatformProxy during CLI migrations/seeds (environment: undefined
+	// falls back to local persistence). Deploy with: pnpm run deploy
+	"env": {
+		"production": {
+			"name": "cms-captiveau",
+			"vars": {
+				"CLOUDFLARE_DEPLOY": "true",
+				"ENVIRONMENT": "production"
+			},
+			"services": [
+				{
+					"binding": "WORKER_SELF_REFERENCE",
+					"service": "cms-captiveau"
+				}
+			],
+			"d1_databases": [
+				{
+					"binding": "D1",
+					"database_name": "cms-captiveau-db",
+					"database_id": "5a43e099-4b8e-4d52-b9b3-df7a4ae1a38b",
+					"migrations_dir": "src/migrations"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "NEXT_INC_CACHE_R2_BUCKET",
+					"bucket_name": "cms-captiveau-opennext-cache"
+				},
+				{
+					// Payload media storage
+					"binding": "R2",
+					"bucket_name": "cms-captiveau-media"
+				}
+			],
+			"images": {
+				"binding": "IMAGES"
+			}
+		},
+		// Staging mirror — isolated worker, D1, R2 buckets, and preview URL.
+		// Deploy with: pnpm run deploy:staging
+		"staging": {
+			"name": "cms-captiveau-staging",
+			"vars": {
+				"CLOUDFLARE_DEPLOY": "true",
+				"ENVIRONMENT": "staging",
+				"PAYLOAD_PUBLIC_SERVER_URL": "https://cms-captiveau-staging.mulaiplus.workers.dev"
+			},
+			"services": [
+				{
+					"binding": "WORKER_SELF_REFERENCE",
+					"service": "cms-captiveau-staging"
+				}
+			],
+			"d1_databases": [
+				{
+					"binding": "D1",
+					"database_name": "cms-captiveau-db-staging",
+					"database_id": "eba3bc0e-3f35-4141-9dc6-3d489359d7a6",
+					"migrations_dir": "src/migrations"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "NEXT_INC_CACHE_R2_BUCKET",
+					"bucket_name": "cms-captiveau-opennext-cache-staging"
+				},
+				{
+					// Payload media storage (staging)
+					"binding": "R2",
+					"bucket_name": "cms-captiveau-media-staging"
+				}
+			],
+			"images": {
+				"binding": "IMAGES"
+			}
+		}
 	}
 }
