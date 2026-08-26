@@ -184,25 +184,47 @@ export interface LogoCarouselSwapperProps
   stagger?: number;
 }
 
+/**
+ * Fills rows to `columns` slots using only DISTINCT logos — never repeats an
+ * item within a row. Fillers are taken from the whole pool (other rows) when
+ * the row is shorter than `columns`, so a single show never displays the same
+ * logo twice.
+ */
 function normalizeRows(
   rows: LogoCarouselSwapperRow[],
   columns: number
 ): LogoCarouselSwapperRow[] {
+  const pool: LogoCarouselSwapperItem[] = [];
+  for (const row of rows) {
+    for (const item of row) {
+      if (item?.src && !pool.some((p) => p.src === item.src)) {
+        pool.push(item);
+      }
+    }
+  }
+
   return rows
     .map((row) => {
-      const next = row.slice(0, columns);
-
-      while (next.length < columns) {
-        const fallback = row[next.length % Math.max(row.length, 1)];
-        if (!fallback) {
-          break;
+      const next: LogoCarouselSwapperItem[] = [];
+      for (const item of row) {
+        if (item?.src && !next.some((x) => x.src === item.src)) {
+          next.push(item);
         }
-        next.push(fallback);
+      }
+
+      let fill = 0;
+      while (next.length < columns) {
+        const candidate = pool[fill % Math.max(pool.length, 1)];
+        fill += 1;
+        if (!candidate || next.some((x) => x.src === candidate.src)) {
+          continue;
+        }
+        next.push(candidate);
       }
 
       return next;
     })
-    .filter((row) => row.length === columns && row.every((item) => item.src));
+    .filter((row) => row.some((item) => item.src));
 }
 
 interface LogoSlotProps {

@@ -16,12 +16,16 @@ const fallbackLogos = [
  * Simple client-logo strip — placed right under the hero.
  */
 export default function SocialProof({ homepage }: { homepage: CmsHomepage }) {
-  const logos = (homepage.socialProofLogos.length ? homepage.socialProofLogos : fallbackLogos).filter((l): l is string => !!l)
-  const half = Math.ceil(logos.length / 2)
-  const rows: LogoCarouselSwapperRow[] = [
-    logos.slice(0, half).map((src) => ({ src, alt: 'partner' })),
-    logos.slice(half).map((src) => ({ src, alt: 'partner' })),
-  ]
+  const source = homepage.socialProofLogos.length ? homepage.socialProofLogos : fallbackLogos
+  // Dedupe by src — a logo added twice in the CMS must never render twice.
+  const logos = source
+    .filter((l): l is string => !!l)
+    .filter((l, i, arr) => arr.indexOf(l) === i)
+
+  // Interleave (even/odd indices) so each show/row holds different logos.
+  const left = logos.filter((_, i) => i % 2 === 0).map((src) => ({ src, alt: 'partner' }))
+  const right = logos.filter((_, i) => i % 2 === 1).map((src) => ({ src, alt: 'partner' }))
+  const rows: LogoCarouselSwapperRow[] = [left, right]
   return (
     <Section className="border-y border-border py-12 sm:py-16">
       <div className="mb-8 text-center">
