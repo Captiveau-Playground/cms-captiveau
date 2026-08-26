@@ -17,6 +17,8 @@ next-env.d.ts
 # Uploads
 media/
 public/media/
+# ...except the payload media file API route (gitignore 'media/' matches any dir named media)
+!src/app/(payload)/api/media/
 
 # Agent Skills
 .agents/

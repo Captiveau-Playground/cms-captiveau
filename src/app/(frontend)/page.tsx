@@ -14,6 +14,10 @@ const CtaSeraSection = dynamic(() => import('@/components/blocks/cta').then((m) 
 const Faq = dynamic(() => import('@/components/frontend/home/faq'), { ssr: true })
 const ContactSection = dynamic(() => import('@/components/frontend/home/contact'), { ssr: true })
 import { getHomeData, getCmsPageCta } from '@/lib/cms-data'
+
+// ISR: re-renders at runtime with real D1 data (build-time uses placeholder
+// DB, so CMS edits — e.g. social-proof logos — appear within this window).
+export const revalidate = 120
 import { formatDateLong } from '@/lib/date'
 import type { Metadata } from 'next'
 import { buildMetadata } from '@/lib/seo'

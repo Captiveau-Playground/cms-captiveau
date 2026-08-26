@@ -24,9 +24,14 @@ export default function SocialProof({ homepage }: { homepage: CmsHomepage }) {
   ]
   return (
     <Section className="border-y border-border py-12 sm:py-16">
-      <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-        {homepage.socialProofLabel || 'Dipercaya klien di berbagai industri'}
-      </p>
+      <div className="mb-8 text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          {homepage.socialProofLabel || 'Dipercaya klien di berbagai industri'}
+        </p>
+        {homepage.socialProofDescription && (
+          <p className="mt-2 text-sm text-muted-foreground">{homepage.socialProofDescription}</p>
+        )}
+      </div>
       <LogoCarouselSwapper
         aria-label="Client & partner logos"
         rows={rows}

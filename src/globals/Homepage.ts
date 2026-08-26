@@ -138,6 +138,10 @@ export const Homepage: GlobalConfig = {
               name: 'socialProofLogos',
               label: 'Logos',
               type: 'array',
+              admin: {
+                description:
+                  'Unggah logo di sini (lewat Media Collection). PNG/JPG otomatis dikonversi ke WebP saat upload; SVG tetap vektor.',
+              },
               fields: [{ name: 'logo', type: 'upload', relationTo: 'media' }],
             },
           ],
