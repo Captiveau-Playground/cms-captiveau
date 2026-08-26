@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@payloadcms/drizzle': 14590aa682c91140039731b1fa68fdaa77de029673f11e62f315ff55a8c75dce
+  '@payloadcms/drizzle': 2c0c64136327257f914fbeaf06545f0be2d850c949b888345e36fe0ac34a34c5
   '@payloadcms/next': 831b0fd5ea86987380272c795ba8c2c2db1d6a52358d8bdaf42ec556b98434fb
 
 importers:
@@ -7081,7 +7081,7 @@ snapshots:
 
   '@payloadcms/db-d1-sqlite@3.88.0(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)':
     dependencies:
-      '@payloadcms/drizzle': 3.88.0(patch_hash=14590aa682c91140039731b1fa68fdaa77de029673f11e62f315ff55a8c75dce)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)
+      '@payloadcms/drizzle': 3.88.0(patch_hash=2c0c64136327257f914fbeaf06545f0be2d850c949b888345e36fe0ac34a34c5)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)
       console-table-printer: 2.12.1
       drizzle-kit: 0.31.7
       drizzle-orm: 0.45.2(@types/pg@8.20.0)(pg@8.20.0)
@@ -7123,7 +7123,7 @@ snapshots:
 
   '@payloadcms/db-postgres@3.88.0(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))':
     dependencies:
-      '@payloadcms/drizzle': 3.88.0(patch_hash=14590aa682c91140039731b1fa68fdaa77de029673f11e62f315ff55a8c75dce)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)
+      '@payloadcms/drizzle': 3.88.0(patch_hash=2c0c64136327257f914fbeaf06545f0be2d850c949b888345e36fe0ac34a34c5)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)
       '@types/pg': 8.20.0
       console-table-printer: 2.12.1
       drizzle-kit: 0.31.7
@@ -7164,7 +7164,7 @@ snapshots:
       - sqlite3
       - supports-color
 
-  '@payloadcms/drizzle@3.88.0(patch_hash=14590aa682c91140039731b1fa68fdaa77de029673f11e62f315ff55a8c75dce)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)':
+  '@payloadcms/drizzle@3.88.0(patch_hash=2c0c64136327257f914fbeaf06545f0be2d850c949b888345e36fe0ac34a34c5)(@types/pg@8.20.0)(payload@3.88.0(graphql@16.14.2)(typescript@5.9.3))(pg@8.20.0)':
     dependencies:
       console-table-printer: 2.12.1
       dequal: 2.0.3

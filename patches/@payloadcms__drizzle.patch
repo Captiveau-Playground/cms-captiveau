@@ -1,26 +1,34 @@
 diff --git a/dist/postgres/requireDrizzleKit.js b/dist/postgres/requireDrizzleKit.js
-index d5bb5772d511e6ec13f3e903c7bbf4c83711a7a0..1d2c94668c66c1756a0be763992d6200db33b5f9 100644
 --- a/dist/postgres/requireDrizzleKit.js
 +++ b/dist/postgres/requireDrizzleKit.js
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,12 @@
  import { createRequire } from 'module';
  const require = createRequire(import.meta.url);
++// 'drizzle-kit/api' is built at runtime so no bundler can statically resolve or
++// constant-fold the require target — drizzle-kit (and its esbuild/libsql native
++// deps) never enters the Next/OpenNext worker bundle. It still resolves
++// normally when the Payload CLI runs this file unbundled on Node.
++const drizzleKitApi = String.fromCharCode(100,114,105,122,122,108,101,45,107,105,116,47,97,112,105);
  export const requireDrizzleKit = ()=>{
 -    const { generateDrizzleJson, generateMigration, pushSchema, upPgSnapshot } = require('drizzle-kit/api');
-+    const { generateDrizzleJson, generateMigration, pushSchema, upPgSnapshot } = require('drizzle' + '-kit/api');
++    const { generateDrizzleJson, generateMigration, pushSchema, upPgSnapshot } = require(drizzleKitApi);
      return {
          generateDrizzleJson,
          generateMigration,
 diff --git a/dist/sqlite/requireDrizzleKit.js b/dist/sqlite/requireDrizzleKit.js
-index e2ede3c94a6138c8746f018af01c14cfefbbd920..95f511f7c59b0a0259f50309dcdf954730266a1c 100644
 --- a/dist/sqlite/requireDrizzleKit.js
 +++ b/dist/sqlite/requireDrizzleKit.js
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,12 @@
  import { createRequire } from 'module';
  const require = createRequire(import.meta.url);
++// 'drizzle-kit/api' is built at runtime so no bundler can statically resolve or
++// constant-fold the require target — drizzle-kit (and its esbuild/libsql native
++// deps) never enters the Next/OpenNext worker bundle. It still resolves
++// normally when the Payload CLI runs this file unbundled on Node.
++const drizzleKitApi = String.fromCharCode(100,114,105,122,122,108,101,45,107,105,116,47,97,112,105);
  export const requireDrizzleKit = ()=>{
 -    const { generateSQLiteDrizzleJson, generateSQLiteMigration, pushSQLiteSchema } = require('drizzle-kit/api');
-+    const { generateSQLiteDrizzleJson, generateSQLiteMigration, pushSQLiteSchema } = require('drizzle' + '-kit/api');
++    const { generateSQLiteDrizzleJson, generateSQLiteMigration, pushSQLiteSchema } = require(drizzleKitApi);
      return {
          generateDrizzleJson: generateSQLiteDrizzleJson,
          generateMigration: generateSQLiteMigration,
