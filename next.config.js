@@ -1,9 +1,17 @@
 import { withPayload } from '@payloadcms/next/withPayload'
+import path from 'path'
 
 // Cloudflare build uses payload.cloudflare.ts (D1 + R2); local dev uses
 // payload.config.ts (PostgreSQL). `turbopack.resolveAlias` overrides the
 // `@payload-config` tsconfig path so the right adapter is bundled.
 const isCloudflareBuild = process.env.PAYLOAD_CONFIG_PATH === 'payload.cloudflare.ts'
+
+// drizzle-kit is migration-only tooling (Payload CLI). It must never be
+// bundled into the app: bundlers trace the D1 adapter's lazy
+// `require('drizzle-kit/api')` into esbuild native binaries and dynamic
+// `@libsql/${target}` requires. Alias it to a stub for both bundlers so the
+// bundle stays self-contained (the real package is only needed on Node).
+const drizzleKitStub = path.join(process.cwd(), 'src/lib/drizzle-kit-stub.ts')
 
 /** @type {import('next').NextConfig} */
 const securityHeaders = [
@@ -18,12 +26,6 @@ const securityHeaders = [
 
 const nextConfig = {
   output: 'standalone',
-  // drizzle-kit (and its esbuild/libsql native deps) is migration-only tooling
-  // used by the Payload CLI — never at request runtime. Bundling it into the
-  // server bundle makes Turbopack traverse esbuild's platform binaries
-  // (@esbuild/linux-x64 README.md + bin/esbuild) and drizzle-kit's dynamic
-  // `@libsql/${target}` require, which breaks the build on Linux CI.
-  serverExternalPackages: ['drizzle-kit'],
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
   },
@@ -52,10 +54,20 @@ const nextConfig = {
         turbopack: {
           resolveAlias: {
             '@payload-config': './payload.cloudflare.ts',
+            'drizzle-kit': drizzleKitStub,
+            'drizzle-kit/api': drizzleKitStub,
           },
         },
       }
     : {}),
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'drizzle-kit': drizzleKitStub,
+      'drizzle-kit/api': drizzleKitStub,
+    }
+    return config
+  },
 }
 
 export default withPayload(nextConfig)
