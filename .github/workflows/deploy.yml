@@ -69,6 +69,12 @@ jobs:
             exit 1
           fi
           npx wrangler whoami
+          # R2 canary — opennext provisions the incremental-cache bucket via the
+          # R2 REST API at deploy time; fail early if the token lacks R2 access.
+          if ! npx wrangler r2 bucket list >/dev/null 2>&1; then
+            echo "::error::CLOUDFLARE_API_TOKEN tidak punya permission R2. Tambahkan Account · R2 Storage · Edit pada token API Cloudflare."
+            exit 1
+          fi
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -122,6 +128,12 @@ jobs:
             exit 1
           fi
           npx wrangler whoami
+          # R2 canary — opennext provisions the incremental-cache bucket via the
+          # R2 REST API at deploy time; fail early if the token lacks R2 access.
+          if ! npx wrangler r2 bucket list >/dev/null 2>&1; then
+            echo "::error::CLOUDFLARE_API_TOKEN tidak punya permission R2. Tambahkan Account · R2 Storage · Edit pada token API Cloudflare."
+            exit 1
+          fi
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
