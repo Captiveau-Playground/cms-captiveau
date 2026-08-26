@@ -58,6 +58,18 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Verify Cloudflare auth (fail fast if secrets missing)
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Secret CLOUDFLARE_API_TOKEN belum di-set di GitHub (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Secret CLOUDFLARE_ACCOUNT_ID belum di-set di GitHub."
+            exit 1
+          fi
+          npx wrangler whoami
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -98,6 +110,18 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+
+      - name: Verify Cloudflare auth (fail fast if secrets missing)
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Secret CLOUDFLARE_API_TOKEN belum di-set di GitHub (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Secret CLOUDFLARE_ACCOUNT_ID belum di-set di GitHub."
+            exit 1
+          fi
+          npx wrangler whoami
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
