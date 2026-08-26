@@ -18,6 +18,12 @@ const securityHeaders = [
 
 const nextConfig = {
   output: 'standalone',
+  // drizzle-kit (and its esbuild/libsql native deps) is migration-only tooling
+  // used by the Payload CLI — never at request runtime. Bundling it into the
+  // server bundle makes Turbopack traverse esbuild's platform binaries
+  // (@esbuild/linux-x64 README.md + bin/esbuild) and drizzle-kit's dynamic
+  // `@libsql/${target}` require, which breaks the build on Linux CI.
+  serverExternalPackages: ['drizzle-kit'],
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
   },
