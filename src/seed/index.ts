@@ -31,9 +31,8 @@ async function seed() {
   console.log('✅ Admin user created: admin@captiveau.id / Admin123!')
 }
 
-seed()
-  .catch((err) => {
-    console.error('Seed failed:', err)
-    process.exit(1)
-  })
-  .then(() => process.exit(0))
+// Top-level await: `payload run` hanya menunggu evaluasi modul.
+await seed().catch((err) => {
+  console.error('Seed failed:', err)
+  process.exit(1)
+})
