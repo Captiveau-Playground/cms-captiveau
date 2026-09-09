@@ -943,7 +943,7 @@ export interface Event {
    */
   status?: ('upcoming' | 'ongoing' | 'past' | 'archived') | null;
   /**
-   * Tempel kode embed Google Form di sini (Google Form → Kirim → < > Sematkan). Akan dirender di halaman detail sebagai formulir pendaftaran.
+   * Tempel kode embed Google Form di sini (Google Form → Kirim → < > Sematkan). Contoh: <iframe src="https://docs.google.com/forms/d/e/.../viewform?embedded=true" ...></iframe>. Akan dirender di halaman detail sebagai formulir pendaftaran.
    */
   googleFormEmbed?: string | null;
   /**
