@@ -104,6 +104,14 @@ export default async function FrontendLayout({
       .filter(Boolean)
       .join(', ')
 
+  const footerWa = (settings?.whatsappNumbers || [])
+    .filter((w) => w.number)
+    .map((w) => ({
+      label: w.label || 'WhatsApp',
+      number: String(w.number).replace(/\D/g, ''),
+      isPrimary: !!w.isPrimary,
+    }))
+
   const footerProps: FooterSectionProps = {
     companyName: settings?.companyName || undefined,
     email,
@@ -112,13 +120,7 @@ export default async function FrontendLayout({
     socialLinks: settings?.socialLinks || [],
     navData,
     services: services.map((s) => ({ title: s.title, slug: s.slug, category: s.category })),
-    whatsappNumbers: (settings?.whatsappNumbers || [])
-      .filter((w) => w.number)
-      .map((w) => ({
-        label: w.label || 'WhatsApp',
-        number: String(w.number).replace(/\D/g, ''),
-        isPrimary: !!w.isPrimary,
-      })),
+    whatsappNumbers: footerWa.length > 0 ? footerWa : undefined,
     quote: settings?.footer?.quote || undefined,
     statusLabel: settings?.footer?.statusLabel || undefined,
   }
