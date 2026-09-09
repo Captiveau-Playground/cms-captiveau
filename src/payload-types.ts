@@ -923,6 +923,10 @@ export interface Event {
   description: string;
   image?: (number | null) | Media;
   /**
+   * Alternatif: tempel URL file gambar langsung (mis. https://captiveau.id/api/media/file/…). Dipakai bila memilih dari Media Library bermasalah. Jika diisi, URL ini yang tampil.
+   */
+  imageUrl?: string | null;
+  /**
    * Menentukan rasio tampilan gambar di kartu & halaman detail. Pilih "Otomatis" untuk menampilkan poster sesuai proporsi aslinya tanpa terpotong.
    */
   imageAspect?: ('auto' | '21/9' | '16/9' | '4/3' | '1/1') | null;
@@ -1692,6 +1696,7 @@ export interface EventsSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   image?: T;
+  imageUrl?: T;
   imageAspect?: T;
   startDate?: T;
   endDate?: T;

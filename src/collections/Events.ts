@@ -56,6 +56,16 @@ export const Events: CollectionConfig = {
       relationTo: 'media',
     },
     {
+      name: 'imageUrl',
+      label: 'Cover / Poster URL (opsional)',
+      type: 'text',
+      admin: {
+        description:
+          'Alternatif: tempel URL file gambar langsung (mis. https://captiveau.id/api/media/file/…). Dipakai bila memilih dari Media Library bermasalah. Jika diisi, URL ini yang tampil.',
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'imageAspect',
       label: 'Rasio Cover / Poster',
       type: 'select',

@@ -563,7 +563,7 @@ async function _cached_getCmsEvents(): Promise<EventItem[]> {
       slug: e.slug || '',
       title: e.title || '',
       description: e.description || '',
-      image: mediaUrl(e.image, 'hero') || mediaUrl(e.image) || null,
+      image: e.imageUrl || mediaUrl(e.image, 'hero') || mediaUrl(e.image) || null,
       imageAspect: (['auto', '21/9', '16/9', '4/3', '1/1'] as const).includes(e.imageAspect)
         ? e.imageAspect
         : 'auto',
