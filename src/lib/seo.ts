@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 const SITE_NAME = 'Captiveau'
-const DEFAULT_HOST = 'https://cms-captiveau.mulaiplus.workers.dev'
+const DEFAULT_HOST = 'https://captiveau.id'
 
 export const DEFAULT_OG_IMAGE = '/logo.webp'
 
