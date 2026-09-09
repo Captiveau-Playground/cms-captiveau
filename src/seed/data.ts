@@ -30,10 +30,32 @@ export const siteSettings = {
 export const mainMenu = {
   items: [
     { label: 'Beranda', href: '/', order: 1 },
-    { label: 'Layanan', href: '/services', order: 2 },
-    { label: 'Portofolio', href: '/portfolios', order: 3 },
-    { label: 'Artikel', href: '/articles', order: 4 },
-    { label: 'Tentang Kami', href: '/about-us', order: 5 },
+    {
+      label: 'Layanan',
+      href: '/services',
+      order: 2,
+      children: [
+        { label: 'Landing Page', href: '/services/landing-page', description: 'Halaman konversi tinggi untuk bisnis Anda' },
+        { label: 'E-Commerce', href: '/services/e-commerce', description: 'Platform toko online end-to-end' },
+        { label: 'Company Profile', href: '/services/company-profile', description: 'Profil perusahaan yang profesional' },
+        { label: 'UI/UX Design', href: '/services/uiux-design', description: 'Desain produk digital yang tepat' },
+        { label: 'Web Development', href: '/services/web-development', description: 'Aplikasi web berperforma tinggi' },
+        { label: 'Mobile App', href: '/services/mobile-app', description: 'Aplikasi iOS & Android' },
+      ],
+    },
+    { label: 'Portofolio', href: '/portfolio', order: 3 },
+    { label: 'Acara', href: '/events', order: 4 },
+    { label: 'Artikel', href: '/blog', order: 5 },
+    {
+      label: 'Perusahaan',
+      href: '/about',
+      order: 6,
+      children: [
+        { label: 'Tentang Kami', href: '/about', description: 'Cerita & tim di balik Captiveau' },
+        { label: 'FAQ', href: '/faq', description: 'Pertanyaan yang sering diajukan' },
+        { label: 'Kontak', href: '/contact', description: 'Konsultasi gratis, tanpa komitmen' },
+      ],
+    },
   ],
 }
 

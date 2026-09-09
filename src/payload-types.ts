@@ -1795,6 +1795,26 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Bisa lebih dari satu (mis. Sales, Support, Umum). Nomor pertama yang ditandai utamakan akan dipakai tombol/formulir WhatsApp.
+   */
+  whatsappNumbers?:
+    | {
+        /**
+         * Contoh: Sales, Support, Umum
+         */
+        label?: string | null;
+        /**
+         * Format internasional, contoh: 6281234567890
+         */
+        number: string;
+        /**
+         * Dipakai untuk tombol/formulir WhatsApp jika lebih dari satu nomor.
+         */
+        isPrimary?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
   address?: {
     street?: string | null;
     city?: string | null;
@@ -2048,6 +2068,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         type?: T;
         value?: T;
+        id?: T;
+      };
+  whatsappNumbers?:
+    | T
+    | {
+        label?: T;
+        number?: T;
+        isPrimary?: T;
         id?: T;
       };
   address?:

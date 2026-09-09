@@ -39,7 +39,7 @@ export default async function PromoPage({
 
   // Decide CTA: cal / whatsapp / contact
   const ctaType = promo.cta.type || 'cal'
-  const waNumber = settings?.contactOptions?.whatsappNumber || (settings?.whatsapp || '').replace(/\D/g, '')
+  const waNumber = settings?.contactOptions?.whatsappNumber || settings?.primaryWhatsapp || (settings?.whatsapp || '').replace(/\D/g, '')
   const ctaLabel = promo.cta.label || 'Klaim Promo'
 
   const renderCta = (label: string, onDark = false) => {

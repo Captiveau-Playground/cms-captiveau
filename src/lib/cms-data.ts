@@ -115,12 +115,30 @@ export type CmsNavItem = {
 
 const defaultMenu: CmsNavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
+  {
+    label: 'Services',
+    href: '/services',
+    children: [
+      { label: 'Landing Page', href: '/services/landing-page', description: 'Halaman konversi tinggi untuk bisnis Anda' },
+      { label: 'E-Commerce', href: '/services/e-commerce', description: 'Platform toko online end-to-end' },
+      { label: 'Company Profile', href: '/services/company-profile', description: 'Profil perusahaan yang profesional' },
+      { label: 'UI/UX Design', href: '/services/uiux-design', description: 'Desain produk digital yang tepat' },
+      { label: 'Web Development', href: '/services/web-development', description: 'Aplikasi web berperforma tinggi' },
+      { label: 'Mobile App', href: '/services/mobile-app', description: 'Aplikasi iOS & Android' },
+    ],
+  },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Events', href: '/events' },
   { label: 'Blog', href: '/blog' },
-  { label: 'About Us', href: '/about' },
-  { label: 'FAQ', href: '/faq' },
+  {
+    label: 'Company',
+    href: '/about',
+    children: [
+      { label: 'About Us', href: '/about', description: 'Cerita & tim di balik Captiveau' },
+      { label: 'FAQ', href: '/faq', description: 'Pertanyaan yang sering diajukan' },
+      { label: 'Contact', href: '/contact', description: 'Konsultasi gratis, tanpa komitmen' },
+    ],
+  },
 ]
 
 async function _cached_getCmsMainMenu(): Promise<CmsNavItem[]> {
@@ -159,16 +177,41 @@ async function _cached_getCmsSiteSettings() {
     const payload = await getPayloadClient()
     const data = (await payload.findGlobal({ slug: 'site-settings' })) as unknown as SiteSetting
     const email = data?.contacts?.find((c) => c.type === 'email')?.value ?? siteFallback.email
-    const whatsapp =
-      data?.contacts?.find((c) => c.type === 'whatsapp')?.value ?? siteFallback.whatsapp
     const phone = data?.contacts?.find((c) => c.type === 'phone')?.value ?? siteFallback.phone
+
+    // Daftar nomor WhatsApp — bisa lebih dari satu (Sales/Support/Umum).
+    const fallbackWa = siteFallback.whatsappNumbers || []
+    const cmsWa = (data?.whatsappNumbers || [])
+      .filter((w: any) => w.number)
+      .map((w: any) => ({
+        label: w.label || 'WhatsApp',
+        number: String(w.number).replace(/\D/g, ''),
+        isPrimary: !!w.isPrimary,
+      }))
+    const whatsappNumbers =
+      cmsWa.length > 0
+        ? cmsWa
+        : data?.contacts?.find((c) => c.type === 'whatsapp')?.value
+          ? [{
+              label: 'WhatsApp',
+              number: (data.contacts.find((c: any) => c.type === 'whatsapp')!.value || '').replace(/\D/g, ''),
+              isPrimary: true,
+            }]
+          : fallbackWa
+    const primaryWhatsapp =
+      whatsappNumbers.find((w: any) => w.isPrimary)?.number ||
+      whatsappNumbers[0]?.number ||
+      ''
+
     return {
       companyName: data?.companyName || siteFallback.companyName,
       tagline: data?.tagline || siteFallback.tagline,
       description: data?.description || siteFallback.description,
       email,
       phone,
-      whatsapp,
+      whatsapp: primaryWhatsapp && primaryWhatsapp.replace(/\D/g, '') ? primaryWhatsapp : siteFallback.whatsapp,
+      whatsappNumbers,
+      primaryWhatsapp,
       socials: (data?.socialLinks || []).map((s) => ({ platform: s.platform, url: s.url || '' })),
       address:
         data?.address && data.address.city

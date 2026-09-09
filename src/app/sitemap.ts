@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: SITE_URL, changeFrequency: 'weekly', priority: 1 },
     { url: `${SITE_URL}/services`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/portfolio`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE_URL}/events`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: 'daily', priority: 0.9 },
     { url: `${SITE_URL}/about`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/faq`, changeFrequency: 'monthly', priority: 0.5 },
@@ -74,10 +75,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: p.updatedAt || undefined,
   }))
 
+  // Dynamic: events (non-archived)
+  const events = await payload.find({
+    collection: 'events',
+    where: { status: { not_equals: 'archived' } },
+    limit: 100,
+    select: { slug: true, updatedAt: true },
+  })
+  const eventRoutes: MetadataRoute.Sitemap = events.docs.map((e) => ({
+    url: `${SITE_URL}/events/${e.slug}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+    lastModified: e.updatedAt || undefined,
+  }))
+
   return [
     ...staticRoutes,
     ...serviceRoutes,
     ...projectRoutes,
+    ...eventRoutes,
     ...articleRoutes,
     ...promoRoutes,
   ]

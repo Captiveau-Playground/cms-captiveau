@@ -86,6 +86,37 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'whatsappNumbers',
+      label: 'Nomor WhatsApp',
+      type: 'array',
+      admin: {
+        description:
+          'Bisa lebih dari satu (mis. Sales, Support, Umum). Nomor pertama yang ditandai utamakan akan dipakai tombol/formulir WhatsApp.',
+      },
+      fields: [
+        {
+          name: 'label',
+          label: 'Label',
+          type: 'text',
+          admin: { description: 'Contoh: Sales, Support, Umum' },
+        },
+        {
+          name: 'number',
+          label: 'Nomor',
+          type: 'text',
+          required: true,
+          admin: { description: 'Format internasional, contoh: 6281234567890' },
+        },
+        {
+          name: 'isPrimary',
+          label: 'Nomor utama',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: { description: 'Dipakai untuk tombol/formulir WhatsApp jika lebih dari satu nomor.' },
+        },
+      ],
+    },
+    {
       name: 'address',
       label: 'Address',
       type: 'group',

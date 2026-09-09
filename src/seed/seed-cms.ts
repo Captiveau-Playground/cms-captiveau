@@ -445,6 +445,11 @@ async function main() {
         { type: 'email', value: site.email },
         { type: 'whatsapp', value: site.whatsapp },
       ],
+      whatsappNumbers: (site.whatsappNumbers || []).map((w) => ({
+        label: w.label,
+        number: w.number,
+        isPrimary: !!w.isPrimary,
+      })),
       address: { street: 'Jl. Kuningan Barat No. 8', city: 'Jakarta Selatan', region: 'DKI Jakarta', postalCode: '12710', country: 'Indonesia' },
     },
   })
@@ -466,13 +471,23 @@ async function main() {
             { label: 'E-Commerce', href: '/services/e-commerce', description: 'Platform toko online end-to-end' },
             { label: 'Company Profile', href: '/services/company-profile', description: 'Profil perusahaan yang profesional' },
             { label: 'UI/UX Design', href: '/services/uiux-design', description: 'Desain produk digital yang tepat' },
+            { label: 'Web Development', href: '/services/web-development', description: 'Aplikasi web berperforma tinggi' },
+            { label: 'Mobile App', href: '/services/mobile-app', description: 'Aplikasi iOS & Android' },
           ],
         },
         { label: 'Portfolio', href: '/portfolio', order: 3 },
         { label: 'Events', href: '/events', order: 4 },
         { label: 'Blog', href: '/blog', order: 5 },
-        { label: 'About Us', href: '/about', order: 6 },
-        { label: 'FAQ', href: '/faq', order: 7 },
+        {
+          label: 'Company',
+          href: '/about',
+          order: 6,
+          children: [
+            { label: 'About Us', href: '/about', description: 'Cerita & tim di balik Captiveau' },
+            { label: 'FAQ', href: '/faq', description: 'Pertanyaan yang sering diajukan' },
+            { label: 'Contact', href: '/contact', description: 'Konsultasi gratis, tanpa komitmen' },
+          ],
+        },
       ],
     },
   })

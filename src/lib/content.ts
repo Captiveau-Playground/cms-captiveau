@@ -46,6 +46,10 @@ export const site = {
   email: 'hello@captiveau.id',
   phone: '+62-851-1770-5910',
   whatsapp: '+6285117705910',
+  primaryWhatsapp: '6285117705910',
+  whatsappNumbers: [
+    { label: 'Umum', number: '6285117705910', isPrimary: true },
+  ],
   address: 'Tebet, South Jakarta, Indonesia',
   socials: [
     { platform: 'instagram', url: 'https://instagram.com/captiveau' },

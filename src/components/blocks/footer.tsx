@@ -14,6 +14,7 @@ export type FooterSectionProps = {
   socialLinks?: { platform?: string | null; url?: string | null }[]
   navData?: { label: string; href: string }[]
   services?: { title: string; slug: string }[]
+  whatsappNumbers?: { label?: string | null; number: string; isPrimary?: boolean }[]
   quote?: string | null
   statusLabel?: string | null
 }
@@ -44,6 +45,7 @@ export function FooterPromptHandoffSection({
   socialLinks = [],
   navData,
   services = defaultServices,
+  whatsappNumbers,
   quote = "Kami membangun produk digital yang kami harap lebih banyak software hadirkan — tenang, berkarakter, dan siap untuk dunia nyata.",
   statusLabel = "Menerima proyek baru",
   cal,
@@ -138,7 +140,7 @@ export function FooterPromptHandoffSection({
                   </Link>
                 </li>
               )}
-              {phone && (
+              {phone && whatsappNumbers === undefined && (
                 <li>
                   <Link
                     className="relative inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground transition-[color,transform] hover:text-foreground active:scale-[0.96]"
@@ -149,6 +151,22 @@ export function FooterPromptHandoffSection({
                   </Link>
                 </li>
               )}
+              {(whatsappNumbers || []).map((wa) => (
+                <li key={wa.number}>
+                  <Link
+                    className="relative inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground transition-[color,transform] hover:text-foreground active:scale-[0.96]"
+                    href={`https://wa.me/${wa.number.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Phone className="size-3.5 shrink-0" />
+                    <span className="flex min-w-0 flex-col">
+                      <span className="text-xs text-muted-foreground/80">{wa.label || 'WhatsApp'}</span>
+                      <span>+{wa.number.replace(/\D/g, "")}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
               {address && (
                 <li className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="size-3.5 shrink-0" />

@@ -15,14 +15,20 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
   const site = settings
   const channels = [
     { icon: Mail, label: 'Email us', value: site.email || '', href: `mailto:${site.email || ''}`, desc: 'Replies within 1 business day' },
-    { icon: Phone, label: 'Call / WhatsApp', value: site.phone || site.whatsapp || '', href: `https://wa.me/${(site.whatsapp || '').replace(/\D/g, '')}`, desc: 'Mon – Fri, 09:00–18:00 WIB' },
+    ...(site.whatsappNumbers || []).map((wa) => ({
+      icon: Phone,
+      label: wa.label || 'WhatsApp',
+      value: `+${wa.number}`,
+      href: `https://wa.me/${wa.number}`,
+      desc: wa.isPrimary ? 'Nomor utama' : 'Kirim pesan via WhatsApp',
+    })),
     { icon: MapPin, label: 'Visit us', value: site.address || 'Tebet, South Jakarta', href: 'https://www.google.com/maps/search/Tebet,+Jakarta+Selatan', desc: 'Indonesia' },
   ]
   const [sent, setSent] = useState(false)
   const [delivery, setDelivery] = useState<'email' | 'whatsapp'>('email')
 
   const options = site.contactOptions || { deliveryEmail: true, deliveryWhatsapp: true, whatsappNumber: null }
-  const waNumber = options.whatsappNumber || (site.whatsapp || '').replace(/\D/g, '')
+  const waNumber = options.whatsappNumber || site.primaryWhatsapp || (site.whatsapp || '').replace(/\D/g, '')
   const showEmail = options.deliveryEmail !== false
   const showWhatsapp = options.deliveryWhatsapp !== false && !!waNumber
 
