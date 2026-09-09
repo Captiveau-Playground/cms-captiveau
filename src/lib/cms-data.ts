@@ -25,7 +25,6 @@ import {
   process as processFallback,
   faqs as faqsFallback,
   jobs as jobsFallback,
-  events as eventsFallback,
   trustPoints as trustPointsFallback,
   advantages as advantagesFallback,
   stats as statsFallback,
@@ -558,7 +557,8 @@ async function _cached_getCmsEvents(): Promise<EventItem[]> {
       limit: 100,
       depth: 1,
     })
-    if (!docs.length) return eventsFallback
+    // Tanpa data di CMS → tidak ada fallback acara contoh; halaman tampil empty-state.
+    if (!docs.length) return []
     return docs.map((e: any) => ({
       slug: e.slug || '',
       title: e.title || '',
@@ -595,7 +595,7 @@ async function _cached_getCmsEvents(): Promise<EventItem[]> {
       recordingUrl: e.recordingUrl || null,
     }))
   } catch {
-    return eventsFallback
+    return []
   }
 }
 
@@ -811,7 +811,7 @@ export async function getHomeData() {
         process: processFallback,
         socialProofLabel: 'Dipercaya klien di berbagai industri',
         socialProofDescription: 'Teknologi modern yang tim kami gunakan untuk menghadirkan produk digital kelas dunia.',
-        socialProofLogos: ['/logos/nvidia.svg', '/logos/supabase.svg', '/logos/github.svg', '/logos/openai.svg', '/logos/turso.svg', '/logos/clerk.svg', '/logos/claude.svg', '/logos/vercel.svg'],
+        socialProofLogos: [],
         values: valuesFallback.map((v) => ({ icon: v.icon, title: v.title, desc: v.desc })),
       } as unknown as CmsHomepage),
     services,
