@@ -68,8 +68,8 @@ export default function ContactSection({ settings }: { settings: CmsSiteSettings
                   text="Let's talk about your project"
                 />
                 <p className="max-w-lg text-muted-foreground text-sm leading-relaxed md:text-base">
-                  Tell us about your idea — we'll get back to you within one
-                  business day with the next steps. No pressure, no commitment.
+                  Ceritakan ide Anda — kami akan menghubungi Anda dalam satu
+                  hari kerja dengan langkah berikutnya. Tanpa tekanan, tanpa komitmen.
                 </p>
 
                 <div className="flex flex-col gap-3">

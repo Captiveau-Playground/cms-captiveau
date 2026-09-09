@@ -25,7 +25,7 @@ export default async function FaqPage() {
       <PageHero
         eyebrow="FAQ"
         title="Frequently Asked Questions"
-        description="Find answers about Captiveau and our services. If you can’t find one, reach out directly."
+        description="Temukan jawaban tentang Captiveau dan layanan kami. Jika belum menemukannya, hubungi kami langsung."
       />
 
       <Section className="py-16 sm:py-24">

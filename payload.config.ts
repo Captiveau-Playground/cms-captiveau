@@ -33,6 +33,7 @@ import { Users } from './src/collections/Users'
 import { Redirects } from './src/collections/Redirects'
 import { Projects } from './src/collections/Projects'
 import { Promotions } from './src/collections/Promotions'
+import { Events } from './src/collections/Events'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -155,6 +156,7 @@ async function getConfig() {
       Redirects,
       Projects,
       Promotions,
+      Events,
     ],
     globals: [SiteSettings, MainMenu, Homepage, PageCTAs],
     // Full-featured rich text: headings, internal/external links, embedded

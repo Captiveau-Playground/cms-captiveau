@@ -116,8 +116,8 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Name</span>
-                <input required name="name" placeholder="Your name" className={inputClass} />
+                <span className="text-sm font-medium text-foreground">Nama</span>
+                <input required name="name" placeholder="Nama Anda" className={inputClass} />
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-medium text-foreground">Email</span>
@@ -127,7 +127,7 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
 
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Service needed</span>
+                <span className="text-sm font-medium text-foreground">Layanan yang dibutuhkan</span>
                 <select name="service" className={inputClass} defaultValue="Landing Page">
                   {['Landing Page', 'E-Commerce', 'Company Profile', 'UI/UX Design', 'Web Development', 'Mobile App', 'Other'].map((o) => (
                     <option key={o}>{o}</option>
@@ -135,9 +135,9 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
                 </select>
               </label>
               <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-foreground">Budget range</span>
+                <span className="text-sm font-medium text-foreground">Rentang budget</span>
                 <select name="budget" className={inputClass} defaultValue="Rp 5–20 juta">
-                  {['Under Rp 5 juta', 'Rp 5–20 juta', 'Rp 20–50 juta', 'Rp 50+ juta'].map((o) => (
+                  {['Di bawah Rp 5 juta', 'Rp 5–20 juta', 'Rp 20–50 juta', 'Rp 50+ juta'].map((o) => (
                     <option key={o}>{o}</option>
                   ))}
                 </select>
@@ -145,12 +145,12 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
             </div>
 
             <label className="flex flex-col gap-2">
-              <span className="text-sm font-medium text-foreground">Project details</span>
+              <span className="text-sm font-medium text-foreground">Detail proyek</span>
               <textarea
                 required
                 name="message"
                 rows={5}
-                placeholder="Describe your project, timeline, and goals..."
+                placeholder="Jelaskan project, timeline, dan tujuan Anda..."
                 className={`${inputClass} resize-none`}
               />
             </label>
@@ -161,11 +161,11 @@ export default function ContactClient({ settings }: { settings: CmsSiteSettings 
             >
               {sent ? (
                 <>
-                  Sent — check your email <Check className="size-4" />
+                  Terkirim — cek email Anda <Check className="size-4" />
                 </>
               ) : (
                 <>
-                  Send Message
+                  Kirim Pesan
                   <Send className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </>
               )}

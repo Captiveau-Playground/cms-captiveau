@@ -61,10 +61,10 @@ export default function Faq({
                       Still have questions?
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      Talk to our team and get a reply within one business day.
+                      Hubungi tim kami dan dapatkan jawaban dalam satu hari kerja.
                     </p>
                     <ConsultCta
-                      label="Contact us"
+                      label="Hubungi kami"
                       cal={cal}
                       className="mt-5 inline-flex h-auto border border-border bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-muted/30"
                     />
@@ -119,10 +119,10 @@ export default function Faq({
 
                 <div className="mt-6 flex flex-col gap-2 border border-border px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="font-mono text-[11px] text-muted-foreground">
-                    Want to talk through your project?
+                    Ingin membahas project Anda?
                   </p>
                   <ConsultCta
-                    label="Book a free call"
+                    label="Jadwalkan panggilan gratis"
                     cal={cal}
                     className="group h-auto border-0 bg-transparent p-0 text-sm font-semibold text-primary hover:bg-transparent"
                   />

@@ -17,6 +17,7 @@ import {
   trustPoints,
   advantages,
   stats,
+  events,
 } from '../lib/content'
 
 async function uploadImage(payload: any, filePath: string, alt: string) {
@@ -372,6 +373,7 @@ async function main() {
     Pricing: 'pricing',
     Support: 'support',
   }
+
   for (let i = 0; i < faqs.length; i++) {
     const f = faqs[i]
     const existing = await payload.find({ collection: 'faqs', where: { question: { equals: f.title } } })
@@ -388,6 +390,46 @@ async function main() {
     }
   }
   console.log(`✓ ${faqs.length} FAQs`)
+
+  // ── Events ──
+  console.log('Seeding events...')
+  for (let i = 0; i < events.length; i++) {
+    const ev = events[i]
+    const existing = await payload.find({ collection: 'events', where: { slug: { equals: ev.slug } } })
+    const data = {
+      title: ev.title,
+      slug: ev.slug,
+      description: ev.description,
+      startDate: ev.startDate,
+      endDate: ev.endDate ?? undefined,
+      venue: ev.venue,
+      mode: ev.mode,
+      organizer: ev.organizer,
+      capacity: ev.capacity ?? undefined,
+      imageAspect: ev.imageAspect || 'auto',
+      status: ev.status,
+      googleFormEmbed: ev.googleFormEmbed || undefined,
+      registrationUrl: ev.registrationUrl || undefined,
+      sessions: (ev.sessions || []).map((s) => ({
+        time: s.time,
+        title: s.title,
+        description: s.description ?? undefined,
+      })),
+      materialOutline: (ev.materialOutline || []).map((item) => ({ item })),
+      speakers: (ev.speakers || []).map((sp) => ({
+        name: sp.name,
+        position: sp.position || '',
+        role: sp.role || '',
+      })),
+      recordingUrl: ev.recordingUrl || undefined,
+    }
+    if (existing.docs.length > 0) {
+      await payload.update({ collection: 'events', id: existing.docs[0].id, data })
+    } else {
+      await payload.create({ collection: 'events', data })
+    }
+  }
+  console.log(`✓ ${events.length} events`)
 
   // ── Site Settings ──
   console.log('Seeding site settings...')
@@ -427,9 +469,10 @@ async function main() {
           ],
         },
         { label: 'Portfolio', href: '/portfolio', order: 3 },
-        { label: 'Blog', href: '/blog', order: 4 },
-        { label: 'About Us', href: '/about', order: 5 },
-        { label: 'FAQ', href: '/faq', order: 6 },
+        { label: 'Events', href: '/events', order: 4 },
+        { label: 'Blog', href: '/blog', order: 5 },
+        { label: 'About Us', href: '/about', order: 6 },
+        { label: 'FAQ', href: '/faq', order: 7 },
       ],
     },
   })
@@ -449,7 +492,7 @@ async function main() {
       heroTitlePrefix: 'We build',
       heroSpecialties: ['digital products', 'company profiles', 'e-commerce platforms', 'web & mobile apps', 'SaaS dashboards'].map((t) => ({ text: t })),
       heroTitleSuffix: 'that convert.',
-      heroSubtitle: 'An Indonesian software house crafting end-to-end digital products — research, design, development, and launch. Startups to enterprises trust us to ship.',
+      heroSubtitle: 'Software house Indonesia yang membangun produk digital secara end-to-end — riset, desain, pengembangan, dan peluncuran. Startup hingga enterprise mempercayai kami untuk menghadirkan produk.' ,
       heroImages: heroMedia,
       stats: stats.map((s) => ({ value: s.value, suffix: s.suffix, label: s.label })),
       techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind'].map((t) => ({ name: t })),
@@ -457,7 +500,7 @@ async function main() {
       advantages: advantages.map((a) => ({ icon: a.icon, title: a.title, description: a.desc })),
       process: process.map((p) => ({ step: p.step, title: p.title, description: p.desc, icon: 'arrow-right' })),
       socialProofLabel: 'We build with trusted technology',
-      socialProofDescription: 'The modern stack our team uses to ship world-class digital products.',
+      socialProofDescription: 'Teknologi modern yang tim kami gunakan untuk menghadirkan produk digital kelas dunia.',
       values: values.map((v) => ({ icon: 'star', title: v.title, description: v.desc })),
     },
   })
@@ -473,28 +516,28 @@ async function main() {
           pageKey: 'home',
           enabled: true,
           title: "Let's Start Collaborating.",
-          subtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
-          primaryCta: { label: 'Free Consultation', href: '/contact', useCal: true },
+          subtitle: 'Ide digital Anda siap menjadi produk nyata. Dapatkan konsultasi gratis bersama tim kami.',
+          primaryCta: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
           secondaryCta: { label: 'Lihat Portofolio', href: '/portfolio' },
         },
         {
           pageKey: 'about',
           enabled: true,
           title: 'Interested in working together?',
-          subtitle: "Let's discuss your project — the first consultation is free.",
-          primaryCta: { label: 'Contact Us', href: '/contact', useCal: false },
+          subtitle: 'Mari diskusikan project Anda — konsultasi pertama gratis.',
+          primaryCta: { label: 'Hubungi Kami', href: '/contact', useCal: false },
         },
         {
           pageKey: 'services',
           enabled: true,
           title: 'Not sure where to start?',
-          subtitle: 'Get a free consultation to map out your needs — no strings attached.',
-          primaryCta: { label: 'Free Consultation', href: '/contact', useCal: false },
+          subtitle: 'Dapatkan konsultasi gratis untuk memetakan kebutuhan Anda — tanpa komitmen.',
+          primaryCta: { label: 'Konsultasi Gratis', href: '/contact', useCal: false },
         },
         {
           pageKey: 'serviceDetail',
           enabled: true,
-          title: '',
+          title: 'Siap memulai project Anda?',
           subtitle: 'Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana kerja yang jelas.',
           primaryCta: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
         },
@@ -509,8 +552,8 @@ async function main() {
           pageKey: 'projectDetail',
           enabled: true,
           title: 'Want similar results for your business?',
-          subtitle: "Tell us what you need — we're ready to help from idea to launch.",
-          primaryCta: { label: 'Start Your Project', href: '/contact', useCal: false },
+          subtitle: 'Ceritakan kebutuhan Anda — kami siap membantu dari ide hingga peluncuran.',
+          primaryCta: { label: 'Mulai Project Anda', href: '/contact', useCal: false },
         },
         {
           pageKey: 'blogPost',
@@ -523,8 +566,8 @@ async function main() {
           pageKey: 'faq',
           enabled: true,
           title: 'Still have questions?',
-          subtitle: "We're here to help. Contact our team and get an answer within 24 hours.",
-          primaryCta: { label: 'Contact Us', href: '/contact', useCal: false },
+          subtitle: 'Kami siap membantu. Hubungi tim kami dan dapatkan jawaban dalam 24 jam.',
+          primaryCta: { label: 'Hubungi Kami', href: '/contact', useCal: false },
         },
       ],
     },
@@ -534,4 +577,9 @@ async function main() {
   console.log('\n✅ Seed complete!')
 }
 
-main().catch((err) => { console.error('Seed failed:', err); throw err })
+// Top-level await: `payload run` only waits for the module's top-level
+// evaluation, so the seed must be awaited here (not fire-and-forget).
+await main().catch((err) => {
+  console.error('Seed failed:', err)
+  throw err
+})

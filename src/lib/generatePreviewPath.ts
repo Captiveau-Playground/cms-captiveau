@@ -4,6 +4,7 @@ const collectionPrefixMap: Record<string, string> = {
   services: '/services',
   articles: '/blog',
   projects: '/portfolio',
+  events: '/events',
   pages: '',
 }
 

@@ -44,8 +44,8 @@ export function FooterPromptHandoffSection({
   socialLinks = [],
   navData,
   services = defaultServices,
-  quote = "We build the kind of digital products we wish more software shipped — calm, opinionated, ready for the real world.",
-  statusLabel = "Now accepting new projects",
+  quote = "Kami membangun produk digital yang kami harap lebih banyak software hadirkan — tenang, berkarakter, dan siap untuk dunia nyata.",
+  statusLabel = "Menerima proyek baru",
   cal,
 }: FooterSectionProps & { cal?: CalSettings | null }) {
   const year = new Date().getFullYear()
@@ -163,7 +163,7 @@ export function FooterPromptHandoffSection({
       <FooterMotionSection>
         <div className="flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
           <span className="tabular-nums">
-            © {year} {companyName}. All rights reserved.
+            © {year} {companyName}. Hak cipta dilindungi.
           </span>
           <span aria-hidden className="hidden sm:inline">
             ·
@@ -173,7 +173,7 @@ export function FooterPromptHandoffSection({
             ·
           </span>
           <Link className="text-muted-foreground transition-colors hover:text-foreground" href="/blog">
-            Insights
+            Artikel
           </Link>
           <span aria-hidden className="hidden sm:inline">
             ·

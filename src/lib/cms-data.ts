@@ -25,6 +25,7 @@ import {
   process as processFallback,
   faqs as faqsFallback,
   jobs as jobsFallback,
+  events as eventsFallback,
   trustPoints as trustPointsFallback,
   advantages as advantagesFallback,
   stats as statsFallback,
@@ -34,6 +35,7 @@ import {
   type TeamMember as TeamMemberItem,
   type CaseStudy,
   type CaseStudyChapter,
+  type EventItem,
 } from './content'
 
 
@@ -115,6 +117,7 @@ const defaultMenu: CmsNavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Events', href: '/events' },
   { label: 'Blog', href: '/blog' },
   { label: 'About Us', href: '/about' },
   { label: 'FAQ', href: '/faq' },
@@ -272,13 +275,6 @@ async function _cached_getCmsProjects(): Promise<ProjectItem[]> {
       results: (p.results || []).map((r: any) => ({ value: r.value || '', label: r.label || '' })),
       stack: (p.stack || []).map((t: any) => t.tech).filter(Boolean),
       integrations: (p.integrations || []).map((i: any) => i.name).filter(Boolean),
-      story: (p.story || [])
-        .filter((s: any) => s.heading)
-        .map((s: any) => ({
-          heading: s.heading,
-          description: s.description || '',
-          image: mediaUrl(s.image, 'hero') || mediaUrl(s.image) || null,
-        })),
       caseStudy: mapCaseStudy(p.caseStudy),
     }))
   } catch {
@@ -356,7 +352,7 @@ async function _cached_getCmsArticles() {
       category: (a.tags || [])[0]?.tag || 'Blog',
       author: a.author || null,
       date: a.publishedDate?.slice(0, 10) || a.createdAt?.slice(0, 10) || '',
-      readTime: `${a.readingTime || 5} min read`,
+      readTime: `${a.readingTime || 5} menit baca`,
       excerpt: a.description || '',
       image: mediaUrl(a.coverImage, 'card') || mediaUrl(a.coverImage) || '/images/office.jpg',
     }))
@@ -482,6 +478,90 @@ async function _cached_getCmsJobs() {
 }
 
 // ═══════════════════════════════════════════════════════
+// Events (acara: workshop, webinar, talk)
+// ═══════════════════════════════════════════════════════
+/** Status "aktif" untuk tampilan: upcoming & ongoing (archived disembunyikan). */
+function eventStatus(value: string | null | undefined): EventItem['status'] {
+  if (
+    value === 'upcoming' ||
+    value === 'ongoing' ||
+    value === 'past' ||
+    value === 'archived'
+  ) {
+    return value
+  }
+  return 'upcoming'
+}
+
+/**
+ * Ambil link form dari kolom `registrationUrl`, atau turunkan otomatis dari
+ * attribute src iframe pada `googleFormEmbed` bila link eksplisit kosong.
+ */
+function resolveRegistrationUrl(embed: string | null, explicit: string | null): string | null {
+  if (explicit?.trim()) return explicit.trim()
+  if (!embed) return null
+  const match = embed.match(/<iframe[^>]+src=["']([^"']+)["']/i)
+  if (!match) return null
+  return match[1].replace(/&amp;/g, '&').trim()
+}
+
+async function _cached_getCmsEvents(): Promise<EventItem[]> {
+  try {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'events',
+      where: { status: { not_equals: 'archived' } },
+      sort: 'startDate',
+      limit: 100,
+      depth: 1,
+    })
+    if (!docs.length) return eventsFallback
+    return docs.map((e: any) => ({
+      slug: e.slug || '',
+      title: e.title || '',
+      description: e.description || '',
+      image: mediaUrl(e.image, 'hero') || mediaUrl(e.image) || null,
+      imageAspect: (['auto', '21/9', '16/9', '4/3', '1/1'] as const).includes(e.imageAspect)
+        ? e.imageAspect
+        : 'auto',
+      startDate: e.startDate || '',
+      endDate: e.endDate || null,
+      venue: e.venue || '',
+      mode: (['offline', 'online', 'hybrid'] as const).includes(e.mode)
+        ? e.mode
+        : 'offline',
+      organizer: e.organizer || '',
+      capacity: e.capacity ?? null,
+      status: eventStatus(e.status),
+      googleFormEmbed: e.googleFormEmbed || null,
+      registrationUrl: resolveRegistrationUrl(e.googleFormEmbed || null, e.registrationUrl || null),
+      sessions: (e.sessions || []).map((s: any) => ({
+        time: s.time || '',
+        title: s.title || '',
+        description: s.description || undefined,
+      })),
+      materialOutline: (e.materialOutline || [])
+        .map((m: any) => m.item)
+        .filter(Boolean),
+      speakers: (e.speakers || []).map((sp: any) => ({
+        name: sp.name || '',
+        position: sp.position || '',
+        role: sp.role || '',
+        photo: mediaUrl(sp.photo, 'thumbnail') || mediaUrl(sp.photo) || null,
+      })),
+      recordingUrl: e.recordingUrl || null,
+    }))
+  } catch {
+    return eventsFallback
+  }
+}
+
+export async function getCmsEventBySlug(slug: string): Promise<EventItem | null> {
+  const all = await getCmsEvents()
+  return all.find((e) => e.slug === slug) || null
+}
+
+// ═══════════════════════════════════════════════════════
 // FAQs
 // ═══════════════════════════════════════════════════════
 const faqCategoryLabel: Record<string, string> = {
@@ -572,27 +652,27 @@ const defaultPageCtas: Record<string, CmsPageCta> = {
   home: {
     enabled: true,
     title: "Let's Start Collaborating.",
-    subtitle: 'Your digital idea is ready to become a real product. Get a free consultation with our team.',
-    primary: { label: 'Free Consultation', href: '/contact', useCal: true },
+    subtitle: 'Ide digital Anda siap menjadi produk nyata. Dapatkan konsultasi gratis bersama tim kami.',
+    primary: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
     secondary: { label: 'Lihat Portofolio', href: '/portfolio' },
   },
   about: {
     enabled: true,
     title: 'Interested in working together?',
-    subtitle: "Let's discuss your project — the first consultation is free.",
-    primary: { label: 'Contact Us', href: '/contact', useCal: false },
+    subtitle: 'Mari diskusikan project Anda — konsultasi pertama gratis.',
+    primary: { label: 'Hubungi Kami', href: '/contact', useCal: false },
     secondary: null,
   },
   services: {
     enabled: true,
     title: 'Not sure where to start?',
-    subtitle: 'Get a free consultation to map out your needs — no strings attached.',
-    primary: { label: 'Free Consultation', href: '/contact', useCal: false },
+    subtitle: 'Dapatkan konsultasi gratis untuk memetakan kebutuhan Anda — tanpa komitmen.',
+    primary: { label: 'Konsultasi Gratis', href: '/contact', useCal: false },
     secondary: null,
   },
   serviceDetail: {
     enabled: true,
-    title: '',
+    title: 'Siap memulai project Anda?',
     subtitle: 'Konsultasi gratis — ceritakan ide kamu, kami kasih estimasi & rencana kerja yang jelas.',
     primary: { label: 'Konsultasi Gratis', href: '/contact', useCal: true },
     secondary: null,
@@ -607,8 +687,8 @@ const defaultPageCtas: Record<string, CmsPageCta> = {
   projectDetail: {
     enabled: true,
     title: 'Want similar results for your business?',
-    subtitle: "Tell us what you need — we're ready to help from idea to launch.",
-    primary: { label: 'Start Your Project', href: '/contact', useCal: false },
+    subtitle: 'Ceritakan kebutuhan Anda — kami siap membantu dari ide hingga peluncuran.',
+    primary: { label: 'Mulai Project Anda', href: '/contact', useCal: false },
     secondary: null,
   },
   blogPost: {
@@ -621,8 +701,8 @@ const defaultPageCtas: Record<string, CmsPageCta> = {
   faq: {
     enabled: true,
     title: 'Still have questions?',
-    subtitle: "We're here to help. Contact our team and get an answer within 24 hours.",
-    primary: { label: 'Contact Us', href: '/contact', useCal: false },
+    subtitle: 'Kami siap membantu. Hubungi tim kami dan dapatkan jawaban dalam 24 jam.',
+    primary: { label: 'Hubungi Kami', href: '/contact', useCal: false },
     secondary: null,
   },
 }
@@ -687,7 +767,7 @@ export async function getHomeData() {
         advantages: advantagesFallback.map((a) => ({ icon: a.icon, title: a.title, desc: a.desc })),
         process: processFallback,
         socialProofLabel: 'Dipercaya klien di berbagai industri',
-        socialProofDescription: 'The modern stack our team uses to ship world-class digital products.',
+        socialProofDescription: 'Teknologi modern yang tim kami gunakan untuk menghadirkan produk digital kelas dunia.',
         socialProofLogos: ['/logos/nvidia.svg', '/logos/supabase.svg', '/logos/github.svg', '/logos/openai.svg', '/logos/turso.svg', '/logos/clerk.svg', '/logos/claude.svg', '/logos/vercel.svg'],
         values: valuesFallback.map((v) => ({ icon: v.icon, title: v.title, desc: v.desc })),
       } as unknown as CmsHomepage),
@@ -794,6 +874,9 @@ export async function getCmsTeam(...args: Parameters<typeof _cached_getCmsTeam>)
 }
 export async function getCmsJobs(...args: Parameters<typeof _cached_getCmsJobs>) {
   return cached('getCmsJobs', () => _cached_getCmsJobs(...args))
+}
+export async function getCmsEvents(...args: Parameters<typeof _cached_getCmsEvents>) {
+  return cached('getCmsEvents', () => _cached_getCmsEvents(...args))
 }
 export async function getCmsFaqs(...args: Parameters<typeof _cached_getCmsFaqs>) {
   return cached('getCmsFaqs', () => _cached_getCmsFaqs(...args))

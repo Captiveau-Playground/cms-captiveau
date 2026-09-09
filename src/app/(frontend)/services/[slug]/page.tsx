@@ -254,7 +254,7 @@ export default async function ServiceDetailPage({
             },
           ]}
           title={"Pricing " + service.title}
-          description="Final pricing is tailored to your project's scope and specific needs. This is a transparent starting point."
+          description="Harga akhir disesuaikan dengan scope dan kebutuhan spesifik project Anda. Ini adalah titik awal yang transparan."
         />
       </Section>
 

@@ -22,7 +22,7 @@ export default async function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Let's Discuss Your Project"
-        description="Tell us your vision — we'll help turn it into a real product. First consultation is free, no commitment."
+        description="Ceritakan visi Anda — kami bantu wujudkan menjadi produk nyata. Konsultasi pertama gratis, tanpa komitmen."
       />
       <ContactClient settings={settings} />
     </>

@@ -30,7 +30,7 @@ export const SiteSettings: GlobalConfig = {
       name: 'description',
       label: 'Site Description',
       type: 'textarea',
-      defaultValue: 'Captiveau — Creative Tech Studio. Transform Your Ideas Into Digital Reality.',
+      defaultValue: 'Captiveau — Creative Tech Studio. Mewujudkan Ide Anda Menjadi Realita Digital.',
     },
     {
       name: 'logo',
@@ -151,9 +151,9 @@ export const SiteSettings: GlobalConfig = {
           label: 'Footer Quote',
           type: 'textarea',
           defaultValue:
-            'We build the kind of digital products we wish more software shipped — calm, opinionated, ready for the real world.',
+            'Kami membangun produk digital yang kami harap lebih banyak software hadirkan — tenang, berkarakter, dan siap untuk dunia nyata.',
         },
-        { name: 'statusLabel', label: 'Status Text', type: 'text', defaultValue: 'Now accepting new projects' },
+        { name: 'statusLabel', label: 'Status Text', type: 'text', defaultValue: 'Menerima proyek baru' },
       ],
     },
     {

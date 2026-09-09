@@ -39,7 +39,7 @@ export default function CaseStudyScroll({ chapters }: { chapters: CaseChapter[] 
         {/* Header */}
         <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex w-full max-w-7xl items-center justify-between px-4 pt-5 sm:px-6 lg:px-8 lg:pt-8">
           <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-            The story
+            Kisahnya
           </span>
           <motion.span className="font-mono text-xs tabular-nums text-muted-foreground">
             <motion.span className="inline-block min-w-[2ch] text-foreground">{sceneNow}</motion.span>

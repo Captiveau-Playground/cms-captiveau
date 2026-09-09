@@ -42,7 +42,7 @@ export function CtaSeraSection({
               <div className="flex flex-col gap-8 p-6 md:p-10 lg:flex-row lg:items-end lg:justify-between">
                 <div className="min-w-0 max-w-xl">
                   <p className="text-[11px] text-muted-foreground uppercase tracking-[0.2em]">
-                    Get started
+                    Mulai
                   </p>
                   <AnimatedHeading
                     className="mt-4 max-w-xl text-balance font-medium text-3xl tracking-tight md:text-4xl"

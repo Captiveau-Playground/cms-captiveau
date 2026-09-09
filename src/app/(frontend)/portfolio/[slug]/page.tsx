@@ -46,8 +46,8 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     cs && (cs.objective?.title || cs.objective?.description)
       ? {
           key: 'objective',
-          eyebrow: 'Objectives',
-          title: cs.objective?.title || 'Objectives',
+          eyebrow: 'Tujuan',
+          title: cs.objective?.title || 'Tujuan',
           description: cs.objective!.description,
           image: cs.objective?.image || p.image,
         }
@@ -55,8 +55,8 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     cs && (cs.approach?.title || cs.approach?.description)
       ? {
           key: 'approach',
-          eyebrow: 'Our approach',
-          title: cs.approach?.title || 'Our approach',
+          eyebrow: 'Pendekatan kami',
+          title: cs.approach?.title || 'Pendekatan kami',
           description: cs.approach!.description,
           image: cs.approach?.image || p.image,
         }
@@ -64,8 +64,8 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     cs && (cs.challenge?.title || cs.challenge?.description)
       ? {
           key: 'challenge',
-          eyebrow: 'The challenge',
-          title: cs.challenge?.title || 'The challenge',
+          eyebrow: 'Tantangan',
+          title: cs.challenge?.title || 'Tantangan',
           description: cs.challenge!.description,
           image: cs.challenge?.image || p.image,
         }
@@ -73,8 +73,8 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     cs && (cs.outcome?.title || cs.outcome?.description)
       ? {
           key: 'outcome',
-          eyebrow: 'Outcome',
-          title: cs.outcome?.title || 'Outcome',
+          eyebrow: 'Hasil',
+          title: cs.outcome?.title || 'Hasil',
           description: cs.outcome!.description,
           image: cs.outcome?.image || p.image,
         }
@@ -87,7 +87,7 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
   return [
     {
       key: 'objective',
-      eyebrow: 'Objectives',
+      eyebrow: 'Tujuan',
       title: 'Set a clear goal',
       description:
         p.description ||
@@ -96,7 +96,7 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     },
     {
       key: 'approach',
-      eyebrow: 'Our approach',
+      eyebrow: 'Pendekatan kami',
       title: 'Designed around the objective',
       description: p.services.length
         ? `Lingkup kerja mencakup ${p.services.join(', ')} — disusun untuk hasil yang terukur.`
@@ -105,7 +105,7 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     },
     {
       key: 'challenge',
-      eyebrow: 'The challenge',
+      eyebrow: 'Tantangan',
       title: 'Constraints that sharpened the work',
       description:
         'Menyeimbangkan kualitas, kecepatan, dan budget — batasan justru mengarahkan keputusan desain menjadi lebih tajam.',
@@ -113,7 +113,7 @@ function buildCaseChapters(p: ProjectItem): CaseChapter[] {
     },
     {
       key: 'outcome',
-      eyebrow: 'Outcome',
+      eyebrow: 'Hasil',
       title: 'Measurable results',
       description: p.results.length
         ? `Sejak peluncuran hasilnya terukur: ${p.results.map((r) => `${r.value} ${r.label}`).join(', ')}.`
@@ -251,7 +251,7 @@ export default async function ProjectDetailPage({
           <CoverReveal
             src={project.image}
             alt={project.title}
-            left="the cover"
+            left="sampul"
             right={`${project.category || 'case study'} — ${project.year || ''}`}
           />
         </div>
@@ -261,16 +261,16 @@ export default async function ProjectDetailPage({
       <Section className="py-16 sm:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <Kicker>The brief</Kicker>
+            <Kicker>Ringkasan</Kicker>
             <p className="max-w-xl text-balance text-2xl font-medium leading-[1.25] tracking-[-0.03em] text-foreground sm:text-3xl lg:text-[2.5rem] lg:leading-[1.18]">
               {project.description}
             </p>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <dl className="flex flex-col">
-              <MetaRow label="Year" value={project.year} />
-              <MetaRow label="Category" value={project.category} />
-              <MetaRow label="Services" value={project.services.join(' · ')} />
+              <MetaRow label="Tahun" value={project.year} />
+              <MetaRow label="Kategori" value={project.category} />
+              <MetaRow label="Layanan" value={project.services.join(' · ')} />
               {project.stack.length > 0 && (
                 <MetaRow label="Stack" value={project.stack.slice(0, 4).join(', ')} />
               )}
@@ -295,7 +295,7 @@ export default async function ProjectDetailPage({
               </div>
               <div className="mt-3 flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                  the client
+                  klien
                 </span>
                 {cs.client.industry && (
                   <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-secondary">
@@ -305,7 +305,7 @@ export default async function ProjectDetailPage({
               </div>
             </div>
             <div className="lg:col-span-6 lg:col-start-7">
-              <Kicker>Client overview</Kicker>
+              <Kicker>Profil klien</Kicker>
               <h2 className="text-3xl font-medium tracking-[-0.04em] text-foreground md:text-4xl">
                 {cs.client.name}
                 {cs.client.location && (
@@ -321,7 +321,7 @@ export default async function ProjectDetailPage({
                 <div className="mt-9 border border-border bg-muted/40">
                   <div className="flex items-center justify-between border-b border-border px-6 py-3.5">
                     <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-secondary">
-                      What they needed
+                      Yang mereka butuhkan
                     </span>
                     <span className="text-lg leading-none text-secondary">“</span>
                   </div>
@@ -339,7 +339,7 @@ export default async function ProjectDetailPage({
       {cs && cs.testimonials.length > 0 && (
         <Section muted className="py-16 sm:py-24">
           <div className="mb-10 border-b border-border pb-8">
-            <Kicker className="mb-0">What they said</Kicker>
+            <Kicker className="mb-0">Kata mereka</Kicker>
             <h2 className="mt-3 text-2xl font-medium tracking-[-0.04em] text-foreground">
               In their own words
             </h2>
@@ -405,7 +405,7 @@ export default async function ProjectDetailPage({
           <SeraMaskRule className="mb-12" />
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
-              <Kicker>Reflection</Kicker>
+              <Kicker>Refleksi</Kicker>
               <SeraBlurReveal>
                 <h2 className="max-w-xl text-balance text-3xl font-medium leading-[1.08] tracking-[-0.04em] text-foreground sm:text-4xl">
                   {reflection.title || 'Reflection'}

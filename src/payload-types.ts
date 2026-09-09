@@ -79,6 +79,7 @@ export interface Config {
     redirects: Redirect;
     projects: Project;
     promotions: Promotion;
+    events: Event;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     promotions: PromotionsSelect<false> | PromotionsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -791,17 +793,6 @@ export interface Project {
       }[]
     | null;
   /**
-   * Bab cerita proyek — tampil sebagai scroll-reveal di halaman detail. Gunakan 3–5 bab untuk ritme terbaik.
-   */
-  story?:
-    | {
-        heading: string;
-        description: string;
-        image?: (number | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
-  /**
    * Narasi scrollytelling untuk halaman detail — client overview, bab cerita, dan testimoni. Kosongkan untuk memakai story otomatis.
    */
   caseStudy?: {
@@ -920,6 +911,95 @@ export interface Promotion {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  slug: string;
+  /**
+   * Ringkasan acara yang tampil di kartu daftar dan bagian atas halaman detail.
+   */
+  description: string;
+  image?: (number | null) | Media;
+  /**
+   * Menentukan rasio tampilan gambar di kartu & halaman detail. Pilih "Otomatis" untuk menampilkan poster sesuai proporsi aslinya tanpa terpotong.
+   */
+  imageAspect?: ('auto' | '21/9' | '16/9' | '4/3' | '1/1') | null;
+  startDate: string;
+  endDate?: string | null;
+  mode?: ('offline' | 'online' | 'hybrid') | null;
+  /**
+   * Contoh: Zoom (online) atau Jl. Kuningan Barat No. 8 (offline).
+   */
+  venue?: string | null;
+  organizer?: string | null;
+  /**
+   * Jumlah peserta maksimal (opsional).
+   */
+  capacity?: number | null;
+  /**
+   * Acara ber-status archived tidak ditampilkan di halaman publik.
+   */
+  status?: ('upcoming' | 'ongoing' | 'past' | 'archived') | null;
+  /**
+   * Tempel kode embed Google Form di sini (Google Form → Kirim → < > Sematkan). Akan dirender di halaman detail sebagai formulir pendaftaran.
+   */
+  googleFormEmbed?: string | null;
+  /**
+   * Link langsung formulir pendaftaran (dibuka di tab baru). Jika dikosongkan tapi Google Form Embed diisi, link otomatis diambil dari URL embed.
+   */
+  registrationUrl?: string | null;
+  /**
+   * Susunan acara per sesi — ditampilkan sebagai timeline rapi di halaman detail. Urutkan sesuai waktu.
+   */
+  sessions?:
+    | {
+        /**
+         * Contoh: 09.00 – 09.15
+         */
+        time: string;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Pokok-pokok materi yang akan dibahas — tampil sebagai daftar bernomor.
+   */
+  materialOutline?:
+    | {
+        item: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Nama, posisi di acara, dan jabatan professional pembicara.
+   */
+  speakers?:
+    | {
+        name: string;
+        /**
+         * Contoh: Pembicara utama, Moderator, Panelis
+         */
+        position?: string | null;
+        /**
+         * Contoh: Founder & CEO, Captiveau
+         */
+        role?: string | null;
+        photo?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Opsional — tautan YouTube rekaman acara. Jika diisi, tombol "Tonton Rekaman" tampil di halaman detail.
+   */
+  recordingUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -989,6 +1069,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'promotions';
         value: number | Promotion;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1491,14 +1575,6 @@ export interface ProjectsSelect<T extends boolean = true> {
         name?: T;
         id?: T;
       };
-  story?:
-    | T
-    | {
-        heading?: T;
-        description?: T;
-        image?: T;
-        id?: T;
-      };
   caseStudy?:
     | T
     | {
@@ -1604,6 +1680,52 @@ export interface PromotionsSelect<T extends boolean = true> {
   metaDescription?: T;
   keywords?: T;
   ogImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  image?: T;
+  imageAspect?: T;
+  startDate?: T;
+  endDate?: T;
+  mode?: T;
+  venue?: T;
+  organizer?: T;
+  capacity?: T;
+  status?: T;
+  googleFormEmbed?: T;
+  registrationUrl?: T;
+  sessions?:
+    | T
+    | {
+        time?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  materialOutline?:
+    | T
+    | {
+        item?: T;
+        id?: T;
+      };
+  speakers?:
+    | T
+    | {
+        name?: T;
+        position?: T;
+        role?: T;
+        photo?: T;
+        id?: T;
+      };
+  recordingUrl?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1834,6 +1956,9 @@ export interface Homepage {
     | null;
   socialProofLabel?: string | null;
   socialProofDescription?: string | null;
+  /**
+   * Unggah logo di sini (lewat Media Collection). PNG/JPG otomatis dikonversi ke WebP saat upload; SVG tetap vektor.
+   */
   socialProofLogos?:
     | {
         logo?: (number | null) | Media;

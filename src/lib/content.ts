@@ -42,7 +42,7 @@ export const site = {
   companyName: 'Captiveau',
   tagline: 'Transform Your Ideas Into Digital Reality',
   description:
-    'Captiveau — an Indonesian software house building digital products end-to-end: research, design, development, and maintenance.',
+    'Captiveau — software house Indonesia yang membangun produk digital secara end-to-end: riset, desain, pengembangan, dan maintenance.',
   email: 'hello@captiveau.id',
   phone: '+62-851-1770-5910',
   whatsapp: '+6285117705910',
@@ -95,42 +95,42 @@ export const services: ServiceItem[] = [
     icon: 'layout',
     tagline: 'Single-Page Website',
     description:
-      'High-converting landing pages with compelling design and persuasive copy that turn visitors into customers.',
+      'Landing page konversi tinggi dengan desain yang memikat dan copywriting persuasif yang mengubah pengunjung menjadi pelanggan.',
     highlights: ['High Conversion Rate', 'Blazing Fast', 'SEO Optimized'],
     intro:
-      'We craft landing pages that are not only visually stunning but also engineered for conversion. With a data-driven approach and modern UX principles, every element guides visitors toward becoming customers.',
+      'Kami merancang landing page yang tidak hanya indah secara visual tetapi juga dioptimalkan untuk konversi. Dengan pendekatan berbasis data dan prinsip UX modern, setiap elemen dirancang untuk memandu pengunjung menjadi pelanggan.',
     benefits: [
-      { icon: 'zap', title: 'Fast Load Time', description: 'Performance tuned for 90+ PageSpeed scores' },
-      { icon: 'search', title: 'SEO Optimized', description: 'Semantic HTML structure + JSON-LD schema' },
-      { icon: 'smartphone', title: 'Mobile First', description: 'Pixel-perfect responsive on every device' },
-      { icon: 'bar-chart', title: 'Conversion Ready', description: 'Strategic CTAs, integrated forms, analytics' },
+      { icon: 'zap', title: 'Fast Load Time', description: 'Performa dioptimalkan untuk skor PageSpeed 90+' },
+      { icon: 'search', title: 'SEO Optimized', description: 'Struktur HTML semantik + skema JSON-LD' },
+      { icon: 'smartphone', title: 'Mobile First', description: 'Responsif sempurna di semua perangkat' },
+      { icon: 'bar-chart', title: 'Conversion Ready', description: 'CTA strategis, form terintegrasi, dan analitik' },
     ],
     process: [
-      { step: '01', title: 'Consult & Brief', description: 'Discuss needs, audience, and landing page goals', icon: 'file-text' },
-      { step: '02', title: 'Wireframe', description: 'Page structure, copywriting, and user flow', icon: 'layers' },
-      { step: '03', title: 'Visual Design', description: 'UI/UX design aligned to brand identity', icon: 'palette' },
-      { step: '04', title: 'Development', description: 'Built with Next.js + Tailwind CSS', icon: 'code' },
-      { step: '05', title: 'Testing & Deploy', description: 'QA, performance testing, and go-live', icon: 'rocket' },
+      { step: '01', title: 'Consult & Brief', description: 'Diskusi kebutuhan, target audiens, dan tujuan landing page', icon: 'file-text' },
+      { step: '02', title: 'Wireframe', description: 'Struktur halaman, copywriting, dan alur pengguna', icon: 'layers' },
+      { step: '03', title: 'Visual Design', description: 'Desain UI/UX yang selaras dengan identitas brand', icon: 'palette' },
+      { step: '04', title: 'Development', description: 'Dibangun dengan Next.js + Tailwind CSS', icon: 'code' },
+      { step: '05', title: 'Testing & Deploy', description: 'QA, pengujian performa, dan go-live', icon: 'rocket' },
     ],
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Motion'],
     pricing: {
       basic: {
         name: 'Basic',
         price: 'Rp 3,499,000',
-        description: 'Single-page landing site',
-        features: ['1 Main Page', 'Responsive Design', 'Contact Form', 'Basic SEO', 'Social Media Integration'],
+        description: 'Landing page satu halaman',
+        features: ['1 Halaman Utama', 'Desain Responsif', 'Form Kontak', 'SEO Dasar', 'Integrasi Media Sosial'],
       },
       best: {
         name: 'Professional',
         price: 'Rp 5,499,000',
-        description: 'Multi-section landing site',
-        features: ['3–5 Page Sections', 'Animations & Interactions', 'Form + CRM Integration', 'Advanced SEO + JSON-LD', 'Analytics Setup', 'Performance Optimization'],
+        description: 'Landing page multi-section',
+        features: ['3–5 Section Halaman', 'Animasi & Interaksi', 'Form + Integrasi CRM', 'SEO Lanjutan + JSON-LD', 'Setup Analitik', 'Optimasi Performa'],
       },
       enterprise: {
         name: 'Enterprise',
         price: 'Rp 7,499,000',
         description: 'Landing page + microsite',
-        features: ['Multi-page Microsite', 'Custom Animations', 'A/B Testing Ready', 'CMS Integration', 'Priority Support', 'Performance SLA 99.9%'],
+        features: ['Microsite Multi-halaman', 'Animasi Kustom', 'Siap A/B Testing', 'Integrasi CMS', 'Dukungan Prioritas', 'SLA Performa 99.9%'],
       },
     },
   },
@@ -142,21 +142,21 @@ export const services: ServiceItem[] = [
     icon: 'shopping-cart',
     tagline: 'Online Selling Platform',
     description:
-      'End-to-end e-commerce solutions with complete features to launch and scale your online business.',
+      'Solusi e-commerce end-to-end dengan fitur lengkap untuk meluncurkan dan mengembangkan bisnis online Anda.',
     highlights: ['Conversion Optimized', 'Secure Payments', 'Inventory System'],
     intro:
-      'We build scalable, user-friendly online stores. From product catalog to checkout, every step is designed to maximize conversion and customer satisfaction.',
+      'Kami membangun toko online yang scalable dan mudah digunakan. Dari katalog produk hingga checkout, setiap langkah dirancang untuk memaksimalkan konversi dan kepuasan pelanggan.',
     benefits: [
-      { icon: 'credit-card', title: 'Payment Gateway', description: 'Midtrans, Xendit, or custom payments' },
-      { icon: 'package', title: 'Inventory Management', description: 'Real-time stock management' },
+      { icon: 'credit-card', title: 'Payment Gateway', description: 'Midtrans, Xendit, atau pembayaran kustom' },
+      { icon: 'package', title: 'Inventory Management', description: 'Manajemen stok real-time' },
       { icon: 'truck', title: 'Shipping Integration', description: 'RajaOngkir, JNE, J&T, SiCepat' },
-      { icon: 'bar-chart', title: 'Sales Dashboard', description: 'Analytics & sales reporting' },
+      { icon: 'bar-chart', title: 'Sales Dashboard', description: 'Analitik & laporan penjualan' },
     ],
     process: [
-      { step: '01', title: 'Consultation', description: 'Business needs & market analysis', icon: 'clipboard-list' },
-      { step: '02', title: 'UX Design', description: 'User flows, wireframes, and mockups', icon: 'pen-tool' },
-      { step: '03', title: 'Development', description: 'Frontend + Backend + Payment Integration', icon: 'code' },
-      { step: '04', title: 'Testing', description: 'QA, payment testing, security audit', icon: 'shield' },
+      { step: '01', title: 'Consultation', description: 'Analisis kebutuhan bisnis & pasar', icon: 'clipboard-list' },
+      { step: '02', title: 'UX Design', description: 'Alur pengguna, wireframe, dan mockup', icon: 'pen-tool' },
+      { step: '03', title: 'Development', description: 'Frontend + Backend + Integrasi Pembayaran', icon: 'code' },
+      { step: '04', title: 'Testing', description: 'QA, pengujian pembayaran, dan audit keamanan', icon: 'shield' },
       { step: '05', title: 'Launch', description: 'Deploy, monitoring & maintenance', icon: 'rocket' },
     ],
     technologies: ['Next.js', 'Medusa.js', 'PostgreSQL', 'Tailwind CSS', 'Midtrans'],
@@ -164,20 +164,20 @@ export const services: ServiceItem[] = [
       basic: {
         name: 'Starter',
         price: 'Rp 26,999,000',
-        description: 'Basic online store',
-        features: ['Up to 100 Products', '1 Payment Gateway', '1 Courier', 'Mobile Responsive', 'Basic Reports'],
+        description: 'Toko online dasar',
+        features: ['Hingga 100 Produk', '1 Payment Gateway', '1 Ekspedisi', 'Responsif Mobile', 'Laporan Dasar'],
       },
       best: {
         name: 'Business',
         price: 'Rp 34,999,000',
-        description: 'Complete online store',
-        features: ['Unlimited Products', 'Multiple Payments', 'Multiple Couriers', 'Admin Dashboard', 'Inventory Management', 'Sales Reports'],
+        description: 'Toko online lengkap',
+        features: ['Produk Tanpa Batas', 'Multi Pembayaran', 'Multi Ekspedisi', 'Admin Dashboard', 'Manajemen Inventori', 'Laporan Penjualan'],
       },
       enterprise: {
         name: 'Enterprise',
         price: 'Rp 49,999,000',
-        description: 'E-commerce platform',
-        features: ['Custom Features', 'Multi-warehouse', 'CRM Integration', 'Dedicated Server', '24/7 Priority Support', 'SLA 99.9%'],
+        description: 'Platform e-commerce',
+        features: ['Fitur Kustom', 'Multi-gudang', 'Integrasi CRM', 'Server Khusus', 'Dukungan Prioritas 24/7', 'SLA 99.9%'],
       },
     },
   },
@@ -189,21 +189,21 @@ export const services: ServiceItem[] = [
     icon: 'building2',
     tagline: 'Corporate Website',
     description:
-      'Professional company profile websites that build trust and credibility for your brand.',
+      'Website company profile profesional yang membangun kepercayaan dan kredibilitas untuk brand Anda.',
     highlights: ['Professional Branding', 'Lead Generation', 'Multi-page'],
     intro:
-      'We build company profile websites that reflect your business identity and credibility. With clear structure and strong visuals, your website becomes a 24/7 marketing asset.',
+      'Kami membangun website company profile yang mencerminkan identitas dan kredibilitas bisnis Anda. Dengan struktur yang jelas dan visual yang kuat, website Anda menjadi aset pemasaran 24/7.',
     benefits: [
-      { icon: 'target', title: 'Lead Generation', description: 'Purpose-built forms, CTAs, and funnels' },
-      { icon: 'sparkles', title: 'Brand Identity', description: 'Visually consistent with your brand' },
-      { icon: 'layers', title: 'Multi-page', description: 'About, services, portfolio, contact' },
-      { icon: 'line-chart', title: 'Analytics Integrated', description: 'GA4, GTM, and conversion tracking' },
+      { icon: 'target', title: 'Lead Generation', description: 'Form, CTA, dan funnel yang dirancang khusus' },
+      { icon: 'sparkles', title: 'Brand Identity', description: 'Konsisten secara visual dengan brand Anda' },
+      { icon: 'layers', title: 'Multi-page', description: 'Tentang, layanan, portofolio, kontak' },
+      { icon: 'line-chart', title: 'Analytics Integrated', description: 'GA4, GTM, dan conversion tracking' },
     ],
     process: [
-      { step: '01', title: 'Discovery', description: 'Brand audit & competitor analysis', icon: 'search' },
-      { step: '02', title: 'Information Architecture', description: 'Page structure & user journey', icon: 'layers' },
-      { step: '03', title: 'Design', description: 'Visual identity & UI design', icon: 'palette' },
-      { step: '04', title: 'Development', description: 'Build & CMS integration', icon: 'code' },
+      { step: '01', title: 'Discovery', description: 'Audit brand & analisis kompetitor', icon: 'search' },
+      { step: '02', title: 'Information Architecture', description: 'Struktur halaman & perjalanan pengguna', icon: 'layers' },
+      { step: '03', title: 'Design', description: 'Identitas visual & desain UI', icon: 'palette' },
+      { step: '04', title: 'Development', description: 'Build & integrasi CMS', icon: 'code' },
       { step: '05', title: 'Launch', description: 'Deploy & optimasi performa', icon: 'rocket' },
     ],
     technologies: ['Next.js', 'Payload CMS', 'Tailwind CSS', 'Vercel', 'GA4'],
@@ -211,20 +211,20 @@ export const services: ServiceItem[] = [
       basic: {
         name: 'Essential',
         price: 'Rp 8,999,000',
-        description: '5-page company profile',
-        features: ['5 Main Pages', 'Responsive Design', 'Contact Form', 'Basic SEO', 'Social Media Links'],
+        description: 'Company profile 5 halaman',
+        features: ['5 Halaman Utama', 'Desain Responsif', 'Form Kontak', 'SEO Dasar', 'Tautan Media Sosial'],
       },
       best: {
         name: 'Professional',
         price: 'Rp 12,999,000',
         description: 'Company profile + CMS',
-        features: ['10+ Pages', 'CMS for Content Updates', 'Blog Section', 'Advanced SEO + JSON-LD', 'Analytics Setup', 'Performance Optimization'],
+        features: ['10+ Halaman', 'CMS untuk Update Konten', 'Section Blog', 'SEO Lanjutan + JSON-LD', 'Setup Analitik', 'Optimasi Performa'],
       },
       enterprise: {
         name: 'Enterprise',
         price: 'Rp 18,999,000',
         description: 'Company profile + microsite',
-        features: ['Multi-language', 'CRM Integration', 'Custom Animations', 'CMS + Team Training', 'Priority Support', 'SLA 99.9%'],
+        features: ['Multi-bahasa', 'Integrasi CRM', 'Animasi Kustom', 'CMS + Pelatihan Tim', 'Dukungan Prioritas', 'SLA 99.9%'],
       },
     },
   },
@@ -236,42 +236,42 @@ export const services: ServiceItem[] = [
     icon: 'palette',
     tagline: 'Interface Design',
     description:
-      'Beautiful, intuitive, conversion-focused interface design for your digital product.',
+      'Desain antarmuka yang indah, intuitif, dan berfokus pada konversi untuk produk digital Anda.',
     highlights: ['User-Centered Design', 'Conversion Focused', 'Design Systems'],
     intro:
-      'We design intuitive, aesthetic digital experiences. From user research to prototyping, every design decision is grounded in data and industry best practices.',
+      'Kami merancang pengalaman digital yang intuitif dan estetis. Dari riset pengguna hingga prototyping, setiap keputusan desain didasarkan pada data dan praktik terbaik industri.',
     benefits: [
-      { icon: 'search', title: 'User Research', description: 'Interviews, surveys, usability tests' },
-      { icon: 'pen-tool', title: 'Wireframe & Prototype', description: 'Rapid prototyping in Figma' },
-      { icon: 'wand', title: 'Design System', description: 'Reusable, consistent components' },
-      { icon: 'line-chart', title: 'Conversion Focus', description: 'Every design decision driven by data' },
+      { icon: 'search', title: 'User Research', description: 'Wawancara, survei, dan usability test' },
+      { icon: 'pen-tool', title: 'Wireframe & Prototype', description: 'Prototyping cepat di Figma' },
+      { icon: 'wand', title: 'Design System', description: 'Komponen yang reusable dan konsisten' },
+      { icon: 'line-chart', title: 'Conversion Focus', description: 'Setiap keputusan desain didorong data' },
     ],
     process: [
-      { step: '01', title: 'Research', description: 'Understand users & business needs', icon: 'search' },
-      { step: '02', title: 'Ideation', description: 'Wireframes & user flows', icon: 'lightbulb' },
-      { step: '03', title: 'UI Design', description: 'High-fidelity design & design systems', icon: 'palette' },
-      { step: '04', title: 'Prototype', description: 'Interactive prototype & testing', icon: 'layers' },
-      { step: '05', title: 'Handoff', description: 'Developer-ready specs & assets', icon: 'code' },
+      { step: '01', title: 'Research', description: 'Memahami pengguna & kebutuhan bisnis', icon: 'search' },
+      { step: '02', title: 'Ideation', description: 'Wireframe & alur pengguna', icon: 'lightbulb' },
+      { step: '03', title: 'UI Design', description: 'Desain high-fidelity & design system', icon: 'palette' },
+      { step: '04', title: 'Prototype', description: 'Prototipe interaktif & pengujian', icon: 'layers' },
+      { step: '05', title: 'Handoff', description: 'Spesifikasi & aset siap developer', icon: 'code' },
     ],
     technologies: ['Figma', 'Design Tokens', 'User Testing', 'Prototyping', 'Design Systems'],
     pricing: {
       basic: {
         name: 'UI Kit',
         price: 'Rp 9,999,000',
-        description: 'Design of 1 core screen',
-        features: ['1 Core Screen', 'Basic Design System', 'Interactive Prototype', '2 Rounds of Revisions', 'Handoff Files'],
+        description: 'Desain 1 layar inti',
+        features: ['1 Layar Inti', 'Design System Dasar', 'Prototipe Interaktif', '2x Revisi', 'File Handoff'],
       },
       best: {
         name: 'Full Flow',
         price: 'Rp 15,999,000',
-        description: 'Complete user flow design',
-        features: ['5–10 Screens', 'User Research', 'Full Design System', 'Usability Testing', 'Developer Handoff', '4 Rounds of Revisions'],
+        description: 'Desain alur pengguna lengkap',
+        features: ['5–10 Layar', 'Riset Pengguna', 'Design System Lengkap', 'Usability Testing', 'Developer Handoff', '4x Revisi'],
       },
       enterprise: {
         name: 'Product Suite',
         price: 'Rp 24,999,000',
-        description: 'Full product design',
-        features: ['Unlimited Screens', 'Multi-platform', 'Design Tokens + Docs', 'Design System Library', 'Dedicated Designer', 'Priority Support'],
+        description: 'Desain produk lengkap',
+        features: ['Layar Tanpa Batas', 'Multi-platform', 'Design Tokens + Docs', 'Design System Library', 'Designer Khusus', 'Dukungan Prioritas'],
       },
     },
   },
@@ -283,42 +283,42 @@ export const services: ServiceItem[] = [
     icon: 'code',
     tagline: 'Modern Technology',
     description:
-      'High-performance web applications with Next.js, React, and TypeScript — built to scale.',
+      'Aplikasi web berperforma tinggi dengan Next.js, React, dan TypeScript — dibangun untuk berskala.',
     highlights: ['Next.js & React', 'TypeScript', 'API Integration'],
     intro:
-      'We build fast, secure, scalable web applications. With a modern stack — Next.js, React, and TypeScript — your product is ready to grow alongside your business.',
+      'Kami membangun aplikasi web yang cepat, aman, dan scalable. Dengan teknologi modern — Next.js, React, dan TypeScript — produk Anda siap tumbuh seiring bisnis Anda.',
     benefits: [
-      { icon: 'gauge', title: 'High Performance', description: 'Lighthouse 90+ on mobile & desktop' },
-      { icon: 'shield', title: 'Security First', description: 'SSL, encryption, security best practices' },
-      { icon: 'layers', title: 'Scalable Architecture', description: 'Architecture ready to grow with you' },
-      { icon: 'code', title: 'Clean Code', description: 'Structured, maintainable codebase' },
+      { icon: 'gauge', title: 'High Performance', description: 'Skor Lighthouse 90+ di mobile & desktop' },
+      { icon: 'shield', title: 'Security First', description: 'SSL, enkripsi, dan praktik keamanan terbaik' },
+      { icon: 'layers', title: 'Scalable Architecture', description: 'Arsitektur siap tumbuh bersama Anda' },
+      { icon: 'code', title: 'Clean Code', description: 'Codebase yang terstruktur dan mudah dirawat' },
     ],
     process: [
-      { step: '01', title: 'Requirements', description: 'Technical discovery & architecture', icon: 'clipboard-list' },
-      { step: '02', title: 'Setup', description: 'Project scaffolding & CI/CD', icon: 'code' },
-      { step: '03', title: 'Development', description: 'Feature iteration in sprints', icon: 'layers' },
-      { step: '04', title: 'Testing', description: 'Automated & manual QA', icon: 'shield' },
-      { step: '05', title: 'Maintenance', description: 'Monitoring & ongoing support', icon: 'rocket' },
+      { step: '01', title: 'Requirements', description: 'Discovery teknis & arsitektur', icon: 'clipboard-list' },
+      { step: '02', title: 'Setup', description: 'Scaffolding project & CI/CD', icon: 'code' },
+      { step: '03', title: 'Development', description: 'Iterasi fitur dalam sprint', icon: 'layers' },
+      { step: '04', title: 'Testing', description: 'QA otomatis & manual', icon: 'shield' },
+      { step: '05', title: 'Maintenance', description: 'Monitoring & dukungan berkelanjutan', icon: 'rocket' },
     ],
     technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Vercel / AWS'],
     pricing: {
       basic: {
         name: 'MVP',
         price: 'Rp 19,999,000',
-        description: 'Web app MVP',
-        features: ['3 Core Modules', 'Responsive Design', 'Authentication', 'Database Setup', 'Production Deploy'],
+        description: 'MVP aplikasi web',
+        features: ['3 Modul Inti', 'Desain Responsif', 'Autentikasi', 'Setup Database', 'Deploy Produksi'],
       },
       best: {
         name: 'Business',
         price: 'Rp 34,999,000',
-        description: 'Complete web app',
-        features: ['10+ Modules', 'Roles & Permissions', 'Admin Dashboard', 'API Integration', 'Payment Gateway', 'CI/CD Pipeline'],
+        description: 'Aplikasi web lengkap',
+        features: ['10+ Modul', 'Role & Permission', 'Admin Dashboard', 'Integrasi API', 'Payment Gateway', 'CI/CD Pipeline'],
       },
       enterprise: {
         name: 'Enterprise',
         price: 'Rp 69,999,000',
-        description: 'Complex platform',
-        features: ['Custom Architecture', 'Microservices Ready', 'Multi-tenant', 'Dedicated Team', '24/7 Monitoring', 'SLA 99.9%'],
+        description: 'Platform kompleks',
+        features: ['Arsitektur Kustom', 'Siap Microservices', 'Multi-tenant', 'Tim Khusus', 'Monitoring 24/7', 'SLA 99.9%'],
       },
     },
   },
@@ -330,42 +330,42 @@ export const services: ServiceItem[] = [
     icon: 'smartphone',
     tagline: 'Reach Further',
     description:
-      'Smooth, fast, delightful iOS & Android mobile apps for your business.',
+      'Aplikasi mobile iOS & Android yang mulus, cepat, dan menyenangkan untuk bisnis Anda.',
     highlights: ['iOS & Android', 'Offline Ready', 'Push Notifications'],
     intro:
-      'We develop cross-platform mobile apps with React Native and Expo — one codebase for iOS and Android, without sacrificing native performance.',
+      'Kami mengembangkan aplikasi mobile cross-platform dengan React Native dan Expo — satu codebase untuk iOS dan Android, tanpa mengorbankan performa native.',
     benefits: [
-      { icon: 'smartphone', title: 'Cross-platform', description: 'One codebase for iOS & Android' },
-      { icon: 'bolt', title: 'Fast & Smooth', description: '60fps animations, responsive interaction' },
-      { icon: 'shield', title: 'Secure Auth', description: 'Biometric & OAuth integration' },
-      { icon: 'rocket', title: 'OTA Updates', description: 'Ship updates without store review' },
+      { icon: 'smartphone', title: 'Cross-platform', description: 'Satu codebase untuk iOS & Android' },
+      { icon: 'bolt', title: 'Fast & Smooth', description: 'Animasi 60fps, interaksi responsif' },
+      { icon: 'shield', title: 'Secure Auth', description: 'Integrasi biometrik & OAuth' },
+      { icon: 'rocket', title: 'OTA Updates', description: 'Update tanpa menunggu review toko' },
     ],
     process: [
-      { step: '01', title: 'Discovery', description: 'Scope definition & platform strategy', icon: 'search' },
-      { step: '02', title: 'UX/UI', description: 'Mobile-first design & prototype', icon: 'palette' },
-      { step: '03', title: 'Development', description: 'React Native + backend integration', icon: 'code' },
-      { step: '04', title: 'Testing', description: 'Device matrix & QA', icon: 'shield' },
-      { step: '05', title: 'Store Launch', description: 'Submission & release management', icon: 'rocket' },
+      { step: '01', title: 'Discovery', description: 'Definisi scope & strategi platform', icon: 'search' },
+      { step: '02', title: 'UX/UI', description: 'Desain & prototipe mobile-first', icon: 'palette' },
+      { step: '03', title: 'Development', description: 'React Native + integrasi backend', icon: 'code' },
+      { step: '04', title: 'Testing', description: 'Matrix perangkat & QA', icon: 'shield' },
+      { step: '05', title: 'Store Launch', description: 'Submit & manajemen rilis', icon: 'rocket' },
     ],
     technologies: ['React Native', 'Expo', 'TypeScript', 'Firebase', 'Supabase'],
     pricing: {
       basic: {
         name: 'Starter',
         price: 'Rp 24,999,000',
-        description: 'Mobile app MVP',
-        features: ['3 Core Screens', 'Authentication', 'Push Notifications', 'API Integration', 'Store Submission'],
+        description: 'MVP aplikasi mobile',
+        features: ['3 Layar Inti', 'Autentikasi', 'Push Notifications', 'Integrasi API', 'Submit ke App Store'],
       },
       best: {
         name: 'Growth',
         price: 'Rp 44,999,000',
-        description: 'Complete mobile app',
-        features: ['10+ Screens', 'Offline Mode', 'In-app Payments', 'Admin Dashboard', 'Analytics', '2 Iterations'],
+        description: 'Aplikasi mobile lengkap',
+        features: ['10+ Layar', 'Mode Offline', 'Pembayaran In-app', 'Admin Dashboard', 'Analitik', '2 Iterasi'],
       },
       enterprise: {
         name: 'Scale',
         price: 'Rp 79,999,000',
-        description: 'Complex mobile platform',
-        features: ['Custom Features', 'Real-time Sync', 'Multi-language', 'Dedicated Team', '24/7 Support', 'SLA 99.9%'],
+        description: 'Platform mobile kompleks',
+        features: ['Fitur Kustom', 'Sinkronisasi Real-time', 'Multi-bahasa', 'Tim Khusus', 'Dukungan 24/7', 'SLA 99.9%'],
       },
     },
   },
@@ -383,7 +383,6 @@ export type Project = {
   services: string[]
   results: { value: string; label: string }[]
   stack: string[]
-  story?: { heading: string; description: string; image: string | null }[]
   integrations?: string[]
   caseStudy?: CaseStudy | null
 }
@@ -427,15 +426,15 @@ export const projects: Project[] = [
     image: '/client/amertavana.webp',
     tags: ['Web Development', 'Brand Identity'],
     description:
-      'A modern company profile website for a premium lifestyle brand — elegant design, optimal performance.',
+      'Website company profile modern untuk brand lifestyle premium — desain elegan, performa optimal.',
     size: 'large',
     category: 'Company Profile',
     year: '2026',
     services: ['Web Development', 'UI/UX Design', 'Brand Identity'],
     results: [
-      { value: '+120%', label: 'Organic traffic' },
-      { value: '98', label: 'Lighthouse score' },
-      { value: '<1s', label: 'Load time' },
+      { value: '+120%', label: 'Trafik organik' },
+      { value: '98', label: 'Skor Lighthouse' },
+      { value: '<1s', label: 'Waktu muat' },
     ],
     stack: ['Next.js', 'Tailwind CSS', 'Payload CMS', 'Vercel'],
     caseStudy: {
@@ -496,15 +495,15 @@ export const projects: Project[] = [
     image: '/client/cogan.webp',
     tags: ['UI/UX Design', 'Mobile App'],
     description:
-      'A mobile app with an intuitive user experience and stunning visual design.',
+      'Aplikasi mobile dengan pengalaman pengguna yang intuitif dan desain visual yang memukau.',
     size: 'small',
     category: 'Mobile App',
     year: '2026',
     services: ['UI/UX Design', 'Mobile Development'],
     results: [
-      { value: '4.8', label: 'App rating' },
-      { value: '50K+', label: 'Downloads' },
-      { value: '+35%', label: 'Retention' },
+      { value: '4.8', label: 'Rating aplikasi' },
+      { value: '50K+', label: 'Unduhan' },
+      { value: '+35%', label: 'Retensi' },
     ],
     stack: ['React Native', 'Figma', 'Firebase'],
     caseStudy: {
@@ -565,14 +564,14 @@ export const projects: Project[] = [
     image: '/client/emerintek.webp',
     tags: ['Web Platform', 'Dashboard'],
     description:
-      'An analytics dashboard platform with real-time data visualization and comprehensive management systems.',
+      'Platform dashboard analitik dengan visualisasi data real-time dan sistem manajemen yang menyeluruh.',
     size: 'small',
     category: 'Dashboard',
     year: '2025',
     services: ['Web Development', 'Data Visualization'],
     results: [
-      { value: '-40%', label: 'Manual workload' },
-      { value: '24/7', label: 'Real-time monitoring' },
+      { value: '-40%', label: 'Beban kerja manual' },
+      { value: '24/7', label: 'Monitoring real-time' },
       { value: '99.9%', label: 'Uptime' },
     ],
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Recharts'],
@@ -583,15 +582,15 @@ export const projects: Project[] = [
     image: '/client/indomaja.webp',
     tags: ['E-Commerce', 'Digital Strategy'],
     description:
-      'A full-featured e-commerce platform with integrated payment gateway and inventory management.',
+      'Platform e-commerce lengkap dengan payment gateway terintegrasi dan manajemen inventori.',
     size: 'large',
     category: 'E-Commerce',
     year: '2025',
     services: ['E-Commerce', 'Web Development', 'Digital Strategy'],
     results: [
-      { value: '+85%', label: 'Online sales' },
-      { value: '3x', label: 'Conversion rate' },
-      { value: '1,200+', label: 'Products managed' },
+      { value: '+85%', label: 'Penjualan online' },
+      { value: '3x', label: 'Tingkat konversi' },
+      { value: '1,200+', label: 'Produk dikelola' },
     ],
     stack: ['Next.js', 'Medusa.js', 'Midtrans', 'PostgreSQL'],
   },
@@ -603,10 +602,10 @@ export const stats: {
   decimals?: number
   label: string
 }[] = [
-  { value: 50, suffix: '+', label: 'Projects delivered' },
-  { value: 30, suffix: '+', label: 'Trusted clients' },
-  { value: 4.9, suffix: '', decimals: 1, label: 'Client rating' },
-  { value: 8, suffix: ' yrs', label: 'Experience' },
+  { value: 50, suffix: '+', label: 'Proyek selesai' },
+  { value: 30, suffix: '+', label: 'Klien terpercaya' },
+  { value: 4.9, suffix: '', decimals: 1, label: 'Rating klien' },
+  { value: 8, suffix: ' thn', label: 'Pengalaman' },
 ]
 
 export type TestimonialItem = {
@@ -623,7 +622,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'CEO',
     company: 'TechStart Indonesia',
     quote:
-      'Captiveau completely transformed how we build digital products. Their team shipped our MVP in just 8 weeks. Now we can focus on business strategy instead of technical problems.',
+      'Captiveau benar-benar mengubah cara kami membangun produk digital. Tim mereka menyelesaikan MVP kami hanya dalam 8 minggu. Sekarang kami bisa fokus pada strategi bisnis, bukan masalah teknis.',
     avatar: 'https://i.pravatar.cc/150?img=11',
   },
   {
@@ -631,7 +630,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'Founder',
     company: 'EduTech Solutions',
     quote:
-      'I was hesitant about local software houses at first, but Captiveau proved their quality. Our e-learning app hit 4.8 on the Play Store. Their team is professional and responsive.',
+      'Awalnya saya ragu dengan software house lokal, tapi Captiveau membuktikan kualitasnya. Aplikasi e-learning kami tembus rating 4.8 di Play Store. Tim mereka profesional dan responsif.',
     avatar: 'https://i.pravatar.cc/150?img=5',
   },
   {
@@ -639,7 +638,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'CTO',
     company: 'FinanceApp',
     quote:
-      'As a non-technical founder, Captiveau helped bring my idea to life. We launched 3 months ahead of schedule. Their transparent development process kept me updated at every step.',
+      'Sebagai founder non-teknis, Captiveau membantu mewujudkan ide saya. Kami meluncur 3 bulan lebih cepat dari jadwal. Proses pengembangan yang transparan membuat saya selalu update di setiap langkah.',
     avatar: 'https://i.pravatar.cc/150?img=60',
   },
   {
@@ -647,7 +646,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'Product Manager',
     company: 'RetailTech',
     quote:
-      'Captiveau’s attention to UI/UX detail is impressive. Our marketplace app saw a 35% higher conversion rate. They truly understand Indonesian users.',
+      'Perhatian Captiveau terhadap detail UI/UX sangat mengesankan. Aplikasi marketplace kami mengalami kenaikan konversi 35%. Mereka benar-benar memahami pengguna Indonesia.',
     avatar: 'https://i.pravatar.cc/150?img=45',
   },
   {
@@ -655,7 +654,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'Direktur IT',
     company: 'Bank Digital',
     quote:
-      'Our financial dashboard needed a complete overhaul, and Captiveau delivered flawlessly. Real-time analytics boosted user engagement by 47%. Their security implementation is rock solid.',
+      'Dashboard keuangan kami butuh overhaul total, dan Captiveau menyelesaikannya dengan sempurna. Analitik real-time meningkatkan engagement pengguna sebesar 47%. Implementasi keamanannya sangat solid.',
     avatar: 'https://i.pravatar.cc/150?img=68',
   },
   {
@@ -663,7 +662,7 @@ export const testimonials: TestimonialItem[] = [
     role: 'Head of Digital',
     company: 'UMKM Hub',
     quote:
-      'Captiveau’s documentation and support are outstanding. Our SME platform onboarded 1,000+ merchants in 2 months. Their team is always ready to help with troubleshooting.',
+      'Dokumentasi dan dukungan Captiveau luar biasa. Platform UMKM kami berhasil mengonboard 1.000+ merchant dalam 2 bulan. Tim mereka selalu siap membantu troubleshooting.',
     avatar: 'https://i.pravatar.cc/150?img=47',
   },
 ]
@@ -680,57 +679,57 @@ export type FaqCategory = (typeof faqCategories)[number]
 
 export const faqs: { title: string; content: string; category: Exclude<FaqCategory, 'Semua'> }[] = [
   {
-    title: 'What is Captiveau?',
+    title: 'Apa itu Captiveau?',
     content:
-      'Captiveau is an Indonesian software house specializing in end-to-end digital product design and development. We help startups, corporations, and SMEs bring their digital ideas to life with modern technology and an experienced team.',
+      'Captiveau adalah software house Indonesia yang berspesialisasi dalam desain dan pengembangan produk digital secara end-to-end. Kami membantu startup, korporasi, dan UMKM mewujudkan ide digital mereka dengan teknologi modern dan tim yang berpengalaman.',
     category: 'General',
   },
   {
-    title: 'How long does it take to build an app?',
+    title: 'Berapa lama waktu pengerjaan aplikasi?',
     content:
-      'It depends on project complexity. Landing pages typically take 1–2 weeks, company profile websites 2–4 weeks, and web/mobile apps 1–3 months. We always provide a clear timeline before starting.',
+      'Tergantung kompleksitas project. Landing page biasanya memakan waktu 1–2 minggu, website company profile 2–4 minggu, dan aplikasi web/mobile 1–3 bulan. Kami selalu memberikan timeline yang jelas sebelum memulai.',
     category: 'General',
   },
   {
-    title: 'Do I need technical skills to work with Captiveau?',
+    title: 'Apakah saya perlu skill teknis untuk bekerja dengan Captiveau?',
     content:
-      'No. Our team guides you from start to finish — from requirement consultation and planning to launch. You focus on your business vision; we handle the rest.',
+      'Tidak. Tim kami memandu Anda dari awal hingga selesai — dari konsultasi kebutuhan dan perencanaan hingga peluncuran. Anda fokus pada visi bisnis; kami yang mengurus sisanya.',
     category: 'General',
   },
   {
-    title: 'How does the process with Captiveau work?',
+    title: 'Bagaimana proses kerja dengan Captiveau?',
     content:
-      'Our process is transparent: consultation & analysis → design & prototype → development → testing & QA → launch & maintenance. You get weekly updates and access to the development board.',
+      'Proses kami transparan: konsultasi & analisis → desain & prototipe → pengembangan → pengujian & QA → peluncuran & maintenance. Anda mendapat update mingguan dan akses ke papan pengembangan.',
     category: 'Technical',
   },
   {
-    title: 'Can I request revisions during development?',
+    title: 'Bisakah saya meminta revisi selama pengembangan?',
     content:
-      'Yes. Every package includes a set number of revisions. For scope changes beyond your package, we provide a transparent additional estimate before starting work.',
+      'Bisa. Setiap paket sudah termasuk sejumlah revisi. Untuk perubahan scope di luar paket Anda, kami memberikan estimasi tambahan yang transparan sebelum mulai mengerjakan.',
     category: 'Technical',
   },
   {
-    title: 'Do the apps support both Android and iOS?',
+    title: 'Apakah aplikasinya mendukung Android dan iOS?',
     content:
-      'Yes. We use React Native / Flutter for cross-platform development — one codebase for Android and iOS without sacrificing native performance.',
+      'Ya. Kami menggunakan React Native / Flutter untuk pengembangan cross-platform — satu codebase untuk Android dan iOS tanpa mengorbankan performa native.',
     category: 'Technical',
   },
   {
-    title: 'How does payment work at Captiveau?',
+    title: 'Bagaimana sistem pembayaran di Captiveau?',
     content:
-      'We use a milestone system: 50% upfront (deposit), 40% at 50% development progress, and 10% on completion. Bank transfer accepted, official invoices always provided.',
+      'Kami menggunakan sistem milestone: 50% di muka (DP), 40% saat progres pengembangan 50%, dan 10% saat selesai. Transfer bank diterima, invoice resmi selalu diberikan.',
     category: 'Pricing',
   },
   {
-    title: 'Is there a warranty for the apps you build?',
+    title: 'Apakah ada garansi untuk aplikasi yang dibuat?',
     content:
-      'Yes. We provide a bug-fix and maintenance guarantee to keep your product running optimally after launch. Monthly maintenance packages are also available for ongoing support.',
+      'Ya. Kami memberikan garansi perbaikan bug dan maintenance agar produk Anda tetap berjalan optimal setelah peluncuran. Paket maintenance bulanan juga tersedia untuk dukungan berkelanjutan.',
     category: 'Support',
   },
   {
-    title: 'How do I get started working with Captiveau?',
+    title: 'Bagaimana cara mulai bekerja dengan Captiveau?',
     content:
-      'Simple. Reach out via the contact form or WhatsApp, tell us your needs, and we will schedule a free consultation to map out the right solution.',
+      'Sangat mudah. Hubungi kami melalui form kontak atau WhatsApp, ceritakan kebutuhan Anda, dan kami akan menjadwalkan konsultasi gratis untuk menyusun solusi yang tepat.',
     category: 'Support',
   },
 ]
@@ -738,17 +737,17 @@ export const faqs: { title: string; content: string; category: Exclude<FaqCatego
 export const trustPoints = [
   {
     title: 'Senior Expert Team',
-    desc: 'Delivered directly by senior developers & designers with 4+ years in the digital industry.',
+    desc: 'Dikerjakan langsung oleh developer & designer senior dengan pengalaman 4+ tahun di industri digital.',
     icon: 'users',
   },
   {
     title: 'Free Consultation',
-    desc: 'Discuss your idea with our team for free before deciding to start your project.',
+    desc: 'Diskusikan ide Anda dengan tim kami secara gratis sebelum memutuskan memulai project.',
     icon: 'message',
   },
   {
     title: 'Quality Guarantee',
-    desc: 'Bug-fix and maintenance guarantee to keep your product running optimally.',
+    desc: 'Garansi perbaikan bug dan maintenance agar produk Anda tetap berjalan optimal.',
     icon: 'shield',
   },
 ] as const
@@ -756,17 +755,17 @@ export const trustPoints = [
 export const advantages = [
   {
     title: 'Transparent Process',
-    desc: 'Track your project in real time with weekly updates and access to the development board.',
+    desc: 'Pantau project Anda secara real-time dengan update mingguan dan akses ke papan pengembangan.',
     icon: 'eye',
   },
   {
     title: 'Dedicated Team',
-    desc: 'Every project gets a dedicated team focused 100% on building your product.',
+    desc: 'Setiap project mendapat tim khusus yang fokus 100% membangun produk Anda.',
     icon: 'users',
   },
   {
     title: 'End-to-End Solutions',
-    desc: 'From first idea to maintenance — we handle design, development, testing, and deployment.',
+    desc: 'Dari ide pertama hingga maintenance — kami menangani desain, pengembangan, pengujian, dan deployment.',
     icon: 'layers',
   },
 ] as const
@@ -776,9 +775,9 @@ export const articles = [
     title: 'How to Choose the Right Tech Stack for Your Startup in 2026',
     category: 'Tech',
     date: '2026-07-15',
-    readTime: '5 min read',
+    readTime: '5 menit baca',
     excerpt:
-      'Choosing the right tech stack is a critical decision that shapes your product scalability, cost, and development speed.',
+      'Memilih tech stack yang tepat adalah keputusan krusial yang menentukan skalabilitas produk, biaya, dan kecepatan pengembangan Anda.',
     image:
       '/images/landing.jpg',
   },
@@ -786,9 +785,9 @@ export const articles = [
     title: 'Why UI/UX Design is an Investment, Not a Cost',
     category: 'Design',
     date: '2026-07-08',
-    readTime: '4 min read',
+    readTime: '4 menit baca',
     excerpt:
-      'Good design is not just aesthetics — it creates experiences that turn visitors into loyal customers.',
+      'Desain yang baik bukan sekadar estetika — ia menciptakan pengalaman yang mengubah pengunjung menjadi pelanggan setia.',
     image:
       '/images/design.jpg',
   },
@@ -796,9 +795,9 @@ export const articles = [
     title: 'Landing Page vs Multi-Page Website: Which Is Right?',
     category: 'Strategy',
     date: '2026-06-28',
-    readTime: '6 min read',
+    readTime: '6 menit baca',
     excerpt:
-      'Not every business needs a multi-page website. Learn when a landing page is enough — and when you need something more complex.',
+      'Tidak semua bisnis membutuhkan website multi-halaman. Pelajari kapan landing page sudah cukup — dan kapan Anda butuh sesuatu yang lebih kompleks.',
     image:
       '/images/office.jpg',
   },
@@ -806,9 +805,9 @@ export const articles = [
     title: '7 Key Metrics to Measure Digital Product Success',
     category: 'Analytics',
     date: '2026-06-20',
-    readTime: '7 min read',
+    readTime: '7 menit baca',
     excerpt:
-      'Stop guessing — start measuring. Here are the essential metrics to track for a successful digital product.',
+      'Berhenti menebak — mulailah mengukur. Berikut metrik penting yang perlu dilacak untuk produk digital yang sukses.',
     image:
       '/images/code.jpg',
   },
@@ -816,9 +815,9 @@ export const articles = [
     title: 'The Digital Product Development Journey: From Idea to Launch',
     category: 'Development',
     date: '2026-06-12',
-    readTime: '8 min read',
+    readTime: '8 menit baca',
     excerpt:
-      'Understanding the product development cycle helps you plan budget, timelines, and expectations better.',
+      'Memahami siklus pengembangan produk membantu Anda merencanakan budget, timeline, dan ekspektasi dengan lebih baik.',
     image:
       '/images/meeting.jpg',
   },
@@ -826,9 +825,9 @@ export const articles = [
     title: 'SEO for Business Websites: The Complete 2026 Guide',
     category: 'Marketing',
     date: '2026-06-05',
-    readTime: '10 min read',
+    readTime: '10 menit baca',
     excerpt:
-      'SEO is not magic — it is strategy. Learn how to get your business website on Google’s first page.',
+      'SEO bukan sihir — ini strategi. Pelajari cara membuat website bisnis Anda tampil di halaman pertama Google.',
     image:
       '/images/team.jpg',
   },
@@ -838,27 +837,27 @@ export const values = [
   {
     icon: 'lightbulb',
     title: 'Creative',
-    desc: 'Creative, innovative solutions for every digital challenge — functional and inspiring.'
+    desc: 'Solusi kreatif dan inovatif untuk setiap tantangan digital — fungsional dan menginspirasi.'
   },
   {
     icon: 'leaf',
     title: 'Lean',
-    desc: 'Efficient and agile in every process. Cut the waste, maximize the value.'
+    desc: 'Efisien dan lincah dalam setiap proses. Kurangi pemborosan, maksimalkan nilai.'
   },
   {
     icon: 'target',
     title: 'Effective',
-    desc: 'Focused on measurable outcomes. Every strategy is designed to hit your business goals.'
+    desc: 'Fokus pada hasil yang terukur. Setiap strategi dirancang untuk mencapai tujuan bisnis Anda.'
   },
   {
     icon: 'bolt',
     title: 'Active',
-    desc: 'Proactive and responsive. We move fast, communicate clearly, and stay a step ahead.'
+    desc: 'Proaktif dan responsif. Kami bergerak cepat, berkomunikasi dengan jelas, dan selangkah lebih maju.'
   },
   {
     icon: 'brain',
     title: 'Rational',
-    desc: 'Decisions built on data, logic, and deep analysis. Sensible, sustainable solutions.'
+    desc: 'Keputusan dibangun di atas data, logika, dan analisis mendalam. Solusi yang masuk akal dan berkelanjutan.'
   },
 ]
 
@@ -879,11 +878,11 @@ export const team: TeamMember[] = [
 ]
 
 export const process = [
-  { step: '01', title: 'Consult & Analyze', desc: 'Discover needs, research, and strategy', icon: 'clipboard-list' },
-  { step: '02', title: 'Design & Prototype', desc: 'From wireframes to high-fidelity prototypes', icon: 'palette' },
-  { step: '03', title: 'Development', desc: 'Built to high engineering standards', icon: 'code' },
-  { step: '04', title: 'Testing & QA', desc: 'Comprehensive quality assurance', icon: 'shield' },
-  { step: '05', title: 'Launch & Maintain', desc: 'Deploy and ongoing support', icon: 'rocket' },
+  { step: '01', title: 'Consult & Analyze', desc: 'Menemukan kebutuhan, riset, dan strategi', icon: 'clipboard-list' },
+  { step: '02', title: 'Design & Prototype', desc: 'Dari wireframe hingga prototipe high-fidelity', icon: 'palette' },
+  { step: '03', title: 'Development', desc: 'Dibangun dengan standar engineering tinggi', icon: 'code' },
+  { step: '04', title: 'Testing & QA', desc: 'Quality assurance yang menyeluruh', icon: 'shield' },
+  { step: '05', title: 'Launch & Maintain', desc: 'Deploy dan dukungan berkelanjutan', icon: 'rocket' },
 ]
 
 export const jobs = [
@@ -892,7 +891,7 @@ export const jobs = [
     type: 'Full-time',
     location: 'Remote / Jakarta',
     salary: 'IDR 8–15M',
-    desc: 'React, Next.js, TypeScript — building fast, beautiful interfaces.',
+    desc: 'React, Next.js, TypeScript — membangun antarmuka yang cepat dan indah.',
     tags: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
   },
   {
@@ -900,7 +899,7 @@ export const jobs = [
     type: 'Full-time',
     location: 'Remote / Jakarta',
     salary: 'IDR 7–12M',
-    desc: 'Designing intuitive user experiences with stunning visuals.',
+    desc: 'Merancang pengalaman pengguna yang intuitif dengan visual yang memukau.',
     tags: ['Figma', 'Design Systems', 'Prototyping'],
   },
   {
@@ -908,7 +907,7 @@ export const jobs = [
     type: 'Full-time',
     location: 'Remote / Jakarta',
     salary: 'IDR 9–16M',
-    desc: 'Building scalable, secure APIs and infrastructure.',
+    desc: 'Membangun API dan infrastruktur yang scalable dan aman.',
     tags: ['Node.js', 'PostgreSQL', 'Redis', 'Docker'],
   },
   {
@@ -916,7 +915,7 @@ export const jobs = [
     type: 'Full-time',
     location: 'Jakarta',
     salary: 'IDR 8–14M',
-    desc: 'Managing timelines, scope, and client communication.',
+    desc: 'Mengelola timeline, scope, dan komunikasi klien.',
     tags: ['Agile', 'Scrum', 'Jira', 'Stakeholders'],
   },
   {
@@ -924,7 +923,157 @@ export const jobs = [
     type: 'Internship',
     location: 'Remote',
     salary: 'IDR 2–4M',
-    desc: 'Learn while contributing to real, shipped projects.',
+    desc: 'Belajar sambil berkontribusi pada project nyata yang sudah rilis.',
     tags: ['Mentorship', 'Real Projects', 'Flexible'],
+  },
+]
+
+export type EventItem = {
+  slug: string
+  title: string
+  description: string
+  image: string | null
+  imageAspect: 'auto' | '21/9' | '16/9' | '4/3' | '1/1'
+  startDate: string
+  endDate: string | null
+  venue: string
+  mode: 'offline' | 'online' | 'hybrid'
+  organizer: string
+  capacity: number | null
+  status: 'upcoming' | 'ongoing' | 'past' | 'archived'
+  googleFormEmbed: string | null
+  registrationUrl: string | null
+  sessions: { time: string; title: string; description?: string }[]
+  materialOutline: string[]
+  speakers: { name: string; position: string; role: string; photo: string | null }[]
+  recordingUrl: string | null
+}
+
+/**
+ * Acara contoh — digunakan sebagai fallback saat CMS kosong dan sebagai source
+ * seed. Google Form embed memakai URL placeholder; ganti lewat CMS admin.
+ */
+export const events: EventItem[] = [
+  {
+    slug: 'workshop-landing-page-konversi-tinggi',
+    title: 'Workshop: Landing Page Konversi Tinggi',
+    description:
+      'Workshop praktis 3 jam — belajar struktur, copywriting, dan optimasi landing page yang benar-benar mengonversi pengunjung menjadi pelanggan.',
+    image: null,
+    imageAspect: 'auto',
+    startDate: '2026-10-15T09:00:00.000Z',
+    endDate: '2026-10-15T12:00:00.000Z',
+    venue: 'Zoom Meeting (online)',
+    mode: 'online',
+    organizer: 'Captiveau',
+    capacity: 50,
+    status: 'upcoming',
+    googleFormEmbed:
+      '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewpEo4M6AuKX8ZWfqH9md7wGMewmylTDwSbTO6eB1Rav3qzg/viewform?embedded=true" width="640" height="2431" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>',
+    registrationUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSewpEo4M6AuKX8ZWfqH9md7wGMewmylTDwSbTO6eB1Rav3qzg/viewform',
+    sessions: [
+      { time: '09.00 – 09.15', title: 'Pembukaan & perkenalan' },
+      {
+        time: '09.15 – 10.30',
+        title: 'Prinsip landing page berkonversi: struktur, hierarki, dan psikologi pengunjung',
+      },
+      { time: '10.30 – 10.45', title: 'Istirahat' },
+      { time: '10.45 – 11.45', title: 'Copywriting praktis + studi kasus nyata' },
+      { time: '11.45 – 12.00', title: 'Q&A dan penutup' },
+    ],
+    materialOutline: [
+      'Anatomi landing page: hero, value proposition, social proof, CTA',
+      'Hierarki visual: apa yang dilihat pengunjung pertama kali',
+      'Psikologi konversi: FOMO, scarcity, dan prinsip persuasi',
+      'Copywriting: headline, sub-headline, dan microcopy',
+      'Studi kasus: landing page sebelum vs sesudah optimasi',
+    ],
+    speakers: [
+      {
+        name: 'Andi Pratama',
+        position: 'Pembicara utama',
+        role: 'Founder & CEO, Captiveau',
+        photo: null,
+      },
+      {
+        name: 'Fina Rahma',
+        position: 'Fasilitator',
+        role: 'UI/UX Designer, Captiveau',
+        photo: null,
+      },
+    ],
+    recordingUrl: null,
+  },
+  {
+    slug: 'webinar-uiux-desain-berbasis-data',
+    title: 'Webinar: UI/UX Desain Berbasis Data',
+    description:
+      'Bagaimana riset pengguna dan data mengarahkan setiap keputusan desain — dari wireframe hingga design system, tanpa menebak-nebak.',
+    image: null,
+    imageAspect: '4/3',
+    startDate: '2026-11-05T14:00:00.000Z',
+    endDate: '2026-11-05T16:00:00.000Z',
+    venue: 'Zoom Meeting (online)',
+    mode: 'online',
+    organizer: 'Captiveau',
+    capacity: 100,
+    status: 'upcoming',
+    googleFormEmbed:
+      '<iframe src="https://docs.google.com/forms/d/e/2FAIpQLSdNb3jXwqZ4VhY7T9lReX8gYmECbSAMPLE/webform?embedded=true" width="640" height="900" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>',
+    registrationUrl:
+      'https://docs.google.com/forms/d/e/2FAIpQLSdNb3jXwqZ4VhY7T9lReX8gYmECbSAMPLE/webform',
+    sessions: [
+      { time: '14.00 – 14.10', title: 'Pembukaan' },
+      { time: '14.10 – 15.00', title: 'Riset pengguna: wawancara, survei, usability test' },
+      { time: '15.00 – 15.50', title: 'Dari data ke keputusan desain (studi kasus)' },
+      { time: '15.50 – 16.00', title: 'Q&A' },
+    ],
+    materialOutline: [
+      'Metode riset pengguna untuk produk baru vs produk berjalan',
+      'Membaca data analitik dan hasil usability test',
+      'Mengubah insight menjadi prinsip desain',
+      'Contoh design system yang lahir dari data',
+    ],
+    speakers: [
+      {
+        name: 'Bella Kusuma',
+        position: 'Pembicara utama',
+        role: 'Head of Design, Captiveau',
+        photo: null,
+      },
+    ],
+    recordingUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  },
+  {
+    slug: 'talkshow-luncurkan-toko-online-umkm',
+    title: 'Talkshow: Meluncurkan Toko Online untuk UMKM',
+    description:
+      'Sesi tanya-jawab hangat bersama praktisi e-commerce — dari pilihan platform, payment gateway, hingga strategi pemasaran pertama.',
+    image: null,
+    imageAspect: 'auto',
+    startDate: '2026-09-12T13:00:00.000Z',
+    endDate: '2026-09-12T15:00:00.000Z',
+    venue: 'M Bloc Space, Jakarta Selatan',
+    mode: 'offline',
+    organizer: 'Captiveau × Komunitas UMKM',
+    capacity: 60,
+    status: 'past',
+    googleFormEmbed: null,
+    registrationUrl: null,
+    sessions: [
+      { time: '13.00 – 13.15', title: 'Registrasi ulang' },
+      { time: '13.15 – 14.15', title: 'Diskusi: memilih platform & payment gateway' },
+      { time: '14.15 – 15.00', title: 'Q&A terbuka & networking' },
+    ],
+    materialOutline: [],
+    speakers: [
+      {
+        name: 'Dewi Lestari',
+        position: 'Panelis',
+        role: 'Product Manager, Captiveau',
+        photo: null,
+      },
+    ],
+    recordingUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
 ]

@@ -339,3 +339,15 @@ body {
   border: 1px solid hsl(var(--border));
   padding: 0.5rem 0.75rem;
 }
+
+/* Google Form embed — sesuaikan iframe agar muat di wadahnya (sidebar detail acara) */
+.google-form-embed {
+  container-type: inline-size;
+}
+.google-form-embed iframe {
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+  border: 0;
+  min-height: 900px;
+}

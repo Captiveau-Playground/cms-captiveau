@@ -42,7 +42,7 @@ export default async function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="End-to-End Digital Solutions"
-        description="From landing pages to complex platforms — we deliver the right technology solutions for every stage of your business growth."
+        description="Dari landing page hingga platform kompleks — kami menghadirkan solusi teknologi yang tepat untuk setiap tahap pertumbuhan bisnis Anda."
       />
 
       {/* Services grid */}
@@ -111,7 +111,7 @@ export default async function ServicesPage() {
                       ))}
                     </div>
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                      Learn more
+                      Selengkapnya
                       <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                     </div>
@@ -188,7 +188,7 @@ export default async function ServicesPage() {
             How We <span className="text-primary">Work</span>
           </>
         }
-        description="A proven method from 50+ projects. Transparent at every stage."
+        description="Metode yang terbukti dari 50+ proyek. Transparan di setiap tahap."
       />
 
       {/* Technology & integrations */}

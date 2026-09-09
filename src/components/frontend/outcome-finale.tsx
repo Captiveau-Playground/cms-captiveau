@@ -75,14 +75,14 @@ export default function OutcomeFinale({
             {/* before → after */}
             <div className="mt-10">
               <div className="mb-2.5 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span>before launch</span>
+                <span>sebelum peluncuran</span>
                 <span className="text-foreground">{m.text}</span>
               </div>
               <div className="h-[3px] w-full overflow-hidden bg-foreground/10">
                 <motion.div style={{ width: fill }} className="h-full bg-primary" />
               </div>
               <div className="mt-2.5 text-right font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                after launch
+                setelah peluncuran
               </div>
             </div>
           </div>

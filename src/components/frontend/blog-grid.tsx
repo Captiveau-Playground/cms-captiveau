@@ -74,7 +74,7 @@ function BlogCard({
       />
       <div className="space-y-2 px-2 pb-2">
         <div className="flex items-center gap-2 text-[11px] text-muted-foreground group-hover:text-foreground sm:text-xs">
-          <p>by {author || 'Tim Captiveau'}</p>
+          <p>oleh {author || 'Tim Captiveau'}</p>
           <div className="size-1 rounded-full bg-muted-foreground" />
           <p>{date}</p>
           <div className="size-1 rounded-full bg-muted-foreground" />

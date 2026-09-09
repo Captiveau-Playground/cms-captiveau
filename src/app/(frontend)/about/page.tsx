@@ -10,9 +10,9 @@ import { buildMetadata } from '@/lib/seo'
 import { AnimatedHeading } from '@/components/frontend/animated-heading'
 
 const storyStats = [
-  { value: 12, suffix: 'K+', label: 'Project hours' },
+  { value: 12, suffix: 'K+', label: 'Jam proyek' },
   { value: 99.9, suffix: '%', decimals: 1, label: 'Uptime' },
-  { value: 40, suffix: '+', label: 'Happy clients' },
+  { value: 40, suffix: '+', label: 'Klien puas' },
 ]
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,7 +34,7 @@ export default async function AboutPage() {
       <PageHero
         eyebrow="About Us"
         title="We are what we build."
-        description="Captiveau — a creative tech studio from Jakarta. We help businesses build digital products end-to-end: research, design, development, and maintenance."
+        description="Captiveau — creative tech studio dari Jakarta. Kami membantu bisnis membangun produk digital secara end-to-end: riset, desain, pengembangan, dan maintenance."
       />
 
       {/* Story */}
@@ -56,14 +56,14 @@ export default async function AboutPage() {
             />
             <div className="flex flex-col gap-4 text-base leading-relaxed text-muted-foreground">
               <p>
-                It started with two engineers tired of rebuilding the same
-                interfaces in every project. We began collecting what worked
-                and shaping it into something anyone could use.
+                Semua bermula dari dua engineer yang bosan membangun ulang
+                antarmuka yang sama di setiap proyek. Kami mulai mengumpulkan apa
+                yang berhasil dan membentuknya menjadi sesuatu yang bisa dipakai siapa pun.
               </p>
               <p>
-                Seven years later, that collection grew into a studio trusted by
-                teams across industries — from solo founders to enterprises
-                shipping at scale.
+                Tujuh tahun kemudian, kumpulan itu tumbuh menjadi studio yang
+                dipercaya tim dari berbagai industri — dari founder solo hingga
+                enterprise yang meluncurkan produk dalam skala besar.
               </p>
             </div>
 
@@ -91,7 +91,7 @@ export default async function AboutPage() {
                 The <span className="text-primary">C.L.E.A.R</span> Philosophy
               </>
             }
-            description="The principles behind every product and service we deliver."
+            description="Prinsip di balik setiap produk dan layanan yang kami hadirkan."
           />
 
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">

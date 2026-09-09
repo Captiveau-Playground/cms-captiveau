@@ -107,14 +107,14 @@ export function HeroBentoSection({
                 {homepage.heroSubtitle}
               </p>
               <div className="flex flex-wrap gap-3">
-                <ConsultCta label="Start Your Project" cal={cal} />
+                <ConsultCta label="Mulai Project Anda" cal={cal} />
                 <Button
                   asChild
                   className="active:scale-[0.96] transition-transform"
                   size="lg"
                   variant="outline"
                 >
-                  <a href="/portfolio">See Our Work</a>
+                  <a href="/portfolio">Lihat Karya Kami</a>
                 </Button>
               </div>
             </motion.div>
@@ -139,7 +139,7 @@ export function HeroBentoSection({
                   )}
                 </p>
                 <p className="mt-1 text-muted-foreground text-xs leading-relaxed">
-                  {stats[0]?.label || "products shipped"}
+                  {stats[0]?.label || "produk dikirim"}
                 </p>
               </div>
             </motion.div>
@@ -190,7 +190,7 @@ export function HeroBentoSection({
             >
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <TerminalIcon className="size-3.5 shrink-0" />
-                <span>End-to-end digital product studio</span>
+                <span>Studio produk digital end-to-end</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {specialties.slice(0, 5).map((specialty) => (

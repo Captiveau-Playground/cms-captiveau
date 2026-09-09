@@ -183,35 +183,6 @@ export const Projects: CollectionConfig = {
       ],
     },
     {
-      name: 'story',
-      label: 'Project Story',
-      type: 'array',
-      admin: {
-        description:
-          'Bab cerita proyek — tampil sebagai scroll-reveal di halaman detail. Gunakan 3–5 bab untuk ritme terbaik.',
-      },
-      fields: [
-        {
-          name: 'heading',
-          label: 'Chapter Title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'description',
-          label: 'Chapter Description',
-          type: 'textarea',
-          required: true,
-        },
-        {
-          name: 'image',
-          label: 'Chapter Image',
-          type: 'upload',
-          relationTo: 'media',
-        },
-      ],
-    },
-    {
       name: 'caseStudy',
       label: 'Case Study',
       type: 'group',
