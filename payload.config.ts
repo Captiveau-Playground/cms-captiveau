@@ -142,6 +142,18 @@ async function getConfig() {
     graphQL: {
       disable: true,
     },
+    // Origin yang boleh memakai auth cookie (admin UI murni cookie, bukan header).
+    // Payload auto-menambahkan serverURL ke csrf; daftar ini memastikan
+    // captiveau.id / workers.dev / localhost dikenali sehingga update globals
+    // (analytics/GA4/GTM/Clarity/GSC) tidak gagal "You are not allowed...".
+    csrf: [
+      'https://captiveau.id',
+      'https://cms-captiveau.mulaiplus.workers.dev',
+      'https://cms-captiveau-staging.mulaiplus.workers.dev',
+      'http://localhost:4000',
+      'http://localhost:3000',
+      'http://127.0.0.1:4000',
+    ],
     serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://captiveau.id',
     collections: [
       Users,

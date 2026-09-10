@@ -137,11 +137,24 @@ async function getConfig() {
         baseDir: path.resolve(dirname),
       },
     },
-    // Security: GraphQL is not used by the frontend, so disable it to reduce
-    // the API attack surface. serverURL anchors CSRF/same-origin checks.
+    // Security: GraphQL tidak dipakai frontend, jadi dimatikan demi mengurangi
+    // permukaan serangan API. serverURL menentukan origin request yang aman.
     graphQL: {
       disable: true,
     },
+    // Origin yang boleh memakai auth berbasis cookie (admin UI memakai cookie,
+    // bukan header Authorization). Payload otomatis menambahkan serverURL ke
+    // csrf — di build prod serverURL bisa ter-bake ke workers.dev, padahal
+    // admin diakses dari captiveau.id; tanpa ini Origin captiveau.id tertolak
+    // dan semua operasi REST yang butuh auth gagal "You are not allowed...".
+    csrf: [
+      'https://captiveau.id',
+      'https://cms-captiveau.mulaiplus.workers.dev',
+      'https://cms-captiveau-staging.mulaiplus.workers.dev',
+      'http://localhost:4000',
+      'http://localhost:3000',
+      'http://127.0.0.1:4000',
+    ],
     serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'https://captiveau.id',
     collections: [
       Users,
