@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { ArrowUpRight, MonitorPlay } from 'lucide-react'
 import { Section } from '@/components/frontend/section'
 import { Reveal } from '@/components/frontend/reveal'
-import { formatDateLong } from '@/lib/date'
 import type { EventItem } from '@/lib/content'
 import { cn } from '@/lib/utils'
 
@@ -10,6 +9,19 @@ const MODE_LABEL: Record<string, string> = {
   offline: 'Offline',
   online: 'Online',
   hybrid: 'Hybrid',
+}
+
+/** Kelas aspect-ratio cover — sama persis dengan halaman /events. 'auto' = rasio asli gambar (tidak dipress). */
+const ASPECT_CLASS: Record<string, string> = {
+  auto: 'aspect-auto',
+  '21/9': 'aspect-[21/9]',
+  '16/9': 'aspect-[16/9]',
+  '4/3': 'aspect-[4/3]',
+  '1/1': 'aspect-square',
+}
+
+function aspectClass(event: EventItem): string {
+  return ASPECT_CLASS[event.imageAspect] || 'aspect-auto'
 }
 
 /**
@@ -48,19 +60,24 @@ export function EventsSection({ events }: { events: EventItem[] }) {
               className="group flex h-full flex-col border border-border bg-background transition-colors duration-300 hover:border-primary/40"
             >
               <div className="relative overflow-hidden border-b border-border bg-muted">
-                <span className="pointer-events-none absolute left-4 top-4 z-10 border border-border bg-background/90 px-2.5 py-1 font-mono text-[11px] font-semibold text-foreground">
-                  {formatDateLong(event.startDate)}
-                </span>
                 {event.image ? (
                   <img
                     loading="lazy"
                     decoding="async"
                     src={event.image}
                     alt={event.title}
-                    className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    className={cn(
+                      'w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]',
+                      aspectClass(event)
+                    )}
                   />
                 ) : (
-                  <div className="flex aspect-[16/9] w-full items-center justify-center bg-gradient-to-br from-primary/10 to-transparent">
+                  <div
+                    className={cn(
+                      'flex w-full items-center justify-center bg-gradient-to-br from-primary/10 to-transparent',
+                      ASPECT_CLASS[event.imageAspect === 'auto' ? '16/9' : event.imageAspect] || 'aspect-[16/9]'
+                    )}
+                  >
                     <MonitorPlay className="size-10 text-primary/40" />
                   </div>
                 )}
