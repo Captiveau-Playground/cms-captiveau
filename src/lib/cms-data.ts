@@ -77,7 +77,7 @@ function isMedia(obj: any): obj is { url?: string | null; sizes?: any } {
  * PAYLOAD_PUBLIC_SERVER_URL — always serve media same-origin so images load
  * regardless of environment/env baking mistakes.
  */
-function normalizeMediaUrl(url: string | null | undefined): string | null {
+export function normalizeMediaUrl(url: string | null | undefined): string | null {
   if (!url) return null
   try {
     const parsed = new URL(url, 'https://cms-captiveau.mulaiplus.workers.dev')

@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import { getSiteSettings, getServices } from '@/lib/cms'
-import { getCmsMainMenu, type CmsNavItem } from '@/lib/cms-data'
+import { getCmsMainMenu, normalizeMediaUrl, type CmsNavItem } from '@/lib/cms-data'
 import Navbar from '@/components/frontend/navbar'
 import SmoothScroll from '@/components/frontend/smooth-scroll'
 import { FooterPromptHandoffSection, type FooterSectionProps } from '@/components/blocks/footer'
@@ -29,6 +29,16 @@ export async function generateMetadata(): Promise<Metadata> {
     settings?.description ||
     'Software house Indonesia spesialis digital product design & development.'
 
+  // Favicon dari CMS (Site Settings → favicon). URL media dinormalisasi dulu
+  // supaya tidak bocor origin dev, lalu dipakai sebagai <link rel="icon">.
+  // Kalau belum diatur di CMS, fallback ke /icon.png (public/icon.png).
+  const faviconDoc =
+    settings?.favicon && typeof settings.favicon === 'object'
+      ? (settings.favicon as { url?: string | null; mimeType?: string | null })
+      : undefined
+  const faviconUrl = normalizeMediaUrl(faviconDoc?.url)
+  const faviconType = faviconDoc?.mimeType || 'image/x-icon'
+
   return {
     metadataBase: new URL(siteUrl),
     title: {
@@ -36,6 +46,15 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${settings?.companyName || 'Captiveau'}`,
     },
     description,
+    icons: {
+      icon: faviconUrl
+        ? [{ url: faviconUrl, type: faviconType }]
+        : [{ url: '/icon.png', type: 'image/png' }],
+      shortcut: faviconUrl || '/icon.png',
+      ...(faviconUrl && faviconType.includes('png')
+        ? { apple: faviconUrl }
+        : { apple: '/icon.png' }),
+    },
     alternates: { canonical: '/' },
     verification:
       settings?.analytics?.gscVerification

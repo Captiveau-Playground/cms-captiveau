@@ -25,7 +25,9 @@ async function getPayloadClient() {
 export async function getSiteSettings(): Promise<SiteSetting | null> {
   const payload = await getPayloadClient()
   try {
-    const data = await payload.findGlobal({ slug: 'site-settings' })
+    // depth 1: resolve relasi seperti favicon/logo jadi dokumen Media utuh
+    // (default Local API depth 0 hanya mengembalikan id angka).
+    const data = await payload.findGlobal({ slug: 'site-settings', depth: 1 })
     return data as unknown as SiteSetting
   } catch {
     return null
