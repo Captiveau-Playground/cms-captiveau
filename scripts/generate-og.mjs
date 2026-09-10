@@ -2,6 +2,9 @@
  * Render social share (OG) image 1200×630 dari scripts/og-template.html ke
  * public/og-default.jpg memakai Chromium via Playwright.
  *
+ * Font Satoshi & logo asli otomatis dibundel sebagai data URI, jadi output
+ * selalu konsisten dengan design system v3 "Clean Studio".
+ *
  * Run: node scripts/generate-og.mjs
  * (membutuhkan playwright + Chromium; gunakan executablePath bila ada).
  */
@@ -11,13 +14,21 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
+const root = path.join(here, '..')
+
 const html = readFileSync(path.join(here, 'og-template.html'), 'utf8')
-const out = path.join(here, '..', 'public', 'og-default.jpg')
+const font = readFileSync(path.join(root, 'public', 'fonts', 'Satoshi-Variable.woff2')).toString('base64')
+const logo = readFileSync(path.join(root, 'public', 'logo.png')).toString('base64')
+const out = path.join(root, 'public', 'og-default.jpg')
+
+const finalHtml = html
+  .replaceAll('{{FONT}}', font)
+  .replaceAll('{{LOGO}}', logo)
 
 const execPath = process.env.CHROME_PATH || undefined
 const browser = await chromium.launch({ headless: true, executablePath: execPath })
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 })
-await page.setContent(html, { waitUntil: 'networkidle' })
+await page.setContent(finalHtml, { waitUntil: 'networkidle' })
 await page.screenshot({ path: out, type: 'jpeg', quality: 82 })
 await browser.close()
 console.log('written:', out)
