@@ -86,13 +86,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: settings?.companyName || 'Captiveau',
       title,
       description,
-      images: [{ url: `${siteUrl}/logo.webp`, width: 512, height: 512, alt: 'Captiveau' }],
+      images: [{ url: `${siteUrl}/og-default.jpg`, width: 1200, height: 630, alt: 'Captiveau' }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${siteUrl}/logo.webp`],
+      images: [`${siteUrl}/og-default.jpg`],
     },
   }
 }

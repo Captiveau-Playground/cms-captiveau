@@ -29,8 +29,6 @@ const defaultServices = [
 const defaultCompany = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/faq" },
 ]
 
 /**
@@ -51,7 +49,10 @@ export function FooterPromptHandoffSection({
   cal,
 }: FooterSectionProps & { cal?: CalSettings | null }) {
   const year = new Date().getFullYear()
-  const companyLinks = navData && navData.length ? navData : defaultCompany
+  // Artikel/Blog & FAQ tidak ditampilkan di footer.
+  const companyLinks = (navData && navData.length ? navData : defaultCompany).filter(
+    (l) => l.href !== "/blog" && l.href !== "/faq",
+  )
 
   return (
     <FooterMotionShell>
@@ -187,18 +188,6 @@ export function FooterPromptHandoffSection({
             ·
           </span>
           <span>Creative Tech Studio — Jakarta, Indonesia.</span>
-          <span aria-hidden className="hidden sm:inline">
-            ·
-          </span>
-          <Link className="text-muted-foreground transition-colors hover:text-foreground" href="/blog">
-            Artikel
-          </Link>
-          <span aria-hidden className="hidden sm:inline">
-            ·
-          </span>
-          <Link className="text-muted-foreground transition-colors hover:text-foreground" href="/faq">
-            FAQ
-          </Link>
         </div>
       </FooterMotionSection>
     </FooterMotionShell>

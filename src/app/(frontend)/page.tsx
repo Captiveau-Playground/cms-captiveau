@@ -11,9 +11,10 @@ const SocialProof = dynamic(() => import('@/components/frontend/home/social-proo
 const BlogSection = dynamic(() => import('@/components/blocks/blog').then((m) => m.BlogSection), { ssr: true })
 const TestimonialsSeraSection = dynamic(() => import('@/components/blocks/testimonials').then((m) => m.TestimonialsSeraSection), { ssr: true })
 const CtaSeraSection = dynamic(() => import('@/components/blocks/cta').then((m) => m.CtaSeraSection), { ssr: true })
+const EventsSection = dynamic(() => import('@/components/blocks/events').then((m) => m.EventsSection), { ssr: true })
 const Faq = dynamic(() => import('@/components/frontend/home/faq'), { ssr: true })
 const ContactSection = dynamic(() => import('@/components/frontend/home/contact'), { ssr: true })
-import { getHomeData, getCmsPageCta } from '@/lib/cms-data'
+import { getHomeData, getCmsPageCta, getCmsEvents } from '@/lib/cms-data'
 
 // ISR: re-renders at runtime with real D1 data (build-time uses placeholder
 // DB, so CMS edits — e.g. social-proof logos — appear within this window).
@@ -42,6 +43,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const data = await getHomeData()
   const homeCta = await getCmsPageCta('home')
+  // Events: utama upcoming/ongoing, lalu isi sisa slot (maks 3) dengan acara
+  // terakhir supaya section "Acara terdekat" tetap >0 meski event mendatang
+  // belum lengkap (mis. cuma 1-2 data).
+  const allEvents = await getCmsEvents()
+  const upcomingEvents = [
+    ...allEvents.filter((e) => e.status === 'upcoming' || e.status === 'ongoing'),
+    ...allEvents.filter((e) => e.status === 'past').reverse(),
+  ].slice(0, 3)
 
   return (
     <>
@@ -96,6 +105,7 @@ export default async function HomePage() {
           image: a.image,
         }))}
       />
+      <EventsSection events={upcomingEvents} />
       <TestimonialsSeraSection testimonials={data.testimonials} />
       {homeCta.enabled && (
         <CtaSeraSection cta={homeCta} cal={data.settings.cal} />

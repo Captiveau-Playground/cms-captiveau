@@ -343,11 +343,15 @@ body {
 /* Google Form embed — sesuaikan iframe agar muat di wadahnya (sidebar detail acara) */
 .google-form-embed {
   container-type: inline-size;
+  /* Form Google bisa sangat panjang; batasi tinggi wadah & scroll internal */
+  max-height: min(72vh, 720px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .google-form-embed iframe {
   width: 100% !important;
   max-width: 100%;
   display: block;
   border: 0;
-  min-height: 900px;
+  min-height: 560px;
 }

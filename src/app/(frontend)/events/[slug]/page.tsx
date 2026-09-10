@@ -44,15 +44,6 @@ const MODE_LABEL: Record<string, string> = {
   hybrid: 'Hybrid',
 }
 
-/** Kelas aspect-ratio untuk cover — dipakai di kartu & halaman detail. 'auto' = ikut rasio asli gambar. */
-const ASPECT_CLASS: Record<string, string> = {
-  auto: 'aspect-auto',
-  '21/9': 'aspect-[21/9]',
-  '16/9': 'aspect-[16/9]',
-  '4/3': 'aspect-[4/3]',
-  '1/1': 'aspect-square',
-}
-
 function formatTime(iso: string | null): string {
   if (!iso) return ''
   const d = new Date(iso)
@@ -189,16 +180,18 @@ export default async function EventDetailPage({
         </div>
       </header>
 
-      {/* Cover */}
+      {/* Cover — dibatasi ukuran (poster acara), di tengah, tetap utuh tidak ter-crop */}
       {event.image && (
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-none border border-border">
+        <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="overflow-hidden border border-border bg-muted/40">
             <img
               loading="lazy"
               decoding="async"
               src={event.image}
               alt={event.title}
-              className={cn('w-full object-cover', ASPECT_CLASS[event.imageAspect] || 'aspect-auto')}
+              className={cn(
+                'mx-auto max-h-[24rem] w-auto max-w-full object-contain sm:max-h-[28rem]'
+              )}
             />
           </div>
         </div>

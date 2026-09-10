@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE_NAME = 'Captiveau'
 const DEFAULT_HOST = 'https://captiveau.id'
 
-export const DEFAULT_OG_IMAGE = '/logo.webp'
+export const DEFAULT_OG_IMAGE = '/og-default.jpg'
 
 /**
  * Stable site origin. Kept constant (not request-header based) so metadata
